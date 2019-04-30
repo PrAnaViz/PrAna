@@ -1,0 +1,22 @@
+Package: PRANA
+Type: Package
+Title: PRANA: PRescription data ANAlysis
+Version: 0.1.0
+Authors@R: person("Kishore Kumar", "Jagadeesan", email= "jkkishore85@gmail.com", role = c("aut", "cre"))
+Description: Package with functions to compile and process UK NHS Digital prescribing data 
+        for the period 2014-2018 to facilitate the calculation of the consumption data and long-term time, seasonal and 
+        location based trends to create an interactive data visualisation tool for a wider use.
+Depends: R (>= 3.1.0)
+License:  GPL-2 | GPL-3
+Encoding: UTF-8
+LazyData: true
+Imports:
+    data.table (>= 1.11.8),
+    dplyr (>= 0.7.8),
+    plyr (>= 1.8.4),
+    readr (>= 1.2.1),
+    reshape (>= 0.8.8),
+    stringr (>= 1.3.1)
+Suggests:
+    knitr (>= 0.1.0)
+    
