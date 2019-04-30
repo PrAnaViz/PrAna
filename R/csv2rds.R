@@ -1,9 +1,13 @@
-# .CSV file to .rds file
-#
-# This is a function named 'csv2rds' 
-# which converts .CSV file into .rds file.
-#
-# 
+
+#' csv2rds - Convert .CSV file(s) in the path defined to .rds file in a desired location
+#'
+#' @param path .CSV file(s) location
+#' @param output desired output .rds file with location
+#'
+#' @return .rds file in a desired location
+#' @export
+
+
 csv2rds <- function(path,output)
 {
   setwd(path)
