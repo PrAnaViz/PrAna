@@ -1,37 +1,24 @@
-prana_summary
-========================================================
+Prescription Data Analysis
+===
 author: Kishore Jagadeesan
-date: 
-autosize: true
+date: 06 May, 2019
+width: 960
+height: 700
+transition: linear
+css: prana_summary.css
 
-First Slide
-========================================================
+<!-- NOTE: Styling and external images may be missing --> 
+<p>Postdoctoral Research Associate
+  <br/>
+  Department of Chemistry
+  <br/>
+  University of Bath
+</p>
 
-For more details on authoring R presentations please visit <https://support.rstudio.com/hc/en-us/articles/200486468>.
-
-- Bullet 1
-- Bullet 2
-- Bullet 3
-
-Slide With Code
-========================================================
-
-
-```r
-summary(cars)
-```
-
-```
-     speed           dist       
- Min.   : 4.0   Min.   :  2.00  
- 1st Qu.:12.0   1st Qu.: 26.00  
- Median :15.0   Median : 36.00  
- Mean   :15.4   Mean   : 42.98  
- 3rd Qu.:19.0   3rd Qu.: 56.00  
- Max.   :25.0   Max.   :120.00  
-```
-
-Slide With Plot
-========================================================
-
-![plot of chunk unnamed-chunk-2](prana_summary-figure/unnamed-chunk-2-1.png)
+Outline
+===
+* Predicted Environement Concentration (PEC)
+* NHS Prescription Dataset
+* BNF & SNOMED
+ * 
+* 
