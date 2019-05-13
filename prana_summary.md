@@ -28,7 +28,7 @@ Tool to calculate the total amount of Active Pharmaceutical Ingredients (APIs) p
 Background
 ===
 
- * To predict the total amount of APIs, released to the environment and to calculate Predicted environmental concentration (PEC), information on the manufacturing or consumption is vital.
+ * To predict the total amount of APIs, released to the environment and to calculate Predicted Environmental Concentration (PEC), information on the manufacturing or consumption is vital.
  * And for certain groups of APIs, assessment of their consumption trends over spatial and temporal regions helps to understand and correlate with various facts like drug abuse and antimicrobial resistance.
  
 Data and Strucutre
@@ -37,7 +37,7 @@ Data and Strucutre
 * NHS Prescription Dataset
   * Monthly dataset ~ 1.3 GB
   * more than 500 million rows
-  
+<img src="C:/R Directory/Shiny/PRANA/img/rpres/nhs_prescription_01.png" height="500px" />  
 
 Data and Strucutre
 ===
