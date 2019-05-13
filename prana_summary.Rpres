@@ -114,3 +114,6 @@ Demo - Time series
 Demo - Time series
 ===
 <img src="img/rpres/timeseries_03.gif"  />
+
+##### By selecting the API in the barplot, we able to see the trend of the API over the period
+##### Download buttons helps to download the data .csv files
