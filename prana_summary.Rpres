@@ -18,6 +18,7 @@ Outline
   * Background
   * Data and Strucutre
   * Data management, aggregation
+* Demo
 * Features
 * Summary
 
@@ -115,5 +116,11 @@ Demo - Time series
 ===
 <img src="img/rpres/timeseries_03.gif"  />
 
-##### By selecting the API in the barplot, we able to see the trend of the API over the period
-##### Download buttons helps to download the data .csv files
+ * By selecting the API in the barplot, we able to see the trend of the API over the period
+ * Download buttons helps to download the data in .csv files
+ 
+Demo - Targeted API
+===
+<img src="img/rpres/targeted_01.gif"  />
+
+ * By selecting the API in the dropdown, we able to see the trend of the API over the period
