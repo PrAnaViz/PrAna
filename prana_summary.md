@@ -169,3 +169,27 @@ Demo - Monthwise GP
 <img src="img/rpres/monthwise_gp.gif"  />
 
 * By selecting the GP Practice code in the dropdown, we able to see the monthwise trend of all APIs for a particular GP
+
+Demo - Compare STW
+===
+
+<img src="img/rpres/compare_stw_01.png"  />
+
+#####  17 - Select the year of interest
+#####  18 - Comparison of the APIs for the selected year - 2D Plot 
+#####  19 - Comparison of the APIs for the selected year - 3D Plot
+
+Demo - Compare STW - 2D plot
+===
+
+<img src="img/rpres/compare_stw_01.gif"  />
+
+
+* By selecting the year in the dropdown, we able to see the year wise trend of all APIs for different STPs
+
+Demo - Compare STW - 3D plot
+===
+
+<img src="img/rpres/compare_stw_02.gif"  />
+
+* By selecting the year in the dropdown, we able to see the year wise trend of all APIs for different STPs
