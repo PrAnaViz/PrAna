@@ -37,7 +37,7 @@ Background
 Data and Strucutre
 ===
 
- * NHS Prescription Dataset
+* NHS Prescription Dataset
   * Monthly dataset ~ 1.3 GB
   * more than 500 million rows
   
