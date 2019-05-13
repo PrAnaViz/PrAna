@@ -124,3 +124,9 @@ Demo - Targeted API
 <img src="img/rpres/targeted_01.gif"  />
 
  * By selecting the API in the dropdown, we able to see the trend of the API over the period
+
+Demo - Timeseries GP
+===
+<img src="img/rpres/targeted_gp.gif"  />
+
+ * To see the trend of the API over the period with respective to different GP practice in the particular STP catchment area
