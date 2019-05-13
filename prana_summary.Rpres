@@ -130,3 +130,4 @@ Demo - Timeseries GP
 <img src="img/rpres/targeted_gp.gif"  />
 
  * To see the trend of the API over the period with respective to different GP practice in the particular STP catchment area
+  * Working on getting the trend of different APIs over the selection of targeted GP practice
