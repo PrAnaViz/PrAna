@@ -110,3 +110,7 @@ Demo - Time series
 #####  8 - Display the total prescription data for the year 2014-2018 in kg (For all API from the Target list )
 #####  9 - Display the total prescription data for the year 2014-2018 in kg (For a particular target API)
 #####  10 - Display the total prescription data for the year 2014-2018 in kg (For a particular target GP surgery)
+
+Demo - Time series
+===
+<img src="img/rpres/timeseries_03.gif"  />
