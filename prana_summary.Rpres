@@ -1,3 +1,10 @@
+--- 
+title: Prescription Data Analysis
+author: Kishore Jagadeesan
+date: `r format(Sys.time(), '%d %B, %Y')`
+output: powerpoint_presentation
+--- 
+
 Prescription Data Analysis
 ===
 author: Kishore Jagadeesan
