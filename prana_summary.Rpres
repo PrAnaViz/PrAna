@@ -162,3 +162,10 @@ Demo - Monthwise APIs
 <img src="img/rpres/monthwise_API.gif"  />
 
 * By selecting the year in the dropdown, we able to see the monthwise trend of all APIs for a particular STP
+
+Demo - Monthwise GP
+===
+
+<img src="img/rpres/monthwise_gp.gif"  />
+
+* By selecting the GP Practice code in the dropdown, we able to see the monthwise trend of all APIs for a particular GP
