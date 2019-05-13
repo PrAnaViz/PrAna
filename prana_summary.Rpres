@@ -148,6 +148,7 @@ Demo - Particular year
 ===
 
 <img src="img/rpres/particular_year_01.gif"  />
+
   * By selecting the API in the barplot, we able to see the trend of the API over,
     * Period
     * GP Practice - Total
