@@ -2,7 +2,7 @@
 title: Prescription Data Analysis
 author: Kishore Jagadeesan
 date: 13 May, 2019
-output: powerpoint_presentation
+output: slidy_presentation
 --- 
 
 Prescription Data Analysis
