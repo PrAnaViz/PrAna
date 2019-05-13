@@ -28,39 +28,22 @@ Prescription Data Analysis
 ===
 Tool to calculate the total amount of Active Pharmaceutical Ingredients (APIs) prescribed and to monitor prescribing trends over different spatial and temporal regions.
 
-Prescription Data Analysis
+Background
 ===
-
-### Background
 
  * To predict the total amount of APIs, released to the environment and to calculate Predicted environmental concentration (PEC), information on the manufacturing or consumption is vital.
  * And for certain groups of APIs, assessment of their consumption trends over spatial and temporal regions helps to understand and correlate with various facts like drug abuse and antimicrobial resistance.
  
-Prescription Data Analysis
+Data and Strucutre
 ===
-
-### Data and Strucutre
 
  * NHS Prescription Dataset
   * Monthly dataset ~ 1.3 GB
-  * > 500 million rows
+  * more than 500 million rows
   
-Prescription Data Analysis
+
+Data and Strucutre
 ===
-
-### Data and Strucutre
-
- * NHS Data Model and Dictionary (NHS dm+d)
-  * Virtual Therapeutic Moiety (VTM)
-  * Virtual Medicinal Product (VMP) 
-  * Virtual Medicinal Product Pack (VMPP)
-  * Actual Medicinal Product (AMP)
-  * Actual Medicinal Product Pack (AMPP)
-
-Prescription Data Analysis
-===
-
-### Data and Strucutre
 
  * NHS Data Model and Dictionary (NHS dm+d)
   * Virtual Therapeutic Moiety (VTM)      - Atenolol 
@@ -71,20 +54,15 @@ Prescription Data Analysis
 
 Active ingredient(s) Strength Dose form Pack level Identified supplier
 
-Prescription Data Analysis
+Data management, aggregation
 ===
-
-### Data management, aggregation
 
  * Cannot be directly combined based on different APIs.
  * Do not facilitate the calculation of the consumption data.
  * Do not facilitate the assessment of seasonal or location based trends.
 
-Prescription Data Analysis
+Data management, aggregation
 ===
-
-### Data management, aggregation
-
  * R
  * Packages used
   * shiny
@@ -97,8 +75,6 @@ Prescription Data Analysis
 
 Prescription Data Analysis
 ===
-
-### Data management, aggregation
 
 With this interactive tool, we have made it easy to caculate the total quantity of different APIs prescribed and to monitor prescribing trends over different spatial and temporal regions.
   
