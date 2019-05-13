@@ -18,8 +18,8 @@ Outline
   * Background
   * Data and Strucutre
   * Data management, aggregation
-* Demo
-* Features
+* Demo - Features
+* Additional Features
 * Summary
 
 Prescription Data Analysis
@@ -193,3 +193,32 @@ Demo - Compare STW - 3D plot
 <img src="img/rpres/compare_stw_02.gif"  />
 
 * By selecting the year in the dropdown, we able to see the year wise trend of all APIs for different STPs
+
+Additional Features - Heatmap
+===
+
+<img src="img/rpres/add_heatmap_01.png"  />
+
+#####  20 - Data with total APIs  
+#####  21 - Select API 
+#####  22 - Select Year
+#####  23 - Heatmap Tab
+
+Additional Features - Pie Chart
+===
+
+<img src="img/rpres/add_piechart_01.png"  />
+
+#####  20 - Data with total APIs  
+#####  21 - Select API 
+#####  22 - Select Year
+#####  24 - PieChart Tab
+
+Summary
+===
+
+ * The tool helps to calculate the consumption data for different APIs over the time period 2014-2018
+ * Also helps in the assessment of consumption trends over spatial and temporal regions, which are interesting for a number of applications
+ * It has present limitation in calculation the quantity of the APIs prescribed as ‘solution for injection’
+ * Hosted in a private server - R Shiny server
+ * Initiated the idea of hosting it in the University of Bath server
