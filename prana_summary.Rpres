@@ -74,4 +74,39 @@ Prescription Data Analysis
 ===
 
 With this interactive tool, we have made it easy to caculate the total quantity of different APIs prescribed and to monitor prescribing trends over different spatial and temporal regions.
-  
+
+Demo
+===
+
+https://jkkishore85.shinyapps.io/PDA_1_0/
+
+Demo - Login Page
+===
+* Login page to restrict users
+<img src="img/rpres/prana_login.PNG"  />
+
+Demo - Front page
+===
+
+<img src="img/rpres/prana_front.PNG"  />
+
+###### 1 - User Identification; 2, 3 - Input files ; 4,5,6 - Different View Options
+
+Demo - Input files
+===
+
+<img src="img/rpres/input_files.PNG"  />
+
+#####  2 - Target APIs list in .csv format
+#####  3 - Grouping of APIs based on the chemical class in .csv format. This can be modified based on the usage of data.
+
+Demo - Time series
+===
+
+<img src="img/rpres/timeseries_01.PNG"  />
+
+#####  5 - Select the STP catchment area
+#####  6, 7 - Options to see the trends based on a target API or GP surgery (Options 9 and 10)
+#####  8 - Display the total prescription data for the year 2014-2018 in kg (For all API from the Target list )
+#####  9 - Display the total prescription data for the year 2014-2018 in kg (For a particular target API)
+#####  10 - Display the total prescription data for the year 2014-2018 in kg (For a particular target GP surgery)
