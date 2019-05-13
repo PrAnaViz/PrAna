@@ -37,7 +37,7 @@ Data and Strucutre
 * NHS Prescription Dataset
   * Monthly dataset ~ 1.3 GB
   * more than 500 million rows
-<img src="img/rpres/nhs_prescription_01.png"  />  
+<img src="img/rpres/nhs_prescription_01.PNG"  />  
 
 Data and Strucutre
 ===
