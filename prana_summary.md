@@ -155,3 +155,10 @@ Demo - Particular year
     * Chemical form
     * Medicinal form
     * GP Practice - Monthwise
+    
+Demo - Monthwise APIs
+===
+
+<img src="img/rpres/monthwise_API.gif"  />
+
+* By selecting the year in the dropdown, we able to see the monthwise trend of all APIs for a particular STP
