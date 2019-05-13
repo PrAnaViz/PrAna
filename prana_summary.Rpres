@@ -2,10 +2,7 @@ Prescription Data Analysis
 ===
 author: Kishore Jagadeesan
 date: `r format(Sys.time(), '%d %B, %Y')`
-width: 960
-height: 700
-transition: linear
-css: prana_summary.css
+
 
 <!-- NOTE: Styling and external images may be missing --> 
 <p>Postdoctoral Research Associate
@@ -45,7 +42,7 @@ Data and Strucutre
 Data and Strucutre
 ===
 
- * NHS Data Model and Dictionary (NHS dm+d)
+* NHS Data Model and Dictionary (NHS dm+d)
   * Virtual Therapeutic Moiety (VTM)      - Atenolol 
   * Virtual Medicinal Product (VMP)       - Atenolol 100 mg tablets 
   * Virtual Medicinal Product Pack (VMPP) - Atenolol 100 mg tablets x 28 tablet
@@ -63,8 +60,8 @@ Data management, aggregation
 
 Data management, aggregation
 ===
- * R
- * Packages used
+* R
+* Packages used
   * shiny
   * shinydashboard
   * data.table
