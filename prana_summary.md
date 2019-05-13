@@ -103,7 +103,7 @@ Demo - Input files
 Demo - Time series
 ===
 
-<img src="img/rpres/timeseries_01.PNG"  />
+<img src="img/rpres/timeseries_01.png"  />
 
 #####  5 - Select the STP catchment area
 #####  6, 7 - Options to see the trends based on a target API or GP surgery (Options 9 and 10)
