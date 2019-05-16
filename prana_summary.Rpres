@@ -1,9 +1,4 @@
---- 
-title: Prescription Data Analysis
-author: Kishore Jagadeesan
-date: `r format(Sys.time(), '%d %B, %Y')`
-output: slidy_presentation
---- 
+
 
 Prescription Data Analysis
 ===
@@ -201,25 +196,25 @@ Demo - Compare STW - 3D plot
 
 * By selecting the year in the dropdown, we able to see the year wise trend of all APIs for different STPs
 
-Additional Features - Heatmap
-===
+<!-- Additional Features - Heatmap -->
+<!-- === -->
 
-<img src="img/rpres/add_heatmap_01.png"  />
+<!-- <img src="img/rpres/add_heatmap_01.png"  /> -->
 
-#####  20 - Data with total APIs  
-#####  21 - Select API 
-#####  22 - Select Year
-#####  23 - Heatmap Tab
+<!-- #####  20 - Data with total APIs   -->
+<!-- #####  21 - Select API  -->
+<!-- #####  22 - Select Year -->
+<!-- #####  23 - Heatmap Tab -->
 
-Additional Features - Pie Chart
-===
+<!-- Additional Features - Pie Chart -->
+<!-- === -->
 
-<img src="img/rpres/add_piechart_01.png"  />
+<!-- <img src="img/rpres/add_piechart_01.png"  /> -->
 
-#####  20 - Data with total APIs  
-#####  21 - Select API 
-#####  22 - Select Year
-#####  24 - PieChart Tab
+<!-- #####  20 - Data with total APIs   -->
+<!-- #####  21 - Select API  -->
+<!-- #####  22 - Select Year -->
+<!-- #####  24 - PieChart Tab -->
 
 Summary
 ===
