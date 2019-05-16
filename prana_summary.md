@@ -21,7 +21,7 @@ Outline
   * Data and Strucutre
   * Data management, aggregation
 * Demo - Features
-* Additional Features
+<!-- * Additional Features -->
 * Summary
 
 Prescription Data Analysis
