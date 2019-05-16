@@ -222,5 +222,4 @@ Summary
  * The tool helps to calculate the consumption data for different APIs over the time period 2014-2018
  * Also helps in the assessment of consumption trends over spatial and temporal regions, which are interesting for a number of applications
  * It has present limitation in calculation the quantity of the APIs prescribed as ‘solution for injection’
- * Hosted in a private server - R Shiny server
- * Initiated the idea of hosting it in the University of Bath server
+ 
