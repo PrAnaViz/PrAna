@@ -40,7 +40,7 @@ Data and Strucutre
 * NHS Prescription Dataset
   * Monthly dataset ~ 1.3 GB
   * more than 500 million rows
-<img src="img/rpres/nhs_prescription_01.PNG"  />  
+<img src="documents/presentations/img/rpres/nhs_prescription_01.PNG"  />  
 
 Data and Strucutre
 ===
@@ -86,19 +86,19 @@ https://jkkishore85.shinyapps.io/PDA_1_0/
 Demo - Login Page
 ===
 * Login page to restrict users
-<img src="img/rpres/prana_login.PNG"  />
+<img src="documents/presentations/img/rpres/prana_login.PNG"  />
 
 Demo - Front page
 ===
 
-<img src="img/rpres/prana_front.PNG"  />
+<img src="documents/presentations/img/rpres/prana_front.PNG"  />
 
 ###### 1 - User Identification; 2, 3 - Input files ; 4,5,6 - Different View Options
 
 Demo - Input files
 ===
 
-<img src="img/rpres/input_files.PNG"  />
+<img src="documents/presentations/img/rpres/input_files.PNG"  />
 
 #####  2 - Target APIs list in .csv format
 #####  3 - Grouping of APIs based on the chemical class in .csv format. This can be modified based on the usage of data.
@@ -106,7 +106,7 @@ Demo - Input files
 Demo - Time series
 ===
 
-<img src="img/rpres/timeseries_01.png"  />
+<img src="documents/presentations/img/rpres/timeseries_01.png"  />
 
 #####  5 - Select the STP catchment area
 #####  6, 7 - Options to see the trends based on a target API or GP surgery (Options 9 and 10)
@@ -116,20 +116,20 @@ Demo - Time series
 
 Demo - Time series
 ===
-<img src="img/rpres/timeseries_03.gif"  />
+<img src="documents/presentations/img/rpres/timeseries_03.gif"  />
 
  * By selecting the API in the barplot, we able to see the trend of the API over the period
  * Download buttons helps to download the data in .csv files
  
 Demo - Targeted API
 ===
-<img src="img/rpres/targeted_01.gif"  />
+<img src="documents/presentations/img/rpres/targeted_01.gif"  />
 
  * By selecting the API in the dropdown, we able to see the trend of the API over the period
 
 Demo - Timeseries GP
 ===
-<img src="img/rpres/targeted_gp.gif"  />
+<img src="documents/presentations/img/rpres/targeted_gp.gif"  />
 
  * To see the trend of the API over the period with respective to different GP practice in the particular STP catchment area
  * Working on getting the trend of different APIs over the selection of targeted GP practice
@@ -137,7 +137,7 @@ Demo - Timeseries GP
 Demo - Particular year
 ===
 
-<img src="img/rpres/particular_year_01.png"  />
+<img src="documents/presentations/img/rpres/particular_year_01.png"  />
 
 #####  11 - Select the STP catchment area
 #####  12 - Select the year of interest
@@ -149,7 +149,7 @@ Demo - Particular year
 Demo - Particular year
 ===
 
-<img src="img/rpres/particular_year_01.gif"  />
+<img src="documents/presentations/img/rpres/particular_year_01.gif"  />
 
   * By selecting the API in the barplot, we able to see the trend of the API over,
     * Period
@@ -161,21 +161,21 @@ Demo - Particular year
 Demo - Monthwise APIs
 ===
 
-<img src="img/rpres/monthwise_API.gif"  />
+<img src="documents/presentations/img/rpres/monthwise_API.gif"  />
 
 * By selecting the year in the dropdown, we able to see the monthwise trend of all APIs for a particular STP
 
 Demo - Monthwise GP
 ===
 
-<img src="img/rpres/monthwise_gp.gif"  />
+<img src="documents/presentations/img/rpres/monthwise_gp.gif"  />
 
 * By selecting the GP Practice code in the dropdown, we able to see the monthwise trend of all APIs for a particular GP
 
 Demo - Compare STW
 ===
 
-<img src="img/rpres/compare_stw_01.png"  />
+<img src="documents/presentations/img/rpres/compare_stw_01.png"  />
 
 #####  17 - Select the year of interest
 #####  18 - Comparison of the APIs for the selected year - 2D Plot 
@@ -184,7 +184,7 @@ Demo - Compare STW
 Demo - Compare STW - 2D plot
 ===
 
-<img src="img/rpres/compare_stw_01.gif"  />
+<img src="documents/presentations/img/rpres/compare_stw_01.gif"  />
 
 
 * By selecting the year in the dropdown, we able to see the year wise trend of all APIs for different STPs
@@ -192,14 +192,14 @@ Demo - Compare STW - 2D plot
 Demo - Compare STW - 3D plot
 ===
 
-<img src="img/rpres/compare_stw_02.gif"  />
+<img src="documents/presentations/img/rpres/compare_stw_02.gif"  />
 
 * By selecting the year in the dropdown, we able to see the year wise trend of all APIs for different STPs
 
 <!-- Additional Features - Heatmap -->
 <!-- === -->
 
-<!-- <img src="img/rpres/add_heatmap_01.png"  /> -->
+<!-- <img src="documents/presentations/img/rpres/add_heatmap_01.png"  /> -->
 
 <!-- #####  20 - Data with total APIs   -->
 <!-- #####  21 - Select API  -->
@@ -209,7 +209,7 @@ Demo - Compare STW - 3D plot
 <!-- Additional Features - Pie Chart -->
 <!-- === -->
 
-<!-- <img src="img/rpres/add_piechart_01.png"  /> -->
+<!-- <img src="documents/presentations/img/rpres/add_piechart_01.png"  /> -->
 
 <!-- #####  20 - Data with total APIs   -->
 <!-- #####  21 - Select API  -->
