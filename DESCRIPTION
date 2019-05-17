@@ -6,17 +6,34 @@ Authors@R: person("Kishore Kumar", "Jagadeesan", email= "jkkishore85@gmail.com",
 Description: Package with functions to compile and process UK NHS Digital prescribing data 
         for the period 2014-2018 to facilitate the calculation of the consumption data and long-term time, seasonal and 
         location based trends to create an interactive data visualisation tool for a wider use.
-Depends: R (>= 3.1.0)
+Depends: R (>= 3.1.0), 
+         shinydashboard (>= 0.7.1), 
+         shiny (>= 1.2.0),
+         shinyBS (>= 0.61),
+         data.table (>= 1.11.8),
+         plyr (>= 1.8.4),
+         dplyr (>= 0.7.8),
+         DT (>= 0.5),
+         data.table (>= 1.11.8),
+         magrittr (>= 1.5),
+         tidyr (>= 0.8.2),
+         reshape (>= 0.8.8),
+         reshape2 (>= 1.4.3),
+         readxl (>= 1.1.0),
+         stringr (>= 1.3.1),
+         lubridate (>= 1.7.4),
+         ggplot2 (>= 3.1.0),
+         chron (>= 2.3),
+         plotly (>= 4.8.0),
+         leaflet (>= 2.0.2)
+         readr (>= 1.2.1),
+         rowr (>=1.1.3),
+         stringi (>= 1.2.4),
+         bit64 (>= 0.9),
+         plotly (>= 4.8.0)
 License: GPL-2 | GPL-3
 Encoding: UTF-8
 LazyData: true
-Imports:
-    data.table (>= 1.11.8),
-    dplyr (>= 0.7.8),
-    plyr (>= 1.8.4),
-    readr (>= 1.2.1),
-    reshape (>= 0.8.8),
-    stringr (>= 1.3.1)
 Suggests:
     knitr (>= 0.1.0)
 RoxygenNote: 6.1.1
