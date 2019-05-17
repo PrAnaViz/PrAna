@@ -55,21 +55,21 @@ USER <- reactiveValues(Logged = F)
       })
       
       dform <- reactive({ 
-        a1 <-read_rds(file.path("datasets/", "dform.rds"))
+        a1 <-read_rds(file.path("data/", "dform.rds"))
         a1$VPID <- format(as.numeric (as.character(a1$VPID)), scientific = FALSE)
         a1$FORMCD <- format(as.numeric (as.character(a1$FORMCD)), scientific = FALSE)
         a1
       })
       
       dform_desc <- reactive({ 
-        a1<-  read_rds(file.path("datasets/", "dform_desc.rds"))
+        a1<-  read_rds(file.path("data/", "dform_desc.rds"))
         a1$CD <- format(as.numeric (as.character(a1$CD)), scientific = FALSE)
         a1
       })
       
       drug_group <- reactive({ 
         group_data()
-        #data.table::fread(file.path("datasets/", "drug_group.csv"), header = TRUE)
+        #data.table::fread(file.path("data/", "drug_group.csv"), header = TRUE)
       })
       
       bnf_api_aggr1 <- reactive({
@@ -77,91 +77,91 @@ USER <- reactiveValues(Logged = F)
         if (input$searchoption == "stp_01")
         {
           if(input$selectyear == "2018") {
-            read_rds(file.path("datasets/", "API_Aggr_02_Saltford_201811.rds"))
+            read_rds(file.path("data/", "API_Aggr_02_Saltford_201811.rds"))
           }
           else if(input$selectyear == "2017") {
-            read_rds(file.path("datasets/", "API_Aggr_02_Saltford_201712.rds"))
+            read_rds(file.path("data/", "API_Aggr_02_Saltford_201712.rds"))
           }
           else if(input$selectyear == "2016") {
-            read_rds(file.path("datasets/", "API_Aggr_02_Saltford_201612.rds"))
+            read_rds(file.path("data/", "API_Aggr_02_Saltford_201612.rds"))
           }
           else if(input$selectyear == "2015") {
-            read_rds(file.path("datasets/", "API_Aggr_02_Saltford_201512.rds"))
+            read_rds(file.path("data/", "API_Aggr_02_Saltford_201512.rds"))
           }
           else if(input$selectyear == "2014") {
-            read_rds(file.path("datasets/", "API_Aggr_02_Saltford_201412.rds"))
+            read_rds(file.path("data/", "API_Aggr_02_Saltford_201412.rds"))
           }
         }
         else if (input$searchoption == "stp_04")
         {
           if(input$selectyear == "2018") {
-            read_rds(file.path("datasets/", "API_Aggr_02_Chippenham_201811.rds"))
+            read_rds(file.path("data/", "API_Aggr_02_Chippenham_201811.rds"))
           }
           else if(input$selectyear == "2017") {
-            read_rds(file.path("datasets/", "API_Aggr_02_Chippenham_201712.rds"))
+            read_rds(file.path("data/", "API_Aggr_02_Chippenham_201712.rds"))
           }
           else if(input$selectyear == "2016") {
-            read_rds(file.path("datasets/", "API_Aggr_02_Chippenham_201612.rds"))
+            read_rds(file.path("data/", "API_Aggr_02_Chippenham_201612.rds"))
           }
           else if(input$selectyear == "2015") {
-            read_rds(file.path("datasets/", "API_Aggr_02_Chippenham_201512.rds"))
+            read_rds(file.path("data/", "API_Aggr_02_Chippenham_201512.rds"))
           }
           else if(input$selectyear == "2014") {
-            read_rds(file.path("datasets/", "API_Aggr_02_Chippenham_201412.rds"))
+            read_rds(file.path("data/", "API_Aggr_02_Chippenham_201412.rds"))
           }
         }
         else if (input$searchoption == "stp_02")
         {
           if(input$selectyear == "2018") {
-            read_rds(file.path("datasets/", "API_Aggr_02_Keynsham_201811.rds"))
+            read_rds(file.path("data/", "API_Aggr_02_Keynsham_201811.rds"))
           }
           else if(input$selectyear == "2017") {
-            read_rds(file.path("datasets/", "API_Aggr_02_Keynsham_201712.rds"))
+            read_rds(file.path("data/", "API_Aggr_02_Keynsham_201712.rds"))
           }
           else if(input$selectyear == "2016") {
-            read_rds(file.path("datasets/", "API_Aggr_02_Keynsham_201612.rds"))
+            read_rds(file.path("data/", "API_Aggr_02_Keynsham_201612.rds"))
           }
           else if(input$selectyear == "2015") {
-            read_rds(file.path("datasets/", "API_Aggr_02_Keynsham_201512.rds"))
+            read_rds(file.path("data/", "API_Aggr_02_Keynsham_201512.rds"))
           }
           else if(input$selectyear == "2014") {
-            read_rds(file.path("datasets/", "API_Aggr_02_Keynsham_201412.rds"))
+            read_rds(file.path("data/", "API_Aggr_02_Keynsham_201412.rds"))
           }
         }
         else if (input$searchoption == "stp_05")
         {
           if(input$selectyear == "2018") {
-            read_rds(file.path("datasets/", "API_Aggr_02_Trowbridge_201811.rds"))
+            read_rds(file.path("data/", "API_Aggr_02_Trowbridge_201811.rds"))
           }
           else if(input$selectyear == "2017") {
-            read_rds(file.path("datasets/", "API_Aggr_02_Trowbridge_201712.rds"))
+            read_rds(file.path("data/", "API_Aggr_02_Trowbridge_201712.rds"))
           }
           else if(input$selectyear == "2016") {
-            read_rds(file.path("datasets/", "API_Aggr_02_Trowbridge_201612.rds"))
+            read_rds(file.path("data/", "API_Aggr_02_Trowbridge_201612.rds"))
           }
           else if(input$selectyear == "2015") {
-            read_rds(file.path("datasets/", "API_Aggr_02_Trowbridge_201512.rds"))
+            read_rds(file.path("data/", "API_Aggr_02_Trowbridge_201512.rds"))
           }
           else if(input$selectyear == "2014") {
-            read_rds(file.path("datasets/", "API_Aggr_02_Trowbridge_201412.rds"))
+            read_rds(file.path("data/", "API_Aggr_02_Trowbridge_201412.rds"))
           }
         }
         else if (input$searchoption == "stp_03")
         {
           if(input$selectyear == "2018") {
-            read_rds(file.path("datasets/", "API_Aggr_02_Avonmouth_201811.rds"))
+            read_rds(file.path("data/", "API_Aggr_02_Avonmouth_201811.rds"))
           }
           else if(input$selectyear == "2017") {
-            read_rds(file.path("datasets/", "API_Aggr_02_Avonmouth_201712.rds"))
+            read_rds(file.path("data/", "API_Aggr_02_Avonmouth_201712.rds"))
           }
           else if(input$selectyear == "2016") {
-            read_rds(file.path("datasets/", "API_Aggr_02_Avonmouth_201612.rds"))
+            read_rds(file.path("data/", "API_Aggr_02_Avonmouth_201612.rds"))
           }
           else if(input$selectyear == "2015") {
-            read_rds(file.path("datasets/", "API_Aggr_02_Avonmouth_201512.rds"))
+            read_rds(file.path("data/", "API_Aggr_02_Avonmouth_201512.rds"))
           }
           else if(input$selectyear == "2014") {
-            read_rds(file.path("datasets/", "API_Aggr_02_Trowbridge_201412.rds"))
+            read_rds(file.path("data/", "API_Aggr_02_Trowbridge_201412.rds"))
           }
         }
         
@@ -262,22 +262,22 @@ USER <- reactiveValues(Logged = F)
         
         if (input$searchoption2 == "stp_01")
         {
-          a1 <- read_rds(file.path("datasets/", "API_Aggr_02_Saltford_201811.rds"))
-          a2 <- read_rds(file.path("datasets/", "API_Aggr_02_Saltford_201712.rds"))
-          a3 <- read_rds(file.path("datasets/", "API_Aggr_02_Saltford_201612.rds"))
-          a4 <- read_rds(file.path("datasets/", "API_Aggr_02_Saltford_201512.rds"))
-          a5 <- read_rds(file.path("datasets/", "API_Aggr_02_Saltford_201412.rds"))
+          a1 <- read_rds(file.path("data/", "API_Aggr_02_Saltford_201811.rds"))
+          a2 <- read_rds(file.path("data/", "API_Aggr_02_Saltford_201712.rds"))
+          a3 <- read_rds(file.path("data/", "API_Aggr_02_Saltford_201612.rds"))
+          a4 <- read_rds(file.path("data/", "API_Aggr_02_Saltford_201512.rds"))
+          a5 <- read_rds(file.path("data/", "API_Aggr_02_Saltford_201412.rds"))
           a6 <- rbind.data.frame(a1,a2,a3,a4,a5)
           a7 <- cbind(STW = "stp_01",a6)
           a7
         }
         else if (input$searchoption2 == "stp_04")
         {
-          a1 <- read_rds(file.path("datasets/", "API_Aggr_02_Chippenham_201811.rds"))
-          a2 <- read_rds(file.path("datasets/", "API_Aggr_02_Chippenham_201712.rds"))
-          a3 <- read_rds(file.path("datasets/", "API_Aggr_02_Chippenham_201612.rds"))
-          a4 <- read_rds(file.path("datasets/", "API_Aggr_02_Chippenham_201512.rds"))
-          a5 <- read_rds(file.path("datasets/", "API_Aggr_02_Chippenham_201412.rds"))
+          a1 <- read_rds(file.path("data/", "API_Aggr_02_Chippenham_201811.rds"))
+          a2 <- read_rds(file.path("data/", "API_Aggr_02_Chippenham_201712.rds"))
+          a3 <- read_rds(file.path("data/", "API_Aggr_02_Chippenham_201612.rds"))
+          a4 <- read_rds(file.path("data/", "API_Aggr_02_Chippenham_201512.rds"))
+          a5 <- read_rds(file.path("data/", "API_Aggr_02_Chippenham_201412.rds"))
           a6 <- rbind.data.frame(a1,a2,a3,a4,a5)
           a7 <- cbind(STW = "stp_04",a6)
           a7
@@ -285,33 +285,33 @@ USER <- reactiveValues(Logged = F)
         }
         else if (input$searchoption2 == "stp_02")
         {
-          a1 <- read_rds(file.path("datasets/", "API_Aggr_02_Keynsham_201811.rds"))
-          a2 <- read_rds(file.path("datasets/", "API_Aggr_02_Keynsham_201712.rds"))
-          a3 <- read_rds(file.path("datasets/", "API_Aggr_02_Keynsham_201612.rds"))
-          a4 <- read_rds(file.path("datasets/", "API_Aggr_02_Keynsham_201512.rds"))
-          a5 <- read_rds(file.path("datasets/", "API_Aggr_02_Keynsham_201412.rds"))
+          a1 <- read_rds(file.path("data/", "API_Aggr_02_Keynsham_201811.rds"))
+          a2 <- read_rds(file.path("data/", "API_Aggr_02_Keynsham_201712.rds"))
+          a3 <- read_rds(file.path("data/", "API_Aggr_02_Keynsham_201612.rds"))
+          a4 <- read_rds(file.path("data/", "API_Aggr_02_Keynsham_201512.rds"))
+          a5 <- read_rds(file.path("data/", "API_Aggr_02_Keynsham_201412.rds"))
           a6 <- rbind.data.frame(a1,a2,a3,a4,a5)
           a7 <- cbind(STW = "stp_02",a6)
           a7
         }
         else if (input$searchoption2 == "stp_05")
         {
-          a1 <- read_rds(file.path("datasets/", "API_Aggr_02_Trowbridge_201811.rds"))
-          a2 <- read_rds(file.path("datasets/", "API_Aggr_02_Trowbridge_201712.rds"))
-          a3 <- read_rds(file.path("datasets/", "API_Aggr_02_Trowbridge_201612.rds"))
-          a4 <- read_rds(file.path("datasets/", "API_Aggr_02_Trowbridge_201512.rds"))
-          a5 <- read_rds(file.path("datasets/", "API_Aggr_02_Trowbridge_201412.rds"))
+          a1 <- read_rds(file.path("data/", "API_Aggr_02_Trowbridge_201811.rds"))
+          a2 <- read_rds(file.path("data/", "API_Aggr_02_Trowbridge_201712.rds"))
+          a3 <- read_rds(file.path("data/", "API_Aggr_02_Trowbridge_201612.rds"))
+          a4 <- read_rds(file.path("data/", "API_Aggr_02_Trowbridge_201512.rds"))
+          a5 <- read_rds(file.path("data/", "API_Aggr_02_Trowbridge_201412.rds"))
           a6 <- rbind.data.frame(a1,a2,a3,a4,a5)
           a7 <- cbind(STW = "stp_05",a6)
           a7
         }
         else if (input$searchoption2 == "stp_03")
         {
-          a1 <- read_rds(file.path("datasets/", "API_Aggr_02_Avonmouth_201811.rds"))
-          a2 <- read_rds(file.path("datasets/", "API_Aggr_02_Avonmouth_201712.rds"))
-          a3 <- read_rds(file.path("datasets/", "API_Aggr_02_Avonmouth_201612.rds"))
-          a4 <- read_rds(file.path("datasets/", "API_Aggr_02_Avonmouth_201512.rds"))
-          a5 <- read_rds(file.path("datasets/", "API_Aggr_02_Avonmouth_201412.rds"))
+          a1 <- read_rds(file.path("data/", "API_Aggr_02_Avonmouth_201811.rds"))
+          a2 <- read_rds(file.path("data/", "API_Aggr_02_Avonmouth_201712.rds"))
+          a3 <- read_rds(file.path("data/", "API_Aggr_02_Avonmouth_201612.rds"))
+          a4 <- read_rds(file.path("data/", "API_Aggr_02_Avonmouth_201512.rds"))
+          a5 <- read_rds(file.path("data/", "API_Aggr_02_Avonmouth_201412.rds"))
           a6 <- rbind.data.frame(a1,a2,a3,a4,a5)
           a7 <- cbind(STW = "stp_03",a6)
           a7
@@ -320,7 +320,7 @@ USER <- reactiveValues(Logged = F)
         
       })
       
-      unlist_api <-   data.table::fread(file.path("datasets/", "unlist_api.csv"), header = FALSE)
+      unlist_api <-   data.table::fread(file.path("data/", "unlist_api.csv"), header = FALSE)
       
       data_timeseries02 <- reactive({
         a1 <- data_timeseries01()[ which(!data_timeseries01()$'CPD' %in% c(unlist_api$V1)) , ]
@@ -545,11 +545,11 @@ USER <- reactiveValues(Logged = F)
         
         if (input$selectyear02 == "2014")
         {
-          a1 <- read_rds(file.path("datasets/", "API_Aggr_02_Saltford_201412.rds"))
-          a2 <- read_rds(file.path("datasets/", "API_Aggr_02_Chippenham_201412.rds"))
-          a3 <- read_rds(file.path("datasets/", "API_Aggr_02_Keynsham_201412.rds"))
-          a4 <- read_rds(file.path("datasets/", "API_Aggr_02_Trowbridge_201412.rds"))
-          a5 <- read_rds(file.path("datasets/", "API_Aggr_02_Avonmouth_201412.rds"))
+          a1 <- read_rds(file.path("data/", "API_Aggr_02_Saltford_201412.rds"))
+          a2 <- read_rds(file.path("data/", "API_Aggr_02_Chippenham_201412.rds"))
+          a3 <- read_rds(file.path("data/", "API_Aggr_02_Keynsham_201412.rds"))
+          a4 <- read_rds(file.path("data/", "API_Aggr_02_Trowbridge_201412.rds"))
+          a5 <- read_rds(file.path("data/", "API_Aggr_02_Avonmouth_201412.rds"))
           a11 <- cbind(STW = "stp_01",a1)
           a21 <- cbind(STW = "stp_04",a2)
           a31 <- cbind(STW = "stp_02",a3)
@@ -560,11 +560,11 @@ USER <- reactiveValues(Logged = F)
         }
         else if (input$selectyear02 == "2015")
         {
-          a1 <- read_rds(file.path("datasets/", "API_Aggr_02_Saltford_201512.rds"))
-          a2 <- read_rds(file.path("datasets/", "API_Aggr_02_Chippenham_201512.rds"))
-          a3 <- read_rds(file.path("datasets/", "API_Aggr_02_Keynsham_201512.rds"))
-          a4 <- read_rds(file.path("datasets/", "API_Aggr_02_Trowbridge_201512.rds"))
-          a5 <- read_rds(file.path("datasets/", "API_Aggr_02_Avonmouth_201512.rds"))
+          a1 <- read_rds(file.path("data/", "API_Aggr_02_Saltford_201512.rds"))
+          a2 <- read_rds(file.path("data/", "API_Aggr_02_Chippenham_201512.rds"))
+          a3 <- read_rds(file.path("data/", "API_Aggr_02_Keynsham_201512.rds"))
+          a4 <- read_rds(file.path("data/", "API_Aggr_02_Trowbridge_201512.rds"))
+          a5 <- read_rds(file.path("data/", "API_Aggr_02_Avonmouth_201512.rds"))
           a11 <- cbind(STW = "stp_01",a1)
           a21 <- cbind(STW = "stp_04",a2)
           a31 <- cbind(STW = "stp_02",a3)
@@ -575,11 +575,11 @@ USER <- reactiveValues(Logged = F)
         }
         else if (input$selectyear02 == "2016")
         {
-          a1 <- read_rds(file.path("datasets/", "API_Aggr_02_Saltford_201612.rds"))
-          a2 <- read_rds(file.path("datasets/", "API_Aggr_02_Chippenham_201612.rds"))
-          a3 <- read_rds(file.path("datasets/", "API_Aggr_02_Keynsham_201612.rds"))
-          a4 <- read_rds(file.path("datasets/", "API_Aggr_02_Trowbridge_201612.rds"))
-          a5 <- read_rds(file.path("datasets/", "API_Aggr_02_Avonmouth_201612.rds"))
+          a1 <- read_rds(file.path("data/", "API_Aggr_02_Saltford_201612.rds"))
+          a2 <- read_rds(file.path("data/", "API_Aggr_02_Chippenham_201612.rds"))
+          a3 <- read_rds(file.path("data/", "API_Aggr_02_Keynsham_201612.rds"))
+          a4 <- read_rds(file.path("data/", "API_Aggr_02_Trowbridge_201612.rds"))
+          a5 <- read_rds(file.path("data/", "API_Aggr_02_Avonmouth_201612.rds"))
           a11 <- cbind(STW = "stp_01",a1)
           a21 <- cbind(STW = "stp_04",a2)
           a31 <- cbind(STW = "stp_02",a3)
@@ -590,11 +590,11 @@ USER <- reactiveValues(Logged = F)
         }
         else if (input$selectyear02 == "2017")
         {
-          a1 <- read_rds(file.path("datasets/", "API_Aggr_02_Saltford_201712.rds"))
-          a2 <- read_rds(file.path("datasets/", "API_Aggr_02_Chippenham_201712.rds"))
-          a3 <- read_rds(file.path("datasets/", "API_Aggr_02_Keynsham_201712.rds"))
-          a4 <- read_rds(file.path("datasets/", "API_Aggr_02_Trowbridge_201712.rds"))
-          a5 <- read_rds(file.path("datasets/", "API_Aggr_02_Avonmouth_201712.rds"))
+          a1 <- read_rds(file.path("data/", "API_Aggr_02_Saltford_201712.rds"))
+          a2 <- read_rds(file.path("data/", "API_Aggr_02_Chippenham_201712.rds"))
+          a3 <- read_rds(file.path("data/", "API_Aggr_02_Keynsham_201712.rds"))
+          a4 <- read_rds(file.path("data/", "API_Aggr_02_Trowbridge_201712.rds"))
+          a5 <- read_rds(file.path("data/", "API_Aggr_02_Avonmouth_201712.rds"))
           a11 <- cbind(STW = "stp_01",a1)
           a21 <- cbind(STW = "stp_04",a2)
           a31 <- cbind(STW = "stp_02",a3)
@@ -605,11 +605,11 @@ USER <- reactiveValues(Logged = F)
         }
         else if (input$selectyear02 == "2018")
         {
-          a1 <- read_rds(file.path("datasets/", "API_Aggr_02_Saltford_201811.rds"))
-          a2 <- read_rds(file.path("datasets/", "API_Aggr_02_Chippenham_201811.rds"))
-          a3 <- read_rds(file.path("datasets/", "API_Aggr_02_Keynsham_201811.rds"))
-          a4 <- read_rds(file.path("datasets/", "API_Aggr_02_Trowbridge_201811.rds"))
-          a5 <- read_rds(file.path("datasets/", "API_Aggr_02_Avonmouth_201811.rds"))
+          a1 <- read_rds(file.path("data/", "API_Aggr_02_Saltford_201811.rds"))
+          a2 <- read_rds(file.path("data/", "API_Aggr_02_Chippenham_201811.rds"))
+          a3 <- read_rds(file.path("data/", "API_Aggr_02_Keynsham_201811.rds"))
+          a4 <- read_rds(file.path("data/", "API_Aggr_02_Trowbridge_201811.rds"))
+          a5 <- read_rds(file.path("data/", "API_Aggr_02_Avonmouth_201811.rds"))
           a11 <- cbind(STW = "stp_01",a1)
           a21 <- cbind(STW = "stp_04",a2)
           a31 <- cbind(STW = "stp_02",a3)
