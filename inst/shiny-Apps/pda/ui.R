@@ -15,7 +15,7 @@ ui <- dashboardPage(
   dashboardSidebar(
     shinyjs::useShinyjs(),
     shinyjs::inlineCSS(appCSS),
-    tags$head(includeScript("google-analytics.js")),
+    #tags$head(includeScript("google-analytics.js")),
     uiOutput("sidebarpanel")
   ),
 
