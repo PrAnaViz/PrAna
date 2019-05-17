@@ -71,7 +71,7 @@ server <- function(input, output, session) {
           menuItem(
             "SNOMED",
             tabName = "snomed",
-            icon = icon("line-chart")
+            icon = icon("table")
           )
           
           
