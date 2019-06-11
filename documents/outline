@@ -48,7 +48,7 @@ vmp_summ<- cbind(vmp_summ, VPID2 = vmp_summ$'VPID')
 bnf_full_final <- merge(bnf_full01,vmp_summ,by = "VPID2")
 
 # write it as data file
-write.csv(bnf_full_final,"C:/R Directory/Shiny/PRANA/inst/shiny-Apps/pda_2/data/bnf_snomed_mapping.csv")
+write.csv(bnf_full_final,"C:/R Directory/Shiny/PRANA/inst/shiny-Apps/pda_2/data/bnf_snomed_mapping_02.csv")
 
 # Remove duplicates based on column BNF code
 bnf_full_final_02 <- bnf_full_final[!duplicated(bnf_full_final$`BNF Code` ), ]
@@ -62,25 +62,63 @@ bnf_full_final_03 <- bnf_full_final_02[!duplicated(bnf_full_final_02$VPID2 ), ]
 memory.limit(size = 750000)
 
 setwd("C:/Datasets/Prescription Datasets/2018/PDPI")
-data201812 <- read_rds("Full_2018_12.rds")
-
+data201812 <- readr::read_rds("Full_2018_12.rds")
+library(readr)
 colnames(bnf_full_final_03)[2]<- "BNFCODE"
+colnames(data201812)[4] <- c("BNFCODE")
 
+str(data201812)
 
 ## Merge prescription and SNOMED files
 #
-merge_01 <- {
-  a1 <- data201812
-  colnames(a1)[4] <- c("BNFCODE")
-  a2 <- bnf_full_final_03
-  a2$ISID <- sapply(a2$ISID, as.character)
-  a3 <- merge(a2[!duplicated(a2$BNFCODE),],a1,by = "BNFCODE")
-  #a3 <- a3[, c("PERIOD","PRACTICE","BNFCODE","MDR","VPID","ISID","value","UOM","ITEMS","QUANTITY")]
-  a3
-  
-}
+# merge_01 <- {
+#   a1 <- data201812
+#   colnames(a1)[4] <- c("BNFCODE")
+#   a2 <- bnf_full_final_03
+#   a2$ISID <- sapply(a2$ISID, as.character)
+#   a3 <- merge(a2[!duplicated(a2$BNFCODE),],a1,by = "BNFCODE")
+#   #a3 <- a3[, c("PERIOD","PRACTICE","BNFCODE","MDR","VPID","ISID","value","UOM","ITEMS","QUANTITY")]
+#   a3
+#   
+# }
 
+bnf_full_final_04 <- data.table::data.table(bnf_full_final_03, key = c("BNFCODE"))
+data201812_02 <- data.table::data.table(data201812, key = c("BNFCODE"))
+merge_01 <- merge(bnf_full_final_03,data201812,by = c("BNFCODE"))
 str(merge_01)
 
 
-merge_02 <- merge_01[, c("PERIOD","PRACTICE","BNFCODE","MDR","VPID.x","VPID.y","ISID","value","UoM","ITEMS","QUANTITY")]
+merge_02 <- merge_01[, c("PERIOD","PRACTICE","BNFCODE","MDR: Product Description","VPID.x","VPID.y","ISID","value","UoM","ITEMS","QUANTITY")]
+
+
+
+## Merge everything and calculate the ingredients for each prescription
+
+merge_03 <- {
+  a1 <- merge_02
+  a1$ISID <- sapply(a1$ISID, as.character)
+  a1$value <- sapply(a1$value, as.character) 
+  a1$UoM <- sapply(a1$UoM, as.character)
+  s <- strsplit(a1$ISID, split = "#")
+  v <- strsplit(a1$value, split = "#")
+  u <- strsplit(a1$UoM, split = "#")
+  a2 <- data.frame(PERIOD = rep(a1$'PERIOD', sapply(s, length)),
+                   PRACTICE = rep(a1$'PRACTICE', sapply(s, length)),
+                   BNF_CODE = rep(a1$'BNFCODE', sapply(s, length)),
+                   VPID.x = rep(a1$'VPID.x', sapply(s, length)),
+                   VPID.y = rep(a1$'VPID.y', sapply(s, length)),
+                   MDR = rep(a1$'MDR', sapply(s, length)),
+                   ITEMS = rep(a1$'ITEMS', sapply(s, length)),
+                   QUANTITY = rep(a1$'QUANTITY', sapply(s, length)),
+                   API = unlist(s),
+                   Vol_Mass =  sapply(unlist(v), as.numeric),
+                   UoM = unlist(u))
+  a2$API <- sapply(a2$API,as.character)
+  a2$UoM = sapply(a2$UoM, as.character)
+  
+  a3 <- cbind(a2, ITEMS_TOT = (a2$'ITEMS' *a2$'QUANTITY' )) 
+  a4 <- cbind(a3,Vol_Mass_Tot = (a3$'Vol_Mass' *a3$'ITEMS_TOT' )* uom$multi_fac[match(gsub(" ", "",a3$'UoM'), gsub(" ", "",  uom$'CD'))])
+  a5 <- cbind(a4, DForm = dform$'FORMCD'[match(gsub(" ", "",a4$'VPID.x'), gsub(" ", "",  dform$'VPID'))])
+  
+  a5
+}
