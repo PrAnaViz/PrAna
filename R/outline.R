@@ -10,9 +10,9 @@ vmp <-readxl::read_excel("C:/dmdDataLoader/excel/f_vmp.xlsx", sheet = "VPI")
 
 
 vmp_summ <- plyr::ddply(vmp, .(VPID), summarise, length(unique(ISID)), 
-            ISID= paste(unique(ISID), collapse = "#"),
-            value = paste(STRNT_NMRTR_VAL, collapse = "#"), 
-            UoM =  paste(STRNT_NMRTR_UOMCD, collapse = "#"))
+                        ISID= paste(unique(ISID), collapse = "#"),
+                        value = paste(STRNT_NMRTR_VAL, collapse = "#"), 
+                        UoM =  paste(STRNT_NMRTR_UOMCD, collapse = "#"))
 
 # Match column: vmpp/ampp SNOMED code (SNOMED MAPPING file) with column : APPID (dm+d generated f_ampp file) to generate VPPID column
 bnf_full01 <- cbind(bnf_full,VPPID = ampp$'VPPID' [match(gsub(" ", "",bnf_full$'VMPP / AMPP SNOMED Code' ), gsub(" ", "", ampp$'APPID'))] )
@@ -49,3 +49,38 @@ bnf_full_final <- merge(bnf_full01,vmp_summ,by = "VPID2")
 
 # write it as data file
 write.csv(bnf_full_final,"C:/R Directory/Shiny/PRANA/inst/shiny-Apps/pda_2/data/bnf_snomed_mapping.csv")
+
+# Remove duplicates based on column BNF code
+bnf_full_final_02 <- bnf_full_final[!duplicated(bnf_full_final$`BNF Code` ), ]
+
+# Remove duplicates based on column VPID2
+bnf_full_final_03 <- bnf_full_final_02[!duplicated(bnf_full_final_02$VPID2 ), ]
+
+
+
+
+memory.limit(size = 750000)
+
+setwd("C:/Datasets/Prescription Datasets/2018/PDPI")
+data201812 <- read_rds("Full_2018_12.rds")
+
+colnames(bnf_full_final_03)[2]<- "BNFCODE"
+
+
+## Merge prescription and SNOMED files
+#
+merge_01 <- {
+  a1 <- data201812
+  colnames(a1)[4] <- c("BNFCODE")
+  a2 <- bnf_full_final_03
+  a2$ISID <- sapply(a2$ISID, as.character)
+  a3 <- merge(a2[!duplicated(a2$BNFCODE),],a1,by = "BNFCODE")
+  #a3 <- a3[, c("PERIOD","PRACTICE","BNFCODE","MDR","VPID","ISID","value","UOM","ITEMS","QUANTITY")]
+  a3
+  
+}
+
+str(merge_01)
+
+
+merge_02 <- merge_01[, c("PERIOD","PRACTICE","BNFCODE","MDR","VPID.x","VPID.y","ISID","value","UoM","ITEMS","QUANTITY")]
