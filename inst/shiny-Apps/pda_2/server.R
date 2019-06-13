@@ -11,7 +11,7 @@ options(shiny.maxRequestSize = 5000000*1024^6)
 
 ## Login details
 login_details <- data.frame(user = c("admin","fcte20","kp300","dgk30"),
-                            pswd = c("Rajarajan007#","chloramphenicol1","Ckhepoler.20","r3sist-r3sistanc3"))
+                            pswd = c("123","chloramphenicol1","Ckhepoler.20","r3sist-r3sistanc3"))
 login <- box(
   title = "Login",
   textInput("userName", "Username"),
@@ -122,11 +122,10 @@ server <- function(input, output, session) {
   
   ## Data tables
   
-  output$tab_data01<- renderDataTable({
+  output$tab_data01<- renderDataTable(
     withProgress(message = 'Data is loading, please wait ...', value = 1:100, {
     data01()
-    })
-  })
+    }), options = list(scrollX = TRUE) )
   
   
   
