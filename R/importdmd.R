@@ -12,23 +12,23 @@ importdmd <- function(path)
   memory.limit(size = 750000)
   
   # import June 2018 SNOMED Mapping file
-  bnf_full <- data.table::fread ("data/June 2018 Snomed mapping.csv", header = T, stringsAsFactors = F)
-  bnf_full$'BNF Code' <- gsub("'", "",bnf_full$'BNF Code' )
-  bnf_full$'VMPP / AMPP SNOMED Code'<-gsub("'", "",bnf_full$'VMPP / AMPP SNOMED Code' )
+   bnf_full <- data.table::fread (file.path("data/", "June 2018 Snomed mapping.csv"), header = T, stringsAsFactors = F)
+   bnf_full$'BNF Code' <- gsub("'", "",bnf_full$'BNF Code' )
+   bnf_full$'VMPP / AMPP SNOMED Code'<-gsub("'", "",bnf_full$'VMPP / AMPP SNOMED Code' )
   
   setwd(path) # C:/dmdDataLoader/excel/
   
-  # Create all files from the dm+d folder
-  ampp <-readxl::read_excel("f_ampp.xlsx", sheet = "AmppType")  
-  vmpp <-readxl::read_excel("f_vmpp.xlsx", sheet = "VMPP") 
-  vmp <-readxl::read_excel("f_vmp.xlsx", sheet = "VPI") 
-  dform <- readxl::read_excel("_vmp.xlsx", sheet = "DrugForm") 
-  ing <- readxl::read_excel("f_ingredient.xlsx", sheet = "Ingredient") 
-  UoM_01 <- readxl::read_excel("f_lookup.xlsx", sheet = "UoM") 
-  
-  vmp_summ <- plyr::ddply(vmp, .(VPID), summarise, length(unique(ISID)), 
+  # # Create all files from the dm+d folder
+  ampp <-readxl::read_excel("f_ampp.xlsx", sheet = "AmppType")
+  vmpp <-readxl::read_excel("f_vmpp.xlsx", sheet = "VMPP")
+  vmp <-readxl::read_excel("f_vmp.xlsx", sheet = "VPI")
+  dform <- readxl::read_excel("f_vmp.xlsx", sheet = "DrugForm")
+  ing <- readxl::read_excel("f_ingredient.xlsx", sheet = "Ingredient")
+  UoM_01 <- readxl::read_excel("f_lookup.xlsx", sheet = "UoM")
+
+  vmp_summ <- plyr::ddply(vmp, .(VPID), summarise, length(unique(ISID)),
                           ISID= paste(unique(ISID), collapse = "#"),
-                          value = paste(STRNT_NMRTR_VAL, collapse = "#"), 
+                          value = paste(STRNT_NMRTR_VAL, collapse = "#"),
                           UoM =  paste(STRNT_NMRTR_UOMCD, collapse = "#"))
   
   # Match column: vmpp/ampp SNOMED code (SNOMED MAPPING file) with column : APPID (dm+d generated f_ampp file) to generate VPPID column
