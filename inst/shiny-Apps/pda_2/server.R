@@ -52,6 +52,13 @@ server <- function(input, output, session) {
       }
     }
   })
+  
+  
+  # output file
+  
+  data01 <- reactive({ 
+    importdmd("C:/dmdDataLoader/excel/")
+  })
    
   ### Outputs
   
@@ -84,14 +91,42 @@ server <- function(input, output, session) {
   
   output$body <- renderUI({
     if (USER$Logged == TRUE) {
-      tabItems()}
+      tabItems(
+        # First tab content
+        tabItem(
+        tabName = "snomed",
+        fluidRow(
+          box(width = 2,height = 1500
+              
+              
+          ),# End of Box
+          
+          
+          tabBox(width = 10,height = 1500,
+                 tabPanel("DataTable01",
+                          #downloadButton ('downdat.data_timeseries04'),
+                          dataTableOutput("tab_data01" ,height="450px"))
+                 
+                 
+          ) # End of tabBox     
+        ) # End of fluidRow
+      )
+         
+        
+      )}
     else {
       login
     }
   })
   
   
+  ## Data tables
   
+  output$tab_data01<- renderDataTable({
+    withProgress(message = 'Data is loading, please wait ...', value = 1:100, {
+    data01()
+    })
+  })
   
   
   
