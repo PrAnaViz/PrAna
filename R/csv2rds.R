@@ -1,10 +1,12 @@
 
-#' csv2rds - Convert .CSV file(s) in the path defined to .rds file in a desired location
+#' csv2rds
+#' 
+#' Convert .CSV file(s) in the target path to a .rds file in the defined folder
 #'
-#' @param path .CSV file(s) location
-#' @param output desired output .rds file with location
+#' @param path location for the target .CSV file(s) 
+#' @param output location for the output .rds file
 #'
-#' @return .rds file in a desired location
+#' @return .rds file in the output location
 #' @export
 
 

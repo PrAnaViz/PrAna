@@ -1,8 +1,10 @@
-#' importdmd - import dm+d files, merge with June 2018 snomed mapping file and convert to dataframe
+#' importdmd 
+#' 
+#' Import dm+d files and merge with June 2018 snomed mapping file.
 #'
-#' @param path dm+d excel file(s) location. Example: importdmd("C:/dmdDataLoader/excel/")
+#' @param path dm+d excel file(s) location. Example: importdmd ("C:/dmdDataLoader/excel/")
 #'
-#' @return dataframe 
+#' @return a datatable 
 #' @export
 #'
 

@@ -2,18 +2,18 @@
 % Please edit documentation in R/csv2rds.R
 \name{csv2rds}
 \alias{csv2rds}
-\title{csv2rds - Convert .CSV file(s) in the path defined to .rds file in a desired location}
+\title{csv2rds}
 \usage{
 csv2rds(path, output)
 }
 \arguments{
-\item{path}{.CSV file(s) location}
+\item{path}{location for the target .CSV file(s)}
 
-\item{output}{desired output .rds file with location}
+\item{output}{location for the output .rds file}
 }
 \value{
-.rds file in a desired location
+.rds file in the output location
 }
 \description{
-csv2rds - Convert .CSV file(s) in the path defined to .rds file in a desired location
+Convert .CSV file(s) in the target path to a .rds file in the defined folder
 }

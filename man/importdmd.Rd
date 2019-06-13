@@ -2,16 +2,16 @@
 % Please edit documentation in R/importdmd.R
 \name{importdmd}
 \alias{importdmd}
-\title{importdmd - import dm+d files, merge with June 2018 snomed mapping file and convert to dataframe}
+\title{importdmd}
 \usage{
 importdmd(path)
 }
 \arguments{
-\item{path}{dm+d excel file(s) location. Example: importdmd("C:/dmdDataLoader/excel/")}
+\item{path}{dm+d excel file(s) location. Example: importdmd ("C:/dmdDataLoader/excel/")}
 }
 \value{
-dataframe
+a datatable
 }
 \description{
-importdmd - import dm+d files, merge with June 2018 snomed mapping file and convert to dataframe
+Import dm+d files and merge with June 2018 snomed mapping file.
 }
