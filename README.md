@@ -54,12 +54,14 @@ Data and Strucutre
 <h4>3. Dictionary of medicines and devices (dm+d) release files</h4>
   * The <a href="https://www.nhsbsa.nhs.uk/pharmacies-gp-practices-and-appliance-contractors/dictionary-medicines-and-devices-dmd" target="_blank">dm+d </a> is a dictionary of descriptions and codes which represent medicines and devices in use across the NHS.
   * NHS Data Model and Dictionary (NHS dm+d)
-    * Virtual Therapeutic Moiety (VTM)      - <font color="red"> Atenolol </font>
-    * Virtual Medicinal Product (VMP)       - <font color="red"> Atenolol </font> <font color="green"> 100 mg </font> <font color=#ff6600> tablets </font> 
-    * Virtual Medicinal Product Pack (VMPP) - <font color="red"> Atenolol </font> <font color="green"> 100 mg </font> <font color=#ff6600> tablets </font> <font color="blue"> x 28 tablet </font> 
-    * Actual Medicinal Product (AMP)        - <font color="red"> Atenolol </font> <font color="green"> 100 mg </font> <font color=#ff6600> tablets </font> <font color=#6600cc>(Almus Pharmaceuticals Ltd) </font>
-    * Actual Medicinal Product Pack (AMPP)  - <font color="red"> Atenolol </font> <font color="green"> 100 mg </font> <font color=#ff6600> tablets </font> <font color=#6600cc>(Sandoz Ltd) </font> <font color="blue">x 28 tablet </font>
-  * <font color="red"> Active ingredient(s) </font> <font color="green"> Strength </font> <font color=#ff6600> Dose form </font> <font color="blue"> Pack level </font> <font color=#6600cc> Identified supplier </font>
+  <ul>
+     <li> Virtual Therapeutic Moiety (VTM)      - <font color="red"> Atenolol </font></li>
+     <li> Virtual Medicinal Product (VMP)       - <font color="red"> Atenolol </font> <font color="green"> 100 mg </font> <font color=#ff6600> tablets </font> </li>
+     <li> Virtual Medicinal Product Pack (VMPP) - <font color="red"> Atenolol </font> <font color="green"> 100 mg </font> <font color=#ff6600> tablets </font> <font color="blue"> x 28 tablet </font> </li>
+     <li> Actual Medicinal Product (AMP)        - <font color="red"> Atenolol </font> <font color="green"> 100 mg </font> <font color=#ff6600> tablets </font> <font color=#6600cc>(Almus Pharmaceuticals Ltd) </font></li>
+     <li> Actual Medicinal Product Pack (AMPP)  - <font color="red"> Atenolol </font> <font color="green"> 100 mg </font> <font color=#ff6600> tablets </font> <font color=#6600cc>(Sandoz Ltd) </font> <font color="blue">x 28 tablet </font></li>
+   <li> <font color="red"> Active ingredient(s) </font> <font color="green"> Strength </font> <font color=#ff6600> Dose form </font> <font color="blue"> Pack level </font> <font color=#6600cc> Identified supplier </font></li>
+   </ul>
 
 Data management, aggregation
 ===
@@ -68,7 +70,7 @@ Data management, aggregation
   * Do not facilitate the calculation of the consumption data.
   * Do not facilitate the assessment of seasonal or location based trends.
 
-  * Data aggregation and interactive tool development was implemented entirely <a href = "https://www.r-project.org/in" target="_blank"> R</a>, using <a href = "https://www.rstudio.com/" target="_blank"> Rstudio </a>and the <a href = "https://shiny.rstudio.com/" target="_blank">shiny </a> framework. <a href = "https://www.rstudio.com/" target="_blank">Rstudio</a> is an open-source interface for the development of R applications, and <a href = "https://shiny.rstudio.com/" target="_blank">shiny</a> is a package that allows the creation of web applications directly from R. The other packages used in the data handling and visulaisation are  <a href = "https://cran.r-project.org/web/packages/shinydashboard/" target="_blank"> shinydashboard</a>, <a href = "https://cran.r-project.org/web/packages/data.table/" target="_blank"> data.table</a>, <a href = "https://cran.r-project.org/web/packages/tidyr/ target="_blank"> tidyr</a>, <a href = "https://cran.r-project.org/web/packages/reshape2/" target="_blank"> reshape2</a>, <a href = "https://cran.r-project.org/web/packages/leaflet/" target="_blank"> leaflet</a> and <a href = "https://cran.r-project.org/web/packages/plotly/" target="_blank"> plotly</a>.
+  * Data aggregation and interactive tool development was implemented entirely <a href = "https://www.r-project.org/in" target="_blank"> R</a>, using <a href = "https://www.rstudio.com/" target="_blank"> Rstudio </a>and the <a href = "https://shiny.rstudio.com/" target="_blank">shiny </a> framework. <a href = "https://www.rstudio.com/" target="_blank">Rstudio</a> is an open-source interface for the development of R applications, and <a href = "https://shiny.rstudio.com/" target="_blank">shiny</a> is a package that allows the creation of web applications directly from R. The other packages used in the data handling and visulaisation are  <a href = "https://cran.r-project.org/web/packages/shinydashboard/" target="_blank"> shinydashboard</a>, <a href = "https://cran.r-project.org/web/packages/data.table/" target="_blank"> data.table</a>, <a href = "https://cran.r-project.org/web/packages/tidyr/" target="_blank"> tidyr</a>, <a href = "https://cran.r-project.org/web/packages/reshape2/" target="_blank"> reshape2</a>, <a href = "https://cran.r-project.org/web/packages/leaflet/" target="_blank"> leaflet</a> and <a href = "https://cran.r-project.org/web/packages/plotly/" target="_blank"> plotly</a>.
 
   * All data were grouped by BNF code, by matching and combining the tables generated from BNF SNOMED Mapping file (June 2018) and NHSBSA dm+d weekly release files. The flow chart below explains the matching and combining of the different tables generated from the above mentioned files.
   * <p>Tables mentioned in the flow chart:</p>
@@ -89,6 +91,15 @@ Data management, aggregation
     <td>VMPP</td>
     <td>  dm+d file: f_vmpp.xlsx</td>
   </tr>
+  <tr>
+    <td>VMP</td>
+    <td>  dm+d file: f_vmp.xlsx</td>
+  </tr>
+  <tr>
+    <td>VMP_SUMM</td>
+    <td>  modified VMP table</td>
+  </tr>
+   
 </table>
 
 Prescription Data Analysis
