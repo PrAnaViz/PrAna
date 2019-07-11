@@ -114,6 +114,7 @@ Demo - Login Page
 ===
 * Login page to restrict users
 <div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/prana_login.PNG" alt="prana_login_page" width="width" height="height" style="padding-bottom:0.5em;" />Login Page - June 2018</div>
+
 Demo - Front page
 ===
 
