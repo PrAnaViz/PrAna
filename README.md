@@ -66,6 +66,9 @@ Data management, aggregation
   * Data aggregation and interactive tool development was implemented entirely <a href = "https://www.r-project.org/in" target="_blank"> R</a>, using <a href = "https://www.rstudio.com/" target="_blank"> Rstudio </a>and the <a href = "https://shiny.rstudio.com/" target="_blank">shiny </a> framework. <a href = "https://www.rstudio.com/" target="_blank">Rstudio</a> is an open-source interface for the development of R applications, and <a href = "https://shiny.rstudio.com/" target="_blank">shiny</a> is a package that allows the creation of web applications directly from R. The other packages used in the data handling and visulaisation are  <a href = "https://cran.r-project.org/web/packages/shinydashboard/" target="_blank"> shinydashboard</a>, <a href = "https://cran.r-project.org/web/packages/data.table/" target="_blank"> data.table</a>, <a href = "https://cran.r-project.org/web/packages/tidyr/" target="_blank"> tidyr</a>, <a href = "https://cran.r-project.org/web/packages/reshape2/" target="_blank"> reshape2</a>, <a href = "https://cran.r-project.org/web/packages/leaflet/" target="_blank"> leaflet</a> and <a href = "https://cran.r-project.org/web/packages/plotly/" target="_blank"> plotly</a>.
 
   * All data were grouped by BNF code, by matching and combining the tables generated from BNF SNOMED Mapping file (June 2018) and NHSBSA dm+d weekly release files. The flow chart below explains the matching and combining of the different tables generated from the above mentioned files.
+  
+<div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/outline.png" alt="flow chart" width="width" height="height" style="padding-bottom:0.5em;" />BNF Code matching process flow chart</div>
+  
   * <p>Tables mentioned in the flow chart:</p>
       <table cellpadding="15">
   <tr>
