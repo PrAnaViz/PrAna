@@ -49,19 +49,17 @@ Data and Strucutre
   * <a href="https://www.nhsbsa.nhs.uk/prescription-data/understanding-our-data/bnf-snomed-mapping" target="_blank"> BNF / SNOMED mapping data </a>  is published by the NHS Business Services Authority (NHS BSA) and represents mapped data between the <a href="https://www.nhsbsa.nhs.uk/pharmacies-gp-practices-and-appliance-contractors/dictionary-medicines-and-devices-dmd" target="_blank"> Dictionary of Medicines and Devices (dm+d) </a> and the legacy Master Data Replacement (MDR) drug database.
   * The dataset shows one row for every VMPP / AMPP record and a field showing which BNF code this maps to, as in the figure below,
   
-  <div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/dm_d_label.PNG" alt="dm+d_nomenclature" width="width" height="height" style="padding-bottom:0.5em;" />Dictionary of medicines and devices (dm+d)</div>
+  <div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/bnf_snomed_june_2018.png" alt="bnf_snomed_mapping_june2018" width="width" height="height" style="padding-bottom:0.5em;" />BNF SNOMED Mapping - June 2018</div>
 
 <h4>3. Dictionary of medicines and devices (dm+d) release files</h4>
   * The <a href="https://www.nhsbsa.nhs.uk/pharmacies-gp-practices-and-appliance-contractors/dictionary-medicines-and-devices-dmd" target="_blank">dm+d </a> is a dictionary of descriptions and codes which represent medicines and devices in use across the NHS.
   * NHS Data Model and Dictionary (NHS dm+d)
-    <div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/nhs_prescription_01.PNG" alt="NHS_prescription_dataset" width="width" height="height" style="padding-bottom:0.5em;" />NHS Prescription Dataset - Sample</div>
+    <div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/dm_d_label.PNG" alt="dm+d_nomenclature" width="width" height="height" style="padding-bottom:0.5em;" />Dictionary of medicines and devices (dm+d)</div>
 
-Data management, aggregation
+Data management, aggregation - Part 01
 ===
 
-  * Cannot be directly combined based on different APIs.
-  * Do not facilitate the calculation of the consumption data.
-  * Do not facilitate the assessment of seasonal or location based trends.
+  * The data from the previously mentioned datasets cannot be directly combined based on different APIs. Thus, they neither facilitate the calculation of the consumption data nor the assessment of seasonal or location based trends.
 
   * Data aggregation and interactive tool development was implemented entirely <a href = "https://www.r-project.org/in" target="_blank"> R</a>, using <a href = "https://www.rstudio.com/" target="_blank"> Rstudio </a>and the <a href = "https://shiny.rstudio.com/" target="_blank">shiny </a> framework. <a href = "https://www.rstudio.com/" target="_blank">Rstudio</a> is an open-source interface for the development of R applications, and <a href = "https://shiny.rstudio.com/" target="_blank">shiny</a> is a package that allows the creation of web applications directly from R. The other packages used in the data handling and visulaisation are  <a href = "https://cran.r-project.org/web/packages/shinydashboard/" target="_blank"> shinydashboard</a>, <a href = "https://cran.r-project.org/web/packages/data.table/" target="_blank"> data.table</a>, <a href = "https://cran.r-project.org/web/packages/tidyr/" target="_blank"> tidyr</a>, <a href = "https://cran.r-project.org/web/packages/reshape2/" target="_blank"> reshape2</a>, <a href = "https://cran.r-project.org/web/packages/leaflet/" target="_blank"> leaflet</a> and <a href = "https://cran.r-project.org/web/packages/plotly/" target="_blank"> plotly</a>.
 
@@ -69,7 +67,7 @@ Data management, aggregation
   
 <div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/outline.png" alt="flow chart" width="width" height="height" style="padding-bottom:0.5em;" />BNF Code matching process flow chart</div>
   
-  * <p>Tables mentioned in the flow chart:</p>
+  * <p>Tables mentioned in the flow chart are generated from following files:</p>
       <table cellpadding="15">
   <tr>
     <th>Table</th>
@@ -93,15 +91,24 @@ Data management, aggregation
   </tr>
   <tr>
     <td>VMP_SUMM</td>
-    <td>  modified VMP table</td>
+    <td>  modified from VMP table</td>
   </tr>
    
 </table>
 
+Data management, aggregation - Part 02
+===
+
+  * The final "SNOMED – June 2018" table is matched with the NHS prescription dataset file to generate result based on the user inputs in the tool.
+  * For the region/catchment based selection, GIS region/catchment shape files and postcodes with latitude/longitude coordinates files were utilized. The files are used from open source repositories and research partners.
+  * <a href = "https://cran.r-project.org/web/packages/leaflet/" target="_blank"> leaflet</a>,<a href = "https://cran.r-project.org/web/packages/rgdal/" target="_blank"> rgdal</a>,<a href = "https://cran.r-project.org/web/packages/sp/" target="_blank"> sp</a>,<a href = "https://cran.r-project.org/web/packages/data.table/" target="_blank"> data.table</a>,<a href = "https://cran.r-project.org/web/packages/tidyr/" target="_blank"> tidyr</a> packages are utilized for the reading and selection of shape files, and data aggregation part.
+  
 Prescription Data Analysis
 ===
 
-With this interactive tool, we have made it easy to caculate the total quantity of different APIs prescribed and to monitor prescribing trends over different spatial and temporal regions.
+We aimed to compile and process NHS Digital prescribing data for the period 2014–2018 to facilitate the calculation of the consumption data and long-term time, seasonal and location based trends to create an interactive data visualisation tool for a wider use.
+
+With this interactive tool, we have made it easy to calculate the total quantity of different APIs prescribed and to monitor prescribing trends over different spatial and temporal regions.
 
 Demo
 ===
