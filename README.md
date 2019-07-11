@@ -37,11 +37,17 @@ Background
 Data and Strucutre
 ===
 
-* NHS Prescription Dataset
+<h4>1. NHS Prescription Dataset</h4>
   * Monthly dataset ~ 1.3 GB
   * more than 500 million rows
-<img src="documents/presentations/img/rpres/nhs_prescription_01.PNG"  />  
+  <div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/nhs_prescription_01.PNG" alt="NHS_prescription_dataset" width="width" height="height" style="padding-bottom:0.5em;" />NHS Prescription Dataset - Sample</div>
+<figure>
 
+<h4>2. June 2018 BNF SNOMED Mapping document</h4>
+  * BNF / SNOMED mapping data is published by the NHS Business Services Authority (NHS BSA) and represents mapped data between the Dictionary of Medicines and Devices (dm+d) and the legacy Master Data Replacement (MDR) drug database.
+  * The dataset shows one row for every VMPP / AMPP record and a field showing which BNF code this maps to, as in the figure below,
+  <div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/bnf_snomed_june_2018.png" alt="BNF_SNOMED_Mapping_June_2018" width="width" height="height" style="padding-bottom:0.5em;" />BNF SNOMED Mapping - June 2018</div>
+  
 Data and Strucutre
 ===
 
@@ -86,19 +92,20 @@ https://jkkishore85.shinyapps.io/PDA_1_0/
 Demo - Login Page
 ===
 * Login page to restrict users
-<img src="documents/presentations/img/rpres/prana_login.PNG"  />
-
+<div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/prana_login.PNG" alt="prana_login_page" width="width" height="height" style="padding-bottom:0.5em;" />Login Page - June 2018</div>
 Demo - Front page
 ===
 
-<img src="documents/presentations/img/rpres/prana_front.PNG"  />
+<div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/prana_front.PNG" alt="prana_front_page" width="width" height="height" style="padding-bottom:0.5em;" />Front Page</div>
 
-###### 1 - User Identification; 2, 3 - Input files ; 4,5,6 - Different View Options
+##### 1 - User Identification
+##### 2, 3 - Input files
+##### 4,5,6 - Different View Options
 
 Demo - Input files
 ===
 
-<img src="documents/presentations/img/rpres/input_files.PNG"  />
+<div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/input_files.PNG" alt="input_files" width="width" height="height" style="padding-bottom:0.5em;" />Input files</div>
 
 #####  2 - Target APIs list in .csv format
 #####  3 - Grouping of APIs based on the chemical class in .csv format. This can be modified based on the usage of data.
@@ -106,7 +113,7 @@ Demo - Input files
 Demo - Time series
 ===
 
-<img src="documents/presentations/img/rpres/timeseries_01.png"  />
+<div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/timeseries_01.png" alt="time_series_option" width="width" height="height" style="padding-bottom:0.5em;" />Time series - Option</div>
 
 #####  5 - Select the STP catchment area
 #####  6, 7 - Options to see the trends based on a target API or GP surgery (Options 9 and 10)
@@ -116,28 +123,27 @@ Demo - Time series
 
 Demo - Time series
 ===
-<img src="documents/presentations/img/rpres/timeseries_03.gif"  />
+<div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/timeseries_03.gif" alt="time_series_option_demo" width="width" height="height" style="padding-bottom:0.5em;" />Time series - Demo</div>
 
  * By selecting the API in the barplot, we able to see the trend of the API over the period
  * Download buttons helps to download the data in .csv files
  
 Demo - Targeted API
 ===
-<img src="documents/presentations/img/rpres/targeted_01.gif"  />
+<div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/targeted_01.gif" alt="targeted_api_demo" width="width" height="height" style="padding-bottom:0.5em;" />Targed API - timeseries - Demo</div>
 
  * By selecting the API in the dropdown, we able to see the trend of the API over the period
 
 Demo - Timeseries GP
 ===
-<img src="documents/presentations/img/rpres/targeted_gp.gif"  />
+<div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/targeted_gp.gif" alt="targeted_GP_demo" width="width" height="height" style="padding-bottom:0.5em;" />Targed GP - timeseries - Demo</div>
 
  * To see the trend of the API over the period with respective to different GP practice in the particular STP catchment area
  * Working on getting the trend of different APIs over the selection of targeted GP practice
 
-Demo - Particular year
+Particular year
 ===
-
-<img src="documents/presentations/img/rpres/particular_year_01.png"  />
+<div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/particular_year_01.png" alt="particular_year_option" width="width" height="height" style="padding-bottom:0.5em;" />Particular Year - Option</div>
 
 #####  11 - Select the STP catchment area
 #####  12 - Select the year of interest
@@ -149,7 +155,7 @@ Demo - Particular year
 Demo - Particular year
 ===
 
-<img src="documents/presentations/img/rpres/particular_year_01.gif"  />
+<div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/particular_year_01.gif" alt="particular_year_demo" width="width" height="height" style="padding-bottom:0.5em;" />Particular Year - Demo</div>
 
   * By selecting the API in the barplot, we able to see the trend of the API over,
     * Period
@@ -161,21 +167,19 @@ Demo - Particular year
 Demo - Monthwise APIs
 ===
 
-<img src="documents/presentations/img/rpres/monthwise_API.gif"  />
+<div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/monthwise_API.gif" alt="monthwise_api" width="width" height="height" style="padding-bottom:0.5em;" />Monthwise APIs - Demo</div>
 
 * By selecting the year in the dropdown, we able to see the monthwise trend of all APIs for a particular STP
 
 Demo - Monthwise GP
 ===
-
-<img src="documents/presentations/img/rpres/monthwise_gp.gif"  />
+<div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/monthwise_gp.gif" alt="monthwise_gp_demo" width="width" height="height" style="padding-bottom:0.5em;" />Monthwise GPs - Demo</div>
 
 * By selecting the GP Practice code in the dropdown, we able to see the monthwise trend of all APIs for a particular GP
 
-Demo - Compare STW
+Compare STW
 ===
-
-<img src="documents/presentations/img/rpres/compare_stw_01.png"  />
+<div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/compare_stw_01.png" alt="compare_stw_option" width="width" height="height" style="padding-bottom:0.5em;" />Compare STW - Option</div>
 
 #####  17 - Select the year of interest
 #####  18 - Comparison of the APIs for the selected year - 2D Plot 
@@ -184,15 +188,14 @@ Demo - Compare STW
 Demo - Compare STW - 2D plot
 ===
 
-<img src="documents/presentations/img/rpres/compare_stw_01.gif"  />
-
+<div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/compare_stw_01.gif" alt="compare_stw_2dplot_demo" width="width" height="height" style="padding-bottom:0.5em;" />Compare STW - 2D Plot - Demo</div>
 
 * By selecting the year in the dropdown, we able to see the year wise trend of all APIs for different STPs
 
 Demo - Compare STW - 3D plot
 ===
 
-<img src="documents/presentations/img/rpres/compare_stw_02.gif"  />
+<div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/compare_stw_02.gif" alt="compare_stw_3dplot_demo" width="width" height="height" style="padding-bottom:0.5em;" />Compare STW - 3D Plot - Demo</div>
 
 * By selecting the year in the dropdown, we able to see the year wise trend of all APIs for different STPs
 
