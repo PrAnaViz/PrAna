@@ -49,19 +49,12 @@ Data and Strucutre
   * <a href="https://www.nhsbsa.nhs.uk/prescription-data/understanding-our-data/bnf-snomed-mapping" target="_blank"> BNF / SNOMED mapping data </a>  is published by the NHS Business Services Authority (NHS BSA) and represents mapped data between the <a href="https://www.nhsbsa.nhs.uk/pharmacies-gp-practices-and-appliance-contractors/dictionary-medicines-and-devices-dmd" target="_blank"> Dictionary of Medicines and Devices (dm+d) </a> and the legacy Master Data Replacement (MDR) drug database.
   * The dataset shows one row for every VMPP / AMPP record and a field showing which BNF code this maps to, as in the figure below,
   
-  <div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/bnf_snomed_june_2018.png" alt="BNF_SNOMED_Mapping_June_2018" width="width" height="height" style="padding-bottom:0.5em;" />BNF SNOMED Mapping - June 2018</div>
+  <div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/dm_d_label.PNG" alt="dm+d_nomenclature" width="width" height="height" style="padding-bottom:0.5em;" />Dictionary of medicines and devices (dm+d)</div>
 
 <h4>3. Dictionary of medicines and devices (dm+d) release files</h4>
   * The <a href="https://www.nhsbsa.nhs.uk/pharmacies-gp-practices-and-appliance-contractors/dictionary-medicines-and-devices-dmd" target="_blank">dm+d </a> is a dictionary of descriptions and codes which represent medicines and devices in use across the NHS.
   * NHS Data Model and Dictionary (NHS dm+d)
-  <ul>
-     <li> Virtual Therapeutic Moiety (VTM)      - <font color="red"> Atenolol </font></li>
-     <li> Virtual Medicinal Product (VMP)       - <font color="red"> Atenolol </font> <font color="green"> 100 mg </font> <font color=#ff6600> tablets </font> </li>
-     <li> Virtual Medicinal Product Pack (VMPP) - <font color="red"> Atenolol </font> <font color="green"> 100 mg </font> <font color=#ff6600> tablets </font> <font color="blue"> x 28 tablet </font> </li>
-     <li> Actual Medicinal Product (AMP)        - <font color="red"> Atenolol </font> <font color="green"> 100 mg </font> <font color=#ff6600> tablets </font> <font color=#6600cc>(Almus Pharmaceuticals Ltd) </font></li>
-     <li> Actual Medicinal Product Pack (AMPP)  - <font color="red"> Atenolol </font> <font color="green"> 100 mg </font> <font color=#ff6600> tablets </font> <font color=#6600cc>(Sandoz Ltd) </font> <font color="blue">x 28 tablet </font></li>
-   <li> <font color="red"> Active ingredient(s) </font> <font color="green"> Strength </font> <font color=#ff6600> Dose form </font> <font color="blue"> Pack level </font> <font color=#6600cc> Identified supplier </font></li>
-   </ul>
+    <div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/nhs_prescription_01.PNG" alt="NHS_prescription_dataset" width="width" height="height" style="padding-bottom:0.5em;" />NHS Prescription Dataset - Sample</div>
 
 Data management, aggregation
 ===
