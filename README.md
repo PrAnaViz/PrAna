@@ -38,46 +38,58 @@ Data and Strucutre
 ===
 
 <h4>1. NHS Prescription Dataset</h4>
-  * Monthly dataset ~ 1.3 GB
+  * General practice <a href="https://data.gov.uk/dataset/176ae264-2484-4afe-a297-d51798eb8228/gp-practice-prescribing-data-presentation-level" target="_blank"> prescribing data </a> is a list of all medicines, dressings and appliances that are prescribed and dispensed each month.
+  * Monthly dataset  ~ 1.3 GB
   * more than 500 million rows
+  
   <div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/nhs_prescription_01.PNG" alt="NHS_prescription_dataset" width="width" height="height" style="padding-bottom:0.5em;" />NHS Prescription Dataset - Sample</div>
-<figure>
+
 
 <h4>2. June 2018 BNF SNOMED Mapping document</h4>
-  * BNF / SNOMED mapping data is published by the NHS Business Services Authority (NHS BSA) and represents mapped data between the Dictionary of Medicines and Devices (dm+d) and the legacy Master Data Replacement (MDR) drug database.
+  * <a href="https://www.nhsbsa.nhs.uk/prescription-data/understanding-our-data/bnf-snomed-mapping" target="_blank"> BNF / SNOMED mapping data </a>  is published by the NHS Business Services Authority (NHS BSA) and represents mapped data between the <a href="https://www.nhsbsa.nhs.uk/pharmacies-gp-practices-and-appliance-contractors/dictionary-medicines-and-devices-dmd" target="_blank"> Dictionary of Medicines and Devices (dm+d) </a> and the legacy Master Data Replacement (MDR) drug database.
   * The dataset shows one row for every VMPP / AMPP record and a field showing which BNF code this maps to, as in the figure below,
-  <div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/bnf_snomed_june_2018.png" alt="BNF_SNOMED_Mapping_June_2018" width="width" height="height" style="padding-bottom:0.5em;" />BNF SNOMED Mapping - June 2018</div>
   
-Data and Strucutre
-===
+  <div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/bnf_snomed_june_2018.png" alt="BNF_SNOMED_Mapping_June_2018" width="width" height="height" style="padding-bottom:0.5em;" />BNF SNOMED Mapping - June 2018</div>
 
-* NHS Data Model and Dictionary (NHS dm+d)
-  * Virtual Therapeutic Moiety (VTM)      - Atenolol 
-  * Virtual Medicinal Product (VMP)       - Atenolol 100 mg tablets 
-  * Virtual Medicinal Product Pack (VMPP) - Atenolol 100 mg tablets x 28 tablet
-  * Actual Medicinal Product (AMP)        - Atenolol 100 mg tablets (Almus Pharmaceuticals Ltd) 
-  * Actual Medicinal Product Pack (AMPP)  - Atenolol 100 mg tablets (Sandoz Ltd) x 28 tablet
-
-Active ingredient(s) Strength Dose form Pack level Identified supplier
-
-Data management, aggregation
-===
-
- * Cannot be directly combined based on different APIs.
- * Do not facilitate the calculation of the consumption data.
- * Do not facilitate the assessment of seasonal or location based trends.
+<h4>3. Dictionary of medicines and devices (dm+d) release files</h4>
+  * The <a href="https://www.nhsbsa.nhs.uk/pharmacies-gp-practices-and-appliance-contractors/dictionary-medicines-and-devices-dmd" target="_blank">dm+d </a> is a dictionary of descriptions and codes which represent medicines and devices in use across the NHS.
+  * NHS Data Model and Dictionary (NHS dm+d)
+    * Virtual Therapeutic Moiety (VTM)      - <font color="red"> Atenolol </font>
+    * Virtual Medicinal Product (VMP)       - <font color="red"> Atenolol </font> <font color="green"> 100 mg </font> <font color=#ff6600> tablets </font> 
+    * Virtual Medicinal Product Pack (VMPP) - <font color="red"> Atenolol </font> <font color="green"> 100 mg </font> <font color=#ff6600> tablets </font> <font color="blue"> x 28 tablet </font> 
+    * Actual Medicinal Product (AMP)        - <font color="red"> Atenolol </font> <font color="green"> 100 mg </font> <font color=#ff6600> tablets </font> <font color=#6600cc>(Almus Pharmaceuticals Ltd) </font>
+    * Actual Medicinal Product Pack (AMPP)  - <font color="red"> Atenolol </font> <font color="green"> 100 mg </font> <font color=#ff6600> tablets </font> <font color=#6600cc>(Sandoz Ltd) </font> <font color="blue">x 28 tablet </font>
+  * <font color="red"> Active ingredient(s) </font> <font color="green"> Strength </font> <font color=#ff6600> Dose form </font> <font color="blue"> Pack level </font> <font color=#6600cc> Identified supplier </font>
 
 Data management, aggregation
 ===
-* R
-* Packages used
-  * shiny
-  * shinydashboard
-  * data.table
-  * tidyr
-  * reshape2
-  * leaflet
-  * plotly
+
+  * Cannot be directly combined based on different APIs.
+  * Do not facilitate the calculation of the consumption data.
+  * Do not facilitate the assessment of seasonal or location based trends.
+
+  * Data aggregation and interactive tool development was implemented entirely <a href = "https://www.r-project.org/in" target="_blank"> R</a>, using <a href = "https://www.rstudio.com/" target="_blank"> Rstudio </a>and the <a href = "https://shiny.rstudio.com/" target="_blank">shiny </a> framework. <a href = "https://www.rstudio.com/" target="_blank">Rstudio</a> is an open-source interface for the development of R applications, and <a href = "https://shiny.rstudio.com/" target="_blank">shiny</a> is a package that allows the creation of web applications directly from R. The other packages used in the data handling and visulaisation are  <a href = "https://cran.r-project.org/web/packages/shinydashboard/" target="_blank"> shinydashboard</a>, <a href = "https://cran.r-project.org/web/packages/data.table/" target="_blank"> data.table</a>, <a href = "https://cran.r-project.org/web/packages/tidyr/ target="_blank"> tidyr</a>, <a href = "https://cran.r-project.org/web/packages/reshape2/" target="_blank"> reshape2</a>, <a href = "https://cran.r-project.org/web/packages/leaflet/" target="_blank"> leaflet</a> and <a href = "https://cran.r-project.org/web/packages/plotly/" target="_blank"> plotly</a>.
+
+  * All data were grouped by BNF code, by matching and combining the tables generated from BNF SNOMED Mapping file (June 2018) and NHSBSA dm+d weekly release files. The flow chart below explains the matching and combining of the different tables generated from the above mentioned files.
+  * <p>Tables mentioned in the flow chart:</p>
+      <table cellpadding="15">
+  <tr>
+    <th>Table</th>
+    <th>Files</th>
+  </tr>
+  <tr>
+    <td>SNOMED – June 2018</td>
+    <td>  BNF SNOMED Mapping file - June 2018</td>
+  </tr>
+   <tr>
+    <td>AMPP</td>
+    <td>  dm+d file: f_ampp.xlsx</td>
+  </tr>
+  <tr>
+    <td>VMPP</td>
+    <td>  dm+d file: f_vmpp.xlsx</td>
+  </tr>
+</table>
 
 Prescription Data Analysis
 ===
