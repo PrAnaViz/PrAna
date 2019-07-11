@@ -44,19 +44,19 @@ Data and Strucutre
   * Monthly dataset  ~ 1.3 GB
   * more than 500 million rows
   
-  <div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/nhs_prescription_01.PNG" alt="NHS_prescription_dataset" width="width" height="height" style="padding-bottom:0.5em;" />NHS Prescription Dataset - Sample</div>
+  <div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/nhs_prescription_01.PNG" alt="NHS_prescription_dataset" width="width" height="height" style="padding-bottom:0.5em;" /> Figure 1: NHS Prescription Dataset - Sample</div>
 
 
 <h4>2. June 2018 BNF SNOMED Mapping document</h4>
   * <a href="https://www.nhsbsa.nhs.uk/prescription-data/understanding-our-data/bnf-snomed-mapping" target="_blank"> BNF / SNOMED mapping data </a>  is published by the NHS Business Services Authority (NHS BSA) and represents mapped data between the <a href="https://www.nhsbsa.nhs.uk/pharmacies-gp-practices-and-appliance-contractors/dictionary-medicines-and-devices-dmd" target="_blank"> Dictionary of Medicines and Devices (dm+d) </a> and the legacy Master Data Replacement (MDR) drug database.
   * The dataset shows one row for every VMPP / AMPP record and a field showing which BNF code this maps to, as in the figure below,
   
-  <div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/bnf_snomed_june_2018.png" alt="bnf_snomed_mapping_june2018" width="width" height="height" style="padding-bottom:0.5em;" />BNF SNOMED Mapping - June 2018</div>
+  <div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/bnf_snomed_june_2018.png" alt="bnf_snomed_mapping_june2018" width="width" height="height" style="padding-bottom:0.5em;" /> Figure 2: BNF SNOMED Mapping - June 2018</div>
 
 <h4>3. Dictionary of medicines and devices (dm+d) release files</h4>
   * The <a href="https://www.nhsbsa.nhs.uk/pharmacies-gp-practices-and-appliance-contractors/dictionary-medicines-and-devices-dmd" target="_blank">dm+d </a> is a dictionary of descriptions and codes which represent medicines and devices in use across the NHS.
   * NHS Data Model and Dictionary (NHS dm+d)
-    <div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/dm_d_label.PNG" alt="dm+d_nomenclature" width="width" height="height" style="padding-bottom:0.5em;" />Dictionary of medicines and devices (dm+d)</div>
+    <div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/dm_d_label.PNG" alt="dm+d_nomenclature" width="width" height="height" style="padding-bottom:0.5em;" /> Figure 3: Dictionary of medicines and devices (dm+d)</div>
 
 Data management, aggregation - Part 01
 ===
@@ -67,7 +67,7 @@ Data management, aggregation - Part 01
 
   * All data were grouped by BNF code, by matching and combining the tables generated from BNF SNOMED Mapping file (June 2018) and NHSBSA dm+d weekly release files. The flow chart below explains the matching and combining of the different tables generated from the above mentioned files.
   
-<div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/outline.png" alt="flow chart" width="width" height="height" style="padding-bottom:0.5em;" />BNF Code matching process flow chart</div>
+<div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/outline.png" alt="flow chart" width="width" height="height" style="padding-bottom:0.5em;" /> Figure 4: BNF Code matching process flow chart</div>
   
   * <p>Tables mentioned in the flow chart are generated from following files:</p>
       <table cellpadding="15">
@@ -113,12 +113,12 @@ https://jkkishore85.shinyapps.io/PDA_1_0/
 Demo - Login Page
 ===
 * Login page to restrict users
-<div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/prana_login.PNG" alt="prana_login_page" width="width" height="height" style="padding-bottom:0.5em;" />Login Page - June 2018</div>
+<div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/prana_login.PNG" alt="prana_login_page" width="width" height="height" style="padding-bottom:0.5em;" /> Figure  5: Login Page - June 2018</div>
 
 Demo - Front page
 ===
 
-<div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/prana_front.PNG" alt="prana_front_page" width="width" height="height" style="padding-bottom:0.5em;" />Front Page</div>
+<div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/prana_front.PNG" alt="prana_front_page" width="width" height="height" style="padding-bottom:0.5em;" /> Figure  6: Front Page</div>
 
 ##### 1 - User Identification
 ##### 2, 3 - Input files
@@ -127,7 +127,7 @@ Demo - Front page
 Demo - Input files
 ===
 
-<div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/input_files.PNG" alt="input_files" width="width" height="height" style="padding-bottom:0.5em;" />Input files</div>
+<div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/input_files.PNG" alt="input_files" width="width" height="height" style="padding-bottom:0.5em;" /> Figure  7: Input files</div>
 
 #####  2 - Target APIs list in .csv format
 #####  3 - Grouping of APIs based on the chemical class in .csv format. This can be modified based on the usage of data.
@@ -135,7 +135,7 @@ Demo - Input files
 Demo - Time series
 ===
 
-<div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/timeseries_01.png" alt="time_series_option" width="width" height="height" style="padding-bottom:0.5em;" />Time series - Option</div>
+<div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/timeseries_01.png" alt="time_series_option" width="width" height="height" style="padding-bottom:0.5em;" /> Figure  8: Time series - Option</div>
 
 #####  5 - Select the STP catchment area
 #####  6, 7 - Options to see the trends based on a target API or GP surgery (Options 9 and 10)
@@ -145,27 +145,27 @@ Demo - Time series
 
 Demo - Time series
 ===
-<div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/timeseries_03.gif" alt="time_series_option_demo" width="width" height="height" style="padding-bottom:0.5em;" />Time series - Demo</div>
+<div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/timeseries_03.gif" alt="time_series_option_demo" width="width" height="height" style="padding-bottom:0.5em;" /> Figure  9: Time series - Demo</div>
 
  * By selecting the API in the barplot, we able to see the trend of the API over the period
  * Download buttons helps to download the data in .csv files
  
 Demo - Targeted API
 ===
-<div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/targeted_01.gif" alt="targeted_api_demo" width="width" height="height" style="padding-bottom:0.5em;" />Targed API - timeseries - Demo</div>
+<div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/targeted_01.gif" alt="targeted_api_demo" width="width" height="height" style="padding-bottom:0.5em;" /> Figure  10: Targed API - timeseries - Demo</div>
 
  * By selecting the API in the dropdown, we able to see the trend of the API over the period
 
 Demo - Timeseries GP
 ===
-<div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/targeted_gp.gif" alt="targeted_GP_demo" width="width" height="height" style="padding-bottom:0.5em;" />Targed GP - timeseries - Demo</div>
+<div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/targeted_gp.gif" alt="targeted_GP_demo" width="width" height="height" style="padding-bottom:0.5em;" /> Figure  11: Targed GP - timeseries - Demo</div>
 
  * To see the trend of the API over the period with respective to different GP practice in the particular STP catchment area
  * Working on getting the trend of different APIs over the selection of targeted GP practice
 
 Particular year
 ===
-<div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/particular_year_01.png" alt="particular_year_option" width="width" height="height" style="padding-bottom:0.5em;" />Particular Year - Option</div>
+<div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/particular_year_01.png" alt="particular_year_option" width="width" height="height" style="padding-bottom:0.5em;" /> Figure  12: Particular Year - Option</div>
 
 #####  11 - Select the STP catchment area
 #####  12 - Select the year of interest
@@ -177,7 +177,7 @@ Particular year
 Demo - Particular year
 ===
 
-<div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/particular_year_01.gif" alt="particular_year_demo" width="width" height="height" style="padding-bottom:0.5em;" />Particular Year - Demo</div>
+<div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/particular_year_01.gif" alt="particular_year_demo" width="width" height="height" style="padding-bottom:0.5em;" /> Figure  13: Particular Year - Demo</div>
 
   * By selecting the API in the barplot, we able to see the trend of the API over,
     * Period
@@ -189,19 +189,19 @@ Demo - Particular year
 Demo - Monthwise APIs
 ===
 
-<div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/monthwise_API.gif" alt="monthwise_api" width="width" height="height" style="padding-bottom:0.5em;" />Monthwise APIs - Demo</div>
+<div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/monthwise_API.gif" alt="monthwise_api" width="width" height="height" style="padding-bottom:0.5em;" /> Figure  14: Monthwise APIs - Demo</div>
 
 * By selecting the year in the dropdown, we able to see the monthwise trend of all APIs for a particular STP
 
 Demo - Monthwise GP
 ===
-<div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/monthwise_gp.gif" alt="monthwise_gp_demo" width="width" height="height" style="padding-bottom:0.5em;" />Monthwise GPs - Demo</div>
+<div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/monthwise_gp.gif" alt="monthwise_gp_demo" width="width" height="height" style="padding-bottom:0.5em;" /> Figure 15: Monthwise GPs - Demo</div>
 
 * By selecting the GP Practice code in the dropdown, we able to see the monthwise trend of all APIs for a particular GP
 
 Compare STW
 ===
-<div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/compare_stw_01.png" alt="compare_stw_option" width="width" height="height" style="padding-bottom:0.5em;" />Compare STW - Option</div>
+<div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/compare_stw_01.png" alt="compare_stw_option" width="width" height="height" style="padding-bottom:0.5em;" /> Figure  16: Compare STW - Option</div>
 
 #####  17 - Select the year of interest
 #####  18 - Comparison of the APIs for the selected year - 2D Plot 
@@ -210,14 +210,14 @@ Compare STW
 Demo - Compare STW - 2D plot
 ===
 
-<div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/compare_stw_01.gif" alt="compare_stw_2dplot_demo" width="width" height="height" style="padding-bottom:0.5em;" />Compare STW - 2D Plot - Demo</div>
+<div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/compare_stw_01.gif" alt="compare_stw_2dplot_demo" width="width" height="height" style="padding-bottom:0.5em;" /> Figure  17: Compare STW - 2D Plot - Demo</div>
 
 * By selecting the year in the dropdown, we able to see the year wise trend of all APIs for different STPs
 
 Demo - Compare STW - 3D plot
 ===
 
-<div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/compare_stw_02.gif" alt="compare_stw_3dplot_demo" width="width" height="height" style="padding-bottom:0.5em;" />Compare STW - 3D Plot - Demo</div>
+<div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/compare_stw_02.gif" alt="compare_stw_3dplot_demo" width="width" height="height" style="padding-bottom:0.5em;" /> Figure  18: Compare STW - 3D Plot - Demo</div>
 
 * By selecting the year in the dropdown, we able to see the year wise trend of all APIs for different STPs
 
