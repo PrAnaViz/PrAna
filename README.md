@@ -147,6 +147,7 @@ Demo - Time series
 ===
 <div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/timeseries_03.gif" alt="time_series_option_demo" width="width" height="height" style="padding-bottom:0.5em;" /> Figure  9: Time series - Demo</div>
 
+
  * By selecting the API in the barplot, we able to see the trend of the API over the period
  * Download buttons helps to download the data in .csv files
  
@@ -154,11 +155,13 @@ Demo - Targeted API
 ===
 <div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/targeted_01.gif" alt="targeted_api_demo" width="width" height="height" style="padding-bottom:0.5em;" /> Figure  10: Targed API - timeseries - Demo</div>
 
+
  * By selecting the API in the dropdown, we able to see the trend of the API over the period
 
 Demo - Timeseries GP
 ===
 <div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/targeted_gp.gif" alt="targeted_GP_demo" width="width" height="height" style="padding-bottom:0.5em;" /> Figure  11: Targed GP - timeseries - Demo</div>
+
 
  * To see the trend of the API over the period with respective to different GP practice in the particular STP catchment area
  * Working on getting the trend of different APIs over the selection of targeted GP practice
@@ -179,6 +182,7 @@ Demo - Particular year
 
 <div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/particular_year_01.gif" alt="particular_year_demo" width="width" height="height" style="padding-bottom:0.5em;" /> Figure  13: Particular Year - Demo</div>
 
+
   * By selecting the API in the barplot, we able to see the trend of the API over,
     * Period
     * GP Practice - Total
@@ -191,11 +195,13 @@ Demo - Monthwise APIs
 
 <div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/monthwise_API.gif" alt="monthwise_api" width="width" height="height" style="padding-bottom:0.5em;" /> Figure  14: Monthwise APIs - Demo</div>
 
+
 * By selecting the year in the dropdown, we able to see the monthwise trend of all APIs for a particular STP
 
 Demo - Monthwise GP
 ===
 <div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/monthwise_gp.gif" alt="monthwise_gp_demo" width="width" height="height" style="padding-bottom:0.5em;" /> Figure 15: Monthwise GPs - Demo</div>
+
 
 * By selecting the GP Practice code in the dropdown, we able to see the monthwise trend of all APIs for a particular GP
 
@@ -212,12 +218,14 @@ Demo - Compare STW - 2D plot
 
 <div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/compare_stw_01.gif" alt="compare_stw_2dplot_demo" width="width" height="height" style="padding-bottom:0.5em;" /> Figure  17: Compare STW - 2D Plot - Demo</div>
 
+
 * By selecting the year in the dropdown, we able to see the year wise trend of all APIs for different STPs
 
 Demo - Compare STW - 3D plot
 ===
 
 <div style="width:image width px; font-size:80%; text-align:center;"><img src="documents/presentations/img/rpres/compare_stw_02.gif" alt="compare_stw_3dplot_demo" width="width" height="height" style="padding-bottom:0.5em;" /> Figure  18: Compare STW - 3D Plot - Demo</div>
+
 
 * By selecting the year in the dropdown, we able to see the year wise trend of all APIs for different STPs
 
