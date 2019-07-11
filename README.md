@@ -26,7 +26,9 @@ Outline
 
 Prescription Data Analysis
 ===
-Tool to calculate the total amount of Active Pharmaceutical Ingredients (APIs) prescribed and to monitor prescribing trends over different spatial and temporal regions.
+We aimed to compile and process NHS Digital prescribing data for the period 2014–2018 to facilitate the calculation of the consumption data and long-term time, seasonal and location based trends to create an interactive data visualisation tool for a wider use.
+
+With this interactive tool, we have made it easy to calculate the total quantity of different Active Pharmaceutical Ingredients (APIs) prescribed and to monitor prescribing trends over different spatial and temporal regions.
 
 Background
 ===
@@ -103,14 +105,7 @@ Data management, aggregation - Part 02
   * For the region/catchment based selection, GIS region/catchment shape files and postcodes with latitude/longitude coordinates files were utilized. The files are used from open source repositories and research partners.
   * <a href = "https://cran.r-project.org/web/packages/leaflet/" target="_blank"> leaflet</a>,<a href = "https://cran.r-project.org/web/packages/rgdal/" target="_blank"> rgdal</a>,<a href = "https://cran.r-project.org/web/packages/sp/" target="_blank"> sp</a>,<a href = "https://cran.r-project.org/web/packages/data.table/" target="_blank"> data.table</a>,<a href = "https://cran.r-project.org/web/packages/tidyr/" target="_blank"> tidyr</a> packages are utilized for the reading and selection of shape files, and data aggregation part.
   
-Prescription Data Analysis
-===
-
-We aimed to compile and process NHS Digital prescribing data for the period 2014–2018 to facilitate the calculation of the consumption data and long-term time, seasonal and location based trends to create an interactive data visualisation tool for a wider use.
-
-With this interactive tool, we have made it easy to calculate the total quantity of different APIs prescribed and to monitor prescribing trends over different spatial and temporal regions.
-
-Demo
+Prescription Data Analysis - Demo
 ===
 
 https://jkkishore85.shinyapps.io/PDA_1_0/
