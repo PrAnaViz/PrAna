@@ -55,10 +55,12 @@ server <- function(input, output, session) {
   
   
   # output file
-  
-  data01 <- reactive({ 
+  #BNF SNOMED Mapping file
+  snomedmap <- reactive({ 
     importdmd("C:/dmdDataLoader/excel/")
   })
+  
+  
    
   ### Outputs
   
@@ -105,7 +107,7 @@ server <- function(input, output, session) {
           tabBox(width = 10,height = 1500,
                  tabPanel("DataTable01",
                           #downloadButton ('downdat.data_timeseries04'),
-                          dataTableOutput("tab_data01" ,height="450px"))
+                          dataTableOutput("tab_snomedmap" ,height="450px"))
                  
                  
           ) # End of tabBox     
@@ -122,9 +124,9 @@ server <- function(input, output, session) {
   
   ## Data tables
   
-  output$tab_data01<- renderDataTable(
+  output$tab_snomedmap<- renderDataTable(
     withProgress(message = 'Data is loading, please wait ...', value = 1:100, {
-    data01()
+    snomedmap()
     }), options = list(scrollX = TRUE) )
   
   
