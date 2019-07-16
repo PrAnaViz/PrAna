@@ -64,7 +64,7 @@ server <- function(input, output, session) {
     aggr02 <- DBI::dbConnect(RSQLite::SQLite(), "data/aggr.sqlite")
   
   # create table from the db
-    Five_catchment_201712 <- tbl(aggr01, "Five_catchment_201712")
+    Five_catchment_201712 <- tbl(aggr02, "Five_catchment_201712")
   
   # Subset data
   data_subset_01 <- Five_catchment_201712 %>%
