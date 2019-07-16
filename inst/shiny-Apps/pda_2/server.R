@@ -136,12 +136,12 @@ server <- function(input, output, session) {
   
   ## Data tables
   
-  output$tab_snomedmap<- renderDataTable(
+  output$tab_snomedmap <- renderDataTable(
     withProgress(message = 'Data is loading, please wait ...', value = 1:100, {
     snomedmap()
     }), options = list(scrollX = TRUE) )
   
-  output$tab_data_subset_01<- renderDataTable(
+  output$tab_data_subset_01 <- renderDataTable(
     withProgress(message = 'Data is loading, please wait ...', value = 1:100, {
       data_subset_01()
     }), options = list(scrollX = TRUE) )
