@@ -60,7 +60,15 @@ server <- function(input, output, session) {
     importdmd("C:/dmdDataLoader/excel/")
   })
   
+  # Connect the SQL db
+    aggr02 <- DBI::dbConnect(RSQLite::SQLite(), "data/aggr.sqlite")
   
+  # create table from the db
+    Five_catchment_201712 <- tbl(aggr01, "Five_catchment_201712")
+  
+  # Subset data
+  data_subset_01 <- Five_catchment_201712 %>%
+    filter(PRACTICE %in% c('L81007','L81008'))
   
    
   ### Outputs
@@ -108,7 +116,10 @@ server <- function(input, output, session) {
           tabBox(width = 10,height = 1500,
                  tabPanel("DataTable01",
                           #downloadButton ('downdat.data_timeseries04'),
-                          dataTableOutput("tab_snomedmap" ,height="450px"))
+                          dataTableOutput("tab_snomedmap" ,height="450px")),
+                 tabPanel("Subset_01",
+                          #downloadButton ('downdat.data_timeseries04'),
+                          dataTableOutput("tab_data_subset_01" ,height="450px"))
                  
                  
           ) # End of tabBox     
@@ -130,6 +141,10 @@ server <- function(input, output, session) {
     snomedmap()
     }), options = list(scrollX = TRUE) )
   
+  output$tab_data_subset_01<- renderDataTable(
+    withProgress(message = 'Data is loading, please wait ...', value = 1:100, {
+      data_subset_01()
+    }), options = list(scrollX = TRUE) )
   
   
   ## UI File inputs
