@@ -68,7 +68,7 @@ server <- function(input, output, session) {
   
   # Subset data
   data_subset_01 <- Five_catchment_201712 %>%
-    filter(PRACTICE %in% c('L81007','L81008'))
+    filter(site %in% c('A','B'))
   
    
   ### Outputs
@@ -86,11 +86,8 @@ server <- function(input, output, session) {
           uiOutput("uifile2"),
           bsTooltip ('uifile2',"Click here to upload your data","bottom", options = NULL),
           tags$hr(),
-          menuItem(
-            "SNOMED",
-            tabName = "snomed",
-            icon = icon("table")
-          )
+          menuItem( "Raw_data", tabName = "rawdatasets", icon = icon("table")),
+          menuItem( "SNOMED", tabName = "snomed", icon = icon("table"))
           
           
         )
@@ -116,11 +113,26 @@ server <- function(input, output, session) {
           tabBox(width = 10,height = 1500,
                  tabPanel("DataTable01",
                           #downloadButton ('downdat.data_timeseries04'),
-                          dataTableOutput("tab_snomedmap" ,height="450px")),
+                          dataTableOutput("tab_snomedmap" ,height="450px"))
+                 
+          ) # End of tabBox     
+        ) # End of fluidRow
+      ),
+      
+      tabItem(
+        tabName = "rawdatasets",
+        fluidRow(
+          box(width = 2,height = 1500
+              
+              
+          ),# End of Box
+          
+          
+          tabBox(width = 10,height = 1500,
+                
                  tabPanel("Subset_01",
                           #downloadButton ('downdat.data_timeseries04'),
                           dataTableOutput("tab_data_subset_01" ,height="450px"))
-                 
                  
           ) # End of tabBox     
         ) # End of fluidRow
@@ -143,7 +155,7 @@ server <- function(input, output, session) {
   
   output$tab_data_subset_01 <- renderDataTable(
     withProgress(message = 'Data is loading, please wait ...', value = 1:100, {
-      data_subset_01()
+      as.data.frame( data_subset_01)
     }), options = list(scrollX = TRUE) )
   
   
