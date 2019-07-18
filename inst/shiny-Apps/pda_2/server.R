@@ -61,17 +61,93 @@ server <- function(input, output, session) {
   })
   
   # Connect the SQL db
-    aggr02 <- DBI::dbConnect(RSQLite::SQLite(), "data/aggr.sqlite")
+  aggr01_2014_2018 <- DBI::dbConnect(RSQLite::SQLite(), "data/aggr01_2014_2018.sqlite")
   
   # create table from the db
-    Five_catchment_201712 <- tbl(aggr02, "Five_catchment_201712")
+    Five_catchment_2014_2018 <- tbl(aggr01_2014_2018, "Five_catchment_2014_2018")
   
   # Subset data
-  data_subset_01 <- Five_catchment_201712 %>%
+  data_subset_01 <- Five_catchment_2014_2018 %>%
     filter(site %in% c('A','B'))
   
-   
+  # Subset data
+  data_subset_02 <- reactive ({ 
+    tbl(aggr01_2014_2018, "Five_catchment_2014_2018") %>%
+    filter(site %in% input$searchoption2) %>% 
+    group_by(site, CPD, API, PRACTICE, PERIOD) %>%
+    summarize(sum = sum(gram, na.rm = T))%>%
+    filter(tolower(CPD) %in% targetdata()$V1)
+    })
+  
+  # Subset yearwise data
+  data_yearwise <- reactive ({ 
+    tbl(aggr01_2014_2018, "Five_catchment_2014_2018") %>%
+    filter(site %in% input$searchoption2) %>% 
+    group_by(site, CPD, PRACTICE, PERIOD) %>%
+    summarize(sum = sum(gram, na.rm = T)) %>%
+    filter(tolower(CPD) %in% targetdata()$V1) %>%
+    mutate(Year=(substr(PERIOD, 1, 4))) %>%
+    group_by(site, CPD, Year) %>%
+    summarize(gram = sum(sum, na.rm = T)) %>%
+    mutate(kg = gram/1000)
+  })
+  
+  # Subset monthwise data
+  data_monthwise <- reactive ({ 
+    tbl(aggr01_2014_2018, "Five_catchment_2014_2018") %>%
+      filter(site %in% input$searchoption2) %>% 
+      group_by(site, CPD, PRACTICE, PERIOD) %>%
+      summarize(sum = sum(gram, na.rm = T)) %>%
+      filter(tolower(CPD) %in% targetdata()$V1) %>%
+      mutate(Year=(substr(PERIOD, 1, 4))) %>%
+      mutate(Month=(substr(PERIOD, 5, 6))) %>%
+      group_by(site, CPD, Year, Month) %>%
+      summarize(gram = sum(sum, na.rm = T)) %>%
+      mutate(kg = gram/1000)
+  })
+  
+  # Subset yearwise data with GP code
+  data_yearwise_with_gp <- reactive ({ 
+    tbl(aggr01_2014_2018, "Five_catchment_2014_2018") %>%
+      filter(site %in% input$searchoption2) %>% 
+      group_by(site, CPD, PRACTICE, PERIOD) %>%
+      summarize(sum = sum(gram, na.rm = T)) %>%
+      filter(tolower(CPD) %in% targetdata()$V1) %>%
+      mutate(Year=(substr(PERIOD, 1, 4))) %>%
+      group_by(site, CPD, Year, PRACTICE) %>%
+      summarize(gram = sum(sum, na.rm = T)) %>%
+      mutate(kg = gram/1000)
+  })
+  
+  
+  # Subset monthwise data with GP code
+  data_monthwise_with_gp  <- reactive ({ 
+    tbl(aggr01_2014_2018, "Five_catchment_2014_2018") %>%
+      filter(site %in% input$searchoption2) %>% 
+      group_by(site, CPD, PRACTICE, PERIOD) %>%
+      summarize(sum = sum(gram, na.rm = T)) %>%
+      filter(tolower(CPD) %in% targetdata()$V1) %>%
+      mutate(Year=(substr(PERIOD, 1, 4))) %>%
+      mutate(Month=(substr(PERIOD, 5, 6))) %>%
+      group_by(site, CPD, Year, Month, PRACTICE) %>%
+      summarize(gram = sum(sum, na.rm = T)) %>%
+      mutate(kg = gram/1000)
+  })
+  
+  ## For drug targets
+  targetdata <- reactive({
+    inFile <- input$file1
+    if (is.null(inFile))
+      return(NULL)
+    
+    fread(inFile$datapath, header = FALSE,
+          sep = ",", quote = '"')
+  })
+  
   ### Outputs
+  output$txt_timeseries01 <- renderText({
+    str(tbl(aggr01_2014_2018, "Five_catchment_2014_2018"))
+  })
   
   output$sidebarpanel <- renderUI({
     if (USER$Logged == TRUE) {
@@ -87,7 +163,8 @@ server <- function(input, output, session) {
           bsTooltip ('uifile2',"Click here to upload your data","bottom", options = NULL),
           tags$hr(),
           menuItem( "Raw_data", tabName = "rawdatasets", icon = icon("table")),
-          menuItem( "SNOMED", tabName = "snomed", icon = icon("table"))
+          menuItem( "SNOMED", tabName = "snomed", icon = icon("table")),
+          menuItem( "Time Series", tabName = "timeseries", icon = icon("table"))
           
           
         )
@@ -118,21 +195,113 @@ server <- function(input, output, session) {
           ) # End of tabBox     
         ) # End of fluidRow
       ),
-      
+      # Third tab content
       tabItem(
-        tabName = "rawdatasets",
+        tabName = "timeseries",
         fluidRow(
-          box(width = 2,height = 1500
+          box(width = 2,height = 1500,
+              selectInput('searchoption2', 'Select site:',
+                          c('A' = 'A',
+                            'B' = 'B',
+                            'C' = 'C',
+                            'D' = 'D',
+                            'E' = 'E'
+                          ), selected = 'A'
+              ),
               
+              tags$hr()
               
           ),# End of Box
           
           
           tabBox(width = 10,height = 1500,
-                
+                 tabPanel('Time series - Bar Plot Complete',
+                          br(),
+                          
+                          column(9,
+                                 box(width = "1300px",
+                                     br(),
+                                     # downloadButton ('downdat.time_barplot1',label = "Yearwise"),
+                                     # downloadButton ('downdat.data_api_monthwise_full2',label = "Monthwise"),
+                                     plotlyOutput("timeseries_bar_plot1",height="600px",width = "1000px"))
+                                 
+                                 
+                          ),
+                          column(12,
+                                 tabBox(width = NULL,
+                                        tabPanel("Month wise - with Average",value = "filt_tab_year_01",
+                                                 br(),
+                                                 downloadButton ('downdat.data_time_comp04',label = "Selected API"),
+                                                 downloadButton ('downdat.data_time_comp03',label = "Complete"),
+                                                 plotlyOutput("timeseries_line_comp_plot1",height="550px")
+                                        ),
+                                        #               #             tabPanel("Data Table",
+                                        #               #                     dataTableOutput("tab_data_time_comp07")
+                                        #               #                     ),
+                                        #               # tabPanel("Data Table 2",
+                                        #               #          dataTableOutput("tab_data_time_comp07_02")
+                                        #               # ),
+                                        tabPanel("Month wise",value = "filt_tab_year_02",
+                                                 br(),
+                                                 # downloadButton ('downdat.data_time_comp04',label = "Selected API"),
+                                                 # downloadButton ('downdat.data_time_comp03',label = "Complete"),
+                                                 # plotlyOutput("timeseries_line_comp_plot1",height="550px")
+                                                 plotlyOutput("timeseries_line_plot4",height="450px")
+                                        )
+                                        
+                                        
+                                        
+                                        
+                                 )
+                          )# End of column
+                 )
+                 
+          ) # End of tabBox     
+        ) # End of fluidRow
+      ),
+      
+      
+      # Second tab content
+      tabItem(
+        tabName = "rawdatasets",
+        fluidRow(
+          box(width = 2,height = 1500,
+              selectInput('searchoption3', 'Select site:',
+                          c('A' = 'A',
+                            'B' = 'B',
+                            'C' = 'C',
+                            'D' = 'D',
+                            'E' = 'E'
+                          ), selected = 'A'
+              ),
+              
+              tags$hr()
+              
+          ),# End of Box
+          
+          
+          tabBox(width = 10,height = 1500,
+                 
                  tabPanel("Subset_01",
                           #downloadButton ('downdat.data_timeseries04'),
-                          dataTableOutput("tab_data_subset_01" ,height="450px"))
+                          dataTableOutput("tab_data_subset_01" ,height="450px")),
+                 tabPanel("Subset_02",
+                          #downloadButton ('downdat.data_timeseries04'),
+                          dataTableOutput("tab_data_subset_02" ,height="450px")),
+                 tabPanel("Data Yearwise",
+                          #downloadButton ('downdat.data_timeseries04'),
+                          verbatimTextOutput("txt_timeseries01"),
+                          dataTableOutput("tab_data_yearwise" ,height="450px")),
+                 tabPanel("Data Monthwise",
+                          dataTableOutput("tab_data_monthwise" ,height="450px")),
+                 tabPanel("Data Monthwise - with GP",
+                          dataTableOutput("tab_data_monthwise_with_gp" ,height="450px")),
+                 tabPanel("Data Yearwise - with GP",
+                          dataTableOutput("tab_data_yearwise_with_gp" ,height="450px")),
+                 tabPanel("Targets",
+                          #downloadButton ('downdat.data_timeseries04'),
+                          dataTableOutput("tab_targetdata" ,height="450px"))
+                 
                  
           ) # End of tabBox     
         ) # End of fluidRow
@@ -143,6 +312,22 @@ server <- function(input, output, session) {
     else {
       login
     }
+  })
+  
+  ## Plots
+  output$timeseries_bar_plot1 <- renderPlotly({ 
+    withProgress(message = 'Data is loading, please wait ...', value = 1:100, {
+      
+      p <- ggplot(data=data_yearwise(), aes(x=CPD, y=kg, fill=Year, key = Year )) +  
+        geom_bar(stat="identity", position=position_dodge())+ 
+        ylab("Total CPD (kg)") +
+        xlab("CPD")+
+        ggtitle("Total Prescription for the year 2014, 2016, 2017, 2018 in kg")+
+        theme(axis.title.x = element_text(face="bold", size=10),
+              axis.title.y = element_text(face="bold", size=10),
+              axis.text.x  = element_text(angle=45, vjust=0.5, size=10))
+      ggplotly(p, source = "time_bar01",tooltip =c("CPD","kg","Year") )# %>% layout(dragmode = "select")
+    })
   })
   
   
@@ -158,6 +343,36 @@ server <- function(input, output, session) {
       as.data.frame( data_subset_01)
     }), options = list(scrollX = TRUE) )
   
+  output$tab_data_subset_02 <- renderDataTable(
+    withProgress(message = 'Data is loading, please wait ...', value = 1:100, {
+      as.data.frame( data_subset_02())
+    }), options = list(scrollX = TRUE) )
+  
+  output$tab_data_yearwise <- renderDataTable(
+    withProgress(message = 'Data is loading, please wait ...', value = 1:100, {
+      as.data.frame( data_yearwise())
+    }), options = list(scrollX = TRUE) )
+  
+  output$tab_data_monthwise <- renderDataTable(
+    withProgress(message = 'Data is loading, please wait ...', value = 1:100, {
+      as.data.frame( data_monthwise())
+    }), options = list(scrollX = TRUE) )
+  
+  output$tab_data_monthwise_with_gp <- renderDataTable(
+    withProgress(message = 'Data is loading, please wait ...', value = 1:100, {
+      as.data.frame( data_monthwise_with_gp())
+    }), options = list(scrollX = TRUE) )
+  
+  output$tab_data_yearwise_with_gp <- renderDataTable(
+    withProgress(message = 'Data is loading, please wait ...', value = 1:100, {
+      as.data.frame( data_yearwise_with_gp())
+    }), options = list(scrollX = TRUE) )
+  
+  
+  output$tab_targetdata <- renderDataTable(
+    withProgress(message = 'Data is loading, please wait ...', value = 1:100, {
+      as.data.frame( targetdata())
+    }), options = list(scrollX = TRUE) )
   
   ## UI File inputs
   
