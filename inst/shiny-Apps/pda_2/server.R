@@ -282,6 +282,9 @@ server <- function(input, output, session) {
           
           tabBox(width = 10,height = 1500,
                  
+                 tabPanel("Data SQL",
+                          downloadButton ('downdat.data_sql'),
+                          dataTableOutput("tab_data_sql" ,height="450px")),
                  tabPanel("Subset_01",
                           #downloadButton ('downdat.data_timeseries04'),
                           dataTableOutput("tab_data_subset_01" ,height="450px")),
@@ -336,6 +339,11 @@ server <- function(input, output, session) {
   output$tab_snomedmap <- renderDataTable(
     withProgress(message = 'Data is loading, please wait ...', value = 1:100, {
     snomedmap()
+    }), options = list(scrollX = TRUE) )
+  
+  output$tab_data_sql <- renderDataTable(
+    withProgress(message = 'Data is loading, please wait ...', value = 1:100, {
+      as.data.frame( Five_catchment_2014_2018)
     }), options = list(scrollX = TRUE) )
   
   output$tab_data_subset_01 <- renderDataTable(
@@ -401,5 +409,14 @@ server <- function(input, output, session) {
                      )),
            "Click here to upload your data")
   })
+  
+  
+  ## Download buttons
+  output$downdat.data_sql = downloadHandler(
+    filename = function (){ paste('data','.csv',sep = '')},
+    content = function(file) {
+      write.csv(as.data.frame( Five_catchment_2014_2018), file, row.names = TRUE)
+    }
+  )
  
 }
