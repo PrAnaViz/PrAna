@@ -81,18 +81,7 @@ server <- function(input, output, session) {
     filter(tolower(CPD) %in% targetdata()$V1)
     })
   
-  # Subset yearwise data
-  data_yearwise <- reactive ({ 
-    tbl(aggr01_2014_2018, "Five_catchment_2014_2018") %>%
-    filter(site %in% input$searchoption2) %>% 
-    group_by(site, CPD, PRACTICE, PERIOD) %>%
-    summarize(sum = sum(gram, na.rm = T)) %>%
-    filter(tolower(CPD) %in% targetdata()$V1) %>%
-    mutate(Year=(substr(PERIOD, 1, 4))) %>%
-    group_by(site, CPD, Year) %>%
-    summarize(gram = sum(sum, na.rm = T)) %>%
-    mutate(kg = gram/1000)
-  })
+  
   
   # Subset monthwise data
   data_monthwise <- reactive ({ 
@@ -283,21 +272,8 @@ server <- function(input, output, session) {
   })
   
   ## Plots
-  output$timeseries_bar_plot1 <- renderPlotly({ 
-    withProgress(message = 'Data is loading, please wait ...', value = 1:100, {
-      
-      p <- ggplot(data=data_yearwise(), aes(x=CPD, y=kg, fill=Year, key = Year )) +  
-        geom_bar(stat="identity", position=position_dodge())+ 
-        ylab("Total CPD (kg)") +
-        xlab("CPD")+
-        ggtitle("Total Prescription for the year 2014, 2016, 2017, 2018 in kg")+
-        theme(axis.title.x = element_text(face="bold", size=10),
-              axis.title.y = element_text(face="bold", size=10),
-              axis.text.x  = element_text(angle=45, vjust=0.5, size=10))
-      ggplotly(p, source = "time_bar01",tooltip =c("CPD","kg","Year") )# %>% layout(dragmode = "select")
-    })
-  })
   
+  source(file.path("server", "tab-timeseries.R"),  local = TRUE)$value
   
   ## Data tables
   

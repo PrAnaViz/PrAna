@@ -16,7 +16,7 @@ csv2rds <- function(path,output)
   # Need following library plyr, data.table, readr
   memory.limit(size = 750000)
   # Select the .CSV files in the path
-  a1 <- list.files(path= path, pattern = ".csv")
+  a1 <- list.files(path= path, pattern = ".CSV")
   
   # Convert .CSV files to dataframe inside a list and then convert it into a single dataframe
   a2 <- plyr::ldply(lapply(a1, data.table::fread),data.frame)
@@ -28,4 +28,4 @@ csv2rds <- function(path,output)
 
 
 
-##csv2rds("C:/Datasets/Prescription Datasets/2018/PDPI","Full_2018_07")
+##csv2rds("C:/Datasets/Prescription Datasets/2018/PDPI","Full_2018_12.rds")
