@@ -7,8 +7,6 @@
 #    http://shiny.rstudio.com/
 #
 
-#library(shinydashboard)
-#source(file.path("ui"))
 options(shiny.maxRequestSize = 5000000*1024^6)
 
 ## Login details
