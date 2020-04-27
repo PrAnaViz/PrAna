@@ -14,7 +14,8 @@ saveData <-function (data,tab_name,selectdb){
     username ='kjsql', 
     password = 'nEd01@fd7TZl',
     dbname =selectdb ,
-    host='51.132.130.246')
+    host='localhost'
+    )
   on.exit(dbDisconnect(con), add = TRUE)
   dbWriteTable(con,tab_name,data,row.names= FALSE,  append=T)
   dbDisconnect(con)

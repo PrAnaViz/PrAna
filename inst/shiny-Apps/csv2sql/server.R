@@ -17,7 +17,7 @@ shinyServer(function(input, output) {
         username ='kjsql', 
         password = 'nEd01@fd7TZl', 
         dbname = input$selectdb3,
-        host='51.132.130.246')
+        host='localhost')
     })
     
     sqldata <-  eventReactive(input$submit, {

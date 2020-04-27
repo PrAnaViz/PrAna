@@ -6,10 +6,7 @@
 #' @return Opens up the in-built Shiny App.
 #' @export
 #'
-#' @examples
-#' runShiny('pda')
-#'
-#' stpdata::runShiny('pda')
+#' 
 #'
 runShiny <- function(appName) {
   # locate all the shiny app examples that exist
