@@ -1,0 +1,35 @@
+authors:
+   Kishore Jagadeesan:
+
+template:
+  params:
+    docsearch:
+    
+navbar:
+  structure:
+      left:
+      - home
+      - reference
+      - tutorial
+      - news
+      right: github
+  components:
+  home:
+    icon: fa-home fa-lg
+    href: articles/index.html
+  reference:
+    text: Reference
+    href: reference/index.html
+  tutorial:
+    text: Tutorial
+    menu:
+    - text: PrAna Setup
+      href: 
+    - text: PrAnaViz Tutorial
+      href: articles/PrAnaViz_Tutoral.html
+  news:
+    text: Change Log
+    href: news/index.html
+  github:
+      icon: fa-github fa-lg
+      href: https://github.bath.ac.uk/kjj28/PrAna
