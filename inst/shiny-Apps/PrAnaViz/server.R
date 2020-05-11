@@ -6,35 +6,8 @@
 # 
 #    http://shiny.rstudio.com/
 # #
-# library(reshape)
-# library(reshape2)
-# library(rowr)
-# library(stringi)
-# library(utils)
-# library(shiny)
-# library(shinydashboard)
-# library(shinyBS)
-# library(plyr)
-# library(dplyr, warn.conflicts = FALSE)
-# library(DT)
-# library(data.table)
-# library(magrittr)
-# library(stringr)
-# library(tidyr)
-# library(plotly)
-# library(readxl)
-# library(lubridate)
-# library(ggplot2)
-# library(chron)
-# library(RSQLite)
-# library(RMariaDB)
-# library(dbplyr)
-# library(tidyverse)
-# library(DBI)
-# library(leaflet)
-# library(rgdal)
-# library(d3heatmap)
 
+source("global.R")
 options(shiny.maxRequestSize = 5000000*1024^6)
 
 ## Login details
