@@ -14,6 +14,23 @@ ui <- fluidPage(
 fluidRow(
         column(width = 3,
             box( 
+              textInput("usernm", "user name:", "type here"),
+              passwordInput("pwd", "Password:"),
+              br(),
+              actionButton("mysql_submit", "Submit"),
+              selectInput('selectupload', 'Upload type:',
+                              c(
+                                'full' = 'full',
+                                'part' = 'part',
+                                'selected' = 'selected'
+                              ), selected = 'selected'
+                  ),
+                  selectInput('selectsql', 'SQL:',
+                              c(
+                                'old' = 'old',
+                                'new' = 'new'
+                              ), selected = 'new'
+                  ),
                  conditionalPanel("input.selectupload == 'part'",
                                     selectInput('selectdb', 'Select DB:',
                                                   c(
@@ -26,7 +43,7 @@ fluidRow(
                                       textInput("text", "Table name:", "type here"),
                                       br(),
                                       actionButton("submit", "Upload"),
-                                      tabBox(width = NULL,
+                                      tabBox(width = NULL
                                               
                                              )
                                     )
@@ -40,6 +57,8 @@ fluidRow(
                                 dataTableOutput("tab_sqldata")      
                        ),
                        tabPanel("tab from sql",
+                                
+                                
                                    selectInput('selectdb3', 'Select DB:',
                                           c(
                                             'support' = 'support',
@@ -62,14 +81,14 @@ server <- function(input,output,session){
   
   aggr_alldb <- reactive({ DBI:: dbConnect(
     drv = RMariaDB::MariaDB(),
-    username ='kjsql', 
-    password = 'nEd01@fd7TZl', 
+    username = input$usernm , 
+    password = isolate(input$pwd), 
     dbname = input$selectdb3,
     host='localhost')
   })
   
   sqldata <-  eventReactive(input$submit, {
-    saveData (mydata(),input$text)
+    saveData (mydata(),input$text,input$selectdb, input$usernm,input$pwd)
   })
   
   dir_path <- reactive({
@@ -116,14 +135,16 @@ server <- function(input,output,session){
   
  
  ## To see the tables in DB
-output$tables_output <- renderUI({
-    withProgress(message = 'Data is loading, please wait ...', value = 1:100, {
-      selectInput(inputId="select_tables",
-                  label="Select CCG:",
-                  choices=unique(as.data.frame(dbListTables(aggr_alldb() ))),selected =head(unique(as.data.frame(dbListTables ( aggr_alldb() ) ))),  multiple = FALSE)
-    })
+  
+  observeEvent(input$mysql_submit , {
+        output$tables_output <- renderUI({
+            withProgress(message = 'Data is loading, please wait ...', value = 1:100, {
+              selectInput(inputId="select_tables",
+                          label="Select CCG:",
+                          choices=unique(as.data.frame(dbListTables(aggr_alldb() ))),selected =head(unique(as.data.frame(dbListTables ( aggr_alldb() ) ))),  multiple = FALSE)
+            })
+        })
 })
-
 
   
 }
