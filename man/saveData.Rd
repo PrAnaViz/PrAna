@@ -10,9 +10,11 @@ saveData(data, tab_name, selectdb)
 \item{data}{csv data}
 
 \item{tab_name}{Table name in the tbe DB}
+
+\item{selectdb}{enter the interested db}
 }
 \value{
-
+a table in MySQL
 }
 \description{
 Upload csv to MySQL DB
