@@ -10,49 +10,8 @@
 source("global.R")
 options(shiny.maxRequestSize = 5000000*1024^6)
 
-## Login details
-login_details <- data.frame(user = c("admin","fcte20","kp300","dgk30","bkh20","nns31", "rjg20"),
-                            pswd = c("AdmInPswD","chloramphenicol1","Ckhepoler.20","r3sist-r3sistanc3","EcPhRg","amrQpcr","PswDaDmin"))
-login <- box(
-  title = "Login",
-  textInput("userName", "Username"),
-  passwordInput("passwd", "Password"),
-  br(),
-  actionButton("Login", "Log in")
-)
-
 # Define server logic required to draw a histogram
 server <- function(input, output, session) {
-  
-  #To logout back to login page
-  login.page = paste(
-    isolate(session$clientData$url_protocol),
-    "//",
-    isolate(session$clientData$url_hostname),
-    ":",
-    isolate(session$clientData$url_port),
-    sep = ""
-  )
-  
-  # For login values
-  USER <- reactiveValues(Logged = F)
-  observe({
-    if (USER$Logged == FALSE) {
-      if (!is.null(input$Login)) {
-        if (input$Login > 0) {
-          Username <- isolate(input$userName)
-          Password <- isolate(input$passwd)
-          Id.username <- which(login_details$user %in% Username)
-          Id.password <- which(login_details$pswd %in% Password)
-          if (length(Id.username) > 0 & length(Id.password) > 0){
-            if (Id.username == Id.password) {
-              USER$Logged <- TRUE
-            }
-          }
-        }
-      }
-    }
-  })
   
   sql.demo_one <- "SELECT * FROM demo_one." 
   sql.support <- "SELECT * FROM support." 
@@ -172,16 +131,11 @@ server <- function(input, output, session) {
   ## Outputs
   
   output$sidebarpanel <- renderUI({
-    if (USER$Logged == TRUE) {
       div(
-        sidebarUserPanel(
-          isolate(input$userName),
-          subtitle = a(icon("usr"), "Logout", href = login.page)
-        ),
         sidebarMenu(
           tags$hr(),
-          menuItem("Targeted", tabName = "year_wise"),
-          menuItem("Non-Targeted", tabName = "heatmap_region"),
+          menuItem("Targeted", tabName = "targeted"),
+          menuItem("Non-Targeted", tabName = "non-targeted"),
           tags$hr(),
           selectInput('selectdb_01', 'Select DB:',
                       c(
@@ -202,32 +156,27 @@ server <- function(input, output, session) {
           tags$hr()
         )
       )
-    }
+    
   })
   
   ## body
   
   output$body <- renderUI({
-    if (USER$Logged == TRUE) {
-      tabItems(
-        
-        # yearwise tab content
-        tabItem(
-          tabName = "year_wise",
-          source (file.path("ui","tab-targeted.R"),local = TRUE)$value
-        ), #End of Tab item
-        # Heatmap tab content
-        
-        # Heatmap region tab content
-        tabItem(
-          tabName = "heatmap_region",
-          source (file.path("ui","tab-non-targeted.R"),local = TRUE)$value
-        )# End of Tab item
-        
-      )}
-    else {
-      login
-    }
+          tabItems(
+                    # yearwise tab content
+                    tabItem(
+                        tabName = "targeted",
+                        source (file.path("ui","tab-targeted.R"),local = TRUE)$value
+                            ), #End of Tab item
+                      
+                    # Heatmap region tab content
+                      tabItem(
+                        tabName = "non-targeted",
+                        source (file.path("ui","tab-non-targeted.R"),local = TRUE)$value
+                        )# End of Tab item
+                      
+                    )
+   
   })
   
   
