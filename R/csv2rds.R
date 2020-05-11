@@ -5,7 +5,10 @@
 #'
 #' @param path location for the target .CSV file(s) 
 #' @param output location for the output .rds file
-#'
+#' @examples 
+#' \dontrun{
+#' csv2rds()
+#' }
 #' @return .rds file in the output location
 #' @export
 
