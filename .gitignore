@@ -30,3 +30,4 @@
 ### R.Bookdown Stack ###
 # R package: bookdown caching files
 /*_files/
+inst/doc

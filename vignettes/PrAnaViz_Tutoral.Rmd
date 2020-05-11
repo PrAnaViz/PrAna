@@ -1,0 +1,54 @@
+---
+title: "PrAnaViz"
+author: "Kishore Jagadeesan"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{PrAnaViz Tutorial}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Outline
+
+- Introduction
+- Method
+- Workflow
+
+
+# Introduction
+
+During the last decade, wide range of active pharmaceutical ingredients (APIs) have been identified and quantified in aquatic environment across several studies and indicated their impacts on exposed environmental species and humans. For the prediction of total amount of the APIs released to the environment, information about APIs consumption data is vital. Globally, several methods were reported to estimate the APIs consumption data based on the national prescription data, manufacturers, importers and dispenser’s data.
+
+In the UK, national prescription data provided by National Health Service was used to calculate the consumption data, however, they are limited to a geographical region and or to a group of drugs. 
+The aim of this study is to aggregate and normalize prescription data to calculate total prescribed quantity of different APIs and to develop a tool, to explore spatiotemporal trends of different APIs using the processed dataset for wider use.
+
+# Method
+
+Data was extracted from National level prescribing datasets for the years 2015 to 2018 from NHS Digital. Address of each GP practices and its geographical location based on postcodes were downloaded from NHS Digital and Office for the National Statistics data portal.
+
+As we are interested in calculating the total quantity of an individual API, the whole dataset normalized for each API, using BNF/SNOMED mapping data provided by the NHS Business Services Authority (BSA) as in Figure.
+
+We have created a web-based interactive tool, PrAna, using R in a 
+familiar dashboard layout with two tabs: 
+
+- Targeted API 
+- Non-targeted API 
+
+to visualize total quantity of different APIs at for Bath and North East Somerset CCG  (BANES) region with resolution to individual postcode. 
+
+# Workflow
+
+# Targeted API
+
+- In this tab, user can input their APIs of interest, and select year  from 2015 to 2018 and different Clinical Commissioning Group (CCG) region.
+- This tab provides bar plot, as in figure, which represents total quantity  of different APIs in the selected CCG region in the selected year.
+- This tab also visualise the total quantity of APIs prescribed bymonth, GP Practice, Chemical form, and  Medicinal form for the selected CCG region in selected year.
+
