@@ -7,6 +7,9 @@
 #' @return a datatable 
 #' @export
 #'
+#'
+#' @importFrom utils memory.limit
+#' @importFrom plyr ddply
 
 importdmd <- function(path)
 {
