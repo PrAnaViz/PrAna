@@ -3,3 +3,5 @@
 ^docs$
 ^docs/.nojekyll$
 .RDataTmp
+^_pkgdown\.yml$
+^pkgdown$
