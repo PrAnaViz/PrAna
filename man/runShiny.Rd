@@ -15,9 +15,3 @@ Opens up the in-built Shiny App.
 \description{
 Run in-built Shiny Apps in the package
 }
-\examples{
-runShiny('pda')
-
-stpdata::runShiny('pda')
-
-}
