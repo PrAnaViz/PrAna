@@ -4,7 +4,7 @@
 \alias{saveData}
 \title{saveData}
 \usage{
-saveData(data, tab_name, selectdb)
+saveData(data, tab_name, selectdb, usernm, pwd)
 }
 \arguments{
 \item{data}{csv data}
@@ -12,6 +12,10 @@ saveData(data, tab_name, selectdb)
 \item{tab_name}{Table name in the tbe DB}
 
 \item{selectdb}{enter the interested db}
+
+\item{usernm}{input your MySQL username}
+
+\item{pwd}{input your MySQL password}
 }
 \value{
 a table in MySQL
