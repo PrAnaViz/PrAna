@@ -17,3 +17,8 @@ csv2rds(path, output)
 \description{
 Convert .CSV file(s) in the target path to a .rds file in the defined folder
 }
+\examples{
+\dontrun{
+csv2rds()
+}
+}
