@@ -2,3 +2,4 @@
 ^\.Rproj\.user$
 ^docs$
 ^docs/.nojekyll$
+.RDataTmp
