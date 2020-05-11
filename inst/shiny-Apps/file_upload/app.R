@@ -79,7 +79,8 @@ fluidRow(
 
 server <- function(input,output,session){
   
-  aggr_alldb <- reactive({ DBI:: dbConnect(
+  aggr_alldb <- reactive({ 
+    DBI:: dbConnect(
     drv = RMariaDB::MariaDB(),
     username = input$usernm , 
     password = isolate(input$pwd), 

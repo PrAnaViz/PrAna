@@ -62,8 +62,8 @@ server <- function(input, output, session) {
   # Connect to local host 
   aggr_wodb <- DBI:: dbConnect(
     drv = RMariaDB::MariaDB(),
-    username ='kjsql', 
-    password = 'nEd01@fd7TZl', 
+    username ='root', 
+    password = 'mysqlpassword', 
     host='localhost')
   
   dform_desc <-  tbl(aggr_wodb, sql("SELECT * FROM support.dform_desc" ))
