@@ -21,7 +21,7 @@ server <- function(input, output, session) {
   # Connect to local host 
   aggr_wodb <- DBI:: dbConnect(
     drv = RMariaDB::MariaDB(),
-    username ='root', 
+    username ='jkkis', 
     password = 'mysqlpassword', 
     host='localhost')
   
