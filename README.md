@@ -12,6 +12,10 @@ Apart, from the calculation of the total prescribed quantity of an API or a grou
 
 `PrAnaViz` facilitates users to explore different spatiotemporal and long-term prescription trends for wider use. 
 
+## Installation
+
+`PrAna` itself can be installed as any other R package, however, since it is dependent on several other software tools some extra steps are required for the installation. Please see the [installation section in the handbook][handbook-inst] for more information.
+
 ## Getting started
 
 For a very quick start:
@@ -28,8 +32,7 @@ However, for a better guide to get started it is recommended to read the [tutori
 [R]: https://www.r-project.org/
 [tutorial]: https://github.bath.ac.uk/pages/kjj28/PrAna/articles/PrAnaViz_Tutoral.html
 [NHS digital]: https://digital.nhs.uk/organisation-data-service/data-downloads/gp-data
-
-
+[handbook-inst]: https://github.bath.ac.uk/pages/kjj28/PrAna/articles/handbook.html#installation
 
 
 

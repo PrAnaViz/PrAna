@@ -1,0 +1,10 @@
+bookdown::gitbook:
+    split_by: section
+    mathjax: null
+    config:
+        sharing: no
+        toc:
+            collapse: no
+bookdown::pdfbook:
+    number_sections: yes
+    toc: yes

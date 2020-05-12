@@ -5,3 +5,6 @@
 .RDataTmp
 ^_pkgdown\.yml$
 ^pkgdown$
+^vignettes/handbook.log$
+^_pkgdown.yaml$
+^vignettes$
