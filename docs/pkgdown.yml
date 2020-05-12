@@ -5,11 +5,11 @@ articles:
   01-install: handbook/01-install.html
   02-workflow: handbook/02-workflow.html
   03-features: handbook/03-features.html
-  04-summary: handbook/04-summary.html
+  04-acknowledgements: handbook/04-acknowledgements.html
   05-references: handbook/05-references.html
   index: handbook/index.html
   PrAnaViz_Tutoral: PrAnaViz_Tutoral.html
-last_built: 2020-05-12T12:31Z
+last_built: 2020-05-12T15:08Z
 urls:
   reference: https://github.bath.ac.uk/pages/kjj28/PrAna/reference
   article: https://github.bath.ac.uk/pages/kjj28/PrAna/articles

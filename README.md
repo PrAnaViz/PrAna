@@ -1,6 +1,6 @@
 # PrAna
 
-`PrAna` aims to aggregate and normalise England’s national level prescription data, for all groups of drugs. The name is an acronym for _Prescription Analysis_
+`PrAna` aims to aggregate and normalise England’s national level prescription data, for all groups of drugs. The name is an acronym for _**Pr**escription **Ana**lysis_
 
 During the last decade, wide range of active pharmaceutical ingredients (APIs) have been identified and quantified in aquatic environment across several studies and indicated their impacts on exposed environmental species and humans. For the prediction of total amount of the APIs released to the environment, information about APIs consumption data is vital. Globally, several methods were reported to estimate the APIs consumption data based on the national prescription data, manufacturers, importers and dispenser’s data.
 
@@ -14,13 +14,23 @@ Apart, from the calculation of the total prescribed quantity of an API or a grou
 
 ## Installation
 
-`PrAna` itself can be installed as any other R package, however, since it is dependent on several other software tools some extra steps are required for the installation. Please see the [installation section in the handbook][handbook-inst] for more information.
+`PrAna` can be installed as any other R package, as follows,
 
-## Getting started
+Install the released version of PrAna from CRAN with:
+```
+install.packages("PrAna")
+```
+To install the development version of PrAna from GitHub with:
+```
+install.packages("devtools")
+library(devtools)
+install_github("jkkishore85/PrAna")
+```
+However, since it is dependent on some other software tools some extra steps are required for the installation. Please see the [installation section in the handbook][handbook-inst] for more information.
 
-For a very quick start:
 
-``` r
+For a very quick start to `PrAnaViz`:
+```
 library(PrAna)
 runShiny("PrAnaViz")
 ```

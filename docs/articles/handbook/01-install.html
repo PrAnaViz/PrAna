@@ -112,6 +112,39 @@
 <div id="install" class="section level1">
 <h1 class="hasAnchor">
 <a href="#install" class="anchor"></a>Installation</h1>
+<p><code>PrAna</code> can be installed as any other R package, however, since it is dependent on some other software tools some extra steps are required for the installation.</p>
+<p>You can install the released version of PrAna from CRAN with:</p>
+<pre><code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages("PrAna")</a></code></pre>
+<p>You can install the development version of PrAna from GitHub with:</p>
+<pre><code># install.packages("devtools")
+library(devtools)
+install_github("jkkishore85/PrAna")
+</code></pre>
+<p>Note that you will need to have the latest R version installed in order to use this repository.</p>
+<div id="dependencies" class="section level2">
+<h2 class="hasAnchor">
+<a href="#dependencies" class="anchor"></a>Dependencies</h2>
+<table class="table">
+<thead><tr class="header">
+<th>Software</th>
+<th>Remarks</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td><a href="https://www.mysql.com/">MySQL</a></td>
+<td>Needed to host the generated dataset</td>
+</tr></tbody>
+</table>
+</div>
+<div id="pranaviz" class="section level2">
+<h2 class="hasAnchor">
+<a href="#pranaviz" class="anchor"></a>PrAnaViz</h2>
+<p>For a very quick start:</p>
+<pre><code>library(PrAna)
+
+PrAna::runShiny("PrAnaViz")</code></pre>
+<p>The <code><a href="../../reference/runShiny.html">runShiny("PrAnaViz")</a></code> function will pop-up the <code>PrAnaViz</code> tool which will allow you to explore different spatiotemporal and long-term prescription trends with the sample dataset.</p>
+<p>However, for a better guide to get started it is recommended to read the <a href="https://github.bath.ac.uk/pages/kjj28/PrAna/articles/PrAnaViz_Tutoral.html">tutorial</a>.</p>
+</div>
 </div>
   </div>
 

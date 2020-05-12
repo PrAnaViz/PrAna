@@ -103,7 +103,7 @@
 <div id="prana" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#prana" class="anchor"></a>PrAna</h1></div>
-<p><code>PrAna</code> aims to aggregate and normalise England’s national level prescription data, for all groups of drugs. The name is an acronym for <em>Prescription Analysis</em></p>
+<p><code>PrAna</code> aims to aggregate and normalise England’s national level prescription data, for all groups of drugs. The name is an acronym for <em><strong>Pr</strong>escription <strong>Ana</strong>lysis</em></p>
 <p>During the last decade, wide range of active pharmaceutical ingredients (APIs) have been identified and quantified in aquatic environment across several studies and indicated their impacts on exposed environmental species and humans. For the prediction of total amount of the APIs released to the environment, information about APIs consumption data is vital. Globally, several methods were reported to estimate the APIs consumption data based on the national prescription data, manufacturers, importers and dispenser’s data.</p>
 <p>In the UK, national prescription data provided by <a href="https://digital.nhs.uk/organisation-data-service/data-downloads/gp-data">National Health Service</a> was used to calculate the consumption data. This data is freely accessible and consist of individual files for each month. With the large file with over 10 million records every month, the data from the NHS cannot be used for the direct calculation of the prescription levels of different APIs. Re-organisation and processing of the files is required before to do any exploration or analysis and to speed up the data reading.</p>
 <p>The aim of <code>PrAna</code> is to aggregate and normalize prescription data to calculate total prescribed quantity of different APIs, using open source statistical software <a href="https://www.r-project.org/">R language</a>.</p>
@@ -112,14 +112,17 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p><code>PrAna</code> itself can be installed as any other R package, however, since it is dependent on several other software tools some extra steps are required for the installation. Please see the <a href="https://github.bath.ac.uk/pages/kjj28/PrAna/articles/handbook.html#installation">installation section in the handbook</a> for more information.</p>
-</div>
-<div id="getting-started" class="section level2">
-<h2 class="hasAnchor">
-<a href="#getting-started" class="anchor"></a>Getting started</h2>
-<p>For a very quick start:</p>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">PrAna</span>)
-<span class="fu"><a href="reference/runShiny.html">runShiny</a></span>(<span class="st">"PrAnaViz"</span>)</pre></div>
+<p><code>PrAna</code> can be installed as any other R package, as follows,</p>
+<p>Install the released version of PrAna from CRAN with:</p>
+<pre><code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages("PrAna")</a></code></pre>
+<p>To install the development version of PrAna from GitHub with:</p>
+<pre><code>install.packages("devtools")
+library(devtools)
+install_github("jkkishore85/PrAna")</code></pre>
+<p>However, since it is dependent on some other software tools some extra steps are required for the installation. Please see the <a href="https://github.bath.ac.uk/pages/kjj28/PrAna/articles/handbook.html#installation">installation section in the handbook</a> for more information.</p>
+<p>For a very quick start to <code>PrAnaViz</code>:</p>
+<pre><code>library(PrAna)
+runShiny("PrAnaViz")</code></pre>
 <p>The <code><a href="reference/runShiny.html">runShiny("PrAnaViz")</a></code> function will pop-up the <code>PrAnaViz</code> tool which will allow you to explore different spatiotemporal and long-term prescription trends with the sample dataset.</p>
 <p>However, for a better guide to get started it is recommended to read the <a href="https://github.bath.ac.uk/pages/kjj28/PrAna/articles/PrAnaViz_Tutoral.html">tutorial</a>.</p>
 </div>
