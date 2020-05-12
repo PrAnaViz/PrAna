@@ -1,5 +1,6 @@
 *.html
 _book
+_bookdown.yml
 log
 *.Rmd
 /libs/
