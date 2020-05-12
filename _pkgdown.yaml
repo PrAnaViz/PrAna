@@ -1,0 +1,40 @@
+title: PrAna
+url: https://github.bath.ac.uk/pages/kjj28/PrAna
+template:
+    params:
+        bootswatch: flatly
+navbar:
+  structure:
+    left:
+    - home
+    - reference
+    - tutorial
+    - handbook
+    - news
+    right: github
+  components:
+    articles: ~
+    home:
+      icon: fa-home fa-lg
+      href: index.html
+    reference:
+      text: Reference
+      menu:
+      - text: Online
+        href: reference/index.html
+    tutorial:
+      text: Tutorial
+      menu:
+      - text: PrAnaViz Tutorial
+        href: articles/PrAnaViz_Tutoral.html
+      - text: Handbook
+        menu:
+        - text: Book format
+          href: handbook_bd/index.html
+    news:
+      text: Changelog
+      href: news/index.html
+    github:
+      icon: fa-github fa-lg
+      href: https://github.bath.ac.uk/kjj28
+      
