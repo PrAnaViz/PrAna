@@ -2,6 +2,13 @@ pandoc: 2.7.2
 pkgdown: 1.5.1
 pkgdown_sha: ~
 articles:
+  _advanced: handbook/_advanced.html
+  _index: handbook/_index.html
+  _installation: handbook/_installation.html
+  _intro: handbook/_intro.html
+  _setup: handbook/_setup.html
+  _workflow: handbook/_workflow.html
+  handbook: handbook.html
   PrAnaViz_Tutoral: PrAnaViz_Tutoral.html
-last_built: 2020-05-11T23:43Z
+last_built: 2020-05-12T00:20Z
 

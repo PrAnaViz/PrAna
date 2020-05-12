@@ -5,13 +5,13 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PrAnaViz • PRANA</title>
+<title>handbook • PRANA</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="PrAnaViz">
+<script src="../pkgdown.js"></script><meta property="og:title" content="handbook">
 <meta property="og:description" content="PRANA">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -78,57 +78,47 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>PrAnaViz</h1>
-                        <h4 class="author">Kishore Jagadeesan</h4>
+      <h1 data-toc-skip>handbook</h1>
             
-            <h4 class="date">2020-05-12</h4>
       
       
-      <div class="hidden name"><code>PrAnaViz_Tutoral.Rmd</code></div>
+      <div class="hidden name"><code>handbook.Rmd</code></div>
 
     </div>
 
     
     
-<div id="outline" class="section level2">
-<h2 class="hasAnchor">
-<a href="#outline" class="anchor"></a>Outline</h2>
-<ul>
-<li>Introduction</li>
-<li>Method</li>
-<li>Workflow</li>
-</ul>
-</div>
 <div id="introduction" class="section level1">
 <h1 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h1>
-<p>During the last decade, wide range of active pharmaceutical ingredients (APIs) have been identified and quantified in aquatic environment across several studies and indicated their impacts on exposed environmental species and humans. For the prediction of total amount of the APIs released to the environment, information about APIs consumption data is vital. Globally, several methods were reported to estimate the APIs consumption data based on the national prescription data, manufacturers, importers and dispenser’s data.</p>
-<p>In the UK, national prescription data provided by National Health Service was used to calculate the consumption data, however, they are limited to a geographical region and or to a group of drugs. The aim of this study is to aggregate and normalize prescription data to calculate total prescribed quantity of different APIs and to develop a tool, to explore spatiotemporal trends of different APIs using the processed dataset for wider use.</p>
+<p>#Installation</p>
+<div id="automatic-installation-windows-only" class="section level2">
+<h2 class="hasAnchor">
+<a href="#automatic-installation-windows-only" class="anchor"></a>Automatic installation (Windows only)</h2>
+<p>An installation script is provided that automatically installs and configures all dependencies and finally installs <code>PrAna</code> itself. At this moment, this script only works with Microsoft Windows. You don’t have to install anything else to use it, simply open <code>R</code> and execute these commands:</p>
+<pre><code>source("https://raw.githubusercontent.com/rickhelmus/PrAna/master/install_PrAna.R")
+installPrAna()</code></pre>
+<p>A simple text based wizard will start and asks you what to install and how to do it. You can re-run this installer at any time, for instance, if something went wrong or you want to install additional dependencies.</p>
 </div>
-<div id="method" class="section level1">
-<h1 class="hasAnchor">
-<a href="#method" class="anchor"></a>Method</h1>
-<p>Data was extracted from National level prescribing datasets for the years 2015 to 2018 from NHS Digital. Address of each GP practices and its geographical location based on postcodes were downloaded from NHS Digital and Office for the National Statistics data portal.</p>
-<p>As we are interested in calculating the total quantity of an individual API, the whole dataset normalized for each API, using BNF/SNOMED mapping data provided by the NHS Business Services Authority (BSA) as in Figure.</p>
-<p>We have created a web-based interactive tool, PrAna, using R in a familiar dashboard layout with two tabs:</p>
+<div id="manual-installation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#manual-installation" class="anchor"></a>Manual installation</h2>
+<p>Alternatively, the manual installation is for users who don’t use Windows, prefer to do a manual installation or simply want to know what happens behind the scenes. The manual installation consists of three phases:</p>
 <ul>
-<li>Targeted API</li>
-<li>Non-targeted API</li>
+<li>Installing some prerequisite <code>R</code> packages</li>
+<li>Install and configure (non-R) dependencies</li>
+<li>Install <code>PrAna</code>
+</li>
 </ul>
-<p>to visualize total quantity of different APIs at for Bath and North East Somerset CCG (BANES) region with resolution to individual postcode.</p>
+</div>
 </div>
 <div id="workflow" class="section level1">
 <h1 class="hasAnchor">
 <a href="#workflow" class="anchor"></a>Workflow</h1>
 </div>
-<div id="targeted-api" class="section level1">
+<div id="advanced" class="section level1">
 <h1 class="hasAnchor">
-<a href="#targeted-api" class="anchor"></a>Targeted API</h1>
-<ul>
-<li>In this tab, user can input their APIs of interest, and select year from 2015 to 2018 and different Clinical Commissioning Group (CCG) region.</li>
-<li>This tab provides bar plot, as in figure, which represents total quantity of different APIs in the selected CCG region in the selected year.</li>
-<li>This tab also visualise the total quantity of APIs prescribed bymonth, GP Practice, Chemical form, and Medicinal form for the selected CCG region in selected year.</li>
-</ul>
+<a href="#advanced" class="anchor"></a>Advanced</h1>
 </div>
   </div>
 
