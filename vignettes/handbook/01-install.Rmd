@@ -1,2 +1,44 @@
 # Installation {#install}
 
+`PrAna` can be installed as any other R package, however, since it is dependent on some other software tools some extra steps are required for the installation.
+
+You can install the released version of PrAna from CRAN with:
+
+```
+install.packages("PrAna")
+```
+
+You can install the development version of PrAna from GitHub with:
+
+```
+# install.packages("devtools")
+library(devtools)
+install_github("jkkishore85/PrAna")
+
+```
+Note that you will need to have the latest R version installed in order to use this repository.
+
+## Dependencies
+
+Software         | Remarks
+-----------------| ----------------------------------------------
+[MySQL][MySQL]   | Needed to host the generated dataset
+
+
+
+## PrAnaViz
+
+For a very quick start:
+
+```
+library(PrAna)
+
+PrAna::runShiny("PrAnaViz")
+```
+The `runShiny("PrAnaViz")` function will pop-up the `PrAnaViz` tool which will allow you to explore different spatiotemporal and long-term prescription trends with the sample dataset.
+
+However, for a better guide to get started it is recommended to read the [tutorial][PrAnaViz Tutorial].
+
+[PrAnaViz Tutorial]: https://github.bath.ac.uk/pages/kjj28/PrAna/articles/PrAnaViz_Tutoral.html
+[FileUpload Tutorial]: https://github.bath.ac.uk/pages/kjj28/PrAna/articles/PrAnaViz_Tutoral.html
+[MySQL]: https://www.mysql.com/
