@@ -28,6 +28,7 @@ install_github("jkkishore85/PrAna")
 ```
 However, since it is dependent on some other software tools some extra steps are required for the installation. Please see the [installation section in the handbook][handbook-inst] for more information.
 
+## PrAnaViz
 
 For a very quick start to `PrAnaViz`:
 ```
