@@ -10,7 +10,7 @@ navbar:
       left:
       - home
       - reference
-      - tutorial
+      - articles
       - news
       right: github
   components:
@@ -20,11 +20,15 @@ navbar:
   reference:
     text: Reference
     href: reference/index.html
-  tutorial:
+  articles:
     text: Tutorial
     menu:
-    - text: PrAna Setup
-      href: 
+        text: Handbook
+        menu:
+          - text: Book format
+            href: articles/handbook/setup.html
+          - text: Single page
+            href: articles/handbook.html
     - text: PrAnaViz Tutorial
       href: articles/PrAnaViz_Tutoral.html
   news:
