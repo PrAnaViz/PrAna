@@ -2,7 +2,7 @@
 _book
 log
 *.Rmd
-
+/libs/
 #docs
 .Rproj.user
 
