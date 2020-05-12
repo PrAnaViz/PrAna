@@ -1,3 +1,5 @@
-rmd_files: [ "_index.Rmd","_intro.Rmd", "_installation.Rmd", "_concepts.Rmd", "_workflow.Rmd",  "_advanced.Rmd" ]
-delete_merged_file: yes
-book_filename: "handbook.Rmd"
+book_filename: "handbook"
+delete_merged_file: true
+language:
+  ui:
+    chapter_name: ""
