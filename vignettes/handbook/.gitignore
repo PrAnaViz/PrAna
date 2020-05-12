@@ -2,7 +2,7 @@
 _book
 _bookdown.yml
 log
-*.Rmd
+#*.Rmd
 /libs/
 
 #docs
