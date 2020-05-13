@@ -1,12 +1,15 @@
 
 #' Run in-built Shiny Apps in the package
 #'
-#' @param appName In-built Shiny App name. Example: plotFlow
+#' @param appName In-built Shiny App name.
 #'
 #' @return Opens up the in-built Shiny App.
 #' @export
 #'
-#' 
+#' @examples 
+#' \dontrun{
+#' runShiny("PrAnaViz")
+#' }
 #'
 runShiny <- function(appName) {
   # locate all the shiny app examples that exist

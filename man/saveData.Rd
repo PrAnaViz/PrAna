@@ -18,8 +18,13 @@ saveData(data, tab_name, selectdb, usernm, pwd)
 \item{pwd}{input your MySQL password}
 }
 \value{
-a table in MySQL
+a table in your MySQL database
 }
 \description{
 Upload csv to MySQL DB
+}
+\examples{
+\dontrun{
+saveData()
+}
 }

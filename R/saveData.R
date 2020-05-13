@@ -8,9 +8,14 @@
 #' @param usernm input your MySQL username
 #' @param pwd input your MySQL password
 #'
-#' @return a table in MySQL
+#' @return a table in your MySQL database
 #' @export
 #'
+#'@examples 
+#' \dontrun{
+#' saveData()
+#' }
+
 saveData <-function (data,tab_name,selectdb, usernm,pwd){
   
     con <-  DBI::dbConnect (

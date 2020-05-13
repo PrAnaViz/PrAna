@@ -7,11 +7,17 @@
 runShiny(appName)
 }
 \arguments{
-\item{appName}{In-built Shiny App name. Example: plotFlow}
+\item{appName}{In-built Shiny App name.}
 }
 \value{
 Opens up the in-built Shiny App.
 }
 \description{
 Run in-built Shiny Apps in the package
+}
+\examples{
+\dontrun{
+runShiny("PrAnaViz")
+}
+
 }
