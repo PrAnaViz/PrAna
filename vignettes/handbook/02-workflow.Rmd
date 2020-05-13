@@ -1,3 +1,15 @@
+---
+bibliography: literature.bib  
+---
 # Workflow {#workflow}
 
 Workflow concept
+
+- **Data Preparation**: Download monthly [NHS Prescription Dataset][NHSBSA]
+
+
+[NHSBSA]: https://applications.nhsbsa.nhs.uk/infosystems/welcome
+
+## References
+
+<div id="refs"></div>

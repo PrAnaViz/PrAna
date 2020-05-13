@@ -1,0 +1,220 @@
+\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{book}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provides euro and other symbols
+\else % if luatex or xelatex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={PrAna Handbook},
+  pdfauthor={Kishore Jagadeesan},
+  pdfborder={0 0 0},
+  breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{longtable,booktabs}
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\usepackage{booktabs}
+\usepackage[]{natbib}
+\bibliographystyle{apalike}
+
+\title{PrAna Handbook}
+\author{Kishore Jagadeesan}
+\date{2020-05-13}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\hypertarget{introduction}{%
+\chapter{Introduction}\label{introduction}}
+
+During the last decade, wide range of \textbf{active pharmaceutical ingredients (APIs)} have been identified and quantified in aquatic environment across several studies and indicated their impacts on exposed environmental species and humans. For the prediction of total amount of the APIs released to the environment, information about APIs consumption data is vital. Globally, several methods were reported to estimate the APIs consumption data based on the national prescription data, manufacturers, importers and dispenser's data.
+
+In the UK, national prescription data provided by \href{https://digital.nhs.uk/organisation-data-service/data-downloads/gp-data}{\textbf{National Health Service (NHS)}}, was used to calculate the consumption data. This data is freely accessible and consist of individual files for each month. With the large file with over 10 million records every month, the data from the NHS cannot be used for the direct calculation of the prescription levels of different APIs. Re-organisation and processing of the files is required before to do any exploration or analysis and to speed up the data reading.
+
+The aim of \texttt{PrAna} is to aggregate and normalize prescription data to calculate \textbf{total prescribed quantity} of different APIs, using open source statistical software \href{https://www.r-project.org/}{R language}. The name is an acronym for \emph{\textbf{Pr}escription \textbf{Ana}lysis}
+
+Apart, from the calculation of the total prescribed quantity of an API or a group of APIs, specified to a postcode or region, We have also developed, \emph{an open interactive web-based tool}, \texttt{PrAnaViz} with the processed dataset for the period \texttt{2015} to \texttt{2018}.
+
+\texttt{PrAnaViz} facilitates users \textbf{to visualise, explore and report} different spatiotemporal and long-term prescription trends for wider use.
+
+The documentation of \texttt{PrAna} consists of three parts:
+
+\begin{itemize}
+\tightlist
+\item
+  This handbook
+\item
+  The reference manual (accessible in \texttt{R} with \texttt{?PrAna-package} or \href{https://github.bath.ac.uk/kjj28/PrAna/reference/index.html}{online here})
+\item
+  A tutorial for PrAnaViz \href{https://github.bath.ac.uk/pages/kjj28/PrAna/articles/PrAnaViz_Tutoral.html}{(accessible at here)}
+\item
+  A tutorial for FileUpload \href{https://github.bath.ac.uk/pages/kjj28/PrAna/articles/PrAnaViz_Tutoral.html}{(accessible at here)}
+\end{itemize}
+
+\hypertarget{install}{%
+\chapter{Installation}\label{install}}
+
+\texttt{PrAna} can be installed as any other R package, however, since it is dependent on some other software tools some extra steps are required for the installation.
+
+You can install the released version of PrAna from CRAN with:
+
+\begin{verbatim}
+install.packages("PrAna")
+\end{verbatim}
+
+You can install the development version of PrAna from GitHub with:
+
+\begin{verbatim}
+# install.packages("devtools")
+library(devtools)
+install_github("jkkishore85/PrAna")
+\end{verbatim}
+
+Note that you will need to have the latest R version installed in order to use this repository.
+
+\hypertarget{dependencies}{%
+\section{Dependencies}\label{dependencies}}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+Software & Remarks\tabularnewline
+\midrule
+\endhead
+\href{https://www.mysql.com/}{MySQL} & Needed to host the generated dataset\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{pranaviz}{%
+\section{PrAnaViz}\label{pranaviz}}
+
+For a very quick start:
+
+\begin{verbatim}
+library(PrAna)
+
+PrAna::runShiny("PrAnaViz")
+\end{verbatim}
+
+The \texttt{runShiny("PrAnaViz")} function will pop-up the \texttt{PrAnaViz} tool which will allow you to explore different spatiotemporal and long-term prescription trends with the sample dataset.
+
+However, for a better guide to get started it is recommended to read the \href{https://github.bath.ac.uk/pages/kjj28/PrAna/articles/PrAnaViz_Tutoral.html}{tutorial}.
+
+\hypertarget{workflow}{%
+\chapter{Workflow}\label{workflow}}
+
+Workflow concept
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Data Preparation}: Download monthly \href{https://applications.nhsbsa.nhs.uk/infosystems/welcome}{NHS Prescription Dataset}, as fig \citep{book}
+\end{itemize}
+
+\hypertarget{references}{%
+\section{References}\label{references}}
+
+\hypertarget{refs}{}
+
+\hypertarget{features}{%
+\chapter{Features}\label{features}}
+
+\hypertarget{pranaviz-1}{%
+\section{PrAnaViz}\label{pranaviz-1}}
+
+We have created a web-based interactive tool, \texttt{PrAnaViz}, in a familiar \textbf{dashboard layout} with two tabs: (1) \textbf{Targeted API}, (2) \textbf{Non-targeted API}, to visualize total quantity of different APIs at CCG region with resolution to individual postcode.
+
+\hypertarget{targeted-approach}{%
+\subsection{Targeted Approach}\label{targeted-approach}}
+
+\begin{itemize}
+\tightlist
+\item
+  In this tab, user can \textbf{input a list of APIs}, and find out the \textbf{total prescription quantity} of each API in the selected year, at the selected CCG region.
+\item
+  This tab also visualise the total quantity of \textbf{APIs} prescribed by month, GP, Chemical form, and Medicinal form for a CCG region in a selected year.
+\end{itemize}
+
+\hypertarget{non-targeted-approach}{%
+\subsection{Non-targeted Approach}\label{non-targeted-approach}}
+
+\begin{itemize}
+\tightlist
+\item
+  Total prescription quantity of an individual API at \textbf{different postcode per month} at a CCG region, can be rendered in this tab.
+\item
+  The calculated total prescription quantity of an individual API at postcode level helps to find \textbf{the hotspots}.
+\item
+  User can download data as \textbf{\emph{.csv}} file and publication ready image \textbf{\emph{.eps}} and \textbf{\emph{.pdf}} files.
+\end{itemize}
+
+\hypertarget{acknowledgements}{%
+\chapter{Acknowledgements}\label{acknowledgements}}
+
+This package was built as a part of the \textbf{Wastewater Fingerprinting for Public Health Assessment (ENTRUST)} project funded by Wessex Water and EPSRC IAA (grant no. EP/R51164X/1). Authors thank Sue Griffin, NHS Bath and North East Somerset CCG, Bath for pharmaceutical advice and NHS database assistance.
+
+  \bibliography{book.bib}
+
+\end{document}
