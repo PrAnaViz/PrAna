@@ -7,11 +7,17 @@
 importdmd(path)
 }
 \arguments{
-\item{path}{dm+d excel file(s) location. Example: importdmd ("C:/dmdDataLoader/excel/")}
+\item{path}{dm+d excel file(s) location.}
 }
 \value{
 a datatable
 }
 \description{
-Import dm+d files and merge with June 2018 snomed mapping file.
+Import dm+d files and link it to the BNF code using June 2018 snomed mapping file
+}
+\examples{
+\dontrun{
+importdmd("C:/dmdDataLoader/excel/")
+}
+
 }

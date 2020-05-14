@@ -1,6 +1,6 @@
 #' importdmd 
 #' 
-#' Import dm+d files and link it to thhe BNF code using June 2018 snomed mapping file
+#' Import dm+d files and link it to the BNF code using June 2018 snomed mapping file
 #'
 #' @param path dm+d excel file(s) location.
 #'
@@ -13,8 +13,9 @@
 #'
 #' @examples 
 #' \dontrun{
-#' importdmd(""C:/dmdDataLoader/excel/")
+#' importdmd("C:/dmdDataLoader/excel/")
 #' }
+#' 
 
 importdmd <- function(path)
 {
