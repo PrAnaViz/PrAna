@@ -22,10 +22,11 @@ An overview of all functions involved in the data conversion is shown in the tab
 
 Function         | Remarks
 -----------------| ----------------------------------------------
-`importdmd()`  | Import dm+d files and link it to thhe BNF code using June 2018 snomed mapping file
+`importdmd()`  | Import dm+d files and link it to the BNF code using June 2018 snomed mapping file
 `csv2rds()`   | Combine all the comma separated value (.csv) files in the defined file path and export it into a single R object
 `uk_practice_wise()`| Import NHS dataset files and generate processed individual GP practice prescription dataset
 
+The `importdmd()` function supports import of dm+d files and generate a data object linking each API to its BNF Code, strength and medicinal form. For an overview of these functionalities see the documentation. Some examples:
 
 
 [NHSBSA]: https://applications.nhsbsa.nhs.uk/infosystems/welcome

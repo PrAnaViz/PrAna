@@ -17,10 +17,10 @@ uk_practice_wise <- function(x,y) {
   tab02 <- NULL
   tab03 <- NULL
   tab04 <- NULL
+  tab05 <- NULL
+  tab06 <- NULL
+  tab07 <- NULL
   s <- NULL
-  tab1 <- NULL
-  tab2 <- NULL
-  tab3 <- NULL
   
   for (i in (1:length( unique(y[[2]])  )))
   {
@@ -51,7 +51,7 @@ uk_practice_wise <- function(x,y) {
     tab03 <- cbind(tab02,Vol_Mass_Tot = (tab02$'Vol_Mass'*tab02$'QUANTITY')* (uom_2$'multi_fac'[match(gsub(" ", "",tab02$'UOM'), gsub(" ", "",  uom_2$'CD'))]))
     tab04 <- cbind(tab03, DForm = dform$'FORMCD'[match(gsub(" ", "",tab03$'VPID'), gsub(" ", "",  dform$'VPID'))])
     
-    tab1  <- tab04 %>%
+    tab05  <- tab04 %>%
       dplyr::select("PERIOD", "PRACTICE","API","Vol_Mass_Tot","DForm")%>%
       mutate(API= as.character(API))%>%
       mutate(API_CODE = API) %>%
@@ -61,11 +61,11 @@ uk_practice_wise <- function(x,y) {
       mutate(gram = gram/1000)%>%
       select("NM", "API_CODE","PRACTICE","PERIOD","DForm","gram")
     
-    tab2 <- aggrapi(tab1[, c("NM", "gram")])
+    tab06 <- aggrapi(tab05[, c("NM", "gram")])
     
-    tab3 <- cbind(CPD = tab2$'.id' [match(gsub(" ", "",tab1$"NM"), gsub(" ", "", tab2$'NM'))],tab1)
+    tab07 <- cbind(CPD = tab06$'.id' [match(gsub(" ", "",tab05$"NM"), gsub(" ", "", tab06$'NM'))],tab05)
     
-    write.csv(tab3, paste0( j,".csv"))
+    write.csv(tab07, paste0( j,".csv"))
     
   }
 }
