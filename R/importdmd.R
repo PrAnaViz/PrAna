@@ -4,7 +4,11 @@
 #'
 #' @param path dm+d excel file(s) location.
 #'
-#' @return a datatable 
+#' @return
+#' bnf_full_final - bnf snomed map file,
+#' ing - ingredients list,
+#' uom - unit of measurement,
+#' dform - medicinal form
 #' @export
 #'
 #'
@@ -23,9 +27,9 @@ importdmd <- function(path)
   memory.limit(size = 750000)
   
   # import June 2018 SNOMED Mapping file
-   bnf_full <- data.table::fread (file.path("data/", "June 2018 Snomed mapping.csv"), header = T, stringsAsFactors = F)
-   bnf_full$'BNF Code' <- gsub("'", "",bnf_full$'BNF Code' )
-   bnf_full$'VMPP / AMPP SNOMED Code'<-gsub("'", "",bnf_full$'VMPP / AMPP SNOMED Code' )
+  bnf_full <- data.table::fread (file.path("C:/R Directory/packages/pda.aggr/data", "June 2018 Snomed mapping.csv"), header = T, stringsAsFactors = F)
+  bnf_full$'BNF Code' <- gsub("'", "",bnf_full$'BNF Code' )
+  bnf_full$'VMPP / AMPP SNOMED Code'<-gsub("'", "",bnf_full$'VMPP / AMPP SNOMED Code' )
   
   setwd(path) # C:/dmdDataLoader/excel/
   
@@ -36,7 +40,7 @@ importdmd <- function(path)
   dform <- readxl::read_excel("f_vmp.xlsx", sheet = "DrugForm")
   ing <- readxl::read_excel("f_ingredient.xlsx", sheet = "Ingredient")
   UoM_01 <- readxl::read_excel("f_lookup.xlsx", sheet = "UoM")
-
+  
   vmp_summ <- plyr::ddply(vmp, .(VPID), summarise, length(unique(ISID)),
                           ISID= paste(unique(ISID), collapse = "#"),
                           value = paste(STRNT_NMRTR_VAL, collapse = "#"),
@@ -77,4 +81,6 @@ importdmd <- function(path)
   bnf_full_final_02 <- merge(bnf_full01,vmp_summ,by = "VPID2")
   
   bnf_full_final_02
+  return(list(bnf_full_final = bnf_full_final_02, dform = dform, uom = UoM_01, ing= ing ))
 }
+
