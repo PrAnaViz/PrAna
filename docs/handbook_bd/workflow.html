@@ -24,7 +24,7 @@
 <meta name="author" content="Kishore Jagadeesan" />
 
 
-<meta name="date" content="2020-05-12" />
+<meta name="date" content="2020-05-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -70,14 +70,27 @@
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="install.html"><a href="install.html"><i class="fa fa-check"></i><b>2</b> Installation</a></li>
-<li class="chapter" data-level="3" data-path="workflow.html"><a href="workflow.html"><i class="fa fa-check"></i><b>3</b> Workflow</a></li>
-<li class="chapter" data-level="4" data-path="features.html"><a href="features.html"><i class="fa fa-check"></i><b>4</b> Features</a><ul>
-<li class="chapter" data-level="4.1" data-path="features.html"><a href="features.html#targeted-approach"><i class="fa fa-check"></i><b>4.1</b> Targeted Approach</a></li>
-<li class="chapter" data-level="4.2" data-path="features.html"><a href="features.html#non-targeted-approach"><i class="fa fa-check"></i><b>4.2</b> Non-targeted Approach</a></li>
+<li class="chapter" data-level="2" data-path="install.html"><a href="install.html"><i class="fa fa-check"></i><b>2</b> Installation</a><ul>
+<li class="chapter" data-level="2.1" data-path="install.html"><a href="install.html#dependencies"><i class="fa fa-check"></i><b>2.1</b> Dependencies</a></li>
+<li class="chapter" data-level="2.2" data-path="install.html"><a href="install.html#pranaviz"><i class="fa fa-check"></i><b>2.2</b> PrAnaViz</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>5</b> Final Words</a></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="3" data-path="workflow.html"><a href="workflow.html"><i class="fa fa-check"></i><b>3</b> Workflow</a><ul>
+<li class="chapter" data-level="3.1" data-path="workflow.html"><a href="workflow.html#data-download"><i class="fa fa-check"></i><b>3.1</b> Data Download</a></li>
+<li class="chapter" data-level="3.2" data-path="workflow.html"><a href="workflow.html#data-conversion"><i class="fa fa-check"></i><b>3.2</b> Data Conversion</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="features.html"><a href="features.html"><i class="fa fa-check"></i><b>4</b> PrAnaViz</a><ul>
+<li class="chapter" data-level="4.1" data-path="features.html"><a href="features.html#introduction-1"><i class="fa fa-check"></i><b>4.1</b> Introduction</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="features.html"><a href="features.html#targeted-approach"><i class="fa fa-check"></i><b>4.1.1</b> Targeted Approach</a></li>
+<li class="chapter" data-level="4.1.2" data-path="features.html"><a href="features.html#non-targeted-approach"><i class="fa fa-check"></i><b>4.1.2</b> Non-targeted Approach</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>5</b> Acknowledgements</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a><ul>
+<li class="chapter" data-level="5.1" data-path="references.html"><a href="references.html#introduction-2"><i class="fa fa-check"></i><b>5.1</b> Introduction</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="references.html"><a href="references.html#targeted-approach-1"><i class="fa fa-check"></i><b>5.1.1</b> Targeted Approach</a></li>
+<li class="chapter" data-level="5.1.2" data-path="references.html"><a href="references.html#non-targeted-approach-1"><i class="fa fa-check"></i><b>5.1.2</b> Non-targeted Approach</a></li>
+</ul></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -100,8 +113,50 @@
             <section class="normal" id="section-">
 <div id="workflow" class="section level1">
 <h1><span class="header-section-number">3</span> Workflow</h1>
-<p>Workflow concept</p>
+<ul>
+<li><strong>Data Preparation</strong>: Download monthly <a href="https://applications.nhsbsa.nhs.uk/infosystems/welcome">NHS prescription datasets</a> and Dictionary of medicines and devices release files <a href="https://isd.digital.nhs.uk/trud3/user/guest/group/0/pack/6">(dm+d)</a>.</li>
+<li><strong>Data Conversion</strong>: Aggregation and conversion of the locally stored datasets into practice wise dataset achieved using the functions in <code>PrAna</code>.</li>
+<li><strong>Visualise and Analyse the data</strong>: Visualise and analyse the processed dataset using the in-built ShinyApp <code>PrAnaViz</code>.</li>
+<li><strong>Database service</strong>: Linking of the processed dataset to the <code>PrAnaViz</code> can be achieved by uploading the processed dataset to a local or a remote database service, for example, <a href="https://www.mysql.com/"><em>MySQL.</em></a></li>
+<li><strong>Download images and processed data</strong>: Users can download processed data as <strong><em>.csv</em></strong> file and publication ready image <strong><em>.eps</em></strong> and <strong><em>.pdf</em></strong> files.</li>
+</ul>
+<div id="data-download" class="section level2">
+<h2><span class="header-section-number">3.1</span> Data Download</h2>
+<p>To download NHS prescription datasets, users need to guest login and solve a captcha in <a href="https://applications.nhsbsa.nhs.uk/infosystems/welcome">NHSBSA information portal</a>, to download the <a href="https://isd.digital.nhs.uk/trud3/user/guest/group/0/pack/6">dm+d</a> release files and <a href="https://isd.digital.nhs.uk/trud3/user/guest/group/0/pack/6/subpack/239/releases"><em>dm+d XML Transformation Tool</em></a>, users need to register an account.</p>
+<p>Store the monthly NHS prescription data in year wise folder. For an example, store all the 2015 monthly datasets in a folder named ‘2015’. Extract the dm+d release files using <em>dm+d XML Transformation Tool</em>.</p>
+</div>
+<div id="data-conversion" class="section level2">
+<h2><span class="header-section-number">3.2</span> Data Conversion</h2>
+<p>Different functions were used in the aggregation and conversion workflow behind the scenes that performs the heavy lifting of a workflow step and finally return the results.</p>
+<p>An overview of all functions involved in the data conversion is shown in the table below.</p>
+<table>
+<colgroup>
+<col width="26%" />
+<col width="73%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Remarks</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>importdmd()</code></td>
+<td>Import dm+d files and link it to thhe BNF code using June 2018 snomed mapping file</td>
+</tr>
+<tr class="even">
+<td><code>csv2rds()</code></td>
+<td>Combine all the comma separated value (.csv) files in the defined file path and export it into a single R object</td>
+</tr>
+<tr class="odd">
+<td><code>uk_practice_wise()</code></td>
+<td>Import NHS dataset files and generate processed individual GP practice prescription dataset</td>
+</tr>
+</tbody>
+</table>
 
+</div>
 </div>
             </section>
 

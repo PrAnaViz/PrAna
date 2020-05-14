@@ -1,12 +1,16 @@
-#' Title
+#' uk_practice_wise
 #'
-#' @param x 
-#' @param y 
+#' @param x processed prescription dataset
+#' @param y subset of GP practice
 #'
-#' @return
+#' @return multiple individual GP practice wise processed prescription dataset
 #' @export
 #'
 #' @examples
+#' \dontrun{
+#' uk_practice_wise(data201712_03,UK_GP2017)
+#' }
+#' 
 uk_practice_wise <- function(x,y) {
   
   tab01 <- NULL

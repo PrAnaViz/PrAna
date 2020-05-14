@@ -24,14 +24,14 @@
 <meta name="author" content="Kishore Jagadeesan" />
 
 
-<meta name="date" content="2020-05-12" />
+<meta name="date" content="2020-05-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="summary.html"/>
+<link rel="prev" href="acknowledgements.html"/>
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -70,14 +70,27 @@
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="install.html"><a href="install.html"><i class="fa fa-check"></i><b>2</b> Installation</a></li>
-<li class="chapter" data-level="3" data-path="workflow.html"><a href="workflow.html"><i class="fa fa-check"></i><b>3</b> Workflow</a></li>
-<li class="chapter" data-level="4" data-path="features.html"><a href="features.html"><i class="fa fa-check"></i><b>4</b> Features</a><ul>
-<li class="chapter" data-level="4.1" data-path="features.html"><a href="features.html#targeted-approach"><i class="fa fa-check"></i><b>4.1</b> Targeted Approach</a></li>
-<li class="chapter" data-level="4.2" data-path="features.html"><a href="features.html#non-targeted-approach"><i class="fa fa-check"></i><b>4.2</b> Non-targeted Approach</a></li>
+<li class="chapter" data-level="2" data-path="install.html"><a href="install.html"><i class="fa fa-check"></i><b>2</b> Installation</a><ul>
+<li class="chapter" data-level="2.1" data-path="install.html"><a href="install.html#dependencies"><i class="fa fa-check"></i><b>2.1</b> Dependencies</a></li>
+<li class="chapter" data-level="2.2" data-path="install.html"><a href="install.html#pranaviz"><i class="fa fa-check"></i><b>2.2</b> PrAnaViz</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>5</b> Final Words</a></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="3" data-path="workflow.html"><a href="workflow.html"><i class="fa fa-check"></i><b>3</b> Workflow</a><ul>
+<li class="chapter" data-level="3.1" data-path="workflow.html"><a href="workflow.html#data-download"><i class="fa fa-check"></i><b>3.1</b> Data Download</a></li>
+<li class="chapter" data-level="3.2" data-path="workflow.html"><a href="workflow.html#data-conversion"><i class="fa fa-check"></i><b>3.2</b> Data Conversion</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="features.html"><a href="features.html"><i class="fa fa-check"></i><b>4</b> PrAnaViz</a><ul>
+<li class="chapter" data-level="4.1" data-path="features.html"><a href="features.html#introduction-1"><i class="fa fa-check"></i><b>4.1</b> Introduction</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="features.html"><a href="features.html#targeted-approach"><i class="fa fa-check"></i><b>4.1.1</b> Targeted Approach</a></li>
+<li class="chapter" data-level="4.1.2" data-path="features.html"><a href="features.html#non-targeted-approach"><i class="fa fa-check"></i><b>4.1.2</b> Non-targeted Approach</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>5</b> Acknowledgements</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a><ul>
+<li class="chapter" data-level="5.1" data-path="references.html"><a href="references.html#introduction-2"><i class="fa fa-check"></i><b>5.1</b> Introduction</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="references.html"><a href="references.html#targeted-approach-1"><i class="fa fa-check"></i><b>5.1.1</b> Targeted Approach</a></li>
+<li class="chapter" data-level="5.1.2" data-path="references.html"><a href="references.html#non-targeted-approach-1"><i class="fa fa-check"></i><b>5.1.2</b> Non-targeted Approach</a></li>
+</ul></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -101,13 +114,34 @@
 <div id="references" class="section level1 unnumbered">
 <h1>References</h1>
 
+<div id="introduction-2" class="section level2">
+<h2><span class="header-section-number">5.1</span> Introduction</h2>
+<p>The aim of this tool is to visualise and analyse the prescription data to calculate total prescribed quantity of different APIs and to explore spatiotemporal trends of different APIs for wider use.</p>
+<p>We have created, <code>PrAnaViz</code>, in a familiar <strong>dashboard layout</strong> with two tabs: (1) <strong>Targeted API</strong>, (2) <strong>Non-targeted API</strong>, to visualize total quantity of different APIs at CCG region with resolution to individual postcode.</p>
+<div id="targeted-approach-1" class="section level3">
+<h3><span class="header-section-number">5.1.1</span> Targeted Approach</h3>
+<ul>
+<li>In this tab, user can <strong>input a list of APIs</strong>, and find out the <strong>total prescription quantity</strong> of each API in the selected year, at the selected CCG region.</li>
+<li>This tab also visualise the total quantity of <strong>APIs</strong> prescribed by month, GP, Chemical form, and Medicinal form for a CCG region in a selected year.</li>
+</ul>
+</div>
+<div id="non-targeted-approach-1" class="section level3">
+<h3><span class="header-section-number">5.1.2</span> Non-targeted Approach</h3>
+<ul>
+<li>Total prescription quantity of an individual API at <strong>different postcode per month</strong> at a CCG region, can be rendered in this tab.</li>
+<li>The calculated total prescription quantity of an individual API at postcode level helps to find <strong>the hotspots</strong>.</li>
+<li>User can download data as <strong><em>.csv</em></strong> file and publication ready image <strong><em>.eps</em></strong> and <strong><em>.pdf</em></strong> files.</li>
+</ul>
+
+</div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="summary.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="acknowledgements.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
     </div>
   </div>

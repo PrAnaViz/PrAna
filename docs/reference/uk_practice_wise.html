@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Run in-built Shiny Apps in the package — runShiny • PrAna</title>
+<title>uk_practice_wise — uk_practice_wise • PrAna</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Run in-built Shiny Apps in the package — runShiny" />
-<meta property="og:description" content="Run in-built Shiny Apps in the package" />
+<meta property="og:title" content="uk_practice_wise — uk_practice_wise" />
+<meta property="og:description" content="uk_practice_wise" />
 
 
 
@@ -140,33 +140,37 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Run in-built Shiny Apps in the package</h1>
+    <h1>uk_practice_wise</h1>
     
-    <div class="hidden name"><code>runShiny.Rd</code></div>
+    <div class="hidden name"><code>uk_practice_wise.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Run in-built Shiny Apps in the package</p>
+    <p>uk_practice_wise</p>
     </div>
 
-    <pre class="usage"><span class='fu'>runShiny</span>(<span class='no'>appName</span>)</pre>
+    <pre class="usage"><span class='fu'>uk_practice_wise</span>(<span class='no'>x</span>, <span class='no'>y</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>appName</th>
-      <td><p>In-built Shiny App name.</p></td>
+      <th>x</th>
+      <td><p>processed prescription dataset</p></td>
+    </tr>
+    <tr>
+      <th>y</th>
+      <td><p>subset of GP practice</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Opens up the in-built Shiny App.</p>
+    <p>multiple individual GP practice wise processed prescription dataset</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>runShiny</span>(<span class='st'>"PrAnaViz"</span>)
+<span class='fu'>uk_practice_wise</span>(<span class='no'>data201712_03</span>,<span class='no'>UK_GP2017</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

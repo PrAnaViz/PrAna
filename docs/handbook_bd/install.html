@@ -24,7 +24,7 @@
 <meta name="author" content="Kishore Jagadeesan" />
 
 
-<meta name="date" content="2020-05-12" />
+<meta name="date" content="2020-05-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -70,14 +70,27 @@
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="install.html"><a href="install.html"><i class="fa fa-check"></i><b>2</b> Installation</a></li>
-<li class="chapter" data-level="3" data-path="workflow.html"><a href="workflow.html"><i class="fa fa-check"></i><b>3</b> Workflow</a></li>
-<li class="chapter" data-level="4" data-path="features.html"><a href="features.html"><i class="fa fa-check"></i><b>4</b> Features</a><ul>
-<li class="chapter" data-level="4.1" data-path="features.html"><a href="features.html#targeted-approach"><i class="fa fa-check"></i><b>4.1</b> Targeted Approach</a></li>
-<li class="chapter" data-level="4.2" data-path="features.html"><a href="features.html#non-targeted-approach"><i class="fa fa-check"></i><b>4.2</b> Non-targeted Approach</a></li>
+<li class="chapter" data-level="2" data-path="install.html"><a href="install.html"><i class="fa fa-check"></i><b>2</b> Installation</a><ul>
+<li class="chapter" data-level="2.1" data-path="install.html"><a href="install.html#dependencies"><i class="fa fa-check"></i><b>2.1</b> Dependencies</a></li>
+<li class="chapter" data-level="2.2" data-path="install.html"><a href="install.html#pranaviz"><i class="fa fa-check"></i><b>2.2</b> PrAnaViz</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>5</b> Final Words</a></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="3" data-path="workflow.html"><a href="workflow.html"><i class="fa fa-check"></i><b>3</b> Workflow</a><ul>
+<li class="chapter" data-level="3.1" data-path="workflow.html"><a href="workflow.html#data-download"><i class="fa fa-check"></i><b>3.1</b> Data Download</a></li>
+<li class="chapter" data-level="3.2" data-path="workflow.html"><a href="workflow.html#data-conversion"><i class="fa fa-check"></i><b>3.2</b> Data Conversion</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="features.html"><a href="features.html"><i class="fa fa-check"></i><b>4</b> PrAnaViz</a><ul>
+<li class="chapter" data-level="4.1" data-path="features.html"><a href="features.html#introduction-1"><i class="fa fa-check"></i><b>4.1</b> Introduction</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="features.html"><a href="features.html#targeted-approach"><i class="fa fa-check"></i><b>4.1.1</b> Targeted Approach</a></li>
+<li class="chapter" data-level="4.1.2" data-path="features.html"><a href="features.html#non-targeted-approach"><i class="fa fa-check"></i><b>4.1.2</b> Non-targeted Approach</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>5</b> Acknowledgements</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a><ul>
+<li class="chapter" data-level="5.1" data-path="references.html"><a href="references.html#introduction-2"><i class="fa fa-check"></i><b>5.1</b> Introduction</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="references.html"><a href="references.html#targeted-approach-1"><i class="fa fa-check"></i><b>5.1.1</b> Targeted Approach</a></li>
+<li class="chapter" data-level="5.1.2" data-path="references.html"><a href="references.html#non-targeted-approach-1"><i class="fa fa-check"></i><b>5.1.2</b> Non-targeted Approach</a></li>
+</ul></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -100,7 +113,46 @@
             <section class="normal" id="section-">
 <div id="install" class="section level1">
 <h1><span class="header-section-number">2</span> Installation</h1>
+<p><code>PrAna</code> can be installed as any other R package, however, since it is dependent on some other software tools some extra steps are required for the installation.</p>
+<p>You can install the released version of PrAna from CRAN with:</p>
+<pre><code>install.packages(&quot;PrAna&quot;)</code></pre>
+<p>You can install the development version of PrAna from GitHub with:</p>
+<pre><code># install.packages(&quot;devtools&quot;)
+library(devtools)
+install_github(&quot;jkkishore85/PrAna&quot;)
+</code></pre>
+<p>Note that you will need to have the latest R version installed in order to use this repository.</p>
+<div id="dependencies" class="section level2">
+<h2><span class="header-section-number">2.1</span> Dependencies</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Software</th>
+<th>Remarks</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://rstudio.com/">RStudio</a></td>
+<td>Suggested IDE platform to perform the R operations</td>
+</tr>
+<tr class="even">
+<td><a href="https://www.mysql.com/">MySQL</a></td>
+<td>Optional to host the generated dataset</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="pranaviz" class="section level2">
+<h2><span class="header-section-number">2.2</span> PrAnaViz</h2>
+<p>For a very quick start:</p>
+<pre><code>library(PrAna)
 
+PrAna::runShiny(&quot;PrAnaViz&quot;)</code></pre>
+<p>The <code>runShiny("PrAnaViz")</code> function will pop-up the <code>PrAnaViz</code> tool which will allow you to explore different spatiotemporal and long-term prescription trends with the sample dataset.</p>
+<p>However, for a better guide to get started it is recommended to read the <a href="https://github.bath.ac.uk/pages/kjj28/PrAna/articles/PrAnaViz_Tutoral.html">tutorial</a>.</p>
+
+</div>
 </div>
             </section>
 

@@ -24,7 +24,7 @@
 <meta name="author" content="Kishore Jagadeesan" />
 
 
-<meta name="date" content="2020-05-12" />
+<meta name="date" content="2020-05-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -70,14 +70,27 @@
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="install.html"><a href="install.html"><i class="fa fa-check"></i><b>2</b> Installation</a></li>
-<li class="chapter" data-level="3" data-path="workflow.html"><a href="workflow.html"><i class="fa fa-check"></i><b>3</b> Workflow</a></li>
-<li class="chapter" data-level="4" data-path="features.html"><a href="features.html"><i class="fa fa-check"></i><b>4</b> Features</a><ul>
-<li class="chapter" data-level="4.1" data-path="features.html"><a href="features.html#targeted-approach"><i class="fa fa-check"></i><b>4.1</b> Targeted Approach</a></li>
-<li class="chapter" data-level="4.2" data-path="features.html"><a href="features.html#non-targeted-approach"><i class="fa fa-check"></i><b>4.2</b> Non-targeted Approach</a></li>
+<li class="chapter" data-level="2" data-path="install.html"><a href="install.html"><i class="fa fa-check"></i><b>2</b> Installation</a><ul>
+<li class="chapter" data-level="2.1" data-path="install.html"><a href="install.html#dependencies"><i class="fa fa-check"></i><b>2.1</b> Dependencies</a></li>
+<li class="chapter" data-level="2.2" data-path="install.html"><a href="install.html#pranaviz"><i class="fa fa-check"></i><b>2.2</b> PrAnaViz</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>5</b> Final Words</a></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="3" data-path="workflow.html"><a href="workflow.html"><i class="fa fa-check"></i><b>3</b> Workflow</a><ul>
+<li class="chapter" data-level="3.1" data-path="workflow.html"><a href="workflow.html#data-download"><i class="fa fa-check"></i><b>3.1</b> Data Download</a></li>
+<li class="chapter" data-level="3.2" data-path="workflow.html"><a href="workflow.html#data-conversion"><i class="fa fa-check"></i><b>3.2</b> Data Conversion</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="features.html"><a href="features.html"><i class="fa fa-check"></i><b>4</b> PrAnaViz</a><ul>
+<li class="chapter" data-level="4.1" data-path="features.html"><a href="features.html#introduction-1"><i class="fa fa-check"></i><b>4.1</b> Introduction</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="features.html"><a href="features.html#targeted-approach"><i class="fa fa-check"></i><b>4.1.1</b> Targeted Approach</a></li>
+<li class="chapter" data-level="4.1.2" data-path="features.html"><a href="features.html#non-targeted-approach"><i class="fa fa-check"></i><b>4.1.2</b> Non-targeted Approach</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>5</b> Acknowledgements</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a><ul>
+<li class="chapter" data-level="5.1" data-path="references.html"><a href="references.html#introduction-2"><i class="fa fa-check"></i><b>5.1</b> Introduction</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="references.html"><a href="references.html#targeted-approach-1"><i class="fa fa-check"></i><b>5.1.1</b> Targeted Approach</a></li>
+<li class="chapter" data-level="5.1.2" data-path="references.html"><a href="references.html#non-targeted-approach-1"><i class="fa fa-check"></i><b>5.1.2</b> Non-targeted Approach</a></li>
+</ul></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -101,10 +114,22 @@
 <div id="header">
 <h1 class="title">PrAna Handbook</h1>
 <p class="author"><em>Kishore Jagadeesan</em></p>
-<p class="date"><em>2020-05-12</em></p>
+<p class="date"><em>2020-05-14</em></p>
 </div>
 <div id="introduction" class="section level1">
 <h1><span class="header-section-number">1</span> Introduction</h1>
+<p>During the last decade, wide range of <strong>active pharmaceutical ingredients (APIs)</strong> have been identified and quantified in aquatic environment across several studies and indicated their impacts on exposed environmental species and humans. For the prediction of total amount of the APIs released to the environment, information about APIs consumption data is vital. Globally, several methods were reported to estimate the APIs consumption data based on the national prescription data, manufacturers, importers and dispenser’s data.</p>
+<p>In the UK, national prescription data provided by <a href="https://digital.nhs.uk/organisation-data-service/data-downloads/gp-data"><strong>National Health Service (NHS)</strong></a>, was used to calculate the consumption data. This data is freely accessible and consist of individual files for each month. With the large file with over 10 million records every month, the data from the NHS cannot be used for the direct calculation of the prescription levels of different APIs. Re-organisation and processing of the files is required before to do any exploration or analysis and to speed up the data reading.</p>
+<p>The aim of <code>PrAna</code> is to aggregate and normalize prescription data to calculate <strong>total prescribed quantity</strong> of different APIs, using open source statistical software <a href="https://www.r-project.org/">R language</a>. The name is an acronym for <em><strong>Pr</strong>escription <strong>Ana</strong>lysis</em></p>
+<p>Apart, from the calculation of the total prescribed quantity of an API or a group of APIs, specified to a postcode or region, We have also developed, <em>an open interactive web-based tool</em>, <code>PrAnaViz</code> with the processed dataset for the period <code>2015</code> to <code>2018</code>.</p>
+<p><code>PrAnaViz</code> facilitates users <strong>to visualise, explore and report</strong> different spatiotemporal and long-term prescription trends for wider use.</p>
+<p>The documentation of <code>PrAna</code> consists of three parts:</p>
+<ul>
+<li>This handbook</li>
+<li>The reference manual (accessible in <code>R</code> with <code>?PrAna-package</code> or <a href="https://github.bath.ac.uk/kjj28/PrAna/reference/index.html">online here</a>)</li>
+<li>A tutorial for PrAnaViz <a href="https://github.bath.ac.uk/pages/kjj28/PrAna/articles/PrAnaViz_Tutoral.html">(accessible at here)</a></li>
+<li>A tutorial for FileUpload <a href="https://github.bath.ac.uk/pages/kjj28/PrAna/articles/PrAnaViz_Tutoral.html">(accessible at here)</a></li>
+</ul>
 
 </div>
             </section>

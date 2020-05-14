@@ -63,7 +63,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../../articles/PrAnaViz_Tutoral.html">PrAnaViz Tutorial</a>
+      <a href="../../handbook/PrAnaViz_Tutorial.html">PrAnaViz Tutorial</a>
     </li>
     <li class="dropdown-submenu">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Handbook</a>
@@ -112,7 +112,54 @@
 <div id="workflow" class="section level1">
 <h1 class="hasAnchor">
 <a href="#workflow" class="anchor"></a>Workflow</h1>
-<p>Workflow concept</p>
+<ul>
+<li>
+<strong>Data Preparation</strong>: Download monthly <a href="https://applications.nhsbsa.nhs.uk/infosystems/welcome">NHS prescription datasets</a> and Dictionary of medicines and devices release files <a href="https://isd.digital.nhs.uk/trud3/user/guest/group/0/pack/6">(dm+d)</a>.</li>
+<li>
+<strong>Data Conversion</strong>: Aggregation and conversion of the locally stored datasets into practice wise dataset achieved using the functions in <code>PrAna</code>.</li>
+<li>
+<strong>Visualise and Analyse the data</strong>: Visualise and analyse the processed dataset using the in-built ShinyApp <code>PrAnaViz</code>.</li>
+<li>
+<strong>Database service</strong>: Linking of the processed dataset to the <code>PrAnaViz</code> can be achieved by uploading the processed dataset to a local or a remote database service, for example, [<em>MySQL.</em>][MySQL]</li>
+<li>
+<strong>Download images and processed data</strong>: Users can download processed data as <strong><em>.csv</em></strong> file and publication ready image <strong><em>.eps</em></strong> and <strong><em>.pdf</em></strong> files.</li>
+</ul>
+<div id="data-download" class="section level2">
+<h2 class="hasAnchor">
+<a href="#data-download" class="anchor"></a>Data Download</h2>
+<p>To download NHS prescription datasets, users need to guest login and solve a captcha in <a href="https://applications.nhsbsa.nhs.uk/infosystems/welcome">NHSBSA information portal</a>, to download the <a href="https://isd.digital.nhs.uk/trud3/user/guest/group/0/pack/6">dm+d</a> release files and <a href="https://isd.digital.nhs.uk/trud3/user/guest/group/0/pack/6/subpack/239/releases"><em>dm+d XML Transformation Tool</em></a>, users need to register an account.</p>
+<p>Store the monthly NHS prescription data in year wise folder. For an example, store all the 2015 monthly datasets in a folder named ‘2015’. Extract the dm+d release files using <em>dm+d XML Transformation Tool</em>.</p>
+</div>
+<div id="data-conversion" class="section level2">
+<h2 class="hasAnchor">
+<a href="#data-conversion" class="anchor"></a>Data Conversion</h2>
+<p>Different functions were used in the aggregation and conversion workflow behind the scenes that performs the heavy lifting of a workflow step and finally return the results.</p>
+<p>An overview of all functions involved in the data conversion is shown in the table below.</p>
+<table class="table">
+<colgroup>
+<col width="26%">
+<col width="73%">
+</colgroup>
+<thead><tr class="header">
+<th>Function</th>
+<th>Remarks</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code><a href="../../reference/importdmd.html">importdmd()</a></code></td>
+<td>Import dm+d files and link it to thhe BNF code using June 2018 snomed mapping file</td>
+</tr>
+<tr class="even">
+<td><code><a href="../../reference/csv2rds.html">csv2rds()</a></code></td>
+<td>Combine all the comma separated value (.csv) files in the defined file path and export it into a single R object</td>
+</tr>
+<tr class="odd">
+<td><code><a href="../../reference/uk_practice_wise.html">uk_practice_wise()</a></code></td>
+<td>Import NHS dataset files and generate processed individual GP practice prescription dataset</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
   </div>
 
