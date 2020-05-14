@@ -4,9 +4,17 @@ author: "Kishore Jagadeesan"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
-bibliography: [book.bib]
+bibliography: 
+  - references.bib
+  - packages.bib
 biblio-style: apalike
 link-citations: yes
+colorlinks: yes
+graphics: yes
+lot: yes
+lof: yes
+fontsize: 11pt
+mainfont: Palatino
 description: "This is a handbook to use the PrAna package to aggregate and normalise England’s national level prescription data."
 ---
 

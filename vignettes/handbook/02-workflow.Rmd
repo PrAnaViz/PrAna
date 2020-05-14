@@ -1,15 +1,33 @@
----
-bibliography: literature.bib  
----
 # Workflow {#workflow}
 
-Workflow concept
+- **Data Preparation**: Download monthly [NHS prescription datasets][NHSBSA] and Dictionary of medicines and devices release files [(dm+d)][dm+d].
+- **Data Conversion**: Aggregation and conversion of the locally stored datasets into practice wise dataset achieved using the functions in `PrAna`.
+- **Visualise and Analyse the data**: Visualise and analyse the processed dataset using the in-built ShinyApp `PrAnaViz`.
+- **Database service**: Linking of the processed dataset to the `PrAnaViz` can be achieved by uploading the processed dataset to a local or a remote database service, for example, [_MySQL._][MySQL]
+- **Download images and processed data**: Users can download processed data as **_.csv_** file and publication ready image **_.eps_** and **_.pdf_** files.
 
-- **Data Preparation**: Download monthly [NHS Prescription Dataset][NHSBSA], as fig [@book]
+
+## Data Download
+
+To download NHS prescription datasets, users need to guest login and solve a captcha in [NHSBSA information portal][NHSBSA], to download the [dm+d][dm+d] release files and [_dm+d XML Transformation Tool_][dm+d2], users need to register an account.
+
+Store the monthly NHS prescription data in year wise folder. For an example, store all the 2015 monthly datasets in a folder named '2015'. Extract the dm+d release files using _dm+d XML Transformation Tool_.
+
+
+## Data Conversion
+
+Different functions were used in the aggregation and conversion workflow behind the scenes that performs the heavy lifting of a workflow step and finally return the results. 
+
+An overview of all functions involved in the data conversion is shown in the table below.
+
+Function         | Remarks
+-----------------| ----------------------------------------------
+`importdmd()`  | Import dm+d files and link it to thhe BNF code using June 2018 snomed mapping file
+`csv2rds()`   | Combine all the comma separated value (.csv) files in the defined file path and export it into a single R object
+`uk_practice_wise()`| Import NHS dataset files and generate processed individual GP practice prescription dataset
+
 
 
 [NHSBSA]: https://applications.nhsbsa.nhs.uk/infosystems/welcome
-
-## References
-
-<div id="refs"></div>
+[dm+d]: https://isd.digital.nhs.uk/trud3/user/guest/group/0/pack/6
+[dm+d2]: https://isd.digital.nhs.uk/trud3/user/guest/group/0/pack/6/subpack/239/releases

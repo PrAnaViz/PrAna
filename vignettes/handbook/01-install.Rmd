@@ -22,7 +22,8 @@ Note that you will need to have the latest R version installed in order to use t
 
 Software         | Remarks
 -----------------| ----------------------------------------------
-[MySQL][MySQL]   | Needed to host the generated dataset
+[RStudio][RStudio]   | Suggested IDE platform to perform the R operations
+[MySQL][MySQL]   | Optional to host the generated dataset
 
 
 
@@ -42,3 +43,4 @@ However, for a better guide to get started it is recommended to read the [tutori
 [PrAnaViz Tutorial]: https://github.bath.ac.uk/pages/kjj28/PrAna/articles/PrAnaViz_Tutoral.html
 [FileUpload Tutorial]: https://github.bath.ac.uk/pages/kjj28/PrAna/articles/PrAnaViz_Tutoral.html
 [MySQL]: https://www.mysql.com/
+[RStudio]: https://rstudio.com/

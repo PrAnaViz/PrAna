@@ -1,8 +1,8 @@
 #' importdmd 
 #' 
-#' Import dm+d files and merge with June 2018 snomed mapping file.
+#' Import dm+d files and link it to thhe BNF code using June 2018 snomed mapping file
 #'
-#' @param path dm+d excel file(s) location. Example: importdmd ("C:/dmdDataLoader/excel/")
+#' @param path dm+d excel file(s) location.
 #'
 #' @return a datatable 
 #' @export
@@ -10,6 +10,11 @@
 #'
 #' @importFrom utils memory.limit
 #' @importFrom plyr ddply
+#'
+#' @examples 
+#' \dontrun{
+#' importdmd(""C:/dmdDataLoader/excel/")
+#' }
 
 importdmd <- function(path)
 {
