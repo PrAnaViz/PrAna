@@ -134,6 +134,7 @@ server <- function(input, output, session) {
       div(
         sidebarMenu(
           tags$hr(),
+          menuItem("Home", tabName = "home"),
           menuItem("Targeted", tabName = "targeted"),
           menuItem("Non-Targeted", tabName = "non-targeted"),
           tags$hr(),
@@ -163,6 +164,11 @@ server <- function(input, output, session) {
   
   output$body <- renderUI({
           tabItems(
+                    # yearwise tab content
+                    tabItem(
+                      tabName = "home",
+                      source (file.path("ui","tab-home.R"),local = TRUE)$value
+                    ), #End of Tab item 
                     # yearwise tab content
                     tabItem(
                         tabName = "targeted",

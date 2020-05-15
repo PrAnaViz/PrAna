@@ -10,7 +10,10 @@ importdmd(path)
 \item{path}{dm+d excel file(s) location.}
 }
 \value{
-a datatable
+bnf_full_final - bnf snomed map file,
+ing - ingredients list,
+uom - unit of measurement,
+dform - medicinal form
 }
 \description{
 Import dm+d files and link it to the BNF code using June 2018 snomed mapping file
