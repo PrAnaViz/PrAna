@@ -12,10 +12,11 @@ importdmd(path)
 \value{
 A list with the following elements:
 \itemize{
-  \item api_map - \code{dataframe} containing each BNF code mapped to individual API, its medicinal strength and medicinal form
-  \item ing - \code{dataframe} containing all the API and its code
-  \item uom - \code{dataframe} containing different unit of measurement and its code
-  \item dform - \code{dataframe} containing different medicinal form and its code
+  \item api_map - a \code{data.frame} containing each BNF code mapped to individual API, its medicinal strength and medicinal form
+  \item ing - a \code{tibble} containing all the API and its code
+  \item uom - a \code{tibble} containing different unit of measurement and its code
+  \item uomwdesc - a \code{data.frame} containing different unit of measurement and its code with description
+  \item dform - a \code{tibble} containing different medicinal form and its code
 }
 }
 \description{
