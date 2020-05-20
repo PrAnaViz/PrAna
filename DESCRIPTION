@@ -8,6 +8,8 @@ Description: Package with functions to compile and process UK NHS Digital prescr
         location based trends to create an interactive data visualisation tool for a wider use.
 Imports: shinydashboard, 
          shiny,
+         DiagrammeR,
+         DiagrammeRsvg,
          shinyBS (>= 0.61),
          shinyFiles (>= 0.7.5),
          dbplyr (>= 1.4.2),
@@ -36,7 +38,7 @@ Imports: shinydashboard,
          d3heatmap (>=  0.6.1.2),
          utils(>= 3.5.1),
          rgdal(>= 1.3-6)
-License: MIT License
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Suggests:

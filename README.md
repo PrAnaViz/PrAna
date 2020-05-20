@@ -1,3 +1,7 @@
+---
+bibliography: references.bib
+---
+
 # PrAna
 
 `PrAna` aims to aggregate and normalise England’s national level prescription data, for all groups of drugs. The name is an acronym for _**Pr**escription **Ana**lysis_
@@ -6,13 +10,21 @@ During the last decade, wide range of **active pharmaceutical ingredients (APIs)
 
 In the UK, national prescription data provided by [National Health Service][NHS digital] was used to calculate the consumption data. This data is freely accessible and consist of individual files for each month. With the large file with over 10 million records every month, the data from the NHS cannot be used for the direct calculation of the prescription levels of different APIs. Re-organisation and processing of the files is required before to do any exploration or analysis and to speed up the data reading. 
 
-The aim of `PrAna` is to aggregate and normalize prescription data to calculate total prescribed quantity of different APIs, using open source statistical software [R language][R]. 
+The aim of `PrAna` is to aggregate and normalize prescription data to calculate total prescribed quantity of different APIs, using open source statistical software [R language][@R-base]. 
 
 Apart, from the calculation of the total prescribed quantity of an API or a group of APIs, specified to a postcode or region, We have also developed, _an open interactive web-based tool_, `PrAnaViz` with the processed dataset for the period `2015` to `2018`.
 
 `PrAnaViz` facilitates users **to visualise, explore and report** different spatiotemporal and long-term prescription trends for wider use. 
 
-## Installation
+Below is an overview of the workflow:
+
+- **Data Preparation**: Download monthly [NHS prescription datasets][NHSBSA] and Dictionary of medicines and devices release files [(dm+d)][dm+d].
+- **Data Conversion**: Aggregation and conversion of the locally stored datasets into practice wise dataset achieved using the functions in `PrAna`.
+- **Visualise and Analyse the data**: Visualise and analyse the processed dataset using the in-built ShinyApp `PrAnaViz`.
+- **Database service**: Linking of the processed dataset to the `PrAnaViz` can be achieved by uploading the processed dataset to a local or a remote database service, for example, [_MySQL._][MySQL]
+- **Download images and processed data**: Users can download processed data as **_.csv_** file and publication ready image **_.eps_** and **_.pdf_** files.
+
+## Get this package
 
 `PrAna` can be installed as any other R package, as follows,
 
@@ -20,7 +32,9 @@ Install the released version of PrAna from CRAN with:
 ```
 install.packages("PrAna")
 ```
-To install the development version of PrAna from GitHub with:
+For RStudio, click on the menu _Tools > Install Packages…_ and then type in “PrAna” and press _Install_
+
+To install the development version of PrAna from GitHub:
 ```
 install.packages("devtools")
 library(devtools)
@@ -44,7 +58,8 @@ However, for a better guide to get started it is recommended to read the [tutori
 [tutorial]: https://github.bath.ac.uk/pages/kjj28/PrAna/articles/PrAnaViz_Tutoral.html
 [NHS digital]: https://digital.nhs.uk/organisation-data-service/data-downloads/gp-data
 [handbook-inst]: https://github.bath.ac.uk/pages/kjj28/PrAna/articles/handbook.html#installation
-
-
+[NHSBSA]: https://applications.nhsbsa.nhs.uk/infosystems/welcome
+[dm+d]: https://isd.digital.nhs.uk/trud3/user/guest/group/0/pack/6
+[dm+d2]: https://isd.digital.nhs.uk/trud3/user/guest/group/0/pack/6/subpack/239/releases
 
 

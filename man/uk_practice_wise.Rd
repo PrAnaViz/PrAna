@@ -4,18 +4,20 @@
 \alias{uk_practice_wise}
 \title{uk_practice_wise}
 \usage{
-uk_practice_wise(x, y)
+uk_practice_wise(x, y, z)
 }
 \arguments{
 \item{x}{processed prescription dataset}
 
 \item{y}{subset of GP practice}
+
+\item{z}{processed BNF  mapped file}
 }
 \value{
 multiple individual GP practice wise processed prescription dataset
 }
 \description{
-uk_practice_wise
+Import NHS dataset files and generate processed individual GP practice prescription dataset
 }
 \examples{
 \dontrun{

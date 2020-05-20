@@ -1,3 +1,13 @@
+---
+output:
+  word_document: default
+  pdf_document:
+    fig_caption: yes
+    latex_engine: xelatex
+  html_document: default
+---
+
+
 # Workflow {#workflow}
 
 - **Data Preparation**: Download monthly [NHS prescription datasets][NHSBSA] and Dictionary of medicines and devices release files [(dm+d)][dm+d].
@@ -7,11 +17,16 @@
 - **Download images and processed data**: Users can download processed data as **_.csv_** file and publication ready image **_.eps_** and **_.pdf_** files.
 
 
-## Data Download
+```{r prana-workflow, echo=FALSE, out.width='80%', fig.align='center', fig.fullwidth=TRUE, fig.cap='PrAna Workflow.'}
+knitr::include_graphics('figures/fig-workflow.png')
+```
 
-To download NHS prescription datasets, users need to guest login and solve a captcha in [NHSBSA information portal][NHSBSA], to download the [dm+d][dm+d] release files and [_dm+d XML Transformation Tool_][dm+d2], users need to register an account.
 
-Store the monthly NHS prescription data in year wise folder. For an example, store all the 2015 monthly datasets in a folder named '2015'. Extract the dm+d release files using _dm+d XML Transformation Tool_.
+## Data Preparation
+
+To download NHS prescription datasets \@ref(fig:prana-workflow), users need to guest login and solve a captcha in [NHSBSA information portal][NHSBSA], to download the [dm+d][dm+d] release files and [_dm+d XML Transformation Tool_][dm+d2], users need to register an account.
+
+Store the monthly NHS prescription data in year wise folder. For an example, store all the 2015 monthly datasets in a folder named '2015'. Extract the _dm+d release files_ using _dm+d XML Transformation Tool_. The documentation to extract the release file using the tool is well explained in the readme file.
 
 
 ## Data Conversion
@@ -22,11 +37,36 @@ An overview of all functions involved in the data conversion is shown in the tab
 
 Function         | Remarks
 -----------------| ----------------------------------------------
-`importdmd()`  | Import dm+d files and link it to the BNF code using June 2018 snomed mapping file
-`csv2rds()`   | Combine all the comma separated value (.csv) files in the defined file path and export it into a single R object
-`uk_practice_wise()`| Import NHS dataset files and generate processed individual GP practice prescription dataset
+`csv2dat()`   | Combine and convert all the comma separated value (.CSV) files in the defined file path and export it into a single R object
+`importdmd()`  | Import dm+d files and link it to the BNF code using the SNOMED mapping file
+`uk_practice_wise()` | Import NHS dataset files and generate processed individual GP practice prescription dataset
 
-The `importdmd()` function supports import of dm+d files and generate a data object linking each API to its BNF Code, strength and medicinal form. For an overview of these functionalities see the documentation. Some examples:
+`csv2dat()` function supports to combine different monthly NHS prescription dataset files into a single `.rds` file to process further. For an example:
+
+```
+## Set the folder to store the combined file
+setwd("C:/Datasets/2018")
+
+## Combine and convert mulitple files in the defined folder to a dataframe
+
+data201812 <- csv2dat("C:/Datasets/Prescription Datasets/2018/PDPI")
+
+```
+After successful conversion of the monthly files into a single dataframe, `importdmd()` function helps to breakdown each row of this dataframe into an API, with its corresponding strength and medicinal form by its BNF Code.
+
+Before this step, user need to execute to import different `dm+d files` and multiple data objects  linking each API to its BNF Code, strength and medicinal form. For example:
+
+```
+## Read the extracted files
+dmdfile  <- importdmd("C:/dmdDataLoader/excel/")
+
+bnf_full_final <- dmdfile$bnf_full_final
+uom <- dmdfile$uom
+dform <- dmdfile$dform
+ing <- dmdfile$ing
+
+
+```
 
 
 [NHSBSA]: https://applications.nhsbsa.nhs.uk/infosystems/welcome

@@ -10,13 +10,16 @@ importdmd(path)
 \item{path}{dm+d excel file(s) location.}
 }
 \value{
-bnf_full_final - bnf snomed map file,
-ing - ingredients list,
-uom - unit of measurement,
-dform - medicinal form
+A list with the following elements:
+\itemize{
+  \item api_map - \code{dataframe} containing each BNF code mapped to individual API, its medicinal strength and medicinal form
+  \item ing - \code{dataframe} containing all the API and its code
+  \item uom - \code{dataframe} containing different unit of measurement and its code
+  \item dform - \code{dataframe} containing different medicinal form and its code
+}
 }
 \description{
-Import dm+d files and link it to the BNF code using June 2018 snomed mapping file
+Import dm+d files and link it to the BNF code using SNOMED mapping file
 }
 \examples{
 \dontrun{

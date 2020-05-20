@@ -1,19 +1,23 @@
 #' importdmd 
 #' 
-#' Import dm+d files and link it to the BNF code using June 2018 snomed mapping file
+#' Import dm+d files and link it to the BNF code using SNOMED mapping file
 #'
 #' @param path dm+d excel file(s) location.
 #'
-#' @return
-#' bnf_full_final - bnf snomed map file,
-#' ing - ingredients list,
-#' uom - unit of measurement,
-#' dform - medicinal form
+#' @return A list with the following elements:
+#' \itemize{
+#'   \item api_map - \code{dataframe} containing each BNF code mapped to individual API, its medicinal strength and medicinal form
+#'   \item ing - \code{dataframe} containing all the API and its code
+#'   \item uom - \code{dataframe} containing different unit of measurement and its code
+#'   \item dform - \code{dataframe} containing different medicinal form and its code
+#' }
+#'  
 #' @export
 #'
 #'
 #' @importFrom utils memory.limit
 #' @importFrom plyr ddply
+#' @importFrom dplyr %>%
 #'
 #' @examples 
 #' \dontrun{
@@ -23,15 +27,14 @@
 
 importdmd <- function(path)
 {
-  # Need following library plyr, data.table, readr
   memory.limit(size = 750000)
   
-  # import June 2018 SNOMED Mapping file
-  bnf_full <- data.table::fread (file.path("C:/R Directory/packages/pda.aggr/data", "June 2018 Snomed mapping.csv"), header = T, stringsAsFactors = F)
+  # import SNOMED Mapping (June 2018) file
+  bnf_full <- data.table::fread (system.file("extdata","snomed_mapping.csv", package = "PRANA"), header = T, stringsAsFactors = F)
   bnf_full$'BNF Code' <- gsub("'", "",bnf_full$'BNF Code' )
   bnf_full$'VMPP / AMPP SNOMED Code'<-gsub("'", "",bnf_full$'VMPP / AMPP SNOMED Code' )
   
-  setwd(path) # C:/dmdDataLoader/excel/
+  setwd(path)
   
   # # Create all files from the dm+d folder
   ampp <-readxl::read_excel("f_ampp.xlsx", sheet = "AmppType")
@@ -48,7 +51,6 @@ importdmd <- function(path)
   
   # Match column: vmpp/ampp SNOMED code (SNOMED MAPPING file) with column : APPID (dm+d generated f_ampp file) to generate VPPID column
   bnf_full01 <- cbind(bnf_full,VPPID = ampp$'VPPID' [match(gsub(" ", "",bnf_full$'VMPP / AMPP SNOMED Code' ), gsub(" ", "", ampp$'APPID'))] )
-  
   
   # Match vmpp/ampp SNOMED code* (SNOMED MAPPING file) with VPPID (dm+d generated f_ampp file) to update VPPID column
   bnf_full01$'VPPID'[is.na(bnf_full01$'VPPID')] <- ampp$'VPPID'[match(gsub(" ", "",bnf_full01$'VMPP / AMPP SNOMED Code' [is.na(bnf_full01$'VPPID')]), gsub(" ", "",  ampp$'VPPID'))]
@@ -80,7 +82,17 @@ importdmd <- function(path)
   # Merge both tab based on VPID2
   bnf_full_final_02 <- merge(bnf_full01,vmp_summ,by = "VPID2")
   
-  bnf_full_final_02
-  return(list(bnf_full_final = bnf_full_final_02, dform = dform, uom = UoM_01, ing= ing ))
+  # modify colnames
+  colnames(bnf_full_final_02) <- c("VPID2", "BNFCODE", "MDR", "SNOMED_Code",
+                                "DMD: Product Description at presentation level",
+                                "DMD: Product Description at presentation and pack level",                              "VPPID",
+                                "VPID.x", "VPID.y", "length", "ISID", "value", "UOM")
+  
+  bnf_full_final_02 <- bnf_full_final_02 %>%
+                       dplyr::mutate(ISID= as.character(ISID))%>%
+                       dplyr::distinct(BNFCODE,.keep_all= TRUE)
+  
+  newlist <- list(api_map = bnf_full_final_02, dform = dform, uom = UoM_01, ing= ing )
+  return(newlist)
 }
 

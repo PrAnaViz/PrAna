@@ -7,3 +7,6 @@
 ^pkgdown$
 ^vignettes/handbook.log$
 ^_pkgdown.yaml$
+^LICENSE\.md$
+ references.bib
+^data-raw$

@@ -109,6 +109,19 @@
 <p>The aim of <code>PrAna</code> is to aggregate and normalize prescription data to calculate total prescribed quantity of different APIs, using open source statistical software <a href="https://www.r-project.org/">R language</a>.</p>
 <p>Apart, from the calculation of the total prescribed quantity of an API or a group of APIs, specified to a postcode or region, We have also developed, <em>an open interactive web-based tool</em>, <code>PrAnaViz</code> with the processed dataset for the period <code>2015</code> to <code>2018</code>.</p>
 <p><code>PrAnaViz</code> facilitates users <strong>to visualise, explore and report</strong> different spatiotemporal and long-term prescription trends for wider use.</p>
+<p>Below is an overview of the workflow:</p>
+<ul>
+<li>
+<strong>Data Preparation</strong>: Download monthly [NHS prescription datasets][NHSBSA] and Dictionary of medicines and devices release files [(dm+d)][dm+d].</li>
+<li>
+<strong>Data Conversion</strong>: Aggregation and conversion of the locally stored datasets into practice wise dataset achieved using the functions in <code>PrAna</code>.</li>
+<li>
+<strong>Visualise and Analyse the data</strong>: Visualise and analyse the processed dataset using the in-built ShinyApp <code>PrAnaViz</code>.</li>
+<li>
+<strong>Database service</strong>: Linking of the processed dataset to the <code>PrAnaViz</code> can be achieved by uploading the processed dataset to a local or a remote database service, for example, [<em>MySQL.</em>][MySQL]</li>
+<li>
+<strong>Download images and processed data</strong>: Users can download processed data as <strong><em>.csv</em></strong> file and publication ready image <strong><em>.eps</em></strong> and <strong><em>.pdf</em></strong> files.</li>
+</ul>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -137,8 +150,8 @@ runShiny("PrAnaViz")</code></pre>
     <div class="license">
 <h2>License</h2>
 <ul class="list-unstyled">
-<li>
-<a href="https://opensource.org/licenses/mit-license.php">MIT</a> License</li>
+<li><a href="LICENSE.html">Full license</a></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
 <div class="citation">

@@ -1,17 +1,24 @@
 #' uk_practice_wise
 #'
+#' Import NHS dataset files and generate processed individual GP practice prescription dataset
+#'
 #' @param x processed prescription dataset
 #' @param y subset of GP practice
-#'
+#' @param z processed BNF  mapped file
+#' 
 #' @return multiple individual GP practice wise processed prescription dataset
 #' @export
-#'
+#' 
+#' @importFrom utils write.csv
+#' @importFrom dplyr %>%
+#' 
+#' @import tidyverse
 #' @examples
 #' \dontrun{
 #' uk_practice_wise(data201712_03,UK_GP2017)
 #' }
 #' 
-uk_practice_wise <- function(x,y) {
+uk_practice_wise <- function(x,y,z) {
   
   tab01 <- NULL
   tab02 <- NULL
@@ -28,10 +35,10 @@ uk_practice_wise <- function(x,y) {
     j = unique(y[[2]])[i]
     
     tab01 <- x %>%
-      filter (PRACTICE %in% j) %>%
+      dplyr::filter(PRACTICE %in% j) %>%
       data.table::setnames(4,"BNFCODE") %>%
-      merge(bnf_full_final_02,by = "BNFCODE", all = F) %>%
-      select("PERIOD","PRACTICE","BNFCODE","MDR","VPPID","VPID.x","ISID","value","UOM","ITEMS","QUANTITY")
+      merge(z,by = "BNFCODE", all = F) %>%
+      dplyr::select("PERIOD","PRACTICE","BNFCODE","MDR","VPPID","VPID.x","ISID","value","UOM","ITEMS","QUANTITY")
     
     s <- strsplit(tab01$ISID, split = "#")
     
@@ -53,13 +60,13 @@ uk_practice_wise <- function(x,y) {
     
     tab05  <- tab04 %>%
       dplyr::select("PERIOD", "PRACTICE","API","Vol_Mass_Tot","DForm")%>%
-      mutate(API= as.character(API))%>%
-      mutate(API_CODE = API) %>%
-      group_by(API_CODE,PRACTICE,PERIOD,DForm)%>%
+      dplyr::mutate(API= as.character(API))%>%
+      dplyr::mutate(API_CODE = API) %>%
+      dplyr::group_by(API_CODE,PRACTICE,PERIOD,DForm)%>%
       dplyr::summarize(gram = sum(Vol_Mass_Tot, na.rm = T)) %>%
-      left_join(ing2[,c(1,5)], by="API_CODE") %>%
-      mutate(gram = gram/1000)%>%
-      select("NM", "API_CODE","PRACTICE","PERIOD","DForm","gram")
+      dplyr::left_join(ing2[,c(1,5)], by="API_CODE") %>%
+      dplyr::mutate(gram = gram/1000)%>%
+      dplyr::select("NM", "API_CODE","PRACTICE","PERIOD","DForm","gram")
     
     tab06 <- aggrapi(tab05[, c("NM", "gram")])
     

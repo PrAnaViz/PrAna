@@ -1,7 +1,2 @@
 # PrAnaViz {#features}
 
-```{r child="PrAnaViz_Tutorial.Rmd"}
-```
-
-
-
