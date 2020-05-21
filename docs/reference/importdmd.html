@@ -40,7 +40,7 @@
 
 
 <meta property="og:title" content="importdmd — importdmd" />
-<meta property="og:description" content="Import dm+d files and link it to the BNF code using June 2018 snomed mapping file" />
+<meta property="og:description" content="Import dm+d files and link it to the BNF code using SNOMED mapping file" />
 
 
 
@@ -146,7 +146,7 @@
     </div>
 
     <div class="ref-description">
-    <p>Import dm+d files and link it to the BNF code using June 2018 snomed mapping file</p>
+    <p>Import dm+d files and link it to the BNF code using SNOMED mapping file</p>
     </div>
 
     <pre class="usage"><span class='fu'>importdmd</span>(<span class='no'>path</span>)</pre>
@@ -162,10 +162,14 @@
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>bnf_full_final - bnf snomed map file,
-ing - ingredients list,
-uom - unit of measurement,
-dform - medicinal form</p>
+    <p>A list with the following elements:</p><ul>
+<li><p>api_map - a <code>data.frame</code> containing each BNF code mapped to individual API, its medicinal strength and medicinal form</p></li>
+<li><p>ing - a <code>tibble</code> containing all the API and its code</p></li>
+<li><p>uom - a <code>tibble</code> containing different unit of measurement and its code</p></li>
+<li><p>uomwdesc - a <code>data.frame</code> containing different unit of measurement and its code with description</p></li>
+<li><p>dform - a <code>tibble</code> containing different medicinal form and its code</p></li>
+</ul>
+
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {

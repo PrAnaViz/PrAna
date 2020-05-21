@@ -1,4 +1,4 @@
-#' uk_practice_wise
+#' practice_wise
 #'
 #' Import NHS dataset files and generate processed individual GP practice prescription dataset
 #'
@@ -15,10 +15,10 @@
 #' @import tidyverse
 #' @examples
 #' \dontrun{
-#' uk_practice_wise(data201712_03,UK_GP2017)
+#' practice_wise(data201712_03,UK_GP2017)
 #' }
 #' 
-uk_practice_wise <- function(x,y,z) {
+practice_wise <- function(x,y,z) {
   
   tab01 <- NULL
   tab02 <- NULL

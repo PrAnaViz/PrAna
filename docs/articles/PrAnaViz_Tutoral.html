@@ -102,7 +102,7 @@
       <h1 data-toc-skip>PrAnaViz</h1>
                         <h4 class="author">Kishore Jagadeesan</h4>
             
-            <h4 class="date">2020-05-20</h4>
+            <h4 class="date">2020-05-21</h4>
       
       
       <div class="hidden name"><code>PrAnaViz_Tutoral.Rmd</code></div>
@@ -111,45 +111,28 @@
 
     
     
-<div id="outline" class="section level2">
+<div id="introduction" class="section level2">
 <h2 class="hasAnchor">
-<a href="#outline" class="anchor"></a>Outline</h2>
+<a href="#introduction" class="anchor"></a>Introduction</h2>
+<p>The aim of this tool is to visualise and analyse the prescription data to calculate total prescribed quantity of different APIs and to explore spatiotemporal trends of different APIs for wider use.</p>
+<p>We have created, <code>PrAnaViz</code>, in a familiar <strong>dashboard layout</strong> with two tabs: (1) <strong>Targeted API</strong>, (2) <strong>Non-targeted API</strong>, to visualize total quantity of different APIs at CCG region with resolution to individual postcode.</p>
+<div id="targeted-approach" class="section level3">
+<h3 class="hasAnchor">
+<a href="#targeted-approach" class="anchor"></a>Targeted Approach</h3>
 <ul>
-<li>Introduction</li>
-<li>Method</li>
-<li>Workflow</li>
+<li>In this tab, user can <strong>input a list of APIs</strong>, and find out the <strong>total prescription quantity</strong> of each API in the selected year, at the selected CCG region.</li>
+<li>This tab also visualise the total quantity of <strong>APIs</strong> prescribed by month, GP, Chemical form, and Medicinal form for a CCG region in a selected year.</li>
 </ul>
 </div>
-<div id="introduction" class="section level1">
-<h1 class="hasAnchor">
-<a href="#introduction" class="anchor"></a>Introduction</h1>
-<p>During the last decade, wide range of active pharmaceutical ingredients (APIs) have been identified and quantified in aquatic environment across several studies and indicated their impacts on exposed environmental species and humans. For the prediction of total amount of the APIs released to the environment, information about APIs consumption data is vital. Globally, several methods were reported to estimate the APIs consumption data based on the national prescription data, manufacturers, importers and dispenser’s data.</p>
-<p>In the UK, national prescription data provided by National Health Service was used to calculate the consumption data, however, they are limited to a geographical region and or to a group of drugs. The aim of this study is to aggregate and normalize prescription data to calculate total prescribed quantity of different APIs and to develop a tool, to explore spatiotemporal trends of different APIs using the processed dataset for wider use.</p>
-</div>
-<div id="method" class="section level1">
-<h1 class="hasAnchor">
-<a href="#method" class="anchor"></a>Method</h1>
-<p>Data was extracted from National level prescribing datasets for the years 2015 to 2018 from NHS Digital. Address of each GP practices and its geographical location based on postcodes were downloaded from NHS Digital and Office for the National Statistics data portal.</p>
-<p>As we are interested in calculating the total quantity of an individual API, the whole dataset normalized for each API, using BNF/SNOMED mapping data provided by the NHS Business Services Authority (BSA) as in Figure.</p>
-<p>We have created a web-based interactive tool, PrAna, using R in a familiar dashboard layout with two tabs:</p>
+<div id="non-targeted-approach" class="section level3">
+<h3 class="hasAnchor">
+<a href="#non-targeted-approach" class="anchor"></a>Non-targeted Approach</h3>
 <ul>
-<li>Targeted API</li>
-<li>Non-targeted API</li>
+<li>Total prescription quantity of an individual API at <strong>different postcode per month</strong> at a CCG region, can be rendered in this tab.</li>
+<li>The calculated total prescription quantity of an individual API at postcode level helps to find <strong>the hotspots</strong>.</li>
+<li>User can download data as <strong><em>.csv</em></strong> file and publication ready image <strong><em>.eps</em></strong> and <strong><em>.pdf</em></strong> files.</li>
 </ul>
-<p>to visualize total quantity of different APIs at for Bath and North East Somerset CCG (BANES) region with resolution to individual postcode.</p>
 </div>
-<div id="workflow" class="section level1">
-<h1 class="hasAnchor">
-<a href="#workflow" class="anchor"></a>Workflow</h1>
-</div>
-<div id="targeted-api" class="section level1">
-<h1 class="hasAnchor">
-<a href="#targeted-api" class="anchor"></a>Targeted API</h1>
-<ul>
-<li>In this tab, user can input their APIs of interest, and select year from 2015 to 2018 and different Clinical Commissioning Group (CCG) region.</li>
-<li>This tab provides bar plot, as in figure, which represents total quantity of different APIs in the selected CCG region in the selected year.</li>
-<li>This tab also visualise the total quantity of APIs prescribed bymonth, GP Practice, Chemical form, and Medicinal form for the selected CCG region in selected year.</li>
-</ul>
 </div>
   </div>
 

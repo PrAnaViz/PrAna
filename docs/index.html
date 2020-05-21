@@ -106,13 +106,13 @@
 <p><code>PrAna</code> aims to aggregate and normalise England’s national level prescription data, for all groups of drugs. The name is an acronym for <em><strong>Pr</strong>escription <strong>Ana</strong>lysis</em></p>
 <p>During the last decade, wide range of <strong>active pharmaceutical ingredients (APIs)</strong> have been identified and quantified in aquatic environment across several studies and indicated their impacts on exposed environmental species and humans. For the prediction of total amount of the APIs released to the environment, information about APIs consumption data is vital. Globally, several methods were reported to estimate the APIs consumption data based on the national prescription data, manufacturers, importers and dispenser’s data.</p>
 <p>In the UK, national prescription data provided by <a href="https://digital.nhs.uk/organisation-data-service/data-downloads/gp-data">National Health Service</a> was used to calculate the consumption data. This data is freely accessible and consist of individual files for each month. With the large file with over 10 million records every month, the data from the NHS cannot be used for the direct calculation of the prescription levels of different APIs. Re-organisation and processing of the files is required before to do any exploration or analysis and to speed up the data reading.</p>
-<p>The aim of <code>PrAna</code> is to aggregate and normalize prescription data to calculate total prescribed quantity of different APIs, using open source statistical software <a href="https://www.r-project.org/">R language</a>.</p>
+<p>The aim of <code>PrAna</code> is to aggregate and normalize prescription data to calculate total prescribed quantity of different APIs, using open source statistical software [R language][@R-base].</p>
 <p>Apart, from the calculation of the total prescribed quantity of an API or a group of APIs, specified to a postcode or region, We have also developed, <em>an open interactive web-based tool</em>, <code>PrAnaViz</code> with the processed dataset for the period <code>2015</code> to <code>2018</code>.</p>
 <p><code>PrAnaViz</code> facilitates users <strong>to visualise, explore and report</strong> different spatiotemporal and long-term prescription trends for wider use.</p>
 <p>Below is an overview of the workflow:</p>
 <ul>
 <li>
-<strong>Data Preparation</strong>: Download monthly [NHS prescription datasets][NHSBSA] and Dictionary of medicines and devices release files [(dm+d)][dm+d].</li>
+<strong>Data Preparation</strong>: Download monthly <a href="https://applications.nhsbsa.nhs.uk/infosystems/welcome">NHS prescription datasets</a> and Dictionary of medicines and devices release files <a href="https://isd.digital.nhs.uk/trud3/user/guest/group/0/pack/6">(dm+d)</a>.</li>
 <li>
 <strong>Data Conversion</strong>: Aggregation and conversion of the locally stored datasets into practice wise dataset achieved using the functions in <code>PrAna</code>.</li>
 <li>
@@ -122,13 +122,14 @@
 <li>
 <strong>Download images and processed data</strong>: Users can download processed data as <strong><em>.csv</em></strong> file and publication ready image <strong><em>.eps</em></strong> and <strong><em>.pdf</em></strong> files.</li>
 </ul>
-<div id="installation" class="section level2">
+<div id="get-this-package" class="section level2">
 <h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<a href="#get-this-package" class="anchor"></a>Get this package</h2>
 <p><code>PrAna</code> can be installed as any other R package, as follows,</p>
 <p>Install the released version of PrAna from CRAN with:</p>
 <pre><code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages("PrAna")</a></code></pre>
-<p>To install the development version of PrAna from GitHub with:</p>
+<p>For RStudio, click on the menu <em>Tools &gt; Install Packages…</em> and then type in “PrAna” and press <em>Install</em></p>
+<p>To install the development version of PrAna from GitHub:</p>
 <pre><code>install.packages("devtools")
 library(devtools)
 install_github("jkkishore85/PrAna")</code></pre>

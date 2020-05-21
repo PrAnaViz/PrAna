@@ -112,6 +112,7 @@
 <div id="workflow" class="section level1">
 <h1 class="hasAnchor">
 <a href="#workflow" class="anchor"></a>Workflow</h1>
+<p>The workflow in this tutorial consists of the following steps, as in the Figure: @ref(fig:prana-workflow):</p>
 <ul>
 <li>
 <strong>Data Preparation</strong>: Download monthly <a href="https://applications.nhsbsa.nhs.uk/infosystems/welcome">NHS prescription datasets</a> and Dictionary of medicines and devices release files <a href="https://isd.digital.nhs.uk/trud3/user/guest/group/0/pack/6">(dm+d)</a>.</li>
@@ -129,11 +130,11 @@
 PrAna Workflow.
 </p>
 </div>
-<div id="data-preparation" class="section level2">
+<div id="datapreparation" class="section level2">
 <h2 class="hasAnchor">
-<a href="#data-preparation" class="anchor"></a>Data Preparation</h2>
-<p>To download NHS prescription datasets @ref(fig:prana-workflow), users need to guest login and solve a captcha in <a href="https://applications.nhsbsa.nhs.uk/infosystems/welcome">NHSBSA information portal</a>, to download the <a href="https://isd.digital.nhs.uk/trud3/user/guest/group/0/pack/6">dm+d</a> release files and <a href="https://isd.digital.nhs.uk/trud3/user/guest/group/0/pack/6/subpack/239/releases"><em>dm+d XML Transformation Tool</em></a>, users need to register an account.</p>
-<p>Store the monthly NHS prescription data in year wise folder. For an example, store all the 2015 monthly datasets in a folder named ‘2015’. Extract the <em>dm+d release files</em> using <em>dm+d XML Transformation Tool</em>.</p>
+<a href="#datapreparation" class="anchor"></a>Data Preparation</h2>
+<p>To download NHS prescription datasets, users need to guest login and solve a captcha in <a href="https://applications.nhsbsa.nhs.uk/infosystems/welcome">NHSBSA information portal</a>, to download the <a href="https://isd.digital.nhs.uk/trud3/user/guest/group/0/pack/6">dm+d</a> release files and <a href="https://isd.digital.nhs.uk/trud3/user/guest/group/0/pack/6/subpack/239/releases"><em>dm+d XML Transformation Tool</em></a>, users need to register an account.</p>
+<p>Store the monthly NHS prescription data in year wise folder. For an example, store all the 2015 monthly datasets in a folder named ‘2015’. Extract the <em>dm+d release files</em> using <em>dm+d XML Transformation Tool</em>. The documentation to extract the release file using the tool is well explained in the readme file.</p>
 </div>
 <div id="data-conversion" class="section level2">
 <h2 class="hasAnchor">
@@ -151,20 +152,82 @@ PrAna Workflow.
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td><code><a href="../../reference/importdmd.html">importdmd()</a></code></td>
-<td>Import dm+d files and link it to the BNF code using June 2018 snomed mapping file</td>
+<td><code><a href="../../reference/csv2dat.html">csv2dat()</a></code></td>
+<td>Combine and convert all the comma separated value (.CSV) files in the defined file path and export it into a single R object</td>
 </tr>
 <tr class="even">
-<td><code><a href="../../reference/csv2rds.html">csv2rds()</a></code></td>
-<td>Combine all the comma separated value (.csv) files in the defined file path and export it into a single R object</td>
+<td><code><a href="../../reference/importdmd.html">importdmd()</a></code></td>
+<td>Import dm+d files and link it to the BNF code using the SNOMED mapping file</td>
 </tr>
 <tr class="odd">
-<td><code><a href="../../reference/uk_practice_wise.html">uk_practice_wise()</a></code></td>
+<td><code><a href="../../reference/practice_wise.html">practice_wise()</a></code></td>
 <td>Import NHS dataset files and generate processed individual GP practice prescription dataset</td>
+</tr>
+<tr class="even">
+<td><code><a href="../../reference/runShiny.html">runShiny()</a></code></td>
+<td>Run in-built Shiny Apps in the package</td>
 </tr>
 </tbody>
 </table>
-<p>The <code><a href="../../reference/importdmd.html">importdmd()</a></code> function supports import of dm+d files and generate a data object linking each API to its BNF Code, strength and medicinal form. For an overview of these functionalities see the documentation. Some examples:</p>
+<div id="combine-nhs-monthly-dataset" class="section level3">
+<h3 class="hasAnchor">
+<a href="#combine-nhs-monthly-dataset" class="anchor"></a>Combine NHS monthly dataset</h3>
+<p><code><a href="../../reference/csv2dat.html">csv2dat()</a></code> function supports to combine different monthly NHS prescription dataset files into a single <code>data.frame</code> to process further. For an example:</p>
+<pre><code>## Set the folder to store the combined file
+setwd("C:/Datasets/2018")
+
+## Combine and convert mulitple files in the defined folder to a dataframe
+data201812 &lt;- csv2dat("C:/Datasets/Prescription Datasets/2018/PDPI")
+</code></pre>
+</div>
+<div id="import-dmd-files" class="section level3">
+<h3 class="hasAnchor">
+<a href="#import-dmd-files" class="anchor"></a>Import <code>dm+d</code> files</h3>
+<p><code><a href="../../reference/importdmd.html">importdmd()</a></code> function helps to import different extracted [<code>dm+d files</code>] [#dataextraction] and return multiple data objects including a <code>data.frame</code> which map each BNF code to its corresponding API(s), strength and medicinal form. Recommended to read the documentation of <code><a href="../../reference/importdmd.html">importdmd()</a></code> function to know more regarding the different data objects it generate.</p>
+<pre><code>## Read the extracted dm+d files
+dmdfile  &lt;- importdmd("C:/dmdDataLoader/excel/")
+
+## create a data.frame object for the BNF code mapping file
+api_map &lt;- dmdfile$bnf_full_final
+</code></pre>
+</div>
+<div id="generate-gp-practice-wise-file" class="section level3">
+<h3 class="hasAnchor">
+<a href="#generate-gp-practice-wise-file" class="anchor"></a>Generate GP practice wise file</h3>
+<p>The final step in the data conversion is to generate prescription dataset mapped with the individual API, prescription quantity, medicinal form, and strength for the defined GP practice(s), <code><a href="../../reference/practice_wise.html">practice_wise()</a></code> is used to carry out this conversion.</p>
+<p>The <code><a href="../../reference/practice_wise.html">practice_wise()</a></code> function require following three parameters,</p>
+<ul>
+<li>Combined NHS prescription dataset, genereated using <code><a href="../../reference/csv2dat.html">csv2dat()</a></code> function</li>
+<li>A <code>data.frame</code> containing GP Practices</li>
+<li>BNF Code mapped file, genereated using <code><a href="../../reference/importdmd.html">importdmd()</a></code> function</li>
+</ul>
+<pre><code>## Define the output location
+setwd("C:/Datasets/Prescription Datasets/practice_wise/2018")
+
+## Execute practice_wise() function
+practice_wise(data201812, UK_GP2018, api_map)</code></pre>
+</div>
+</div>
+<div id="visualise-and-analyse-the-data" class="section level2">
+<h2 class="hasAnchor">
+<a href="#visualise-and-analyse-the-data" class="anchor"></a>Visualise and Analyse the data</h2>
+<p>GP practice level files generated using the <code><a href="../../reference/practice_wise.html">practice_wise()</a></code> function are used to calculate the total prescribed quantity of different APIs at the particular GP practices and at a particular postcode using the in-built ShinyApp <code>PrAnaViz</code>.</p>
+<p><code>PrAnaViz</code> helps to visualise the total prescribed quantity of different APIs and to explore spatiotemporal trends of different APIs.</p>
+<p>For a very quick start to <code>PrAnaViz</code>:</p>
+<pre><code>library(PrAna)
+runShiny("PrAnaViz")</code></pre>
+<p>The <code><a href="../../reference/runShiny.html">runShiny("PrAnaViz")</a></code> function will pop-up the <code>PrAnaViz</code> tool which will allow you to explore different spatiotemporal and long-term prescription trends with the sample dataset.</p>
+<p>However, for a better guide to get started it is recommended to read the <a href="https://github.bath.ac.uk/pages/kjj28/PrAna/articles/PrAnaViz_Tutoral.html"><code>PrAnaViz</code> tutorial</a>.</p>
+</div>
+<div id="database-service" class="section level2">
+<h2 class="hasAnchor">
+<a href="#database-service" class="anchor"></a>Database service</h2>
+<p>To avoid the large data loading and processing issue, authors strongly suggest to upload the processed dataset to a local or a remote database service, for example, [<em>MySQL</em>][MySQL], and link it to the <code>PrAnaViz</code>. More information on the linking databases to <code>PrAnaViz</code> is explained in the <a href="https://github.bath.ac.uk/pages/kjj28/PrAna/articles/PrAnaViz_Tutoral.html"><code>PrAnaViz</code> Tutorial</a>.</p>
+</div>
+<div id="download-images-and-processed-data" class="section level2">
+<h2 class="hasAnchor">
+<a href="#download-images-and-processed-data" class="anchor"></a>Download images and processed data</h2>
+<p>Users can download processed data as <strong><em>.csv</em></strong> file and publication ready image <strong><em>.eps</em></strong> and <strong><em>.pdf</em></strong> files, for their further usage and applications.</p>
 </div>
 </div>
   </div>

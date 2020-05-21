@@ -1,7 +1,3 @@
----
-bibliography: references.bib
----
-
 # PrAna
 
 `PrAna` aims to aggregate and normalise England’s national level prescription data, for all groups of drugs. The name is an acronym for _**Pr**escription **Ana**lysis_

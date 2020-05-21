@@ -4,13 +4,16 @@
     <loc>https://github.bath.ac.uk/pages/kjj28/PrAna/index.html</loc>
   </url>
   <url>
-    <loc>https://github.bath.ac.uk/pages/kjj28/PrAna/reference/csv2rds.html</loc>
+    <loc>https://github.bath.ac.uk/pages/kjj28/PrAna/reference/aggrapi.html</loc>
+  </url>
+  <url>
+    <loc>https://github.bath.ac.uk/pages/kjj28/PrAna/reference/csv2dat.html</loc>
   </url>
   <url>
     <loc>https://github.bath.ac.uk/pages/kjj28/PrAna/reference/importdmd.html</loc>
   </url>
   <url>
-    <loc>https://github.bath.ac.uk/pages/kjj28/PrAna/reference/pngdiagrammer.html</loc>
+    <loc>https://github.bath.ac.uk/pages/kjj28/PrAna/reference/practice_wise.html</loc>
   </url>
   <url>
     <loc>https://github.bath.ac.uk/pages/kjj28/PrAna/reference/runShiny.html</loc>
@@ -19,25 +22,19 @@
     <loc>https://github.bath.ac.uk/pages/kjj28/PrAna/reference/saveData.html</loc>
   </url>
   <url>
-    <loc>https://github.bath.ac.uk/pages/kjj28/PrAna/reference/uk_practice_wise.html</loc>
-  </url>
-  <url>
     <loc>https://github.bath.ac.uk/pages/kjj28/PrAna/articles/handbook/01-install.html</loc>
   </url>
   <url>
     <loc>https://github.bath.ac.uk/pages/kjj28/PrAna/articles/handbook/02-workflow.html</loc>
   </url>
   <url>
-    <loc>https://github.bath.ac.uk/pages/kjj28/PrAna/articles/handbook/03-features.html</loc>
+    <loc>https://github.bath.ac.uk/pages/kjj28/PrAna/articles/handbook/03_PrAnaViz.html</loc>
   </url>
   <url>
-    <loc>https://github.bath.ac.uk/pages/kjj28/PrAna/articles/handbook/04_PrAnaViz.html</loc>
+    <loc>https://github.bath.ac.uk/pages/kjj28/PrAna/articles/handbook/04-acknowledgements.html</loc>
   </url>
   <url>
-    <loc>https://github.bath.ac.uk/pages/kjj28/PrAna/articles/handbook/05-acknowledgements.html</loc>
-  </url>
-  <url>
-    <loc>https://github.bath.ac.uk/pages/kjj28/PrAna/articles/handbook/06-references.html</loc>
+    <loc>https://github.bath.ac.uk/pages/kjj28/PrAna/articles/handbook/05-references.html</loc>
   </url>
   <url>
     <loc>https://github.bath.ac.uk/pages/kjj28/PrAna/articles/handbook/index.html</loc>

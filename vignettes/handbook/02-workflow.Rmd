@@ -10,6 +10,8 @@ output:
 
 # Workflow {#workflow}
 
+The workflow in this tutorial consists of the following steps, as in the Figure: \@ref(fig:prana-workflow):
+
 - **Data Preparation**: Download monthly [NHS prescription datasets][NHSBSA] and Dictionary of medicines and devices release files [(dm+d)][dm+d].
 - **Data Conversion**: Aggregation and conversion of the locally stored datasets into practice wise dataset achieved using the functions in `PrAna`.
 - **Visualise and Analyse the data**: Visualise and analyse the processed dataset using the in-built ShinyApp `PrAnaViz`.
@@ -22,9 +24,9 @@ knitr::include_graphics('figures/fig-workflow.png')
 ```
 
 
-## Data Preparation
+## Data Preparation {#datapreparation}
 
-To download NHS prescription datasets \@ref(fig:prana-workflow), users need to guest login and solve a captcha in [NHSBSA information portal][NHSBSA], to download the [dm+d][dm+d] release files and [_dm+d XML Transformation Tool_][dm+d2], users need to register an account.
+To download NHS prescription datasets, users need to guest login and solve a captcha in [NHSBSA information portal][NHSBSA], to download the [dm+d][dm+d] release files and [_dm+d XML Transformation Tool_][dm+d2], users need to register an account.
 
 Store the monthly NHS prescription data in year wise folder. For an example, store all the 2015 monthly datasets in a folder named '2015'. Extract the _dm+d release files_ using _dm+d XML Transformation Tool_. The documentation to extract the release file using the tool is well explained in the readme file.
 
@@ -39,36 +41,80 @@ Function         | Remarks
 -----------------| ----------------------------------------------
 `csv2dat()`   | Combine and convert all the comma separated value (.CSV) files in the defined file path and export it into a single R object
 `importdmd()`  | Import dm+d files and link it to the BNF code using the SNOMED mapping file
-`uk_practice_wise()` | Import NHS dataset files and generate processed individual GP practice prescription dataset
+`practice_wise()` | Import NHS dataset files and generate processed individual GP practice prescription dataset
+`runShiny()` | Run in-built Shiny Apps in the package
 
-`csv2dat()` function supports to combine different monthly NHS prescription dataset files into a single `.rds` file to process further. For an example:
+### Combine NHS monthly dataset
+
+`csv2dat()` function supports to combine different monthly NHS prescription dataset files into a single `data.frame` to process further. For an example:
 
 ```
 ## Set the folder to store the combined file
 setwd("C:/Datasets/2018")
 
 ## Combine and convert mulitple files in the defined folder to a dataframe
-
 data201812 <- csv2dat("C:/Datasets/Prescription Datasets/2018/PDPI")
 
 ```
-After successful conversion of the monthly files into a single dataframe, `importdmd()` function helps to breakdown each row of this dataframe into an API, with its corresponding strength and medicinal form by its BNF Code.
 
-Before this step, user need to execute to import different `dm+d files` and multiple data objects  linking each API to its BNF Code, strength and medicinal form. For example:
+### Import `dm+d` files
+
+`importdmd()` function helps to import different extracted [`dm+d files`] [#dataextraction] and return multiple data objects  including a `data.frame` which map each BNF code to its corresponding API(s), strength and medicinal form. Recommended to read the documentation of `importdmd()` function to know more regarding the different data objects it generate.
 
 ```
-## Read the extracted files
+## Read the extracted dm+d files
 dmdfile  <- importdmd("C:/dmdDataLoader/excel/")
 
-bnf_full_final <- dmdfile$bnf_full_final
-uom <- dmdfile$uom
-dform <- dmdfile$dform
-ing <- dmdfile$ing
-
+## create a data.frame object for the BNF code mapping file
+api_map <- dmdfile$bnf_full_final
 
 ```
+
+### Generate GP practice wise file
+
+The final step in the data conversion is to generate prescription dataset mapped with the individual API, prescription quantity, medicinal form, and strength for the defined GP practice(s), `practice_wise()` is used to carry out this conversion. 
+
+The `practice_wise()` function require following three parameters, 
+
+- Combined NHS prescription dataset, genereated using `csv2dat()` function
+- A `data.frame` containing GP Practices
+- BNF Code mapped file, genereated using `importdmd()` function 
+
+```
+## Define the output location
+setwd("C:/Datasets/Prescription Datasets/practice_wise/2018")
+
+## Execute practice_wise() function
+practice_wise(data201812, UK_GP2018, api_map)
+```
+## Visualise and Analyse the data
+
+GP practice level files generated using the `practice_wise()` function are used to calculate the total prescribed quantity of different APIs at the particular GP practices and at a particular postcode using the in-built ShinyApp `PrAnaViz`.
+
+`PrAnaViz` helps to visualise the total prescribed quantity of different APIs and to explore spatiotemporal trends of different APIs.
+
+For a very quick start to `PrAnaViz`:
+
+```
+library(PrAna)
+runShiny("PrAnaViz")
+```
+The `runShiny("PrAnaViz")` function will pop-up the `PrAnaViz` tool which will allow you to explore different spatiotemporal and long-term prescription trends with the sample dataset.
+
+However, for a better guide to get started it is recommended to read the [`PrAnaViz` tutorial][tutorial].
+
+
+## Database service 
+
+To avoid the large data loading and processing issue, authors strongly suggest to upload the processed dataset to a local or a remote database service, for example, [_MySQL_][MySQL], and link it to the `PrAnaViz`. More information on the linking databases to `PrAnaViz` is explained in the [`PrAnaViz` Tutorial][tutorial].
+
+
+## Download images and processed data
+
+Users can download processed data as **_.csv_** file and publication ready image **_.eps_** and **_.pdf_** files, for their further usage and applications.
 
 
 [NHSBSA]: https://applications.nhsbsa.nhs.uk/infosystems/welcome
 [dm+d]: https://isd.digital.nhs.uk/trud3/user/guest/group/0/pack/6
 [dm+d2]: https://isd.digital.nhs.uk/trud3/user/guest/group/0/pack/6/subpack/239/releases
+[tutorial]: https://github.bath.ac.uk/pages/kjj28/PrAna/articles/PrAnaViz_Tutoral.html
