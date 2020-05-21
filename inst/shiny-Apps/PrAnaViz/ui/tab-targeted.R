@@ -138,6 +138,7 @@ tabPanel(
                            htmlOutput('txt_tot_monthwise_gp_title'),
                            plotlyOutput("plot_compound_monthwise",height="450px")
                   )
+                  
            ) # End of TabBox
     )# End of column  
   ) # End of Fluidrow
