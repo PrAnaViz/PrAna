@@ -122,7 +122,6 @@ server <- function(input, output, session) {
   source(file.path("server", "tab-non-targeted.R"),  local = TRUE)$value  
   
   ## Outputs
-  
   output$sidebarpanel <- renderUI({
       div(
         sidebarMenu(
