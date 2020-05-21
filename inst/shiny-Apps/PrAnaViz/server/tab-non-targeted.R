@@ -19,10 +19,9 @@ gp_postcode_full <-  reactive ({
     distinct()
 })
 
-select_api <- reactive({
-  bnf_group () %>%
+select_api <- bnf_group %>%
     select(BNF_CHEMICAL_SUBSTANCE)
-})
+
 
 # Select shape files by user inputs
 shape_select <- reactive ({
@@ -396,7 +395,7 @@ output$selected_api_input <- renderUI({
   withProgress(message = 'Data is loading, please wait ...', value = 1:100, {
     selectizeInput(inputId="selected_api",
                    label="Select BNF Chemical Substance:",
-                   choices=unique(as.data.frame(select_api())),selected =head(unique(as.data.frame(select_api() ))),  multiple = FALSE
+                   choices=unique(as.data.frame(select_api)),selected =head(unique(as.data.frame(select_api ))),  multiple = FALSE
     )
   })
 })
