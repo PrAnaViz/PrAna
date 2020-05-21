@@ -13,7 +13,7 @@
 #'
 runShiny <- function(appName) {
   # locate all the shiny app examples that exist
-  validExamples <- list.files(system.file("shiny-Apps", package = "PRANA"))
+  validExamples <- list.files(system.file("shiny-Apps", package = "PrAna"))
 
   validExamplesMsg <-
     paste0(
@@ -31,6 +31,6 @@ runShiny <- function(appName) {
   }
 
   # find and launch the app
-  appDir <- system.file("shiny-Apps", appName, package = "PRANA")
+  appDir <- system.file("shiny-Apps", appName, package = "PrAna")
   shiny::runApp(appDir, display.mode = "normal")
 }
