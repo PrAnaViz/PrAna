@@ -77,7 +77,7 @@ group_postcode <- reactive({
     mutate(gram2 = as.numeric(gram)) %>%
     left_join(gp_postcode_full(), by=c("PRACTICE"="PRACTICE", "PERIOD" = "PERIOD")) %>%
     group_by(SURGERY_NAME, NM, Year, PERIOD, PRACTICE, postcode, latitude, longitude) %>%
-    summarize(gram_sum = sum(gram2, na.rm = T)) %>%
+    summarise(gram_sum = sum(gram2, na.rm = T)) %>%
     mutate(kg = gram_sum/1000) %>%
     mutate(month=(substr(PERIOD, 5, 6))) 
 })
@@ -337,7 +337,7 @@ filt_gp_dform <- reactive({
     left_join(dform_desc, by="CD") %>%
     left_join(gp_postcode_full(), by=c("PRACTICE"="PRACTICE", "PERIOD" = "PERIOD")) %>%
     group_by(NM, DESC, postcode) %>%
-    summarize(gram_sum = sum(gram2, na.rm = T)) %>%
+    summarise(gram_sum = sum(gram2, na.rm = T)) %>%
     mutate(kg = gram_sum/1000) %>%
     filter (tolower(NM) %in% !!input$selected_api) %>%
     filter (postcode %in% !!input$postcodemap_marker_click$id)
@@ -354,7 +354,7 @@ tot_postcode <- reactive({
     mutate(gram2 = as.numeric(gram)) %>%
     left_join(gp_postcode_full(), by=c("PRACTICE"="PRACTICE", "PERIOD" = "PERIOD")) %>%
     group_by(NM, Year, postcode) %>%
-    summarize(gram_sum = sum(gram2, na.rm = T)) %>%
+    summarise(gram_sum = sum(gram2, na.rm = T)) %>%
     mutate(kg = gram_sum/1000) %>%
     filter (tolower(NM) %in% !!input$selected_api)
 })
