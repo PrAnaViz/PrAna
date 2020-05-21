@@ -10,12 +10,7 @@ targetdata <- reactive({
 
 # Select db for the gp list
 gp_list_year  <- reactive ({ 
-  if (input$selectdb_01 == "ccg_wise_commissioner") {
-    gp_list_ccg_c 
-  }
-  else if (input$selectdb_01 == "shape_wise") {
-    gp_list_shape 
-  }
+  gp_list_shape 
 })
 
 list_practices <- reactive({

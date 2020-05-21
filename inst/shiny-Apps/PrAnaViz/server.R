@@ -71,16 +71,9 @@ server <- function(input, output, session) {
   
   # For the UI to show all the regions based on year
   gp_list_year_tab  <- reactive ({ 
-    if (input$selectdb_01 == "ccg_wise_commissioner") {
-      gp_list_ccg_c %>%
-        filter (Year %in% !!input$selectyear01) %>%
-        select(region)
-    }
-    else if (input$selectdb_01 == "shape_wise") {
-      gp_list_shape %>%
-        filter (Year %in% !!input$selectyear01) %>%
-        select(region)
-    }
+    gp_list_shape %>%
+    filter (Year %in% !!input$selectyear01) %>%
+    select(region)
   })
   
   ## To see the regions
@@ -138,12 +131,6 @@ server <- function(input, output, session) {
           menuItem("Targeted", tabName = "targeted"),
           menuItem("Non-Targeted", tabName = "non-targeted"),
           tags$hr(),
-          selectInput('selectdb_01', 'Select DB:',
-                      c(
-                        'CCG (c)' = 'ccg_wise_commissioner',
-                        'Shape' = 'shape_wise'), 
-                      selected = 'shape_wise'
-          ),
           selectInput('selectyear01', 'Select Prescirption Year:',
                       c(
                         '2015' = '2015',
