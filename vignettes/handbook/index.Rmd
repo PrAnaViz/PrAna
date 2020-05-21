@@ -9,7 +9,6 @@ biblio-style: apalike
 link-citations: yes
 colorlinks: yes
 graphics: yes
-lot: yes
 lof: yes
 fontsize: 11pt
 description: "This is a handbook to use the PrAna package to aggregate and normalise England’s national level prescription data."
@@ -38,3 +37,5 @@ The documentation of `PrAna` consists of three parts:
 [R]: https://www.r-project.org/
 [NHS]: https://digital.nhs.uk/organisation-data-service/data-downloads/gp-data
 [PrAna ref]: https://github.bath.ac.uk/kjj28/PrAna/reference/index.html
+
+\newpage

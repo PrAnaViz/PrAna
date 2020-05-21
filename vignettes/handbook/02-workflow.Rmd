@@ -125,12 +125,12 @@ runShiny("PrAnaViz")
 ```
 The `runShiny("PrAnaViz")` function will pop-up the `PrAnaViz` tool which will allow you to explore different spatiotemporal and long-term prescription trends with the sample dataset.
 
-However, for a better guide to get started it is recommended to read the [`PrAnaViz` tutorial][tutorial].
+However, for a better guide to get started it is recommended to see the Section \@ref(pranaviz).
 
 
 ## Database service 
 
-To avoid the large data loading and processing issue, authors strongly suggest to upload the processed dataset to a local or a remote database service, for example, [_MySQL_][MySQL], and link it to the `PrAnaViz`. More information on the linking databases to `PrAnaViz` is explained in the [`PrAnaViz` Tutorial][tutorial].
+To avoid the large data loading and processing issue, authors strongly suggest to upload the processed dataset to a local or a remote database service, for example, [_MySQL_][MySQL], and link it to the `PrAnaViz`. More information on the linking databases to `PrAnaViz` is explained in the Section \@ref(pranaviz).
 
 
 ## Download images and processed data
@@ -142,3 +142,5 @@ Users can download processed data as **_.csv_** file and publication ready image
 [dm+d]: https://isd.digital.nhs.uk/trud3/user/guest/group/0/pack/6
 [dm+d2]: https://isd.digital.nhs.uk/trud3/user/guest/group/0/pack/6/subpack/239/releases
 [tutorial]: https://github.bath.ac.uk/pages/kjj28/PrAna/articles/PrAnaViz_Tutoral.html
+
+\newpage
