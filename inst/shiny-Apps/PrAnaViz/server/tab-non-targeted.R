@@ -20,11 +20,7 @@ gp_postcode_full <-  reactive ({
 })
 
 select_api <- reactive({
-  bind_practices () %>%
-    filter (!grepl("Error: Table",CPD)) %>%
-    dplyr::mutate(NM = tolower(NM) ) %>% 
-    dplyr::filter (str_detect(NM , paste(!!bnf_group$BNF_CHEMICAL_SUBSTANCE,collapse = '|'))) %>%
-    dplyr::rename (BNF_CHEMICAL_SUBSTANCE = NM) %>%
+  bnf_group () %>%
     select(BNF_CHEMICAL_SUBSTANCE)
 })
 
