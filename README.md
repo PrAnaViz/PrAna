@@ -2,6 +2,8 @@
 
 `PrAna` aims to aggregate and normalise England’s national level prescription data, for all groups of drugs. The name is an acronym for _**Pr**escription **Ana**lysis_
 
+## Background
+
 During the last decade, wide range of **active pharmaceutical ingredients (APIs)** have been identified and quantified in aquatic environment across several studies and indicated their impacts on exposed environmental species and humans. For the prediction of total amount of the APIs released to the environment, information about APIs consumption data is vital. Globally, several methods were reported to estimate the APIs consumption data based on the national prescription data, manufacturers, importers and dispenser’s data.
 
 In the UK, national prescription data provided by [National Health Service][NHS digital] was used to calculate the consumption data. This data is freely accessible and consist of individual files for each month. With the large file with over 10 million records every month, the data from the NHS cannot be used for the direct calculation of the prescription levels of different APIs. Re-organisation and processing of the files is required before to do any exploration or analysis and to speed up the data reading. 
@@ -12,6 +14,8 @@ Apart, from the calculation of the total prescribed quantity of an API or a grou
 
 `PrAnaViz` facilitates users **to visualise, explore and report** different spatiotemporal and long-term prescription trends for wider use. 
 
+## Workflow
+
 Below is an overview of the workflow:
 
 - **Data Preparation**: Download monthly [NHS prescription datasets][NHSBSA] and Dictionary of medicines and devices release files [(dm+d)][dm+d].
@@ -19,6 +23,13 @@ Below is an overview of the workflow:
 - **Visualise and Analyse the data**: Visualise and analyse the processed dataset using the in-built ShinyApp `PrAnaViz`.
 - **Database service**: Linking of the processed dataset to the `PrAnaViz` can be achieved by uploading the processed dataset to a local or a remote database service, for example, [_MySQL._][MySQL]
 - **Download images and processed data**: Users can download processed data as **_.csv_** file and publication ready image **_.eps_** and **_.pdf_** files.
+
+## Data sources
+
+- Prescribing data and Practice information are from the monthly files published by the [NHS Business Service Authority][NHSBSA], used under the terms of the Open Government Licence.
+- BNF codes and names are also from the [NHS Business Service Authority's Information Portal][NHSBSA], used under the terms of the Open Government Licence.
+- [dm+d weekly release data][dm+d] is also from the NHS Business Service Authority's Information Portal, used under the terms of the Open Government Licence.
+
 
 ## Get this package
 
@@ -38,17 +49,11 @@ install_github("jkkishore85/PrAna")
 ```
 However, since it is dependent on some other software tools some extra steps are required for the installation. Please see the [installation section in the handbook][handbook-inst] for more information.
 
-## PrAnaViz
+However, for a better guide to get started it is recommended to read the [tutorial][tutorial].
 
-For a very quick start to `PrAnaViz`:
-```
-library(PrAna)
-runShiny("PrAnaViz")
-```
-The `runShiny("PrAnaViz")` function will pop-up the `PrAnaViz` tool which will allow you to explore different spatiotemporal and long-term prescription trends with the sample dataset.
+## Acknowledgements
 
-However, for a better guide to get started it is recommended to read the [tutorial].
-
+This package was built as a part of the **Wastewater Fingerprinting for Public Health Assessment (ENTRUST)** project funded by **Wessex Water** and **EPSRC IAA** _(grant no. EP/R51164X/1)_. 
 
 [R]: https://www.r-project.org/
 [tutorial]: https://github.bath.ac.uk/pages/kjj28/PrAna/articles/PrAnaViz_Tutoral.html
@@ -57,5 +62,3 @@ However, for a better guide to get started it is recommended to read the [tutori
 [NHSBSA]: https://applications.nhsbsa.nhs.uk/infosystems/welcome
 [dm+d]: https://isd.digital.nhs.uk/trud3/user/guest/group/0/pack/6
 [dm+d2]: https://isd.digital.nhs.uk/trud3/user/guest/group/0/pack/6/subpack/239/releases
-
-
