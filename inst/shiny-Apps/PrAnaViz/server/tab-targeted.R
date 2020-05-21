@@ -65,12 +65,12 @@ filt_total_NM <- reactive ({
   bind_practices() %>%
     filter (!grepl("Error: Table",CPD)) %>% 
     dplyr::mutate(NM = tolower(NM) ) %>% 
-    dplyr::filter (str_detect(NM , paste(paste0("^",!!targetdata()$V1,collapse = '|')))) %>%
+    dplyr::filter (str_detect(NM , paste(paste0(!!targetdata()$V1,collapse = '|')))) %>%
     mutate(Year=(substr(PERIOD, 1, 4))) %>%
     filter (Year %in% !!input$selectyear01) %>%
     mutate(gram2 = as.numeric(gram)) %>%
     group_by(NM, Year) %>%
-    summarize(gram_sum = sum(gram2, na.rm = T)) %>%
+    summarise(gram_sum = sum(gram2, na.rm = T)) %>%
     mutate(kg = gram_sum/1000) 
 })
 
@@ -84,7 +84,7 @@ filt_total_period  <- reactive ({
     filter (Year %in% !!input$selectyear01) %>%
     mutate(gram2 = as.numeric(gram)) %>%
     group_by(NM, PERIOD) %>%
-    summarize(gram_sum = sum(gram2, na.rm = T)) %>%
+    summarise(gram_sum = sum(gram2, na.rm = T)) %>%
     mutate(kg = gram_sum/1000) 
 })
 
@@ -98,7 +98,7 @@ filt_total_practice <- reactive ({
     filter (Year %in% !!input$selectyear01) %>%
     mutate(gram2 = as.numeric(gram)) %>%
     group_by(NM, PRACTICE) %>%
-    summarize(gram_sum = sum(gram2, na.rm = T)) %>%
+    summarise(gram_sum = sum(gram2, na.rm = T)) %>%
     mutate(kg = gram_sum/1000) 
 })
 
@@ -113,7 +113,7 @@ filt_total_postcode <- reactive ({
     mutate(gram2 = as.numeric(gram)) %>%
     left_join(gp_postcode_full(), by=c("PRACTICE"="PRACTICE", "PERIOD" = "PERIOD")) %>%
     group_by(NM, postcode) %>%
-    summarize(gram_sum = sum(gram2, na.rm = T)) %>%
+    summarise(gram_sum = sum(gram2, na.rm = T)) %>%
     mutate(kg = gram_sum/1000) 
 })
 
@@ -130,7 +130,7 @@ filt_total_dform <- reactive ({
     mutate(CD = DForm) %>% 
     left_join(dform_desc, by="CD") %>%
     group_by(NM, DESC) %>%
-    summarize(gram_sum = sum(gram2, na.rm = T)) %>%
+    summarise(gram_sum = sum(gram2, na.rm = T)) %>%
     mutate(kg = gram_sum/1000) 
 })
 
@@ -144,7 +144,7 @@ filt_total_practice_month <- reactive ({
     filter (Year %in% !!input$selectyear01) %>%
     mutate(gram2 = as.numeric(gram)) %>%
     group_by(NM, PRACTICE, PERIOD) %>%
-    summarize(gram_sum = sum(gram2, na.rm = T)) %>%
+    summarise(gram_sum = sum(gram2, na.rm = T)) %>%
     mutate(kg = gram_sum/1000) 
 })
 
