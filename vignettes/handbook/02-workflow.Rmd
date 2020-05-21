@@ -24,6 +24,12 @@ knitr::include_graphics('figures/fig-workflow.png')
 
 ## Data Preparation {#datapreparation}
 
+*Data sources*
+
+- Prescribing data and Practice information are from the monthly files published by the [NHS Business Service Authority][NHSBSA], used under the terms of the Open Government Licence.
+- BNF codes and names are also from the [NHS Business Service Authority's Information Portal] [NHSBSA], used under the terms of the Open Government Licence.
+- [dm+d weekly release data][dm+d] is also from the NHS Business Service Authority's Information Portal, used under the terms of the Open Government Licence.
+
 To download NHS prescription datasets, users need to guest login and solve a captcha in [NHSBSA information portal][NHSBSA], to download the [dm+d][dm+d] release files and [_dm+d XML Transformation Tool_][dm+d2], users need to register an account.
 
 Store the monthly NHS prescription data in year wise folder. For an example, store all the 2015 monthly datasets in a folder named '2015'. Extract the _dm+d release files_ using _dm+d XML Transformation Tool_. The documentation to extract the release file using the tool is well explained in the readme file.
@@ -35,7 +41,7 @@ Different functions were used in the aggregation and conversion workflow behind 
 
 An overview of all functions involved in the data conversion is shown in the table below.
 
-Function         | Remarks
+*Function*         | *Remarks*
 -----------------| ----------------------------------------------
 `csv2dat()`   | Combine and convert all the comma separated value (.CSV) files in the defined file path and export it into a single R object
 `importdmd()`  | Import dm+d files and link it to the BNF code using the SNOMED mapping file
@@ -60,7 +66,7 @@ data201812 <- csv2dat("C:/Datasets/Prescription Datasets/2018/PDPI")
 
 ### Import `dm+d` files
 
-`importdmd()` function \@ref(example1) helps to import different extracted [`dm+d files`] [#dataextraction] and return multiple data objects  including a `data.frame` which map each BNF code to its corresponding API(s), strength and medicinal form. Recommended to read the documentation of `importdmd()` function to know more regarding the different data objects it generate.
+`importdmd()` function helps to import different extracted [`dm+d files`] [#dataextraction] and return multiple data objects  including a `data.frame` which map each BNF code to its corresponding API(s), strength and medicinal form. Recommended to read the documentation of `importdmd()` function to know more regarding the different data objects it generate.
 
 ```
 ## Read the extracted dm+d files

@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../../pkgdown.css" rel="stylesheet">
 <script src="../../pkgdown.js"></script><meta property="og:title" content="">
-<meta property="og:description" content="PRANA">
+<meta property="og:description" content="PrAna">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -133,6 +133,13 @@ PrAna Workflow.
 <div id="datapreparation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#datapreparation" class="anchor"></a>Data Preparation</h2>
+<p><em>Data sources</em></p>
+<ul>
+<li>Prescribing data and Practice information are from the monthly files published by the <a href="https://applications.nhsbsa.nhs.uk/infosystems/welcome">NHS Business Service Authority</a>, used under the terms of the Open Government Licence.</li>
+<li>BNF codes and names are also from the [NHS Business Service Authority’s Information Portal] <a href="https://applications.nhsbsa.nhs.uk/infosystems/welcome">NHSBSA</a>, used under the terms of the Open Government Licence.</li>
+<li>
+<a href="https://isd.digital.nhs.uk/trud3/user/guest/group/0/pack/6">dm+d weekly release data</a> is also from the NHS Business Service Authority’s Information Portal, used under the terms of the Open Government Licence.</li>
+</ul>
 <p>To download NHS prescription datasets, users need to guest login and solve a captcha in <a href="https://applications.nhsbsa.nhs.uk/infosystems/welcome">NHSBSA information portal</a>, to download the <a href="https://isd.digital.nhs.uk/trud3/user/guest/group/0/pack/6">dm+d</a> release files and <a href="https://isd.digital.nhs.uk/trud3/user/guest/group/0/pack/6/subpack/239/releases"><em>dm+d XML Transformation Tool</em></a>, users need to register an account.</p>
 <p>Store the monthly NHS prescription data in year wise folder. For an example, store all the 2015 monthly datasets in a folder named ‘2015’. Extract the <em>dm+d release files</em> using <em>dm+d XML Transformation Tool</em>. The documentation to extract the release file using the tool is well explained in the readme file.</p>
 </div>
@@ -147,8 +154,8 @@ PrAna Workflow.
 <col width="73%">
 </colgroup>
 <thead><tr class="header">
-<th>Function</th>
-<th>Remarks</th>
+<th><em>Function</em></th>
+<th><em>Remarks</em></th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -173,7 +180,10 @@ PrAna Workflow.
 <h3 class="hasAnchor">
 <a href="#combine-nhs-monthly-dataset" class="anchor"></a>Combine NHS monthly dataset</h3>
 <p><code><a href="../../reference/csv2dat.html">csv2dat()</a></code> function supports to combine different monthly NHS prescription dataset files into a single <code>data.frame</code> to process further. For an example:</p>
-<pre><code>## Set the folder to store the combined file
+<pre><code>## Load library
+library(PrAna)
+
+## Set the folder to store the combined file
 setwd("C:/Datasets/2018")
 
 ## Combine and convert mulitple files in the defined folder to a dataframe
@@ -186,26 +196,42 @@ data201812 &lt;- csv2dat("C:/Datasets/Prescription Datasets/2018/PDPI")
 <p><code><a href="../../reference/importdmd.html">importdmd()</a></code> function helps to import different extracted [<code>dm+d files</code>] [#dataextraction] and return multiple data objects including a <code>data.frame</code> which map each BNF code to its corresponding API(s), strength and medicinal form. Recommended to read the documentation of <code><a href="../../reference/importdmd.html">importdmd()</a></code> function to know more regarding the different data objects it generate.</p>
 <pre><code>## Read the extracted dm+d files
 dmdfile  &lt;- importdmd("C:/dmdDataLoader/excel/")
-
-## create a data.frame object for the BNF code mapping file
-api_map &lt;- dmdfile$bnf_full_final
 </code></pre>
 </div>
 <div id="generate-gp-practice-wise-file" class="section level3">
 <h3 class="hasAnchor">
 <a href="#generate-gp-practice-wise-file" class="anchor"></a>Generate GP practice wise file</h3>
 <p>The final step in the data conversion is to generate prescription dataset mapped with the individual API, prescription quantity, medicinal form, and strength for the defined GP practice(s), <code><a href="../../reference/practice_wise.html">practice_wise()</a></code> is used to carry out this conversion.</p>
-<p>The <code><a href="../../reference/practice_wise.html">practice_wise()</a></code> function require following three parameters,</p>
+<p>And before execute the <code><a href="../../reference/practice_wise.html">practice_wise()</a></code> function it is strongly suggested to setup the destination folder as the working directory using <code><a href="https://rdrr.io/r/base/getwd.html">setwd()</a></code> function.</p>
+<p>The <code><a href="../../reference/practice_wise.html">practice_wise()</a></code> function require following six parameters, as mentioned in the example below,</p>
 <ul>
 <li>Combined NHS prescription dataset, genereated using <code><a href="../../reference/csv2dat.html">csv2dat()</a></code> function</li>
-<li>A <code>data.frame</code> containing GP Practices</li>
-<li>BNF Code mapped file, genereated using <code><a href="../../reference/importdmd.html">importdmd()</a></code> function</li>
+<li>A <code>character</code> vector containing GP Practices</li>
+<li>A <code>data.frame</code> containing BNF Code mapped to individial APIs, strength, medicinal form</li>
+<li>Unit of measurement with multiplication factors file</li>
+<li>Different medicinal forms with its corresponding codes file</li>
+<li>Different APIs with its corresponding codes file</li>
 </ul>
-<pre><code>## Define the output location
+<pre><code>## create a data.frame object for the BNF code mapping file
+api_map &lt;- dmdfile$api_map
+
+## Unit of measurements
+uom &lt;- dmdfile$uomwdesc %&gt;%
+        dplyr::rename(UOM = CD)
+
+## Medicinal form
+dform &lt;- dmdfile$dform
+
+## ingredients list
+ing &lt;- dmdfile$ing %&gt;%
+  dplyr::rename(API_CODE = 1)
+
+## Define the output location
 setwd("C:/Datasets/Prescription Datasets/practice_wise/2018")
 
 ## Execute practice_wise() function
-practice_wise(data201812, UK_GP2018, api_map)</code></pre>
+practice_wise(data201812, GP_practices, api_map, uom, dform, ing)
+</code></pre>
 </div>
 </div>
 <div id="visualise-and-analyse-the-data" class="section level2">

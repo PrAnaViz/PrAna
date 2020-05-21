@@ -13,6 +13,14 @@ The aim of this tool is to visualise and analyse the prescription data to calcul
 
 We have created, `PrAnaViz`, in a familiar **dashboard layout** with two tabs: (1) **Targeted API**, (2) **Non-targeted API**, to visualize total quantity of different APIs at CCG region with resolution to individual postcode. 
 
+
+```{r, cache=FALSE, echo=FALSE}
+knitr::read_chunk("shiny-Apps/PrAnaViz/server.R")
+```
+
+```{r server, eval=FALSE}
+```
+
 ## Targeted Approach
 
 - In this tab, user can **input a list of APIs**, and find out the **total prescription quantity** of each API in the selected year, at the selected CCG region.
