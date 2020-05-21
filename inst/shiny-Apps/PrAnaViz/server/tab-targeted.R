@@ -447,16 +447,88 @@ output$plot_compound_monthwise <- renderPlotly({
 
 # Download csv
 output$downloaddata_t_01 = downloadHandler(
-  filename = function (){ paste(input$region_select_01,'_',input$selectyear01,'_yearwise','.csv',sep = '')},
+  filename = function (){ paste0(input$region_select_01,'_',input$selectyear01,'_yearwise','.csv')},
   content = function(file) {
-    write.csv(as.data.frame(data.barplot_t_01()), file, row.names = TRUE)
+    write.csv(as.data.frame(data.barplot_t_01()), file, row.names = FALSE)
   }
 )
 
 output$downloaddata_t_02 = downloadHandler(
-  filename = function (){ paste(input$region_select_01,'_',input$selectyear01,'_monthwise', '.csv',sep = '')},
+  filename = function (){ paste0(input$region_select_01,'_',input$selectyear01,'_monthwise', '.csv')},
   content = function(file) {
-    write.csv(as.data.frame(data.lineplot_t_01()), file, row.names = TRUE)
+    write.csv(as.data.frame(data.lineplot_t_01()), file, row.names = FALSE)
+  }
+)
+
+output$downloaddata_t_03 = downloadHandler(
+  filename = function (){ 
+    s <- event_data("plotly_click", source = "filt_total_barplot1")
+    paste0(s[["x"]],'_monthwise_at_',input$region_select_01,'_',input$selectyear01, '.csv')
+    },
+  content = function(file) {
+    s <- event_data("plotly_click", source = "filt_total_barplot1")
+    if (length(s) == 0) {
+      NULL
+    }   
+    else {
+      a1 <- subset (as.data.frame(filt_total_period()), NM %in%  s[["x"]]) %>%
+        dplyr::select(1,2,4)
+      write.csv(a1, file, row.names = FALSE)
+    }
+  }
+)
+
+output$downloaddata_t_04 = downloadHandler(
+  filename = function (){ 
+    s <- event_data("plotly_click", source = "filt_total_barplot1")
+    paste0(s[["x"]],'_practicewise_at_',input$region_select_01,'_',input$selectyear01, '.csv')
+  },
+  content = function(file) {
+    s <- event_data("plotly_click", source = "filt_total_barplot1")
+    if (length(s) == 0) {
+      NULL
+    }   
+    else {
+      a1 <- subset (as.data.frame(filt_total_practice()), NM %in%  s[["x"]]) %>%
+        dplyr::select(1,2,4)
+      write.csv(a1, file, row.names = FALSE)
+    }
+  }
+)
+
+output$downloaddata_t_05 = downloadHandler(
+  filename = function (){ 
+    s <- event_data("plotly_click", source = "filt_total_barplot1")
+    paste0(s[["x"]],'_postcodewise_at_',input$region_select_01,'_',input$selectyear01, '.csv')
+  },
+  content = function(file) {
+    s <- event_data("plotly_click", source = "filt_total_barplot1")
+    if (length(s) == 0) {
+      NULL
+    }   
+    else {
+      a1 <- subset (as.data.frame(filt_total_postcode()), NM %in%  s[["x"]])%>%
+        dplyr::select(1,2,4)
+      write.csv(a1, file, row.names = FALSE)
+    }
+  }
+)
+
+output$downloaddata_t_06 = downloadHandler(
+  filename = function (){ 
+    s <- event_data("plotly_click", source = "filt_total_barplot1")
+    paste0(s[["x"]],'_medicinalform_at_',input$region_select_01,'_',input$selectyear01, '.csv')
+  },
+  content = function(file) {
+    s <- event_data("plotly_click", source = "filt_total_barplot1")
+    if (length(s) == 0) {
+      NULL
+    }   
+    else {
+      a1 <- subset (as.data.frame(filt_total_dform()), NM %in%  s[["x"]]) %>%
+              dplyr::select(1,2,4)
+      write.csv(a1, file, row.names = FALSE)
+    }
   }
 )
 
@@ -518,7 +590,10 @@ output$downloadeps_t_02 = downloadHandler(
 )
 
 output$downloadeps_t_03 = downloadHandler(
-  filename = function(){ paste(input$region_select_01,'_',input$selectyear01,'_monthwise','.eps',sep = '')},
+  filename = function(){ 
+    s <- event_data("plotly_click", source = "filt_total_barplot1")
+    paste0(s[["x"]],'_monthwise_at_',input$region_select_01,'_',input$selectyear01, '.eps')
+    },
   content = function(file) {
     postscript(file,
                width = 11.69 , height = 8.27, # inches
@@ -554,8 +629,10 @@ output$downloadeps_t_03 = downloadHandler(
 )
 
 output$downloadeps_t_04 = downloadHandler(
-  filename = function(){ paste(input$region_select_01,'_',input$selectyear01,'_monthwise','.eps',sep = '')},
-  content = function(file) {
+  filename = function(){ 
+    s <- event_data("plotly_click", source = "filt_total_barplot1")
+    paste0(s[["x"]],'_practicewise_at_',input$region_select_01,'_',input$selectyear01, '.eps')},
+    content = function(file) {
     postscript(file,
                width = 11.69 , height = 8.27, # inches
                horizontal = TRUE, onefile = TRUE, paper = "special")
@@ -589,7 +666,9 @@ output$downloadeps_t_04 = downloadHandler(
 )
 
 output$downloadeps_t_05 = downloadHandler(
-  filename = function(){ paste(input$region_select_01,'_',input$selectyear01,'_monthwise','.eps',sep = '')},
+  filename = function(){ 
+    s <- event_data("plotly_click", source = "filt_total_barplot1")
+    paste0(s[["x"]],'_postcodewise_at_',input$region_select_01,'_',input$selectyear01, '.eps')},
   content = function(file) {
     postscript(file,
                width = 11.69 , height = 8.27, # inches
@@ -624,7 +703,9 @@ output$downloadeps_t_05 = downloadHandler(
 )
 
 output$downloadeps_t_06 = downloadHandler(
-  filename = function(){ paste(input$region_select_01,'_',input$selectyear01,'_monthwise','.eps',sep = '')},
+  filename = function(){ 
+    s <- event_data("plotly_click", source = "filt_total_barplot1")
+    paste0(s[["x"]],'_medicinalform_at_',input$region_select_01,'_',input$selectyear01, '.eps')},
   content = function(file) {
     postscript(file,
                width = 11.69 , height = 8.27, # inches
@@ -712,7 +793,10 @@ output$downloadpdf_t_02 = downloadHandler(
 )
 
 output$downloadpdf_t_03 = downloadHandler(
-  filename = function(){ paste(input$region_select_01,'_',input$selectyear01,'_monthwise','.eps',sep = '')},
+  filename = function(){ 
+    s <- event_data("plotly_click", source = "filt_total_barplot1")
+    paste0(s[["x"]],'_monthwise_at_',input$region_select_01,'_',input$selectyear01, '.pdf')
+  },
   content = function(file) {
     pdf(file, paper = "a4r",width = 14)
     s <- event_data("plotly_click", source = "filt_total_barplot1")
@@ -746,7 +830,10 @@ output$downloadpdf_t_03 = downloadHandler(
 )
 
 output$downloadpdf_t_04 = downloadHandler(
-  filename = function(){ paste(input$region_select_01,'_',input$selectyear01,'_monthwise','.eps',sep = '')},
+  filename = function(){ 
+    s <- event_data("plotly_click", source = "filt_total_barplot1")
+    paste0(s[["x"]],'_practicewise_at_',input$region_select_01,'_',input$selectyear01, '.pdf')
+  },
   content = function(file) {
     pdf(file, paper = "a4r",width = 14)
     s <- event_data("plotly_click", source = "filt_total_barplot1")
@@ -779,7 +866,10 @@ output$downloadpdf_t_04 = downloadHandler(
 )
 
 output$downloadpdf_t_05 = downloadHandler(
-  filename = function(){ paste(input$region_select_01,'_',input$selectyear01,'_monthwise','.eps',sep = '')},
+  filename = function(){ 
+    s <- event_data("plotly_click", source = "filt_total_barplot1")
+    paste0(s[["x"]],'_postcodewise_at_',input$region_select_01,'_',input$selectyear01, '.pdf')
+  },
   content = function(file) {
     pdf(file, paper = "a4r",width = 14)
     s <- event_data("plotly_click", source = "filt_total_barplot1")
@@ -812,7 +902,10 @@ output$downloadpdf_t_05 = downloadHandler(
 )
 
 output$downloadpdf_t_06 = downloadHandler(
-  filename = function(){ paste(input$region_select_01,'_',input$selectyear01,'_monthwise','.eps',sep = '')},
+  filename = function(){ 
+    s <- event_data("plotly_click", source = "filt_total_barplot1")
+    paste0(s[["x"]],'_medicinalform_at_',input$region_select_01,'_',input$selectyear01, '.pdf')
+  },
   content = function(file) {
     pdf(file, paper = "a4r",width = 14)
     s <- event_data("plotly_click", source = "filt_total_barplot1")
