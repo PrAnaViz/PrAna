@@ -63,16 +63,8 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../../handbook/PrAnaViz_Tutorial.html">PrAnaViz Tutorial</a>
+      <a href="../../handbook_bd/index.html">Handbook</a>
     </li>
-    <li class="dropdown-submenu">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Handbook</a>
-      <ul class="dropdown-menu" role="menu">
-<li>
-          <a href="../../handbook_bd/index.html">Book format</a>
-        </li>
-      </ul>
-</li>
   </ul>
 </li>
 <li>
@@ -102,7 +94,7 @@
       <h1 data-toc-skip>PrAnaViz</h1>
                         <h4 class="author">Kishore Jagadeesan</h4>
             
-            <h4 class="date">2020-05-21</h4>
+            <h4 class="date">2020-05-22</h4>
       
       
       <div class="hidden name"><code>03_PrAnaViz.Rmd</code></div>
@@ -114,28 +106,131 @@
 <div id="pranaviz" class="section level1">
 <h1 class="hasAnchor">
 <a href="#pranaviz" class="anchor"></a>PrAnaViz</h1>
-<div id="introduction" class="section level2">
+<div id="pranaviz-intro" class="section level2">
 <h2 class="hasAnchor">
-<a href="#introduction" class="anchor"></a>Introduction</h2>
+<a href="#pranaviz-intro" class="anchor"></a>Introduction</h2>
 <p>The aim of this tool is to visualise and analyse the prescription data to calculate total prescribed quantity of different APIs and to explore spatiotemporal trends of different APIs for wider use.</p>
 <p>We have created, <code>PrAnaViz</code>, in a familiar <strong>dashboard layout</strong> with two tabs: (1) <strong>Targeted API</strong>, (2) <strong>Non-targeted API</strong>, to visualize total quantity of different APIs at CCG region with resolution to individual postcode.</p>
 </div>
-<div id="targeted-approach" class="section level2">
+<div id="pranaviz-targeted" class="section level2">
 <h2 class="hasAnchor">
-<a href="#targeted-approach" class="anchor"></a>Targeted Approach</h2>
+<a href="#pranaviz-targeted" class="anchor"></a>Targeted Approach</h2>
 <ul>
-<li>In this tab, user can <strong>input a list of APIs</strong>, and find out the <strong>total prescription quantity</strong> of each API in the selected year, at the selected CCG region.</li>
+<li>In this tab, user can <strong>input a list of APIs</strong>, and find out the <strong>total prescription quantity</strong> of each API in the selected year, at the selected CCG region, as in the Figure: @ref(fig:pranaviz-targeted01).</li>
 <li>This tab also visualise the total quantity of <strong>APIs</strong> prescribed by month, GP, Chemical form, and Medicinal form for a CCG region in a selected year.</li>
 </ul>
+<div class="figure" style="text-align: center">
+<img src="../../../../../R%20Directory/packages/PrAna/vignettes/handbook/figures/targeted01_labelled.png" alt="PrAna Targeted Approach." width="80%"><p class="caption">
+PrAna Targeted Approach.
+</p>
 </div>
-<div id="non-targeted-approach" class="section level2">
+<table class="table">
+<colgroup>
+<col width="26%">
+<col width="73%">
+</colgroup>
+<thead><tr class="header">
+<th><em>Option</em></th>
+<th><em>Remarks</em></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Select Targeted or Non-Targeted Approach</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Select Year, Region and Setting Type</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Upload targets i.e., APIs in <code>.csv</code> format</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Select monthwise or yearwise plots</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Plot generated based on user selection</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Download buttons to download the generated plot as <code>.pdf</code> or <code>.eps</code> and data as <code>.csv</code> format</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>More insights on a selected API, visualise total prescribed quantity of the API per month, GP practice, postcode and medicinal form (click on a particular API on the barplot to generate these plots)</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>Download buttons to download the generated plot as <code>.pdf</code> or <code>.eps</code> and data as <code>.csv</code> format</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="pranaviz-nontargeted" class="section level2">
 <h2 class="hasAnchor">
-<a href="#non-targeted-approach" class="anchor"></a>Non-targeted Approach</h2>
+<a href="#pranaviz-nontargeted" class="anchor"></a>Non-targeted Approach</h2>
 <ul>
-<li>Total prescription quantity of an individual API at <strong>different postcode per month</strong> at a CCG region, can be rendered in this tab.</li>
+<li>Total prescription quantity of an individual API at <strong>different postcode per month</strong> at a CCG region, can be rendered in this tab, as in the Figure: @ref(fig:pranaviz-nontargeted01).</li>
 <li>The calculated total prescription quantity of an individual API at postcode level helps to find <strong>the hotspots</strong>.</li>
 <li>User can download data as <strong><em>.csv</em></strong> file and publication ready image <strong><em>.eps</em></strong> and <strong><em>.pdf</em></strong> files.</li>
 </ul>
+<div class="figure" style="text-align: center">
+<img src="../../../../../R%20Directory/packages/PrAna/vignettes/handbook/figures/non_targeted02_labelled.png" alt="PrAna Non-targeted Approach." width="80%"><p class="caption">
+PrAna Non-targeted Approach.
+</p>
+</div>
+<table class="table">
+<colgroup>
+<col width="26%">
+<col width="73%">
+</colgroup>
+<thead><tr class="header">
+<th><em>Option</em></th>
+<th><em>Remarks</em></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Select Targeted or Non-Targeted Approach</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Select Year, Region and Setting Type</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Select <em>API</em> in the <code>drop-down</code> menu</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Select a month</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Plot generated based on user selection, click on a particular postcode to generate further plots</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Download buttons to download the generated plot as an interactive <code>.html</code> document and data as <code>.csv</code> format</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>Visualise total prescribed quantity of the API per month on the selected postcode (click on a particular postoode on the plot to generate these plots)</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>Download buttons to download the generated plot as <code>.pdf</code> or <code>.eps</code> and data as <code>.csv</code> format</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>Visualise total prescribed quantity of the API per medicinal form on the selected postcode</td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
 </div>
 </div>
   </div>

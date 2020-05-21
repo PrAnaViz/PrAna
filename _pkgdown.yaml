@@ -25,11 +25,7 @@ navbar:
     tutorial:
       text: Tutorial
       menu:
-      - text: PrAnaViz Tutorial
-        href: handbook/PrAnaViz_Tutorial.html
-      - text: Handbook
-        menu:
-        - text: Book format
+        - text: Handbook
           href: handbook_bd/index.html
     news:
       text: Changelog

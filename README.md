@@ -65,3 +65,4 @@ We accept no liability for any errors in the data or its publication here: use t
 [NHSBSA]: https://applications.nhsbsa.nhs.uk/infosystems/welcome
 [dm+d]: https://isd.digital.nhs.uk/trud3/user/guest/group/0/pack/6
 [dm+d2]: https://isd.digital.nhs.uk/trud3/user/guest/group/0/pack/6/subpack/239/releases
+[MySQL]: https://www.mysql.com/
