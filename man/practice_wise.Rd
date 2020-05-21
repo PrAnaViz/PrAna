@@ -9,7 +9,7 @@ practice_wise(x, y, z)
 \arguments{
 \item{x}{processed prescription dataset}
 
-\item{y}{subset of GP practice}
+\item{y}{a character vector consisting of GP practices}
 
 \item{z}{processed BNF  mapped file}
 }

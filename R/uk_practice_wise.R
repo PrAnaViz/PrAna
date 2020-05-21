@@ -3,7 +3,7 @@
 #' Import NHS dataset files and generate processed individual GP practice prescription dataset
 #'
 #' @param x processed prescription dataset
-#' @param y subset of GP practice
+#' @param y a character vector consisting of GP practices
 #' @param z processed BNF  mapped file
 #' 
 #' @return multiple individual GP practice wise processed prescription dataset
@@ -29,10 +29,10 @@ practice_wise <- function(x,y,z) {
   tab07 <- NULL
   s <- NULL
   
-  for (i in (1:length( unique(y[[2]])  )))
+  for (i in (1:length( unique(y)  )))
   {
     
-    j = unique(y[[2]])[i]
+    j = unique(y)[i]
     
     tab01 <- x %>%
       dplyr::filter(PRACTICE %in% j) %>%
