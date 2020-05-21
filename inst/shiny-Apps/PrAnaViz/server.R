@@ -151,18 +151,13 @@ server <- function(input, output, session) {
   
   output$body <- renderUI({
           tabItems(
-                    # yearwise tab content
-                    tabItem(
-                      tabName = "home",
-                      source (file.path("ui","tab-home.R"),local = TRUE)$value
-                    ), #End of Tab item 
-                    # yearwise tab content
+                    # targeted tab content
                     tabItem(
                         tabName = "targeted",
                         source (file.path("ui","tab-targeted.R"),local = TRUE)$value
                             ), #End of Tab item
                       
-                    # Heatmap region tab content
+                    # non-targeted region tab content
                       tabItem(
                         tabName = "non-targeted",
                         source (file.path("ui","tab-non-targeted.R"),local = TRUE)$value
