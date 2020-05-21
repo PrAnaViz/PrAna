@@ -6,8 +6,6 @@ output:
     latex_engine: xelatex
   html_document: default
 ---
-
-
 # Workflow {#workflow}
 
 The workflow in this tutorial consists of the following steps, as in the Figure: \@ref(fig:prana-workflow):
@@ -49,6 +47,9 @@ Function         | Remarks
 `csv2dat()` function supports to combine different monthly NHS prescription dataset files into a single `data.frame` to process further. For an example:
 
 ```
+## Load library
+library(PrAna)
+
 ## Set the folder to store the combined file
 setwd("C:/Datasets/2018")
 
@@ -59,14 +60,11 @@ data201812 <- csv2dat("C:/Datasets/Prescription Datasets/2018/PDPI")
 
 ### Import `dm+d` files
 
-`importdmd()` function helps to import different extracted [`dm+d files`] [#dataextraction] and return multiple data objects  including a `data.frame` which map each BNF code to its corresponding API(s), strength and medicinal form. Recommended to read the documentation of `importdmd()` function to know more regarding the different data objects it generate.
+`importdmd()` function \@ref(example1) helps to import different extracted [`dm+d files`] [#dataextraction] and return multiple data objects  including a `data.frame` which map each BNF code to its corresponding API(s), strength and medicinal form. Recommended to read the documentation of `importdmd()` function to know more regarding the different data objects it generate.
 
 ```
 ## Read the extracted dm+d files
 dmdfile  <- importdmd("C:/dmdDataLoader/excel/")
-
-## create a data.frame object for the BNF code mapping file
-api_map <- dmdfile$bnf_full_final
 
 ```
 
@@ -74,18 +72,38 @@ api_map <- dmdfile$bnf_full_final
 
 The final step in the data conversion is to generate prescription dataset mapped with the individual API, prescription quantity, medicinal form, and strength for the defined GP practice(s), `practice_wise()` is used to carry out this conversion. 
 
-The `practice_wise()` function require following three parameters, 
+And before execute the `practice_wise()` function it is strongly suggested to setup the destination folder as the working directory using `setwd()` function.
+
+The `practice_wise()` function require following six parameters, as mentioned in the example below, 
 
 - Combined NHS prescription dataset, genereated using `csv2dat()` function
-- A `data.frame` containing GP Practices
-- BNF Code mapped file, genereated using `importdmd()` function 
+- A `character` vector containing GP Practices
+- A `data.frame` containing BNF Code mapped to individial APIs, strength, medicinal form
+- Unit of measurement with multiplication factors file
+- Different medicinal forms with its corresponding codes file
+- Different APIs with its corresponding codes file
 
 ```
+## create a data.frame object for the BNF code mapping file
+api_map <- dmdfile$api_map
+
+## Unit of measurements
+uom <- dmdfile$uomwdesc %>%
+        dplyr::rename(UOM = CD)
+
+## Medicinal form
+dform <- dmdfile$dform
+
+## ingredients list
+ing <- dmdfile$ing %>%
+  dplyr::rename(API_CODE = 1)
+
 ## Define the output location
 setwd("C:/Datasets/Prescription Datasets/practice_wise/2018")
 
 ## Execute practice_wise() function
-practice_wise(data201812, UK_GP2018, api_map)
+practice_wise(data201812, GP_practices, api_map, uom, dform, ing)
+
 ```
 ## Visualise and Analyse the data
 
