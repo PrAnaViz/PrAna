@@ -24,7 +24,7 @@
 <meta name="author" content="Kishore Jagadeesan" />
 
 
-<meta name="date" content="2020-05-21" />
+<meta name="date" content="2020-05-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="install.html"/>
-<link rel="next" href="pranaviz-1.html"/>
+<link rel="next" href="pranaviz.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -72,7 +72,6 @@
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
 <li class="chapter" data-level="2" data-path="install.html"><a href="install.html"><i class="fa fa-check"></i><b>2</b> Installation</a><ul>
 <li class="chapter" data-level="2.1" data-path="install.html"><a href="install.html#dependencies"><i class="fa fa-check"></i><b>2.1</b> Dependencies</a></li>
-<li class="chapter" data-level="2.2" data-path="install.html"><a href="install.html#pranaviz"><i class="fa fa-check"></i><b>2.2</b> PrAnaViz</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="workflow.html"><a href="workflow.html"><i class="fa fa-check"></i><b>3</b> Workflow</a><ul>
 <li class="chapter" data-level="3.1" data-path="workflow.html"><a href="workflow.html#datapreparation"><i class="fa fa-check"></i><b>3.1</b> Data Preparation</a></li>
@@ -85,12 +84,13 @@
 <li class="chapter" data-level="3.4" data-path="workflow.html"><a href="workflow.html#database-service"><i class="fa fa-check"></i><b>3.4</b> Database service</a></li>
 <li class="chapter" data-level="3.5" data-path="workflow.html"><a href="workflow.html#download-images-and-processed-data"><i class="fa fa-check"></i><b>3.5</b> Download images and processed data</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="pranaviz-1.html"><a href="pranaviz-1.html"><i class="fa fa-check"></i><b>4</b> PrAnaViz</a><ul>
-<li class="chapter" data-level="4.1" data-path="pranaviz-1.html"><a href="pranaviz-1.html#introduction-1"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
-<li class="chapter" data-level="4.2" data-path="pranaviz-1.html"><a href="pranaviz-1.html#targeted-approach"><i class="fa fa-check"></i><b>4.2</b> Targeted Approach</a></li>
-<li class="chapter" data-level="4.3" data-path="pranaviz-1.html"><a href="pranaviz-1.html#non-targeted-approach"><i class="fa fa-check"></i><b>4.3</b> Non-targeted Approach</a></li>
+<li class="chapter" data-level="4" data-path="pranaviz.html"><a href="pranaviz.html"><i class="fa fa-check"></i><b>4</b> PrAnaViz</a><ul>
+<li class="chapter" data-level="4.1" data-path="pranaviz.html"><a href="pranaviz.html#pranaviz-intro"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="pranaviz.html"><a href="pranaviz.html#pranaviz-targeted"><i class="fa fa-check"></i><b>4.2</b> Targeted Approach</a></li>
+<li class="chapter" data-level="4.3" data-path="pranaviz.html"><a href="pranaviz.html#pranaviz-nontargeted"><i class="fa fa-check"></i><b>4.3</b> Non-targeted Approach</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>5</b> Acknowledgements</a></li>
+<li class="chapter" data-level="6" data-path="disclaimer.html"><a href="disclaimer.html"><i class="fa fa-check"></i><b>6</b> Disclaimer</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -236,15 +236,16 @@ practice_wise(data201812, GP_practices, api_map, uom, dform, ing)
 <pre><code>library(PrAna)
 runShiny(&quot;PrAnaViz&quot;)</code></pre>
 <p>The <code>runShiny("PrAnaViz")</code> function will pop-up the <code>PrAnaViz</code> tool which will allow you to explore different spatiotemporal and long-term prescription trends with the sample dataset.</p>
-<p>However, for a better guide to get started it is recommended to read the <a href="https://github.bath.ac.uk/pages/kjj28/PrAna/articles/PrAnaViz_Tutoral.html"><code>PrAnaViz</code> tutorial</a>.</p>
+<p>However, for a better guide to get started it is recommended to see the Section <a href="pranaviz.html#pranaviz">4</a>.</p>
 </div>
 <div id="database-service" class="section level2">
 <h2><span class="header-section-number">3.4</span> Database service</h2>
-<p>To avoid the large data loading and processing issue, authors strongly suggest to upload the processed dataset to a local or a remote database service, for example, <a href="https://www.mysql.com/"><em>MySQL</em></a>, and link it to the <code>PrAnaViz</code>. More information on the linking databases to <code>PrAnaViz</code> is explained in the <a href="https://github.bath.ac.uk/pages/kjj28/PrAna/articles/PrAnaViz_Tutoral.html"><code>PrAnaViz</code> Tutorial</a>.</p>
+<p>To avoid the large data loading and processing issue, authors strongly suggest to upload the processed dataset to a local or a remote database service, for example, <a href="https://www.mysql.com/"><em>MySQL</em></a>, and link it to the <code>PrAnaViz</code>. More information on the linking databases to <code>PrAnaViz</code> is explained in the Section <a href="pranaviz.html#pranaviz">4</a>.</p>
 </div>
 <div id="download-images-and-processed-data" class="section level2">
 <h2><span class="header-section-number">3.5</span> Download images and processed data</h2>
 <p>Users can download processed data as <strong><em>.csv</em></strong> file and publication ready image <strong><em>.eps</em></strong> and <strong><em>.pdf</em></strong> files, for their further usage and applications.</p>
+<div style="page-break-after: always;"></div>
 
 </div>
 </div>
@@ -254,7 +255,7 @@ runShiny(&quot;PrAnaViz&quot;)</code></pre>
         </div>
       </div>
 <a href="install.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="pranaviz-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="pranaviz.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
