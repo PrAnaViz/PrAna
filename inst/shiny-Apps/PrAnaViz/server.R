@@ -127,7 +127,6 @@ server <- function(input, output, session) {
       div(
         sidebarMenu(
           tags$hr(),
-          menuItem("Home", tabName = "home"),
           menuItem("Targeted", tabName = "targeted"),
           menuItem("Non-Targeted", tabName = "non-targeted"),
           tags$hr(),
