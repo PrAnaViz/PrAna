@@ -1,10 +1,10 @@
-## Function to aggregate
-
 #' aggrapi
 #'
-#' @param y dataframe
+#' Function to aggregate, support function used in \code{practice_wise()} function
+#' 
+#' @param y \code{data.frame}
 #'
-#' @return dataframe
+#' @return \code{data.frame}
 #' 
 #' @importFrom dplyr %>%
 #' 

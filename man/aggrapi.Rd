@@ -7,11 +7,11 @@
 aggrapi(y)
 }
 \arguments{
-\item{y}{dataframe}
+\item{y}{\code{data.frame}}
 }
 \value{
-dataframe
+\code{data.frame}
 }
 \description{
-aggrapi
+Function to aggregate, support function used in \code{practice_wise()} function
 }
