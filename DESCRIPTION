@@ -37,7 +37,6 @@ Imports: shinydashboard,
          d3heatmap,
          utils,
          rgdal
-License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Suggests:
