@@ -53,7 +53,7 @@ However, for a better guide to get started it is recommended to read the [tutori
 
 ## Acknowledgements
 
-This package was built as a part of the **Wastewater Fingerprinting for Public Health Assessment (ENTRUST)** project funded by **Wessex Water** and **EPSRC IAA** _(grant no. EP/R51164X/1)_. 
+This package was built as a part of the **Wastewater Fingerprinting for Public Health Assessment (ENTRUST)** project funded by **University of Bath**, **Wessex Water** and **EPSRC IAA** _(grant no. EP/R51164X/1)_. 
 
 ## Disclaimer
 We accept no liability for any errors in the data or its publication here: use this data at your own risk. You should not use this data to make individual prescribing decisions.
