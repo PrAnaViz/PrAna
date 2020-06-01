@@ -1,3 +1,7 @@
+<!-- badges: start -->
+  [![Travis build status](https://travis-ci.com/kjj28/PrAna.svg?branch=master)](https://travis-ci.com/kjj28/PrAna)
+  <!-- badges: end -->
+  
 # PrAna
 
 `PrAna` aims to aggregate and normalise England’s national level prescription data, for all groups of drugs. The name is an acronym for _**Pr**escription **Ana**lysis_
