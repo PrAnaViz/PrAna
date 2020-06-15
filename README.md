@@ -1,5 +1,5 @@
 <!-- badges: start -->
-  [![Travis build status](https://travis-ci.com/kjj28/PrAna.svg?branch=master)](https://travis-ci.com/kjj28/PrAna)
+  [![Travis build status](https://travis-ci.com/jkkishore85/PrAna.svg?branch=master)](https://travis-ci.com/jkkishore85/PrAna)
   <!-- badges: end -->
   
 # PrAna
