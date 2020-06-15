@@ -29,12 +29,10 @@ Imports: shinydashboard,
          plotly,
          leaflet,
          readr,
-         rowr,
          stringi,
          tidyverse,
          RMariaDB,
          DBI,
-         d3heatmap,
          utils,
          rgdal
 Encoding: UTF-8
