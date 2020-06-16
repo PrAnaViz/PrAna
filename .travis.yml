@@ -9,6 +9,7 @@ addons:
     packages:
       - libgdal-dev
       - libproj-dev
+      - libv8-dev
 
 repos: 
   CRAN: https://cran.rstudio.com
