@@ -36,6 +36,6 @@ The documentation of `PrAna` consists of three parts:
 
 [R]: https://www.r-project.org/
 [NHS]: https://digital.nhs.uk/organisation-data-service/data-downloads/gp-data
-[PrAna ref]: https://github.bath.ac.uk/kjj28/PrAna/reference/index.html
+[PrAna ref]: https://github.com/jkkishore85/PrAna/reference/index.html
 
 \newpage
