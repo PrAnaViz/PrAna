@@ -194,14 +194,14 @@
 
 <span class='co'>## unit of measurement  </span>
 <span class='no'>uom</span> <span class='kw'>&lt;-</span> <span class='no'>dmdfile</span>$<span class='no'>uomwdesc</span> <span class='kw'>%&gt;%</span>
-        <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>rename</a></span>(<span class='kw'>UOM</span> <span class='kw'>=</span> <span class='no'>CD</span>)
+        <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/rename.html'>rename</a></span>(<span class='kw'>UOM</span> <span class='kw'>=</span> <span class='no'>CD</span>)
 
 <span class='co'>## medicinal form </span>
 <span class='no'>dform</span> <span class='kw'>&lt;-</span> <span class='no'>dmdfile</span>$<span class='no'>dform</span>
 
 <span class='co'>## ingredients</span>
 <span class='no'>ing</span> <span class='kw'>&lt;-</span> <span class='no'>dmdfile</span>$<span class='no'>ing</span> <span class='kw'>%&gt;%</span>
-        <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>rename</a></span>(<span class='kw'>API_CODE</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+        <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/rename.html'>rename</a></span>(<span class='kw'>API_CODE</span> <span class='kw'>=</span> <span class='fl'>1</span>)
 
 <span class='co'>## execute practice_wise function to generate multiple files</span>
 <span class='fu'>practice_wise</span>(<span class='no'>data201812</span>, <span class='no'>GP_practices</span>, <span class='no'>api_map</span>, <span class='no'>uom</span>, <span class='no'>dform</span>, <span class='no'>ing</span>)
