@@ -63,9 +63,9 @@ This package was built as a part of the **Wastewater Fingerprinting for Public H
 We accept no liability for any errors in the data or its publication here: use this data at your own risk. You should not use this data to make individual prescribing decisions.
 
 [R]: https://www.r-project.org/
-[tutorial]: https://github.bath.ac.uk/pages/kjj28/PrAna/articles/PrAnaViz_Tutoral.html
+[tutorial]: https://kishorejagadeesan.com/PrAna/articles/PrAnaViz_Tutoral.html
 [NHS digital]: https://digital.nhs.uk/organisation-data-service/data-downloads/gp-data
-[handbook-inst]: https://github.bath.ac.uk/pages/kjj28/PrAna/articles/handbook.html#installation
+[handbook-inst]: https://kishorejagadeesan.com/PrAna/articles/handbook.html#installation
 [NHSBSA]: https://applications.nhsbsa.nhs.uk/infosystems/welcome
 [dm+d]: https://isd.digital.nhs.uk/trud3/user/guest/group/0/pack/6
 [dm+d2]: https://isd.digital.nhs.uk/trud3/user/guest/group/0/pack/6/subpack/239/releases
