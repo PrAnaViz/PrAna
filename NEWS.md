@@ -1,3 +1,3 @@
-# PrAna 1.0.0
+# PrAna 0.1.0
 
-* This is the first release of PrAna.
+* First release of PrAna is on 13th July 2020.
