@@ -65,7 +65,7 @@ We accept no liability for any errors in the data or its publication here: use t
 [R]: https://www.r-project.org/
 [tutorial]: https://kishorejagadeesan.com/PrAna/articles/PrAnaViz_Tutoral.html
 [NHS digital]: https://digital.nhs.uk/organisation-data-service/data-downloads/gp-data
-[handbook-inst]: https://kishorejagadeesan.com/PrAna/articles/handbook.html#installation
+[handbook-inst]: https://kishorejagadeesan.com/PrAna/handbook_bd/install.html
 [NHSBSA]: https://applications.nhsbsa.nhs.uk/infosystems/welcome
 [dm+d]: https://isd.digital.nhs.uk/trud3/user/guest/group/0/pack/6
 [dm+d2]: https://isd.digital.nhs.uk/trud3/user/guest/group/0/pack/6/subpack/239/releases
