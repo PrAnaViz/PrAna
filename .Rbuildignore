@@ -8,6 +8,8 @@
 ^vignettes/handbook.log$
 ^_pkgdown.yaml$
 ^LICENSE\.md$
+.tar.gz
  references.bib
 ^data-raw$
 ^\.travis\.yml$
+.git
