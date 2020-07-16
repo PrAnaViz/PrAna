@@ -2,11 +2,7 @@
 
 `PrAna` can be installed as any other R package, however, since it is dependent on some other software tools some extra steps are required for the installation.
 
-You can install the released version of PrAna from CRAN with:
 
-```
-install.packages("PrAna")
-```
 
 You can install the development version of PrAna from GitHub with:
 

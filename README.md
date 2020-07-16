@@ -39,12 +39,6 @@ Below is an overview of the workflow:
 
 `PrAna` can be installed as any other R package, as follows,
 
-Install the released version of PrAna from CRAN with:
-```
-install.packages("PrAna")
-```
-For RStudio, click on the menu _Tools > Install Packages…_ and then type in “PrAna” and press _Install_
-
 To install the development version of PrAna from GitHub:
 ```
 install.packages("devtools")
