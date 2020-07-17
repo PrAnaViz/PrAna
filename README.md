@@ -57,7 +57,7 @@ This package was built as a part of the **Wastewater Fingerprinting for Public H
 We accept no liability for any errors in the data or its publication here: use this data at your own risk. You should not use this data to make individual prescribing decisions.
 
 [R]: https://www.r-project.org/
-[tutorial]: https://kishorejagadeesan.com/PrAna/articles/PrAnaViz_Tutoral.html
+[tutorial]: https://kishorejagadeesan.com/PrAna/handbook_bd/pranaviz.html
 [NHS digital]: https://digital.nhs.uk/organisation-data-service/data-downloads/gp-data
 [handbook-inst]: https://kishorejagadeesan.com/PrAna/handbook_bd/install.html
 [NHSBSA]: https://applications.nhsbsa.nhs.uk/infosystems/welcome

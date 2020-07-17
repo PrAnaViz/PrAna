@@ -32,7 +32,6 @@ The documentation of `PrAna` consists of three parts:
 - This handbook
 - The reference manual (accessible in `R` with `?PrAna-package` or [online here][PrAna ref])
 - A tutorial for PrAnaViz [(accessible at here)][PrAnaViz Tutorial]
-- A tutorial for FileUpload [(accessible at here)][FileUpload Tutorial]
 
 [R]: https://www.r-project.org/
 [NHS]: https://digital.nhs.uk/organisation-data-service/data-downloads/gp-data

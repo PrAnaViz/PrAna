@@ -141,6 +141,6 @@ Users can download processed data as **_.csv_** file and publication ready image
 [NHSBSA]: https://applications.nhsbsa.nhs.uk/infosystems/welcome
 [dm+d]: https://isd.digital.nhs.uk/trud3/user/guest/group/0/pack/6
 [dm+d2]: https://isd.digital.nhs.uk/trud3/user/guest/group/0/pack/6/subpack/239/releases
-[tutorial]: https://kishorejagadeesan.com/PrAna/articles/PrAnaViz_Tutoral.html
+[tutorial]: https://kishorejagadeesan.com/PrAna/handbook_bd/pranaviz.html
 
 \newpage
