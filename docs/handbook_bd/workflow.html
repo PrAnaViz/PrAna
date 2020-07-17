@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3 Workflow | PrAna Handbook</title>
+  <title>3 Workflow | PrAnaViz</title>
   <meta name="description" content="This is a handbook to use the PrAna package to aggregate and normalise England’s national level prescription data." />
   <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3 Workflow | PrAna Handbook" />
+  <meta property="og:title" content="3 Workflow | PrAnaViz" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3 Workflow | PrAna Handbook" />
+  <meta name="twitter:title" content="3 Workflow | PrAnaViz" />
   
   <meta name="twitter:description" content="This is a handbook to use the PrAna package to aggregate and normalise England’s national level prescription data." />
   
@@ -24,7 +24,7 @@
 <meta name="author" content="Kishore Jagadeesan" />
 
 
-<meta name="date" content="2020-05-22" />
+<meta name="date" content="2020-07-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,6 +33,7 @@
   
 <link rel="prev" href="install.html"/>
 <link rel="next" href="pranaviz.html"/>
+<script src="libs/header-attrs-2.2/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -70,12 +71,15 @@
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="install.html"><a href="install.html"><i class="fa fa-check"></i><b>2</b> Installation</a><ul>
+<li class="chapter" data-level="2" data-path="install.html"><a href="install.html"><i class="fa fa-check"></i><b>2</b> Installation</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="install.html"><a href="install.html#dependencies"><i class="fa fa-check"></i><b>2.1</b> Dependencies</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="workflow.html"><a href="workflow.html"><i class="fa fa-check"></i><b>3</b> Workflow</a><ul>
+<li class="chapter" data-level="3" data-path="workflow.html"><a href="workflow.html"><i class="fa fa-check"></i><b>3</b> Workflow</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="workflow.html"><a href="workflow.html#datapreparation"><i class="fa fa-check"></i><b>3.1</b> Data Preparation</a></li>
-<li class="chapter" data-level="3.2" data-path="workflow.html"><a href="workflow.html#data-conversion"><i class="fa fa-check"></i><b>3.2</b> Data Conversion</a><ul>
+<li class="chapter" data-level="3.2" data-path="workflow.html"><a href="workflow.html#data-conversion"><i class="fa fa-check"></i><b>3.2</b> Data Conversion</a>
+<ul>
 <li class="chapter" data-level="3.2.1" data-path="workflow.html"><a href="workflow.html#combine-nhs-monthly-dataset"><i class="fa fa-check"></i><b>3.2.1</b> Combine NHS monthly dataset</a></li>
 <li class="chapter" data-level="3.2.2" data-path="workflow.html"><a href="workflow.html#import-dmd-files"><i class="fa fa-check"></i><b>3.2.2</b> Import <code>dm+d</code> files</a></li>
 <li class="chapter" data-level="3.2.3" data-path="workflow.html"><a href="workflow.html#generate-gp-practice-wise-file"><i class="fa fa-check"></i><b>3.2.3</b> Generate GP practice wise file</a></li>
@@ -84,14 +88,14 @@
 <li class="chapter" data-level="3.4" data-path="workflow.html"><a href="workflow.html#database-service"><i class="fa fa-check"></i><b>3.4</b> Database service</a></li>
 <li class="chapter" data-level="3.5" data-path="workflow.html"><a href="workflow.html#download-images-and-processed-data"><i class="fa fa-check"></i><b>3.5</b> Download images and processed data</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="pranaviz.html"><a href="pranaviz.html"><i class="fa fa-check"></i><b>4</b> PrAnaViz</a><ul>
+<li class="chapter" data-level="4" data-path="pranaviz.html"><a href="pranaviz.html"><i class="fa fa-check"></i><b>4</b> PrAnaViz</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="pranaviz.html"><a href="pranaviz.html#pranaviz-intro"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
 <li class="chapter" data-level="4.2" data-path="pranaviz.html"><a href="pranaviz.html#pranaviz-targeted"><i class="fa fa-check"></i><b>4.2</b> Targeted Approach</a></li>
 <li class="chapter" data-level="4.3" data-path="pranaviz.html"><a href="pranaviz.html#pranaviz-nontargeted"><i class="fa fa-check"></i><b>4.3</b> Non-targeted Approach</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>5</b> Acknowledgements</a></li>
 <li class="chapter" data-level="6" data-path="disclaimer.html"><a href="disclaimer.html"><i class="fa fa-check"></i><b>6</b> Disclaimer</a></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -104,7 +108,7 @@
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">PrAna Handbook</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">PrAnaViz</a>
           </h1>
         </div>
 
@@ -112,7 +116,7 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="workflow" class="section level1">
+<div id="workflow" class="section level1" number="3">
 <h1><span class="header-section-number">3</span> Workflow</h1>
 <p>The workflow in this tutorial consists of the following steps, as in the Figure: <a href="workflow.html#fig:prana-workflow">3.1</a>:</p>
 <ul>
@@ -128,7 +132,7 @@
 Figure 3.1: PrAna Workflow.
 </p>
 </div>
-<div id="datapreparation" class="section level2">
+<div id="datapreparation" class="section level2" number="3.1">
 <h2><span class="header-section-number">3.1</span> Data Preparation</h2>
 <p><em>Data sources</em></p>
 <ul>
@@ -139,7 +143,7 @@ Figure 3.1: PrAna Workflow.
 <p>To download NHS prescription datasets, users need to guest login and solve a captcha in <a href="https://applications.nhsbsa.nhs.uk/infosystems/welcome">NHSBSA information portal</a>, to download the <a href="https://isd.digital.nhs.uk/trud3/user/guest/group/0/pack/6">dm+d</a> release files and <a href="https://isd.digital.nhs.uk/trud3/user/guest/group/0/pack/6/subpack/239/releases"><em>dm+d XML Transformation Tool</em></a>, users need to register an account.</p>
 <p>Store the monthly NHS prescription data in year wise folder. For an example, store all the 2015 monthly datasets in a folder named ‘2015’. Extract the <em>dm+d release files</em> using <em>dm+d XML Transformation Tool</em>. The documentation to extract the release file using the tool is well explained in the readme file.</p>
 </div>
-<div id="data-conversion" class="section level2">
+<div id="data-conversion" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> Data Conversion</h2>
 <p>Different functions were used in the aggregation and conversion workflow behind the scenes that performs the heavy lifting of a workflow step and finally return the results.</p>
 <p>An overview of all functions involved in the data conversion is shown in the table below.</p>
@@ -173,7 +177,7 @@ Figure 3.1: PrAna Workflow.
 </tr>
 </tbody>
 </table>
-<div id="combine-nhs-monthly-dataset" class="section level3">
+<div id="combine-nhs-monthly-dataset" class="section level3" number="3.2.1">
 <h3><span class="header-section-number">3.2.1</span> Combine NHS monthly dataset</h3>
 <p><code>csv2dat()</code> function supports to combine different monthly NHS prescription dataset files into a single <code>data.frame</code> to process further. For an example:</p>
 <pre><code>## Load library
@@ -186,14 +190,14 @@ setwd(&quot;C:/Datasets/2018&quot;)
 data201812 &lt;- csv2dat(&quot;C:/Datasets/Prescription Datasets/2018/PDPI&quot;)
 </code></pre>
 </div>
-<div id="import-dmd-files" class="section level3">
+<div id="import-dmd-files" class="section level3" number="3.2.2">
 <h3><span class="header-section-number">3.2.2</span> Import <code>dm+d</code> files</h3>
 <p><code>importdmd()</code> function helps to import different extracted [<code>dm+d files</code>] [#dataextraction] and return multiple data objects including a <code>data.frame</code> which map each BNF code to its corresponding API(s), strength and medicinal form. Recommended to read the documentation of <code>importdmd()</code> function to know more regarding the different data objects it generate.</p>
 <pre><code>## Read the extracted dm+d files
 dmdfile  &lt;- importdmd(&quot;C:/dmdDataLoader/excel/&quot;)
 </code></pre>
 </div>
-<div id="generate-gp-practice-wise-file" class="section level3">
+<div id="generate-gp-practice-wise-file" class="section level3" number="3.2.3">
 <h3><span class="header-section-number">3.2.3</span> Generate GP practice wise file</h3>
 <p>The final step in the data conversion is to generate prescription dataset mapped with the individual API, prescription quantity, medicinal form, and strength for the defined GP practice(s), <code>practice_wise()</code> is used to carry out this conversion.</p>
 <p>And before execute the <code>practice_wise()</code> function it is strongly suggested to setup the destination folder as the working directory using <code>setwd()</code> function.</p>
@@ -228,7 +232,7 @@ practice_wise(data201812, GP_practices, api_map, uom, dform, ing)
 </code></pre>
 </div>
 </div>
-<div id="visualise-and-analyse-the-data" class="section level2">
+<div id="visualise-and-analyse-the-data" class="section level2" number="3.3">
 <h2><span class="header-section-number">3.3</span> Visualise and Analyse the data</h2>
 <p>GP practice level files generated using the <code>practice_wise()</code> function are used to calculate the total prescribed quantity of different APIs at the particular GP practices and at a particular postcode using the in-built ShinyApp <code>PrAnaViz</code>.</p>
 <p><code>PrAnaViz</code> helps to visualise the total prescribed quantity of different APIs and to explore spatiotemporal trends of different APIs.</p>
@@ -238,11 +242,11 @@ runShiny(&quot;PrAnaViz&quot;)</code></pre>
 <p>The <code>runShiny("PrAnaViz")</code> function will pop-up the <code>PrAnaViz</code> tool which will allow you to explore different spatiotemporal and long-term prescription trends with the sample dataset.</p>
 <p>However, for a better guide to get started it is recommended to see the Section <a href="pranaviz.html#pranaviz">4</a>.</p>
 </div>
-<div id="database-service" class="section level2">
+<div id="database-service" class="section level2" number="3.4">
 <h2><span class="header-section-number">3.4</span> Database service</h2>
 <p>To avoid the large data loading and processing issue, authors strongly suggest to upload the processed dataset to a local or a remote database service, for example, <a href="https://www.mysql.com/"><em>MySQL</em></a>, and link it to the <code>PrAnaViz</code>. More information on the linking databases to <code>PrAnaViz</code> is explained in the Section <a href="pranaviz.html#pranaviz">4</a>.</p>
 </div>
-<div id="download-images-and-processed-data" class="section level2">
+<div id="download-images-and-processed-data" class="section level2" number="3.5">
 <h2><span class="header-section-number">3.5</span> Download images and processed data</h2>
 <p>Users can download processed data as <strong><em>.csv</em></strong> file and publication ready image <strong><em>.eps</em></strong> and <strong><em>.pdf</em></strong> files, for their further usage and applications.</p>
 <div style="page-break-after: always;"></div>

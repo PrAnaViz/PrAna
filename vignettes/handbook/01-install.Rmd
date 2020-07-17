@@ -21,8 +21,8 @@ Software         | Remarks
 [RStudio][RStudio]   | Suggested IDE platform to perform the R operations
 [MySQL][MySQL]   | Optional to host the generated dataset
 
-[PrAnaViz Tutorial]: https://github.bath.ac.uk/pages/kjj28/PrAna/articles/PrAnaViz_Tutoral.html
-[FileUpload Tutorial]: https://github.bath.ac.uk/pages/kjj28/PrAna/articles/PrAnaViz_Tutoral.html
+[PrAnaViz Tutorial]: https://kishorejagadeesan.com/PrAna/articles/PrAnaViz_Tutoral.html
+[FileUpload Tutorial]: https://kishorejagadeesan.com/PrAna/articles/PrAnaViz_Tutoral.html
 [MySQL]: https://www.mysql.com/
 [RStudio]: https://rstudio.com/
 

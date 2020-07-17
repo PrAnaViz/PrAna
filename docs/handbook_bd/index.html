@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>PrAna Handbook</title>
+  <title>PrAnaViz</title>
   <meta name="description" content="This is a handbook to use the PrAna package to aggregate and normalise England’s national level prescription data." />
   <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="PrAna Handbook" />
+  <meta property="og:title" content="PrAnaViz" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="PrAna Handbook" />
+  <meta name="twitter:title" content="PrAnaViz" />
   
   <meta name="twitter:description" content="This is a handbook to use the PrAna package to aggregate and normalise England’s national level prescription data." />
   
@@ -24,7 +24,7 @@
 <meta name="author" content="Kishore Jagadeesan" />
 
 
-<meta name="date" content="2020-05-22" />
+<meta name="date" content="2020-07-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,6 +33,7 @@
   
 
 <link rel="next" href="install.html"/>
+<script src="libs/header-attrs-2.2/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -70,12 +71,15 @@
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="install.html"><a href="install.html"><i class="fa fa-check"></i><b>2</b> Installation</a><ul>
+<li class="chapter" data-level="2" data-path="install.html"><a href="install.html"><i class="fa fa-check"></i><b>2</b> Installation</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="install.html"><a href="install.html#dependencies"><i class="fa fa-check"></i><b>2.1</b> Dependencies</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="workflow.html"><a href="workflow.html"><i class="fa fa-check"></i><b>3</b> Workflow</a><ul>
+<li class="chapter" data-level="3" data-path="workflow.html"><a href="workflow.html"><i class="fa fa-check"></i><b>3</b> Workflow</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="workflow.html"><a href="workflow.html#datapreparation"><i class="fa fa-check"></i><b>3.1</b> Data Preparation</a></li>
-<li class="chapter" data-level="3.2" data-path="workflow.html"><a href="workflow.html#data-conversion"><i class="fa fa-check"></i><b>3.2</b> Data Conversion</a><ul>
+<li class="chapter" data-level="3.2" data-path="workflow.html"><a href="workflow.html#data-conversion"><i class="fa fa-check"></i><b>3.2</b> Data Conversion</a>
+<ul>
 <li class="chapter" data-level="3.2.1" data-path="workflow.html"><a href="workflow.html#combine-nhs-monthly-dataset"><i class="fa fa-check"></i><b>3.2.1</b> Combine NHS monthly dataset</a></li>
 <li class="chapter" data-level="3.2.2" data-path="workflow.html"><a href="workflow.html#import-dmd-files"><i class="fa fa-check"></i><b>3.2.2</b> Import <code>dm+d</code> files</a></li>
 <li class="chapter" data-level="3.2.3" data-path="workflow.html"><a href="workflow.html#generate-gp-practice-wise-file"><i class="fa fa-check"></i><b>3.2.3</b> Generate GP practice wise file</a></li>
@@ -84,14 +88,14 @@
 <li class="chapter" data-level="3.4" data-path="workflow.html"><a href="workflow.html#database-service"><i class="fa fa-check"></i><b>3.4</b> Database service</a></li>
 <li class="chapter" data-level="3.5" data-path="workflow.html"><a href="workflow.html#download-images-and-processed-data"><i class="fa fa-check"></i><b>3.5</b> Download images and processed data</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="pranaviz.html"><a href="pranaviz.html"><i class="fa fa-check"></i><b>4</b> PrAnaViz</a><ul>
+<li class="chapter" data-level="4" data-path="pranaviz.html"><a href="pranaviz.html"><i class="fa fa-check"></i><b>4</b> PrAnaViz</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="pranaviz.html"><a href="pranaviz.html#pranaviz-intro"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
 <li class="chapter" data-level="4.2" data-path="pranaviz.html"><a href="pranaviz.html#pranaviz-targeted"><i class="fa fa-check"></i><b>4.2</b> Targeted Approach</a></li>
 <li class="chapter" data-level="4.3" data-path="pranaviz.html"><a href="pranaviz.html#pranaviz-nontargeted"><i class="fa fa-check"></i><b>4.3</b> Non-targeted Approach</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>5</b> Acknowledgements</a></li>
 <li class="chapter" data-level="6" data-path="disclaimer.html"><a href="disclaimer.html"><i class="fa fa-check"></i><b>6</b> Disclaimer</a></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -104,7 +108,7 @@
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">PrAna Handbook</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">PrAnaViz</a>
           </h1>
         </div>
 
@@ -113,11 +117,11 @@
 
             <section class="normal" id="section-">
 <div id="header">
-<h1 class="title">PrAna Handbook</h1>
+<h1 class="title">PrAnaViz</h1>
 <p class="author"><em>Kishore Jagadeesan</em></p>
-<p class="date"><em>2020-05-22</em></p>
+<p class="date"><em>2020-07-17</em></p>
 </div>
-<div id="introduction" class="section level1">
+<div id="introduction" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> Introduction</h1>
 <p>During the last decade, wide range of <strong>active pharmaceutical ingredients (APIs)</strong> have been identified and quantified in aquatic environment across several studies and indicated their impacts on exposed environmental species and humans. For the prediction of total amount of the APIs released to the environment, information about APIs consumption data is vital. Globally, several methods were reported to estimate the APIs consumption data based on the national prescription data, manufacturers, importers and dispenser’s data.</p>
 <p>In the UK, national prescription data provided by <a href="https://digital.nhs.uk/organisation-data-service/data-downloads/gp-data"><strong>National Health Service (NHS)</strong></a>, was used to calculate the consumption data. This data is freely accessible and consist of individual files for each month. With the large file with over 10 million records every month, the data from the NHS cannot be used for the direct calculation of the prescription levels of different APIs. Re-organisation and processing of the files is required before to do any exploration or analysis and to speed up the data reading.</p>
