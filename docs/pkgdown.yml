@@ -4,10 +4,10 @@ pkgdown_sha: ~
 articles:
   01-install: handbook/01-install.html
   02-workflow: handbook/02-workflow.html
-  03_PrAnaViz: handbook/03_PrAnaViz.html
+  03-PrAnaViz: handbook/03-PrAnaViz.html
   04-acknowledgements: handbook/04-acknowledgements.html
   index: handbook/index.html
-last_built: 2020-07-17T12:56Z
+last_built: 2020-07-17T13:30Z
 urls:
   reference: https://kishorejagadeesan.com/PrAna/reference
   article: https://kishorejagadeesan.com/PrAna/articles

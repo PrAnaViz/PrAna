@@ -1,3 +1,14 @@
+---
+title: "PrAnaViz"
+author: "Kishore Jagadeesan"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteEngine{knitr::knitr}
+  %\VignetteIndexEntry{PrAnaViz}
+  %\usepackage[UTF-8]{inputenc}
+---
+
 # PrAnaViz {#pranaviz}
 
 ## Introduction {#pranaviz-intro}
