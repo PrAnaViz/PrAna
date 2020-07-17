@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4 PrAnaViz | PrAnaViz</title>
+  <meta name="description" content="This is a handbook to use the PrAna package to aggregate and normalise England’s national level prescription data." />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4 PrAnaViz | PrAnaViz" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a handbook to use the PrAna package to aggregate and normalise England’s national level prescription data." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4 PrAnaViz | PrAnaViz" />
+  
+  <meta name="twitter:description" content="This is a handbook to use the PrAna package to aggregate and normalise England’s national level prescription data." />
+  
+
+<meta name="author" content="Kishore Jagadeesan" />
+
+
+<meta name="date" content="2020-07-17" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="workflow.html"/>
+<link rel="next" href="acknowledgements.html"/>
+<script src="libs/header-attrs-2.2/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">PrAna Handbook</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="install.html"><a href="install.html"><i class="fa fa-check"></i><b>2</b> Installation</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="install.html"><a href="install.html#dependencies"><i class="fa fa-check"></i><b>2.1</b> Dependencies</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="workflow.html"><a href="workflow.html"><i class="fa fa-check"></i><b>3</b> Workflow</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="workflow.html"><a href="workflow.html#datapreparation"><i class="fa fa-check"></i><b>3.1</b> Data Preparation</a></li>
+<li class="chapter" data-level="3.2" data-path="workflow.html"><a href="workflow.html#data-conversion"><i class="fa fa-check"></i><b>3.2</b> Data Conversion</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="workflow.html"><a href="workflow.html#combine-nhs-monthly-dataset"><i class="fa fa-check"></i><b>3.2.1</b> Combine NHS monthly dataset</a></li>
+<li class="chapter" data-level="3.2.2" data-path="workflow.html"><a href="workflow.html#import-dmd-files"><i class="fa fa-check"></i><b>3.2.2</b> Import <code>dm+d</code> files</a></li>
+<li class="chapter" data-level="3.2.3" data-path="workflow.html"><a href="workflow.html#generate-gp-practice-wise-file"><i class="fa fa-check"></i><b>3.2.3</b> Generate GP practice wise file</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="workflow.html"><a href="workflow.html#visualise-and-analyse-the-data"><i class="fa fa-check"></i><b>3.3</b> Visualise and Analyse the data</a></li>
+<li class="chapter" data-level="3.4" data-path="workflow.html"><a href="workflow.html#database-service"><i class="fa fa-check"></i><b>3.4</b> Database service</a></li>
+<li class="chapter" data-level="3.5" data-path="workflow.html"><a href="workflow.html#download-images-and-processed-data"><i class="fa fa-check"></i><b>3.5</b> Download images and processed data</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="pranaviz.html"><a href="pranaviz.html"><i class="fa fa-check"></i><b>4</b> PrAnaViz</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="pranaviz.html"><a href="pranaviz.html#pranaviz-intro"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="pranaviz.html"><a href="pranaviz.html#pranaviz-targeted"><i class="fa fa-check"></i><b>4.2</b> Targeted Approach</a></li>
+<li class="chapter" data-level="4.3" data-path="pranaviz.html"><a href="pranaviz.html#pranaviz-nontargeted"><i class="fa fa-check"></i><b>4.3</b> Non-targeted Approach</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>5</b> Acknowledgements</a></li>
+<li class="chapter" data-level="6" data-path="disclaimer.html"><a href="disclaimer.html"><i class="fa fa-check"></i><b>6</b> Disclaimer</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">PrAnaViz</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="pranaviz" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> PrAnaViz</h1>
+<div id="pranaviz-intro" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Introduction</h2>
+<p>The aim of this tool is to visualise and analyse the prescription data to calculate total prescribed quantity of different APIs and to explore spatiotemporal trends of different APIs for wider use.</p>
+<p>We have created, <code>PrAnaViz</code>, in a familiar <strong>dashboard layout</strong> with two tabs: (1) <strong>Targeted API</strong>, (2) <strong>Non-targeted API</strong>, to visualize total quantity of different APIs at CCG region with resolution to individual postcode.</p>
+</div>
+<div id="pranaviz-targeted" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Targeted Approach</h2>
+<ul>
+<li>In this tab, user can <strong>input a list of APIs</strong>, and find out the <strong>total prescription quantity</strong> of each API in the selected year, at the selected CCG region, as in the Figure: <a href="pranaviz.html#fig:pranaviz-targeted01">4.1</a>.</li>
+<li>This tab also visualise the total quantity of <strong>APIs</strong> prescribed by month, GP, Chemical form, and Medicinal form for a CCG region in a selected year.</li>
+</ul>
+<div class="figure" style="text-align: center"><span id="fig:pranaviz-targeted01"></span>
+<img src="figures/targeted01_labelled.png" alt="PrAna Targeted Approach." width="80%" />
+<p class="caption">
+Figure 4.1: PrAna Targeted Approach.
+</p>
+</div>
+<table>
+<colgroup>
+<col width="26%" />
+<col width="73%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><em>Option</em></th>
+<th><em>Remarks</em></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Select Targeted or Non-Targeted Approach</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Select Year, Region and Setting Type</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Upload targets i.e., APIs in <code>.csv</code> format</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Select monthwise or yearwise plots</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Plot generated based on user selection</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Download buttons to download the generated plot as <code>.pdf</code> or <code>.eps</code> and data as <code>.csv</code> format</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>More insights on a selected API, visualise total prescribed quantity of the API per month, GP practice, postcode and medicinal form (click on a particular API on the barplot to generate these plots)</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>Download buttons to download the generated plot as <code>.pdf</code> or <code>.eps</code> and data as <code>.csv</code> format</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="pranaviz-nontargeted" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> Non-targeted Approach</h2>
+<ul>
+<li>Total prescription quantity of an individual API at <strong>different postcode per month</strong> at a CCG region, can be rendered in this tab, as in the Figure: <a href="pranaviz.html#fig:pranaviz-nontargeted01">4.2</a>.</li>
+<li>The calculated total prescription quantity of an individual API at postcode level helps to find <strong>the hotspots</strong>.</li>
+<li>User can download data as <strong><em>.csv</em></strong> file and publication ready image <strong><em>.eps</em></strong> and <strong><em>.pdf</em></strong> files.</li>
+</ul>
+<div class="figure" style="text-align: center"><span id="fig:pranaviz-nontargeted01"></span>
+<img src="figures/non_targeted02_labelled.png" alt="PrAna Non-targeted Approach." width="80%" />
+<p class="caption">
+Figure 4.2: PrAna Non-targeted Approach.
+</p>
+</div>
+<table>
+<colgroup>
+<col width="26%" />
+<col width="73%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><em>Option</em></th>
+<th><em>Remarks</em></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Select Targeted or Non-Targeted Approach</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Select Year, Region and Setting Type</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Select <em>API</em> in the <code>drop-down</code> menu</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Select a month</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Plot generated based on user selection, click on a particular postcode to generate further plots</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Download buttons to download the generated plot as an interactive <code>.html</code> document and data as <code>.csv</code> format</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>Visualise total prescribed quantity of the API per month on the selected postcode (click on a particular postoode on the plot to generate these plots)</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>Download buttons to download the generated plot as <code>.pdf</code> or <code>.eps</code> and data as <code>.csv</code> format</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>Visualise total prescribed quantity of the API per medicinal form on the selected postcode</td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="workflow.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="acknowledgements.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["handbook.pdf", "handbook.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

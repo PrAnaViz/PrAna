@@ -1,6 +1,0 @@
-# Acknowledgements {#acknowledgements}
-
-This package was built as a part of the **Wastewater Fingerprinting for Public Health Assessment (ENTRUST)** project funded by Wessex Water and EPSRC IAA (grant no. EP/R51164X/1). 
-
-# Disclaimer
-We accept no liability for any errors in the data or its publication here: use this data at your own risk. You should not use this data to make individual prescribing decisions.

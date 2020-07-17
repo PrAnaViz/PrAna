@@ -1,13 +1,8 @@
 pandoc: 2.9.2.1
 pkgdown: 1.5.1
 pkgdown_sha: ~
-articles:
-  01-install: handbook/01-install.html
-  02-workflow: handbook/02-workflow.html
-  03-PrAnaViz: handbook/03-PrAnaViz.html
-  04-acknowledgements: handbook/04-acknowledgements.html
-  index: handbook/index.html
-last_built: 2020-07-17T13:30Z
+articles: {}
+last_built: 2020-07-17T13:41Z
 urls:
   reference: https://kishorejagadeesan.com/PrAna/reference
   article: https://kishorejagadeesan.com/PrAna/articles
