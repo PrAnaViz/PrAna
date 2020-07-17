@@ -1,11 +1,3 @@
----
-output:
-  word_document: default
-  pdf_document:
-    fig_caption: yes
-    latex_engine: xelatex
-  html_document: default
----
 # Workflow {#workflow}
 
 The workflow in this tutorial consists of the following steps, as in the Figure: \@ref(fig:prana-workflow):

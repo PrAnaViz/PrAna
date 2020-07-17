@@ -4,7 +4,6 @@ author: "Kishore Jagadeesan"
 date: "`r Sys.Date()`"
 knit: "bookdown::render_book"
 site: bookdown::bookdown_site
-bibliography: [references.bib]
 biblio-style: apalike
 link-citations: yes
 colorlinks: yes
