@@ -497,7 +497,7 @@ output$downloadhtml_nt_01 <- downloadHandler(
 )
 
 # Download csv 01
-output$downloadcsv_nt_01 = downloadHandler(
+output$downloadcsv_nt_01 <- downloadHandler(
   filename = function (){ paste(input$selected_api,'_',input$region_select_01,'_',input$selectyear01,'_month_',input$sel_month,'.csv',sep = '')},
   content = function(file) {
     write.csv(as.data.frame( downheatmap_period()), file, row.names = TRUE)
@@ -505,7 +505,7 @@ output$downloadcsv_nt_01 = downloadHandler(
 )
 
 # Download csv 02
-output$downloadcsv_nt_02 = downloadHandler(
+output$downloadcsv_nt_02 <- downloadHandler(
   filename = function (){ paste(input$selected_api,'_',input$region_select_01,'_',input$selectyear01,'.csv',sep = '')},
   content = function(file) {
     write.csv(as.data.frame( downheatmap_year()), file, row.names = TRUE)
@@ -513,7 +513,7 @@ output$downloadcsv_nt_02 = downloadHandler(
 )
 
 # Download csv 03
-output$downloadcsv_nt_03 = downloadHandler(
+output$downloadcsv_nt_03 <- downloadHandler(
   filename = function(){ paste(input$postcodemap_marker_click$id,'_',input$selected_api,'_',input$selectyear01, '.csv',sep = '')},
   content = function(file) {
     write.csv(as.data.frame( lineplot_postcode()), file, row.names = TRUE)
@@ -521,7 +521,7 @@ output$downloadcsv_nt_03 = downloadHandler(
 )
 
 # Download eps 01
-output$downloadeps_nt_01 = downloadHandler(
+output$downloadeps_nt_01 <- downloadHandler(
   filename = function(){ paste(input$postcodemap_marker_click$id,'_',input$selected_api,'_',input$selectyear01, '.eps',sep = '')},
   content = function(file) {
     postscript(file,
@@ -549,13 +549,13 @@ output$downloadeps_nt_01 = downloadHandler(
 )
 
 # Download pdf 01
-output$downloadpdf_nt_01 = downloadHandler(
+output$downloadpdf_nt_01 <- downloadHandler(
   filename = function(){ paste(input$postcodemap_marker_click$id,'_',input$selected_api,'_',input$selectyear01, '.pdf',sep = '')},
   content = function(file) {
     pdf(file, paper = "a4r",width = 14)
     a1 <- as.data.frame(dat_lineplotgp())
     a1$PERIOD <-  as.character(a1$PERIOD)
-    g = ggplot(data=a1, aes(x=PERIOD, y=kg,group = SURGERY_NAME)) +
+    g <- ggplot(data=a1, aes(x=PERIOD, y=kg,group = SURGERY_NAME)) +
       geom_line(aes(color = SURGERY_NAME ) ,
                 size = 0.5) +  
       geom_point(aes(color = SURGERY_NAME ),

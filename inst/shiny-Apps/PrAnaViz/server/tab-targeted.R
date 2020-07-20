@@ -453,7 +453,7 @@ output$downloaddata_t_01 = downloadHandler(
   }
 )
 
-output$downloaddata_t_02 = downloadHandler(
+output$downloaddata_t_02 <- downloadHandler(
   filename = function (){ paste0(input$region_select_01,'_',input$selectyear01,'_monthwise', '.csv')},
   content = function(file) {
     write.csv(as.data.frame(data.lineplot_t_01()), file, row.names = FALSE)
@@ -478,7 +478,7 @@ output$downloaddata_t_03 = downloadHandler(
   }
 )
 
-output$downloaddata_t_04 = downloadHandler(
+output$downloaddata_t_04 <- downloadHandler(
   filename = function (){ 
     s <- event_data("plotly_click", source = "filt_total_barplot1")
     paste0(s[["x"]],'_practicewise_at_',input$region_select_01,'_',input$selectyear01, '.csv')
@@ -496,7 +496,7 @@ output$downloaddata_t_04 = downloadHandler(
   }
 )
 
-output$downloaddata_t_05 = downloadHandler(
+output$downloaddata_t_05 <- downloadHandler(
   filename = function (){ 
     s <- event_data("plotly_click", source = "filt_total_barplot1")
     paste0(s[["x"]],'_postcodewise_at_',input$region_select_01,'_',input$selectyear01, '.csv')
@@ -514,7 +514,7 @@ output$downloaddata_t_05 = downloadHandler(
   }
 )
 
-output$downloaddata_t_06 = downloadHandler(
+output$downloaddata_t_06 <- downloadHandler(
   filename = function (){ 
     s <- event_data("plotly_click", source = "filt_total_barplot1")
     paste0(s[["x"]],'_medicinalform_at_',input$region_select_01,'_',input$selectyear01, '.csv')
@@ -533,13 +533,13 @@ output$downloaddata_t_06 = downloadHandler(
 )
 
 # Download eps
-output$downloadeps_t_01= downloadHandler(
+output$downloadeps_t_01<- downloadHandler(
   filename = function(){ paste(input$region_select_01,'_',input$selectyear01,'_yearwise','.eps',sep = '')},
   content = function(file) {
     postscript(file,
                width = 11.69 , height = 8.27, # inches
                horizontal = TRUE, onefile = TRUE, paper = "special")
-    g = ggplot(data=as.data.frame(filt_total_NM()), aes(x=NM, y=kg, fill=NM)) +
+    g <- ggplot(data=as.data.frame(filt_total_NM()), aes(x=NM, y=kg, fill=NM)) +
       geom_bar(stat="identity") +
       labs(title = paste("Total Compounds prescribed at",input$region_select_01, "\nover the year",input$selectyear01, "(in kg)") )+
       labs(x = "API", y = "kg", color = "API")+
@@ -558,7 +558,7 @@ output$downloadeps_t_01= downloadHandler(
   }
 )
 
-output$downloadeps_t_02 = downloadHandler(
+output$downloadeps_t_02 <- downloadHandler(
   filename = function(){ paste(input$region_select_01,'_',input$selectyear01,'_monthwise','.eps',sep = '')},
   content = function(file) {
     postscript(file,
@@ -566,7 +566,7 @@ output$downloadeps_t_02 = downloadHandler(
                horizontal = TRUE, onefile = TRUE, paper = "special")
     a1 <- as.data.frame(filt_total_period())
     a1$PERIOD <-  as.character(a1$PERIOD)
-    g = ggplot(data=a1, aes(x=PERIOD, y=kg, group = NM)) +
+    g <- ggplot(data=a1, aes(x=PERIOD, y=kg, group = NM)) +
       geom_line(aes(color = NM ) ,
                 size = 0.5) +  
       geom_point(aes(color = NM ),
@@ -589,7 +589,7 @@ output$downloadeps_t_02 = downloadHandler(
   }
 )
 
-output$downloadeps_t_03 = downloadHandler(
+output$downloadeps_t_03 <- downloadHandler(
   filename = function(){ 
     s <- event_data("plotly_click", source = "filt_total_barplot1")
     paste0(s[["x"]],'_monthwise_at_',input$region_select_01,'_',input$selectyear01, '.eps')
@@ -605,7 +605,7 @@ output$downloadeps_t_03 = downloadHandler(
     else {
       a1 <- subset (as.data.frame(filt_total_period()), NM %in%  s[["x"]])
       a1$PERIOD <-  as.character(a1$PERIOD)
-      g = ggplot(data=a1, aes(x=PERIOD, y=kg, group = NM)) +
+      g <- ggplot(data=a1, aes(x=PERIOD, y=kg, group = NM)) +
         geom_line(aes(color = NM ) ,
                   size = 0.5) +  
         geom_point(aes(color = NM ),
@@ -628,7 +628,7 @@ output$downloadeps_t_03 = downloadHandler(
   }
 )
 
-output$downloadeps_t_04 = downloadHandler(
+output$downloadeps_t_04 <- downloadHandler(
   filename = function(){ 
     s <- event_data("plotly_click", source = "filt_total_barplot1")
     paste0(s[["x"]],'_practicewise_at_',input$region_select_01,'_',input$selectyear01, '.eps')},
@@ -642,7 +642,7 @@ output$downloadeps_t_04 = downloadHandler(
     }   
     else {
       a1 <- subset (as.data.frame(filt_total_practice()),NM %in% s[["x"]])
-      g = ggplot(data=a1, aes(x=PRACTICE, y=kg, group = NM)) +
+      g <- ggplot(data=a1, aes(x=PRACTICE, y=kg, group = NM)) +
         geom_line(aes(color = NM ) ,
                   size = 0.5) +  
         geom_point(aes(color = NM ),
@@ -665,7 +665,7 @@ output$downloadeps_t_04 = downloadHandler(
   }
 )
 
-output$downloadeps_t_05 = downloadHandler(
+output$downloadeps_t_05 <- downloadHandler(
   filename = function(){ 
     s <- event_data("plotly_click", source = "filt_total_barplot1")
     paste0(s[["x"]],'_postcodewise_at_',input$region_select_01,'_',input$selectyear01, '.eps')},
@@ -679,7 +679,7 @@ output$downloadeps_t_05 = downloadHandler(
     }   
     else {
       a1 <- subset (as.data.frame(filt_total_postcode()),NM %in% s[["x"]])
-      g = ggplot(data=a1, aes(x=postcode, y=kg, group = NM)) +
+      g <- ggplot(data=a1, aes(x=postcode, y=kg, group = NM)) +
         geom_line(aes(color = NM ) ,
                   size = 0.5) +  
         geom_point(aes(color = NM ),
@@ -702,7 +702,7 @@ output$downloadeps_t_05 = downloadHandler(
   }
 )
 
-output$downloadeps_t_06 = downloadHandler(
+output$downloadeps_t_06 <- downloadHandler(
   filename = function(){ 
     s <- event_data("plotly_click", source = "filt_total_barplot1")
     paste0(s[["x"]],'_medicinalform_at_',input$region_select_01,'_',input$selectyear01, '.eps')},
@@ -716,7 +716,7 @@ output$downloadeps_t_06 = downloadHandler(
     }   
     else {
       a1 <- subset (as.data.frame(filt_total_dform()),NM %in% s[["x"]])
-      g = ggplot(data=a1, aes(x=DESC, y=kg, group = NM)) +
+      g <- ggplot(data=a1, aes(x=DESC, y=kg, group = NM)) +
         geom_line(aes(color = NM ) ,
                   size = 0.5) +  
         geom_point(aes(color = NM ),
@@ -740,11 +740,11 @@ output$downloadeps_t_06 = downloadHandler(
 )
 
 # Download pdf
-output$downloadpdf_t_01 = downloadHandler(
+output$downloadpdf_t_01 <- downloadHandler(
   filename = function(){ paste(input$region_select_01,'_',input$selectyear01,'_yearwise', '.pdf',sep = '')},
   content = function(file) {
     pdf(file, paper = "a4r",width = 14)
-    g = ggplot(data=as.data.frame(filt_total_NM()), aes(x=NM, y=kg, fill=NM)) +
+    g <- ggplot(data=as.data.frame(filt_total_NM()), aes(x=NM, y=kg, fill=NM)) +
       geom_bar(stat="identity") +
       labs(title = paste("Total Compounds prescribed at",input$region_select_01, "\nover the year",input$selectyear01, "(in kg)") )+
       labs(x = "API", y = "kg", color = "API")+
@@ -763,13 +763,13 @@ output$downloadpdf_t_01 = downloadHandler(
   }
 )
 
-output$downloadpdf_t_02 = downloadHandler(
+output$downloadpdf_t_02 <- downloadHandler(
   filename = function(){ paste(input$region_select_01,'_',input$selectyear01,'_monthwise','.pdf',sep = '')},
   content = function(file) {
     pdf(file, paper = "a4r",width = 14)
     a1 <- as.data.frame(filt_total_period())
     a1$PERIOD <-  as.character(a1$PERIOD)
-    g = ggplot(data=a1, aes(x=PERIOD, y=kg, group = NM)) +
+    g <- ggplot(data=a1, aes(x=PERIOD, y=kg, group = NM)) +
       geom_line(aes(color = NM ) ,
                 size = 0.5) +  
       geom_point(aes(color = NM ),
@@ -792,7 +792,7 @@ output$downloadpdf_t_02 = downloadHandler(
   }
 )
 
-output$downloadpdf_t_03 = downloadHandler(
+output$downloadpdf_t_03 <- downloadHandler(
   filename = function(){ 
     s <- event_data("plotly_click", source = "filt_total_barplot1")
     paste0(s[["x"]],'_monthwise_at_',input$region_select_01,'_',input$selectyear01, '.pdf')
@@ -806,7 +806,7 @@ output$downloadpdf_t_03 = downloadHandler(
     else {
       a1 <- subset (as.data.frame(filt_total_period()), NM %in%  s[["x"]])
       a1$PERIOD <-  as.character(a1$PERIOD)
-      g = ggplot(data=a1, aes(x=PERIOD, y=kg, group = NM)) +
+      g <- ggplot(data=a1, aes(x=PERIOD, y=kg, group = NM)) +
         geom_line(aes(color = NM ) ,
                   size = 0.5) +  
         geom_point(aes(color = NM ),
@@ -829,7 +829,7 @@ output$downloadpdf_t_03 = downloadHandler(
   }
 )
 
-output$downloadpdf_t_04 = downloadHandler(
+output$downloadpdf_t_04 <- downloadHandler(
   filename = function(){ 
     s <- event_data("plotly_click", source = "filt_total_barplot1")
     paste0(s[["x"]],'_practicewise_at_',input$region_select_01,'_',input$selectyear01, '.pdf')
@@ -842,7 +842,7 @@ output$downloadpdf_t_04 = downloadHandler(
     }   
     else {
       a1 <- subset (as.data.frame(filt_total_practice()),NM %in% s[["x"]])
-      g = ggplot(data=a1, aes(x=PRACTICE, y=kg, group = NM)) +
+      g <- ggplot(data=a1, aes(x=PRACTICE, y=kg, group = NM)) +
         geom_line(aes(color = NM ) ,
                   size = 0.5) +  
         geom_point(aes(color = NM ),
@@ -865,7 +865,7 @@ output$downloadpdf_t_04 = downloadHandler(
   }
 )
 
-output$downloadpdf_t_05 = downloadHandler(
+output$downloadpdf_t_05 <- downloadHandler(
   filename = function(){ 
     s <- event_data("plotly_click", source = "filt_total_barplot1")
     paste0(s[["x"]],'_postcodewise_at_',input$region_select_01,'_',input$selectyear01, '.pdf')
@@ -878,7 +878,7 @@ output$downloadpdf_t_05 = downloadHandler(
     }   
     else {
       a1 <- subset (as.data.frame(filt_total_postcode()),NM %in% s[["x"]])
-      g = ggplot(data=a1, aes(x=postcode, y=kg, group = NM)) +
+      g <- ggplot(data=a1, aes(x=postcode, y=kg, group = NM)) +
         geom_line(aes(color = NM ) ,
                   size = 0.5) +  
         geom_point(aes(color = NM ),
@@ -901,7 +901,7 @@ output$downloadpdf_t_05 = downloadHandler(
   }
 )
 
-output$downloadpdf_t_06 = downloadHandler(
+output$downloadpdf_t_06 <- downloadHandler(
   filename = function(){ 
     s <- event_data("plotly_click", source = "filt_total_barplot1")
     paste0(s[["x"]],'_medicinalform_at_',input$region_select_01,'_',input$selectyear01, '.pdf')
@@ -914,7 +914,7 @@ output$downloadpdf_t_06 = downloadHandler(
     }   
     else {
       a1 <- subset (as.data.frame(filt_total_dform()),NM %in% s[["x"]])
-      g = ggplot(data=a1, aes(x=DESC, y=kg, group = NM)) +
+      g <- ggplot(data=a1, aes(x=DESC, y=kg, group = NM)) +
         geom_line(aes(color = NM ) ,
                   size = 0.5) +  
         geom_point(aes(color = NM ),

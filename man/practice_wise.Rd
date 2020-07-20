@@ -11,13 +11,13 @@ practice_wise(presdata, gpvector, apimap, uom, dform, ing)
 
 \item{gpvector}{\code{character} vector consisting GP practices}
 
-\item{apimap}{BNF code mapped \code{data.frame} genearated using \code{importdmd()} function}
+\item{apimap}{BNF code mapped \code{data.frame} generated using \code{importdmd()} function}
 
-\item{uom}{a \code{data.frame} genearated using \code{importdmd()} function containing different unit of measurements and its corresponding codes}
+\item{uom}{a \code{data.frame} generated using \code{importdmd()} function containing different unit of measurements and its corresponding codes}
 
-\item{dform}{a \code{tibble} genearated using \code{importdmd()} function containing different medicinal form and its corresponding codes}
+\item{dform}{a \code{tibble} generated using \code{importdmd()} function containing different medicinal form and its corresponding codes}
 
-\item{ing}{a \code{tibble} genearated using \code{importdmd()} function containing different APIs and its corresponding codes}
+\item{ing}{a \code{tibble} generated using \code{importdmd()} function containing different APIs and its corresponding codes}
 }
 \value{
 multiple individual GP practice wise processed prescription dataset

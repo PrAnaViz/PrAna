@@ -4,10 +4,10 @@
 #'
 #' @param presdata combined prescription data \code{data.frame} generated using \code{csv2dat()} function
 #' @param gpvector \code{character} vector consisting GP practices
-#' @param apimap BNF code mapped \code{data.frame} genearated using \code{importdmd()} function
-#' @param uom a \code{data.frame} genearated using \code{importdmd()} function containing different unit of measurements and its corresponding codes
-#' @param dform a \code{tibble} genearated using \code{importdmd()} function containing different medicinal form and its corresponding codes
-#' @param ing a \code{tibble} genearated using \code{importdmd()} function containing different APIs and its corresponding codes
+#' @param apimap BNF code mapped \code{data.frame} generated using \code{importdmd()} function
+#' @param uom a \code{data.frame} generated using \code{importdmd()} function containing different unit of measurements and its corresponding codes
+#' @param dform a \code{tibble} generated using \code{importdmd()} function containing different medicinal form and its corresponding codes
+#' @param ing a \code{tibble} generated using \code{importdmd()} function containing different APIs and its corresponding codes
 #'
 #' @return multiple individual GP practice wise processed prescription dataset
 #' @export
@@ -62,12 +62,12 @@ practice_wise <- function(presdata,gpvector,apimap,uom,dform, ing) {
   for (i in (1:length( unique(gpvector)  )))
   {
     
-    j = unique(gpvector)[i]
+    j <- unique(gpvector)[i]
     
     tab01 <- presdata %>%
       dplyr::filter(PRACTICE %in% j) %>%
       data.table::setnames(4,"BNFCODE") %>%
-      merge(apimap,by = "BNFCODE", all = F) %>%
+      merge(apimap,by = "BNFCODE", all = FALSE) %>%
       dplyr::select("PERIOD","PRACTICE","BNFCODE","MDR","VPPID","VPID.x","ISID","value","UOM","ITEMS","QUANTITY")
     
     s <- strsplit(tab01$ISID, split = "#")
@@ -98,7 +98,7 @@ practice_wise <- function(presdata,gpvector,apimap,uom,dform, ing) {
       dplyr::mutate(API= as.character(API))%>%
       dplyr::mutate(API_CODE = API) %>%
       dplyr::group_by(API_CODE,PRACTICE,PERIOD,DForm)%>%
-      dplyr::summarize(gram = sum(Vol_Mass_Tot, na.rm = T)) %>%
+      dplyr::summarize(gram = sum(Vol_Mass_Tot, na.rm = TRUE)) %>%
       dplyr::left_join(ing[,c(1,5)], by="API_CODE") %>%
       dplyr::mutate(gram = gram/1000)%>%
       dplyr::select("NM", "API_CODE","PRACTICE","PERIOD","DForm","gram")

@@ -35,7 +35,7 @@ importdmd <- function(path)
   memory.limit(size = 750000)
   
   # import SNOMED Mapping (June 2018) file
-  bnf_full <- data.table::fread (system.file("extdata","snomed_mapping.csv", package = "PrAna"), header = T, stringsAsFactors = F)
+  bnf_full <- data.table::fread (system.file("extdata","snomed_mapping.csv", package = "PrAna"), header = TRUE, stringsAsFactors = FALSE)
   bnf_full$'BNF Code' <- gsub("'", "",bnf_full$'BNF Code' )
   bnf_full$'VMPP / AMPP SNOMED Code'<-gsub("'", "",bnf_full$'VMPP / AMPP SNOMED Code' )
   
@@ -48,7 +48,7 @@ importdmd <- function(path)
   dform <- readxl::read_excel("f_vmp.xlsx", sheet = "DrugForm")
   ing <- readxl::read_excel("f_ingredient.xlsx", sheet = "Ingredient")
   UoM_01 <- readxl::read_excel("f_lookup.xlsx", sheet = "UoM")
-  uom_desc <- data.table::fread (system.file("extdata","uom_desc.csv", package = "PrAna"), header = T, stringsAsFactors = F)
+  uom_desc <- data.table::fread (system.file("extdata","uom_desc.csv", package = "PrAna"), header = TRUE, stringsAsFactors = FALSE)
   UoM_02 <- cbind(UoM_01, multi_fac=uom_desc$multi_fac  [match(gsub(" ", "",UoM_01$CD), gsub(" ", "",  uom_desc$'CD'))])
   
   
