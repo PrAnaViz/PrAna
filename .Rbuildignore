@@ -13,3 +13,4 @@
 ^data-raw$
 ^\.travis\.yml$
 .git
+^\.github$
