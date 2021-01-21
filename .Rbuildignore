@@ -11,6 +11,5 @@
 .tar.gz
  references.bib
 ^data-raw$
-^\.travis\.yml$
 .git
 ^\.github$

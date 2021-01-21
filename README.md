@@ -1,5 +1,4 @@
 <!-- badges: start -->
-  [![Build Status](https://travis-ci.com/jkkishore85/PrAna.svg?token=QfmfAfm3Jg9UXFvh9x7J&branch=master)](https://travis-ci.com/jkkishore85/PrAna)
   [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
   [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![R-CMD-check](https://github.com/jkkishore85/PrAna/workflows/R-CMD-check/badge.svg)](https://github.com/jkkishore85/PrAna/actions)
