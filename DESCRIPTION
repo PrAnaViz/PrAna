@@ -1,18 +1,14 @@
 Package: PrAna
 Type: Package
 Title: Prescription Data Analysis
-Version: 0.1.0
-Author: Kishore Kumar Jagadeesan <jkkishore85@gmail.com>
-Maintainer: Kishore Kumar Jagadeesan <jkkishore85@gmail.com>
+Version: 1.1.0
+Authors@R:person("Kishore Kumar", "Jagadeesan", email = "jkkishore85@gmail.com", role = c("aut", "cre"))
 Description: Package with functions to compile and process UK NHS Digital prescribing data 
         for the period 2015-2018 to facilitate the calculation of the consumption data and long-term time, seasonal and 
         location based trends to create an interactive data visualisation tool for a wider use.
 Imports: shinydashboard, 
          shiny,
-         DiagrammeR,
-         DiagrammeRsvg,
          shinyBS,
-         shinyFiles,
          dbplyr,
          data.table,
          plyr,
@@ -41,6 +37,6 @@ LazyData: true
 Suggests:
     knitr (>= 0.1.0),
     rmarkdown
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 VignetteBuilder: knitr
 License: MIT + file LICENSE
