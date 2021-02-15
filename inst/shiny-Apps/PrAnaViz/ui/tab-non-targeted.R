@@ -49,8 +49,7 @@ tabPanel(
           column(
             width = 6,
             sliderInput("sel_month", "Select Month:",
-                        min = 0, max = 12, value = 8
-            ),
+                        min = 0, max = 12, value = 8),
             actionButton(inputId = "gen_leaflet01",
                          label = "Generate Graph", class="btn btn-success action-button")
           )
@@ -98,28 +97,6 @@ tabPanel(
         plotlyOutput("filt_gp_lineplot1",height="350px"),
         tags$hr(),
         uiOutput("uidownload_nt_02")
-      ),
-      box( 
-        width = NULL,
-        status = "info",
-        solidHeader = TRUE,
-        tags$style(type = "text/css", 
-                   ".plotly div {
-                                    font-family: 'Open Sans', verdana, arial, sans-serif;
-                                    font-size: 14px;
-                                    opacity: 1;
-                                    font-weight: normal;
-                                    }"),
-        tags$style("#txt_gp_pie_title 
-                                            {
-                                            font:16px Arial, Helvetica, sans-serif;
-                                            line-height: 1.1; 
-                                            text-align: center;
-                                            font-weight: bold;
-                                            }"
-        ),
-        htmlOutput("txt_gp_pie_title"),
-        plotlyOutput("filt_gp_dform_pie",height="350px")
       )
     ) # End of column
   ) # End of fluid row
