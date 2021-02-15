@@ -10,21 +10,21 @@ targetdata <- reactive({
 
 # Select db for the gp list
 gp_list_year  <- reactive ({ 
-  gp_list_shape 
+  gp_list_shape()
 })
 
 list_practices <- reactive({
   if (input$setting_select_01 == "all") {
     gp_list_year () %>%
       dplyr::rename (organisation_code = PRACTICE ) %>%
-      merge(ccg_gp_full[,c("organisation_code","setting_type")] , by = "organisation_code") %>%
+      merge(ccg_gp_full()[,c("organisation_code","setting_type")] , by = "organisation_code") %>%
       dplyr::rename (PRACTICE = organisation_code ) %>% 
       dplyr::rename (Year = year ) 
   }
   else {
     gp_list_year () %>%
       dplyr::rename (organisation_code = PRACTICE ) %>%
-      merge(ccg_gp_full[,c("organisation_code","setting_type")] , by = "organisation_code") %>%
+      merge(ccg_gp_full()[,c("organisation_code","setting_type")] , by = "organisation_code") %>%
       filter (setting_type %in% !!input$setting_select_01) %>% 
       dplyr::rename (PRACTICE = organisation_code ) %>% 
       dplyr::rename (Year = year ) 
@@ -35,9 +35,15 @@ list_practices <- reactive({
 list_practices_year <- reactive({
   list_practices () %>%
     filter (Year %in% !!input$selectyear01) %>%
-    filter (region %in% !!input$region_select_01) %>%
+    filter (region %in% !!toupper(input$region_select_01)) %>%
     select(PRACTICE)
   
+})
+
+## Bind all the practices
+bind_practices <- reactive({
+  base::do.call(rbind, dfList_banes())  %>%
+    distinct()
 })
 
 # Filter out the practices based on selected region and practices
@@ -45,19 +51,32 @@ tbls_yearwise <- reactive ({
   as.data.frame(list_practices_year())$"PRACTICE"
 })
 
-## Need to change the database once we have all regions in a sql database
+# ## Need to change the database once we have all regions in a sql database
 dfList_banes <- reactive({
-  lapply(paste(sql.demo_one, tbls_yearwise()), function(s) {
-    tryCatch({ return(dbGetQuery(aggr_wodb, s)) 
-    }, error = function(e) return(as.character(e)))
-  })
-  
-}) 
-
-## Bind all the practices
-bind_practices <- reactive({
-  base::do.call(rbind, dfList_banes())  %>%
-    distinct()
+    if(input$selectyear01 == "2015"){
+      lapply(paste(sql.demo_one, tbls_yearwise()," WHERE PERIOD LIKE '%2015%'"), function(s) {
+        tryCatch({ return(dbGetQuery(aggr_wodb(), s))
+        }, error = function(e) return(as.character(e)))
+      })
+    }
+    else if(input$selectyear01 == "2016"){
+      lapply(paste(sql.demo_one, tbls_yearwise()," WHERE PERIOD LIKE '%2016%'"), function(s) {
+        tryCatch({ return(dbGetQuery(aggr_wodb(), s))
+        }, error = function(e) return(as.character(e)))
+      })
+    }
+    else if(input$selectyear01 == "2017"){
+      lapply(paste(sql.demo_one, tbls_yearwise()," WHERE PERIOD LIKE '%2017%'"), function(s) {
+        tryCatch({ return(dbGetQuery(aggr_wodb(), s))
+        }, error = function(e) return(as.character(e)))
+      })
+    }
+    else if(input$selectyear01 == "2018"){
+      lapply(paste(sql.demo_one, tbls_yearwise()," WHERE PERIOD LIKE '%2018%'"), function(s) {
+        tryCatch({ return(dbGetQuery(aggr_wodb(), s))
+        }, error = function(e) return(as.character(e)))
+      })
+    }
 })
 
 # Subset yearwise data
@@ -128,7 +147,7 @@ filt_total_dform <- reactive ({
     mutate(gram2 = as.numeric(gram)) %>%
     mutate(DForm = as.numeric(DForm)) %>%
     mutate(CD = DForm) %>% 
-    left_join(dform_desc, by="CD") %>%
+    left_join(dform_desc(), by="CD") %>%
     group_by(NM, DESC) %>%
     summarise(gram_sum = sum(gram2, na.rm = T)) %>%
     mutate(kg = gram_sum/1000) 
