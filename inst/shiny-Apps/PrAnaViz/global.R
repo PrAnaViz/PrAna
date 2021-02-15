@@ -17,10 +17,11 @@ library(readxl)
 library(lubridate)
 library(ggplot2)
 library(chron)
-library(RSQLite)
 library(RMariaDB)
 library(dbplyr)
 library(tidyverse)
 library(DBI)
 library(leaflet)
 library(rgdal)
+
+
