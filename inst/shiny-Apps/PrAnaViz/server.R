@@ -4,7 +4,7 @@ options(shiny.maxRequestSize = 5000000*1024^6)
 # Define server logic required to draw a histogram
 server <- function(input, output, session) {
   
-  sql.demo_one <- "SELECT * FROM gp_practice." 
+  sql.demo_one <- "SELECT * FROM banes." 
   sql.support <- "SELECT * FROM support." 
   
    # Connect to local host 
@@ -141,7 +141,6 @@ server <- function(input, output, session) {
         sidebarMenu(
           tags$hr(),
           menuItem("Database connect", 
-                   
                    textInput("usernm", "user name:", "type here"),
                    passwordInput("pwd", "Password:"),
                    textInput("hostnm", "host name:", "type here"),
