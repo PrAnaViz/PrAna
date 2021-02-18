@@ -192,7 +192,9 @@ observeEvent(input$postcodemap_marker_click, {
 # Data for download csv
 # leaflet data monthwise
 downheatmap_period <- reactive ({
-  dcast(as.data.frame(postcode_api()), postcode+NM ~ PERIOD,value.var= "kg") 
+  postcode_api() %>%
+    dplyr::select(postcode,NM, PERIOD, kg) %>%
+    pivot_wider(names_from = PERIOD, values_from = kg, values_fill = 0  )
 })
 
 #leaflet data yearwise
