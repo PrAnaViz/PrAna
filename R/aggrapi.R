@@ -7,6 +7,7 @@
 #' @return \code{data.frame}
 #' 
 #' @importFrom dplyr %>%
+#' @importFrom stringr str_split_fixed
 #' 
 #' @export
 #'
