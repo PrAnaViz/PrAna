@@ -1,7 +1,6 @@
 <!-- badges: start -->
   [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
   [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![R-CMD-check](https://github.com/jkkishore85/PrAna/workflows/R-CMD-check/badge.svg)](https://github.com/jkkishore85/PrAna/actions)
 [![CRAN status](https://www.r-pkg.org/badges/version/PrAna)](https://CRAN.R-project.org/package=PrAna)
 <!-- badges: end -->
   
@@ -46,11 +45,11 @@ To install the development version of PrAna from GitHub:
 ```
 install.packages("devtools")
 library(devtools)
-install_github("jkkishore85/PrAna")
+install_github("PrAnaViz/PrAna")
 ```
-However, since it is dependent on some other software tools some extra steps are required for the installation. Please see the [installation section in the handbook][handbook-inst] for more information.
+However, since it is dependent on some other software tools some extra steps are required for the installation. Please see the installation section in the handbook for more information.
 
-However, for a better guide to get started it is recommended to read the [tutorial][tutorial].
+However, for a better guide to get started it is recommended to read the tutorial.
 
 ## Acknowledgements
 
@@ -60,9 +59,7 @@ This package was built as a part of the **Wastewater Fingerprinting for Public H
 We accept no liability for any errors in the data or its publication here: use this data at your own risk. You should not use this data to make individual prescribing decisions.
 
 [R]: https://www.r-project.org/
-[tutorial]: https://kishorejagadeesan.com/PrAna/handbook_bd/pranaviz.html
 [NHS digital]: https://digital.nhs.uk/organisation-data-service/data-downloads/gp-data
-[handbook-inst]: https://kishorejagadeesan.com/PrAna/handbook_bd/install.html
 [NHSBSA]: https://applications.nhsbsa.nhs.uk/infosystems/welcome
 [dm+d]: https://isd.digital.nhs.uk/trud3/user/guest/group/0/pack/6
 [dm+d2]: https://isd.digital.nhs.uk/trud3/user/guest/group/0/pack/6/subpack/239/releases
