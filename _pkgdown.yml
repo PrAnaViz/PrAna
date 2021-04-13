@@ -1,4 +1,5 @@
 title: PrAna
+url: https://github.com/PrAnaViz/PrAna
 template:
     params:
         bootswatch: flatly
