@@ -1,10 +1,12 @@
 citHeader("To cite PrAna in publications use:")
 
 citEntry(
-  entry    = "Misc",
-  title    = "PrAnaViz: an interactive R Shiny application to calculate and visualize England NHS prescribing data",
-  author   = "Kishore Kumar Jagadeesan, James Grant, Sue Griffin, Ruth Barden and Barbara Kasprzyk-Hordern" ,
+  entry    = "Article",
+  title    = "PrAna: An R package to calculate and visualize England NHS primary care prescribing data",
+  author   = "Kishore Kumar Jagadeesan and James Grant and Sue Griffin and Ruth Barden and Barbara Kasprzyk-Hordern" ,
+  journal  = "BMC Medical Informatics and Decision Making",
+  year     = "Under Review",
   textVersion = paste(
-"PrAnaViz: an interactive R Shiny application to calculate and visualize England NHS prescribing data"
+
   )
 )
