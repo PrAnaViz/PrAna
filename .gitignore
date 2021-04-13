@@ -33,6 +33,5 @@
 inst/doc
 #docs
 .Rproj.user
-inst/shiny-Apps/pda_2/data/aggr.sqlite
-inst/shiny-Apps/pda_2/data/aggr01_201412.sqlite
-inst/shiny-Apps/pda_2/data/aggr01_201512.sqlite
+
+*.html
