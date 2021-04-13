@@ -30,7 +30,7 @@
 ### R.Bookdown Stack ###
 # R package: bookdown caching files
 /*_files/
-inst/doc
-docs
+/inst/doc
+/docs/
 .Rproj.user
 *.html
