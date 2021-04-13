@@ -3,8 +3,8 @@ Type: Package
 Title: Prescription Data Analysis
 Version: 1.1.0
 Authors@R:person("Kishore Kumar", "Jagadeesan", email = "jkkishore85@gmail.com", role = c("aut", "cre"))
-Description: Package with functions to compile and process UK NHS Digital prescribing data 
-        for the period 2015-2018 to facilitate the calculation of the consumption data and long-term time, seasonal and 
+Description: Package with functions to compile and process UK National Health Service Digital prescribing data 
+        for the period 2015 to 2018, to facilitate the calculation of the consumption data and long-term time, seasonal and 
         location based trends to create an interactive data visualisation tool for a wider use.
 Imports: shiny,
          dbplyr,
@@ -23,7 +23,6 @@ Imports: shiny,
          rgdal,
          dplyr
 Encoding: UTF-8
-LazyData: true
 Suggests:
     knitr (>= 0.1.0),
     rmarkdown
