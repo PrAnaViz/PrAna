@@ -1,3 +1,4 @@
+## Server
 ## Shape file
 
 # ui for file input 01
@@ -11,23 +12,15 @@ output$uifile_shape <- renderUI({
   
 })
 
-map <- reactive({
-  shpdf <- input$file_shape
-  if(is.null(shpdf)){
-    return()
-  }
-  previouswd <- getwd()
-  uploaddirectory <- dirname(shpdf$datapath[1])
-  setwd(uploaddirectory)
-  for(i in 1:nrow(shpdf)){
-    file.rename(shpdf$datapath[i], shpdf$name[i])
-  }
-  setwd(previouswd)
-  map <- sf::st_read(paste(uploaddirectory, shpdf$name[grep(pattern="*.shp$", shpdf$name)], sep="/"), quiet = TRUE ) %>%
-    rename(region_name = 3)
-  map
-})
 
+output$regioninput2 <- renderUI({
+  withProgress(message = 'Data is loading, please wait ...', value = 1:100, {
+    selectInput(inputId="region_select_02",
+                label="Select region:",
+                choices=map()$region_name
+    )
+  })
+})
 
 # Leaflet color function
 getColor <- function(data02) {
@@ -45,7 +38,7 @@ getColor <- function(data02) {
 
 gp_postcode_full <-  reactive ({ 
   gp_data_full_latnlong() %>%
-    filter (Year %in% !!input$selectyear01)  %>%
+    filter (Year %in% !!input$selectyear02)  %>%
     dplyr::select(PERIOD, PRACTICE, SURGERY_NAME, postcode, latitude, longitude) %>%
     distinct()
 })
@@ -83,10 +76,10 @@ output$postcodemap <- renderLeaflet({
       addProviderTiles("Esri.WorldImagery", group = "Satellite") %>%
       addMiniMap(position = "bottomright") %>%
       addLayersControl(
-                position = "topright",
-                baseGroups = c("Street map","Satellite"),
-                overlayGroups = c("CCG")
-              )
+        position = "topright",
+        baseGroups = c("Street map","Satellite"),
+        overlayGroups = c("CCG")
+      )
   })
 })
 
@@ -105,57 +98,122 @@ observeEvent(input$gen_leaflet01, {
     library = 'glyphicon',
     markerColor = getColor(postcode_api_month())
   )})
-
+  
   leafletProxy("postcodemap") %>%
-   addAwesomeMarkers (
-    data = postcode_api_month(),
-    lng = ~longitude,
-    lat = ~latitude,
-    layerId = ~postcode,
-    group = paste(input$selected_api),
-    icon=icons(),
-    label=~ paste0('click to view'),
-    popup = paste(
-      "<center>","<b>",input$selected_api,"</b>","</center>",
-      "<br>",
-      "Postcode:",  postcode_api_month()$postcode,
-      "<br>",
-      "Prescribed quantity (kg):",postcode_api_month()$kg
+    addAwesomeMarkers (
+      data = postcode_api_month(),
+      lng = ~longitude,
+      lat = ~latitude,
+      layerId = ~postcode,
+      group = paste(input$selected_api),
+      icon=icons(),
+      label=~ paste0('click to view'),
+      popup = paste(
+        "<center>","<b>",input$selected_api,"</b>","</center>",
+        "<br>",
+        "Postcode:",  postcode_api_month()$postcode,
+        "<br>",
+        "Prescribed quantity (kg):",postcode_api_month()$kg
+      )
     )
-  )
 })
 
 
 # For lineplot
 observeEvent(input$postcodemap_marker_click, {
   
-dat_lineplotgp <- reactive ({ 
-  postcode_api() %>%
-    filter (postcode %in% !!input$postcodemap_marker_click$id)
-})
-
-# Plotly lineplot 01 - Period
-output$filt_gp_lineplot1 <- renderPlotly({ 
-  withProgress(message = 'Data is loading, please wait ...', value = 1:100, {
-    a1 <- as.data.frame(dat_lineplotgp())
-    a1$PERIOD <-  as.character(a1$PERIOD)
-    a2 <-  plot_ly(a1, x = ~PERIOD, y = ~kg, color = ~SURGERY_NAME) %>%
-      add_markers(showlegend = TRUE) %>%
-      add_lines(showlegend = FALSE) %>%
-      layout(
-        title =  F,
-        autosize = T,
-        showlegend = TRUE,
-        xaxis = list(title = "Year / Month"),
-        yaxis = list (title = "kg / month"),
-        legend = list(orientation = "h",
-                      x = 0.3, 
-                      y = -0.3)
-      )
-    a2
-    
+  dat_lineplotgp <- reactive ({ 
+    postcode_api() %>%
+      filter (postcode %in% !!input$postcodemap_marker_click$id)
   })
-})
+  
+  # Plotly lineplot 01 - Period
+  output$filt_gp_lineplot1 <- renderPlotly({ 
+    withProgress(message = 'Data is loading, please wait ...', value = 1:100, {
+      a1 <- as.data.frame(dat_lineplotgp())
+      a1$PERIOD <-  as.character(a1$PERIOD)
+      a2 <-  plot_ly(a1, x = ~PERIOD, y = ~kg, color = ~SURGERY_NAME) %>%
+        add_markers(showlegend = TRUE) %>%
+        add_lines(showlegend = FALSE) %>%
+        layout(
+          title =  F,
+          autosize = T,
+          showlegend = TRUE,
+          xaxis = list(title = "Year / Month"),
+          yaxis = list (title = "kg / month"),
+          legend = list(orientation = "h",
+                        x = 0.3, 
+                        y = -0.3)
+        )
+      a2
+      
+    })
+  })
+  
+  
+  # Download eps 01
+  output$downloadeps_nt_01 <- downloadHandler(
+    filename = function(){ paste(input$postcodemap_marker_click$id,'_',input$selected_api,'_',input$selectyear02, '.eps',sep = '')},
+    content = function(file) {
+      postscript(file,
+                 width = 11.69 , height = 8.27, # inches
+                 horizontal = TRUE, onefile = TRUE, paper = "special")
+      a1 <- as.data.frame(dat_lineplotgp())
+      a1$PERIOD <-  as.character(a1$PERIOD)
+      g = ggplot(data=a1, aes(x=PERIOD, y=kg,group = SURGERY_NAME)) +
+        geom_line(aes(color = SURGERY_NAME ) ,
+                  size = 0.5) +  
+        geom_point(aes(color = SURGERY_NAME ),
+                   shape = 20,    
+                   size = 4) +
+        labs(title = paste("Quantity of",input$selected_api,"prescribed at",input$postcodemap_marker_click$id, "monthwise for the year", input$selectyear02,"(in kg)"))+
+        labs(x = "Year / Month", y = "kg / month")+
+        theme_bw()+
+        theme(
+          plot.title = element_text(size = 16, face = "bold"  , hjust = 0.5 ),
+          axis.title.x = element_text(size = 14, face = "bold"   ),
+          axis.title.y = element_text(size = 14, face = "bold"   ),
+          axis.text.x = element_text(angle = 45, hjust = 1, size = 12  ),
+          axis.text.y = element_text(size = 12 ),
+          legend.text = element_text(size = 8 ),
+          legend.title = element_text(size = 10, face = "bold"   )
+        )
+      print(g)
+      dev.off()
+      
+    }
+  )
+  
+  # Download pdf 01
+  output$downloadpdf_nt_01 <- downloadHandler(
+    filename = function(){ paste(input$postcodemap_marker_click$id,'_',input$selected_api,'_',input$selectyear02, '.pdf',sep = '')},
+    content = function(file) {
+      pdf(file, paper = "a4r",width = 14)
+      a1 <- as.data.frame(dat_lineplotgp())
+      a1$PERIOD <-  as.character(a1$PERIOD)
+      g <- ggplot(data=a1, aes(x=PERIOD, y=kg,group = SURGERY_NAME)) +
+        geom_line(aes(color = SURGERY_NAME ) ,
+                  size = 0.5) +  
+        geom_point(aes(color = SURGERY_NAME ),
+                   shape = 20,    
+                   size = 2) +
+        labs(title = paste("Quantity of",input$selected_api,"prescribed at",input$postcodemap_marker_click$id, "monthwise for the year", input$selectyear02,"(in kg)"))+
+        labs(x = "Year / Month", y = "kg / month")+
+        theme_bw()+
+        theme(
+          plot.title = element_text(size = 16, face = "bold"  , hjust = 0.5 ),
+          axis.title.x = element_text(size = 14, face = "bold"   ),
+          axis.title.y = element_text(size = 14, face = "bold"   ),
+          axis.text.x = element_text(angle = 45, hjust = 1, size = 12  ),
+          axis.text.y = element_text(size = 12 ),
+          legend.text = element_text(size = 8 ),
+          legend.title = element_text(size = 10, face = "bold"   )
+        )
+      print(g)
+      dev.off()
+    }
+  )
+  
 })
 
 # Total by postcode
@@ -170,7 +228,7 @@ tot_postcode <- reactive({
     group_by(NM, Year, postcode) %>%
     summarise(gram_sum = sum(gram2, na.rm = T)) %>%
     mutate(kg = gram_sum/1000) 
-   
+  
 })
 
 ## Observe event
@@ -183,7 +241,7 @@ observeEvent(input$postcodemap_marker_click, {
   ## Text outputs
   output$txt_leaflet <- renderUI({ 
     HTML( paste("Total quantity of ",input$selected_api, " prescribed at ",input$postcodemap_marker_click$id, 
-                "in the year ",input$selectyear01, " :" , text11$kg, " (kg)" ) 
+                "in the year ",input$selectyear02, " :" , text11$kg, " (kg)" ) 
     ) 
   })
   
@@ -214,9 +272,10 @@ lineplot_postcode <- reactive ({
 # ui for api select
 output$selected_api_input <- renderUI({
   withProgress(message = 'Data is loading, please wait ...', value = 1:100, {
-    selectizeInput(inputId="selected_api",
-                   label="Select BNF Chemical Substance:",
-                   choices=unique(bnf_group()$BNF_CHEMICAL_SUBSTANCE),selected =head(unique(bnf_group()$BNF_CHEMICAL_SUBSTANCE)),  multiple = FALSE
+    selectInput(inputId="selected_api",
+                label="Select BNF Chemical Substance:",
+                choices=unique(bnf_group()$BNF_CHEMICAL_SUBSTANCE),
+                selected =head(unique(bnf_group()$BNF_CHEMICAL_SUBSTANCE)),  multiple = FALSE
     )
   })
 })
@@ -225,7 +284,6 @@ output$selected_api_input <- renderUI({
 output$uidownload_nt_01  <- renderUI({
   withProgress(message = 'Data is loading, please wait ...', value = 1:100, {
     tags$span(
-      downloadButton('downloadhtml_nt_01', 'Download Map'),
       downloadButton('downloadcsv_nt_01', 'Download CSV (monthwise)'),
       downloadButton('downloadcsv_nt_02', 'Download CSV (year)')
     )
@@ -245,25 +303,16 @@ output$uidownload_nt_02 <- renderUI({
 
 ## Text outputs
 
-output$txt_line_gp_title <- renderUI({ HTML( paste("Quantity of ",input$selected_api,"prescribed at<br/>",input$postcodemap_marker_click$id, "monthwise for<br/>the year ", input$selectyear01,"(in kg)") ) })
+output$txt_line_gp_title <- renderUI({ HTML( paste("Quantity of ",input$selected_api,"prescribed at<br/>",input$postcodemap_marker_click$id, "monthwise for<br/>the year ", input$selectyear02,"(in kg)") ) })
 
-output$txt_gp_pie_title <- renderUI({ HTML( paste("Total quantity of ",input$selected_api, "<br/>prescribed at ",input$postcodemap_marker_click$id, "in the<br/>year ",input$selectyear01, " (Group by medicinal form)") ) })
+output$txt_gp_pie_title <- renderUI({ HTML( paste("Total quantity of ",input$selected_api, "<br/>prescribed at ",input$postcodemap_marker_click$id, "in the<br/>year ",input$selectyear02, " (Group by medicinal form)") ) })
 
 ## Download Buttons
-# Download html 01
-output$downloadhtml_nt_01 <- downloadHandler(
-  filename = function (){ paste(input$selected_api,'_',input$region_select_01,'_',input$selectyear01,'_month_',input$sel_month,'.html',sep = '')},
-  content = function(file){
-    saveWidget(
-      widget = postcodemap()
-      , file = file
-    )
-  }
-)
+
 
 # Download csv 01
 output$downloadcsv_nt_01 <- downloadHandler(
-  filename = function (){ paste(input$selected_api,'_',input$region_select_01,'_',input$selectyear01,'_month_',input$sel_month,'.csv',sep = '')},
+  filename = function (){ paste(input$selected_api,'_',input$region_select_02,'_',input$selectyear02,'_month_',input$sel_month,'.csv',sep = '')},
   content = function(file) {
     write.csv(as.data.frame( downheatmap_period()), file, row.names = TRUE)
   }
@@ -271,7 +320,7 @@ output$downloadcsv_nt_01 <- downloadHandler(
 
 # Download csv 02
 output$downloadcsv_nt_02 <- downloadHandler(
-  filename = function (){ paste(input$selected_api,'_',input$region_select_01,'_',input$selectyear01,'.csv',sep = '')},
+  filename = function (){ paste(input$selected_api,'_',input$region_select_02,'_',input$selectyear02,'.csv',sep = '')},
   content = function(file) {
     write.csv(as.data.frame( downheatmap_year()), file, row.names = TRUE)
   }
@@ -279,65 +328,11 @@ output$downloadcsv_nt_02 <- downloadHandler(
 
 # Download csv 03
 output$downloadcsv_nt_03 <- downloadHandler(
-  filename = function(){ paste(input$postcodemap_marker_click$id,'_',input$selected_api,'_',input$selectyear01, '.csv',sep = '')},
+  filename = function(){ paste(input$postcodemap_marker_click$id,'_',input$selected_api,'_',input$selectyear02, '.csv',sep = '')},
   content = function(file) {
     write.csv(as.data.frame( lineplot_postcode()), file, row.names = TRUE)
   }
 )
-
-# Download eps 01
-output$downloadeps_nt_01 <- downloadHandler(
-  filename = function(){ paste(input$postcodemap_marker_click$id,'_',input$selected_api,'_',input$selectyear01, '.eps',sep = '')},
-  content = function(file) {
-    postscript(file,
-               width = 11.69 , height = 8.27, # inches
-               horizontal = TRUE, onefile = TRUE, paper = "special")
-    a1 <- as.data.frame(dat_lineplotgp())
-    a1$PERIOD <-  as.character(a1$PERIOD)
-    g = ggplot(data=a1, aes(x=PERIOD, y=kg,group = SURGERY_NAME)) +
-      geom_line(aes(color = SURGERY_NAME ) ,
-                size = 0.5) +  
-      geom_point(aes(color = SURGERY_NAME ),
-                 shape = 20,    
-                 size = 4) +
-      labs(title = paste("Quantity of",input$selected_api,"prescribed at",input$postcodemap_marker_click$id, "monthwise for the year", input$selectyear01,"(in kg)"))+
-      labs(x = "Year / Month", y = "kg / month")+
-      theme(
-        axis.title.x = element_text(size = 16, face = "bold", family= "Arial" ),
-        axis.title.y = element_text(size = 16, face = "bold", family= "Arial" ),
-        axis.text.x = element_text(angle = 45, hjust = 1)
-      )
-    print(g)
-    dev.off()
-    
-  }
-)
-
-# Download pdf 01
-output$downloadpdf_nt_01 <- downloadHandler(
-  filename = function(){ paste(input$postcodemap_marker_click$id,'_',input$selected_api,'_',input$selectyear01, '.pdf',sep = '')},
-  content = function(file) {
-    pdf(file, paper = "a4r",width = 14)
-    a1 <- as.data.frame(dat_lineplotgp())
-    a1$PERIOD <-  as.character(a1$PERIOD)
-    g <- ggplot(data=a1, aes(x=PERIOD, y=kg,group = SURGERY_NAME)) +
-      geom_line(aes(color = SURGERY_NAME ) ,
-                size = 0.5) +  
-      geom_point(aes(color = SURGERY_NAME ),
-                 shape = 20,    
-                 size = 2) +
-      labs(title = paste("Quantity of",input$selected_api,"prescribed at",input$postcodemap_marker_click$id, "monthwise for the year", input$selectyear01,"(in kg)"))+
-      labs(x = "Year / Month", y = "kg / month")+
-      theme(
-        axis.title.x = element_text(size = 16, face = "bold", family= "Arial" ),
-        axis.title.y = element_text(size = 16, face = "bold", family= "Arial" ),
-        axis.text.x = element_text(angle = 45, hjust = 1)
-      )
-    print(g)
-    dev.off()
-  }
-)
-
 
 
 ###########

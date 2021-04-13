@@ -1,32 +1,42 @@
-tabPanel(
- 
-  title = "Targeted Approach",
-  id    = "datasetTab",
-  value = "datasetTab",
-  name  = "datasetTab",
-  class = "fade in",
-  br(),
+## Ui
+targeted_tab <- tabItem(
+  tabName = "targeted",
   fluidRow(
     column(12,
            box(width = NULL,
-               
-               br(),
+               id = "NULL",
+               collapsible = TRUE,
+               closable = FALSE, 
+               maximizable = TRUE,
                fluidRow(
-                 column(4,
-                        uiOutput("uifile1")
-                 ),
-                 column(4,
-                        radioButtons('select_bar', "Select Period:",
-                                     c(
-                                       'Month' = 'monthwise',
-                                       'Year' = 'yearwise'),                                                               
-                                     selected = 'yearwise',
-                                     inline = TRUE
+                 column(12,
+                        fluidRow(
+                          column(3, 
+                                 uiOutput("uifile1"),
+                                 actionButton(inputId = "gen_barplot01",
+                                              label = "Generate Graph", 
+                                              class="btn btn-success action-button")
+                                 
+                          ),
+                          column(4, offset = 1,
+                                 selectInput('selectyear01', 'Select Prescirption Year:',
+                                             c(
+                                               '2015' = '2015',
+                                               '2016' = '2016',
+                                               '2017' = '2017',
+                                               '2018' = '2018'), 
+                                             selected = '2018'),
+                                 radioButtons('select_bar', "Select Graph type:",
+                                              c(
+                                                'Month' = 'monthwise',
+                                                'Year' = 'yearwise'),                                                               
+                                              selected = 'yearwise',
+                                              inline = TRUE)),
+                          column(4,
+                                 uiOutput("regioninput1"),
+                                 uiOutput("settinginput1"))
                         ),
-                        actionButton(inputId = "gen_barplot01",
-                                     label = "Generate Graph", class="btn btn-success action-button")
-                        
-                 )
+                 ),
                ),
                tags$hr(),
                conditionalPanel("input.select_bar == 'yearwise'",
@@ -65,82 +75,103 @@ tabPanel(
            )
     ),
     column(12,
-           tabBox(width = NULL,
-                  tabPanel("Period",value = "filt_tab_period",
-                           icon  = icon("calendar-alt",lib = "font-awesome"),
-                           br(),
-                           tags$style("#txt_tot_lineplot1_title {
+           tabBox(width = NULL, id = "tabbox01",
+                  
+                  # collapsible = TRUE,
+                  #  closable = FALSE, 
+                  #  maximizable = TRUE,
+                  tabPanel(
+                    id = NULL,
+                    title =  "Period",
+                    tabName = "Period",value = "filt_tab_period",
+                    icon  = icon("calendar-alt",lib = "font-awesome"),
+                    br(),
+                    tags$style("#txt_tot_lineplot1_title {
                                                  font:16px Arial, Helvetica, sans-serif;
                                                  line-height: 1.1; 
                                                  text-align: center;
  
                                                   }"
-                           ),
-                           uiOutput("uidownload_t_03"),
-                           br(),
-                           htmlOutput('txt_tot_lineplot1_title'),
-                           plotlyOutput("filt_total_lineplot1",height="450px")
+                    ),
+                    uiOutput("uidownload_t_03"),
+                    br(),
+                    htmlOutput('txt_tot_lineplot1_title'),
+                    plotlyOutput("filt_total_lineplot1",height="450px")
                   ),
-                  tabPanel("Practice",value = "filt_tab_practice",
-                           icon  = icon("hospital",lib = "font-awesome"),
-                           br(),
-                           tags$style("#txt_tot_lineplot2_title {
+                  tabPanel(
+                    id = NULL,
+                    title = "Practice",
+                    tabName = "Practice",value = "filt_tab_practice",
+                    icon  = icon("hospital",lib = "font-awesome"),
+                    br(),
+                    tags$style("#txt_tot_lineplot2_title {
                                                  font:16px Arial, Helvetica, sans-serif;
                                                  line-height: 1.1; 
                                                  text-align: center;
  
                                                   }"
-                           ),
-                           uiOutput("uidownload_t_04"),
-                           br(),
-                           htmlOutput('txt_tot_lineplot2_title'),
-                           plotlyOutput("filt_total_lineplot2",height="450px")
+                    ),
+                    uiOutput("uidownload_t_04"),
+                    br(),
+                    htmlOutput('txt_tot_lineplot2_title'),
+                    plotlyOutput("filt_total_lineplot2",height="450px")
                   ),
-                  tabPanel("Postcode",value = "filt_tab_postcode",
-                           icon  = icon("map-marked-alt",lib = "font-awesome"),
-                           br(),
-                           tags$style("#txt_tot_lineplot3_title {
+                  tabPanel(
+                    id = NULL,
+                    title = "Postcode",
+                    tabName = "Postcode",value = "filt_tab_postcode",
+                    icon  = icon("map-marker-alt",lib = "font-awesome"),
+                    br(),
+                    tags$style("#txt_tot_lineplot3_title {
                                                  font:16px Arial, Helvetica, sans-serif;
                                                  line-height: 1.1; 
                                                  text-align: center;
  
                                                   }"
-                           ),
-                           uiOutput("uidownload_t_05"),
-                           br(),
-                           htmlOutput('txt_tot_lineplot3_title'),
-                           plotlyOutput("filt_total_lineplot3",height="450px")
+                    ),
+                    uiOutput("uidownload_t_05"),
+                    br(),
+                    htmlOutput('txt_tot_lineplot3_title'),
+                    plotlyOutput("filt_total_lineplot3",height="450px")
                   ),
                   
-                  tabPanel("Medicinal Form",value = "filt_tab_medform",
-                           icon  = icon("pills",lib = "font-awesome"),
-                           br(),
-                           tags$style("#txt_tot_lineplot4_title {
+                  tabPanel(
+                    id = NULL,
+                    title = "Medicinal Form",
+                    tabName = "Medicinal Form",value = "filt_tab_medform",
+                    icon  = icon("pills",lib = "font-awesome"),
+                    br(),
+                    tags$style("#txt_tot_lineplot4_title {
                                                  font:16px Arial, Helvetica, sans-serif;
                                                  line-height: 1.1; 
                                                  text-align: center;
  
                                                   }"
-                           ),
-                           uiOutput("uidownload_t_06"),
-                           br(),
-                           htmlOutput('txt_tot_lineplot4_title'),
-                           plotlyOutput("filt_total_lineplot4",height="450px")
+                    ),
+                    uiOutput("uidownload_t_06"),
+                    br(),
+                    htmlOutput('txt_tot_lineplot4_title'),
+                    plotlyOutput("filt_total_lineplot4",height="450px")
                   ),
-                  tabPanel("Practice - Monthwise",value = "filt_tab_monthwise",
-                           icon  = icon("calendar-plus",lib = "font-awesome"),
-                           br(),
-                           tags$style("#txt_tot_monthwise_gp_title {
+                  tabPanel(
+                    id = NULL,
+                    title = "Practice - Monthwise",
+                    tabName = "Practice - Monthwise",value = "filt_tab_monthwise",
+                    icon  = icon("calendar-plus",lib = "font-awesome"),
+                    br(),
+                    tags$style("#txt_tot_monthwise_gp_title {
                                                  font:16px Arial, Helvetica, sans-serif;
                                                  line-height: 1.1; 
                                                  text-align: center;
  
                                                   }"
-                           ),
-                           htmlOutput('txt_tot_monthwise_gp_title'),
-                           plotlyOutput("plot_compound_monthwise",height="450px")
-                  )     
+                    ),
+                    htmlOutput('txt_tot_monthwise_gp_title'),
+                    plotlyOutput("plot_compound_monthwise",height="450px")
+                  )
+                  
            ) # End of TabBox
     )# End of column  
-  ) # End of Fluidrow
-)# End of TabPanel
+  ) # End of Fluidrow,
+  
+)

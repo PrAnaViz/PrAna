@@ -1,3 +1,6 @@
+## Server
+library(shiny)
+
 # For drug targets
 targetdata <- reactive({
   inFile <- input$file1
@@ -8,27 +11,139 @@ targetdata <- reactive({
         sep = ",", quote = '"')
 })
 
+map <- reactive({
+  
+  if (input$selectyear01 == "2018") {
+    map <- map_2018
+  }
+  else if (input$selectyear01 == "2017") {
+    map <- map_2017
+  } else if (input$selectyear01 == "2016") {
+    map <- map_2016
+  } else if (input$selectyear01 == "2015") {
+    map <- map_2015
+  }
+  
+  map <- as.data.frame(map)
+})
+
+sql.demo_one <- "SELECT * FROM gp_practice." 
+sql.support <- "SELECT * FROM support." 
+
+# Connect to local host 
+aggr_wodb <- reactive({
+  DBI:: dbConnect(
+    drv = RMariaDB::MariaDB(),
+    username = input$usernm ,
+    password = isolate(input$pwd), 
+    host=input$hostnm)
+}) 
+
+
+dform_desc <- reactive({
+  tbl(aggr_wodb(), sql("SELECT * FROM support.dform_desc" ))
+})  
+
+gp_list_shape <- reactive({
+  tbl(aggr_wodb(), sql("SELECT * FROM support.full_gp_shapewise" )) %>%
+    mutate (region = toupper(region))
+})
+
+# select table bnf_group
+tbls_bnf_group <- "bnf_group"
+
+# df from support bnf_group
+df_bnf_group <- reactive({
+  lapply(paste(sql.support, tbls_bnf_group), function(s) {
+    tryCatch({ return(dbGetQuery(aggr_wodb(), s)) 
+    }, error = function(e) return(as.character(e)))
+  })
+})  
+
+# bnf group table
+bnf_group <- reactive({
+  base::do.call(rbind, df_bnf_group()) %>%
+    mutate(BNF_CHEMICAL_SUBSTANCE =(tolower(BNF_CHEMICAL_SUBSTANCE)))
+})  
+
+# select table dfrom_desc
+tbls_dform_desc<- "dform_desc"
+
+# df from support dfrom_desc
+df_dform_desc <-  reactive({
+  lapply(paste(sql.support, tbls_dform_desc), function(s) {
+    tryCatch({ return(dbGetQuery(aggr_wodb(), s)) 
+    }, error = function(e) return(as.character(e)))
+  })
+}) 
+
+# dfrom_desc table
+dform_desc <- reactive({
+  base::do.call(rbind, df_dform_desc()) 
+}) 
+
+# select table gp data latnlong
+tbls_gp_data_full_latnlong <- "gp_data_full_latnlong"
+
+# df from support gp data latnlong
+df_gp_data_full_latnlong <- reactive({
+  lapply(paste(sql.support, tbls_gp_data_full_latnlong), function(s) {
+    tryCatch({ return(dbGetQuery(aggr_wodb(), s)) 
+    }, error = function(e) return(as.character(e)))
+  })
+}) 
+
+# postcode_full table
+gp_data_full_latnlong <- reactive({
+  base::do.call(rbind, df_gp_data_full_latnlong()) %>%
+    mutate(latitude = as.numeric(latitude),
+           longitude = as.numeric(longitude))
+})  
+
+# For the UI to show all the regions based on year
+gp_list_year_tab  <- reactive ({
+  gp_list_shape () %>%
+    filter (Year %in% !!input$selectyear01) %>%
+    select(region)
+})
+
+# select table postcode_full
+tbls_ccg_gp_full <- "ccg_gp_full_latnlong"
+
+# df from support postcode_full
+df_ccg_gp_full <- reactive({
+  lapply(paste(sql.support, tbls_ccg_gp_full), function(s) {
+    tryCatch({ return(dbGetQuery(aggr_wodb(), s)) 
+    }, error = function(e) return(as.character(e)))
+  })
+}) 
+
+# postcode_full table
+ccg_gp_full <- reactive({
+  base::do.call(rbind, df_ccg_gp_full())
+}) 
+
+
+
+title_font <- list(
+  size = 11,
+  xref = "paper",
+  xref = "paper",
+  position = "top center"
+)
+
 # Select db for the gp list
 gp_list_year  <- reactive ({ 
   gp_list_shape()
 })
 
 list_practices <- reactive({
-  if (input$setting_select_01 == "all") {
-    gp_list_year () %>%
-      dplyr::rename (organisation_code = PRACTICE ) %>%
-      merge(ccg_gp_full()[,c("organisation_code","setting_type")] , by = "organisation_code") %>%
-      dplyr::rename (PRACTICE = organisation_code ) %>% 
-      dplyr::rename (Year = year ) 
-  }
-  else {
-    gp_list_year () %>%
-      dplyr::rename (organisation_code = PRACTICE ) %>%
-      merge(ccg_gp_full()[,c("organisation_code","setting_type")] , by = "organisation_code") %>%
-      filter (setting_type %in% !!input$setting_select_01) %>% 
-      dplyr::rename (PRACTICE = organisation_code ) %>% 
-      dplyr::rename (Year = year ) 
-  }
+  gp_list_year () %>%
+    dplyr::rename (organisation_code = PRACTICE ) %>%
+    merge(ccg_gp_full()[,c("organisation_code","setting_type")] , by = "organisation_code") %>%
+    dplyr::filter (setting_type %in% !!input$setting_select_01) %>% 
+    dplyr::rename (PRACTICE = organisation_code ) %>% 
+    dplyr::rename (Year = year ) 
 })
 
 # Get the list of all the practices based on year and region
@@ -53,45 +168,33 @@ tbls_yearwise <- reactive ({
 
 # ## Need to change the database once we have all regions in a sql database
 dfList_banes <- reactive({
-    if(input$selectyear01 == "2015"){
-      lapply(paste(sql.demo_one, tbls_yearwise()," WHERE PERIOD LIKE '%2015%'"), function(s) {
-        tryCatch({ return(dbGetQuery(aggr_wodb(), s))
-        }, error = function(e) return(as.character(e)))
-      })
-    }
-    else if(input$selectyear01 == "2016"){
-      lapply(paste(sql.demo_one, tbls_yearwise()," WHERE PERIOD LIKE '%2016%'"), function(s) {
-        tryCatch({ return(dbGetQuery(aggr_wodb(), s))
-        }, error = function(e) return(as.character(e)))
-      })
-    }
-    else if(input$selectyear01 == "2017"){
-      lapply(paste(sql.demo_one, tbls_yearwise()," WHERE PERIOD LIKE '%2017%'"), function(s) {
-        tryCatch({ return(dbGetQuery(aggr_wodb(), s))
-        }, error = function(e) return(as.character(e)))
-      })
-    }
-    else if(input$selectyear01 == "2018"){
-      lapply(paste(sql.demo_one, tbls_yearwise()," WHERE PERIOD LIKE '%2018%'"), function(s) {
-        tryCatch({ return(dbGetQuery(aggr_wodb(), s))
-        }, error = function(e) return(as.character(e)))
-      })
-    }
+  if(input$selectyear01 == "2015"){
+    lapply(paste(sql.demo_one, tbls_yearwise()," WHERE PERIOD LIKE '%2015%'"), function(s) {
+      tryCatch({ return(dbGetQuery(aggr_wodb(), s))
+      }, error = function(e) return(as.character(e)))
+    })
+  }
+  else if(input$selectyear01 == "2016"){
+    lapply(paste(sql.demo_one, tbls_yearwise()," WHERE PERIOD LIKE '%2016%'"), function(s) {
+      tryCatch({ return(dbGetQuery(aggr_wodb(), s))
+      }, error = function(e) return(as.character(e)))
+    })
+  }
+  else if(input$selectyear01 == "2017"){
+    lapply(paste(sql.demo_one, tbls_yearwise()," WHERE PERIOD LIKE '%2017%'"), function(s) {
+      tryCatch({ return(dbGetQuery(aggr_wodb(), s))
+      }, error = function(e) return(as.character(e)))
+    })
+  }
+  else if(input$selectyear01 == "2018"){
+    lapply(paste(sql.demo_one, tbls_yearwise()," WHERE PERIOD LIKE '%2018%'"), function(s) {
+      tryCatch({ return(dbGetQuery(aggr_wodb(), s))
+      }, error = function(e) return(as.character(e)))
+    })
+  }
 })
 
-# Subset yearwise data
-filt_total_NM <- reactive ({
-  bind_practices() %>%
-    filter (!grepl("Error: Table",CPD)) %>% 
-    dplyr::mutate(NM = tolower(NM) ) %>% 
-    dplyr::filter (str_detect(NM , paste(paste0(!!targetdata()$V1,collapse = '|')))) %>%
-    mutate(Year=(substr(PERIOD, 1, 4))) %>%
-    filter (Year %in% !!input$selectyear01) %>%
-    mutate(gram2 = as.numeric(gram)) %>%
-    group_by(NM, Year) %>%
-    summarise(gram_sum = sum(gram2, na.rm = T)) %>%
-    mutate(kg = gram_sum/1000) 
-})
+
 
 # Subset data - Period
 filt_total_period  <- reactive ({ 
@@ -121,19 +224,27 @@ filt_total_practice <- reactive ({
     mutate(kg = gram_sum/1000) 
 })
 
+
+gp_postcode_full <-  reactive ({ 
+  gp_data_full_latnlong() %>%
+    dplyr::filter (Year %in% !!input$selectyear01)  %>%
+    dplyr::select(PERIOD, PRACTICE, SURGERY_NAME, postcode, latitude, longitude) %>%
+    distinct()
+})
+
 # Subset yearwise data - Postcode
 filt_total_postcode <- reactive ({ 
   bind_practices() %>%
-    filter (!grepl("Error: Table",CPD)) %>% 
+    dplyr::filter (!grepl("Error: Table",CPD)) %>% 
     dplyr::mutate(NM = tolower(NM) ) %>% 
     dplyr::filter (str_detect(NM , paste(!!targetdata()$V1,collapse = '|'))) %>%
-    mutate(Year=(substr(PERIOD, 1, 4))) %>%
-    filter (Year %in% !!input$selectyear01) %>%
-    mutate(gram2 = as.numeric(gram)) %>%
-    left_join(gp_postcode_full(), by=c("PRACTICE"="PRACTICE", "PERIOD" = "PERIOD")) %>%
+    dplyr::mutate(Year=(substr(PERIOD, 1, 4))) %>%
+    dplyr::filter (Year %in% !!input$selectyear01) %>%
+    dplyr::mutate(gram2 = as.numeric(gram)) %>%
+    dplyr::left_join(gp_postcode_full(), by=c("PRACTICE"="PRACTICE", "PERIOD" = "PERIOD")) %>%
     group_by(NM, postcode) %>%
     summarise(gram_sum = sum(gram2, na.rm = T)) %>%
-    mutate(kg = gram_sum/1000) 
+    dplyr::mutate(kg = gram_sum/1000) 
 })
 
 # Subset yearwise data - Medicinal Form
@@ -169,10 +280,7 @@ filt_total_practice_month <- reactive ({
 
 # Data for download csv
 
-# barplot data
-data.barplot_t_01 <- reactive ({
-  dcast(as.data.frame(filt_total_NM()), NM~Year,value.var= "kg") 
-})
+
 
 data.lineplot_t_01 <- reactive ({
   dcast(as.data.frame(filt_total_period()), NM~PERIOD,value.var= "kg") 
@@ -180,7 +288,6 @@ data.lineplot_t_01 <- reactive ({
 
 
 ### Outputs
-
 ## UI
 # ui for file input 01
 output$uifile1 <- renderUI({
@@ -196,6 +303,28 @@ output$uifile1 <- renderUI({
                    placeholder = "Upload Targets file (.csv)"
   ),
   "Click here to upload your targets file")
+})
+
+
+output$regioninput1 <- renderUI({
+  withProgress(message = 'Data is loading, please wait ...', value = 1:100, {
+    selectInput(inputId="region_select_01",
+                label="Select region:",
+                choices=map()$region_name
+    )
+  })
+})
+
+## To see the gp setting type
+output$settinginput1 <- renderUI({
+  withProgress(message = 'Data is loading, please wait ...', value = 1:100, {
+    selectInput(inputId="setting_select_01",
+                label="Setting type:",
+                choices=c("all" , 
+                          unique( ccg_gp_full()$setting_type )),
+                selected ="GP Practice",  multiple = FALSE
+    )
+  })
 })
 
 # ui for download 01
@@ -333,21 +462,43 @@ output$txt_tot_monthwise_gp_title <- renderUI({
 
 # Plotly barplot 01 - Yearwise
 
-observeEvent(input$gen_barplot01, {
-  
-  output$txt_tot_barplot1_title <- renderUI({ HTML( paste0("Total Compounds prescribed at ",input$region_select_01, "\nover the year ",input$selectyear01, " (in kg)")) })
-  
-  output$filt_total_barplot1 <- renderPlotly({ 
-    withProgress(message = 'Data is loading, please wait ...', value = 1:100, {
-      plot_ly(as.data.frame(filt_total_NM()), x = ~NM, y = ~kg,  type = "bar", color = ~NM, source = "filt_total_barplot1") %>%
-        layout(title = FALSE,
-               font = title_font,
-               xaxis = list(title = "API"), 
-               yaxis = list(title = "kg"))      
-    }) 
-  })
-  
+
+
+# Subset yearwise data
+filt_total_NM <- reactive ({
+  bind_practices() %>%
+    filter (!grepl("Error: Table",CPD)) %>% 
+    dplyr::mutate(NM = tolower(NM) ) %>% 
+    dplyr::filter (str_detect(NM , paste(paste0(!!targetdata()$V1,collapse = '|')))) %>%
+    mutate(Year=(substr(PERIOD, 1, 4))) %>%
+    filter (Year %in% !!input$selectyear01) %>%
+    mutate(gram2 = as.numeric(gram)) %>%
+    group_by(NM, Year) %>%
+    summarise(gram_sum = sum(gram2, na.rm = T)) %>%
+    mutate(kg = gram_sum/1000) 
 })
+
+##outputs 
+# barplot title
+output$txt_tot_barplot1_title <- renderUI({ HTML( paste0("Total Compounds prescribed at ",input$region_select_01, "\nover the year ",input$selectyear01, " (in kg)")) })
+
+# barplot
+output$filt_total_barplot1 <- renderPlotly({  
+  withProgress(message = 'Data is loading, please wait ...', value = 1:100, {
+    plot_ly(as.data.frame(filt_total_NM()), x = ~NM, y = ~kg,  type = "bar", color = ~NM, source = "filt_total_barplot1") %>%
+      layout(title = FALSE,
+             font = title_font,
+             xaxis = list(title = "API"), 
+             yaxis = list(title = "kg"))      
+  }) 
+})
+
+
+# barplot data - download csv
+data.barplot_t_01 <- reactive ({
+  dcast(as.data.frame(filt_total_NM()), NM~Year,value.var= "kg") 
+})
+
 
 # Plotly lineplot 00 - Monthwise all targets
 output$filt_total_lineplot11 <- renderPlotly({ 
@@ -483,7 +634,7 @@ output$downloaddata_t_03 = downloadHandler(
   filename = function (){ 
     s <- event_data("plotly_click", source = "filt_total_barplot1")
     paste0(s[["x"]],'_monthwise_at_',input$region_select_01,'_',input$selectyear01, '.csv')
-    },
+  },
   content = function(file) {
     s <- event_data("plotly_click", source = "filt_total_barplot1")
     if (length(s) == 0) {
@@ -545,7 +696,7 @@ output$downloaddata_t_06 <- downloadHandler(
     }   
     else {
       a1 <- subset (as.data.frame(filt_total_dform()), NM %in%  s[["x"]]) %>%
-              dplyr::select(1,2,4)
+        dplyr::select(1,2,4)
       write.csv(a1, file, row.names = FALSE)
     }
   }
@@ -561,15 +712,16 @@ output$downloadeps_t_01<- downloadHandler(
     g <- ggplot(data=as.data.frame(filt_total_NM()), aes(x=NM, y=kg, fill=NM)) +
       geom_bar(stat="identity") +
       labs(title = paste("Total Compounds prescribed at",input$region_select_01, "\nover the year",input$selectyear01, "(in kg)") )+
-      labs(x = "API", y = "kg", color = "API")+
+      labs(x = "API", y = "kg", color = "API") +
+      theme_bw()+
       theme(
-        plot.title = element_text(size = 18, face = "bold"  , hjust = 0.5 ),
-        axis.title.x = element_text(size = 16, face = "bold"   ),
-        axis.title.y = element_text(size = 16, face = "bold"   ),
-        axis.text.x = element_text(angle = 45, hjust = 1, size = 16   ),
-        axis.text.y = element_text(size = 16   ),
-        legend.text = element_text(size = 16   ),
-        legend.title = element_text(size = 16, face = "bold"   )
+        plot.title = element_text(size = 16, face = "bold"  , hjust = 0.5 ),
+        axis.title.x = element_text(size = 14, face = "bold"   ),
+        axis.title.y = element_text(size = 14, face = "bold"   ),
+        axis.text.x = element_text(angle = 45, hjust = 1, size = 12  ),
+        axis.text.y = element_text(size = 12 ),
+        legend.text = element_text(size = 8 ),
+        legend.title = element_text(size = 10, face = "bold"   )
       )
     print(g)
     dev.off()
@@ -593,14 +745,15 @@ output$downloadeps_t_02 <- downloadHandler(
                  size = 4) +
       labs(title = paste("Total compounds prescribed at each month over",input$region_select_01, "\nfor the year", input$selectyear01,"(in kg)"  ))+
       labs(y = "kg / Month", x = "Year / month (YYYYMM)", color = "API")+
+      theme_bw()+
       theme(
-        plot.title = element_text(size = 18, face = "bold"  , hjust = 0.5 ),
-        axis.title.x = element_text(size = 16, face = "bold"   ),
-        axis.title.y = element_text(size = 16, face = "bold"   ),
-        axis.text.x = element_text(angle = 45, hjust = 1, size = 16   ),
-        axis.text.y = element_text(size = 16   ),
-        legend.text = element_text(size = 16,   family= "Arial" ),
-        legend.title = element_text(size = 16, face = "bold"   )
+        plot.title = element_text(size = 16, face = "bold"  , hjust = 0.5 ),
+        axis.title.x = element_text(size = 14, face = "bold"   ),
+        axis.title.y = element_text(size = 14, face = "bold"   ),
+        axis.text.x = element_text(angle = 45, hjust = 1, size = 12  ),
+        axis.text.y = element_text(size = 12 ),
+        legend.text = element_text(size = 8 ),
+        legend.title = element_text(size = 10, face = "bold"   )
       )
     print(g)
     dev.off()
@@ -612,7 +765,7 @@ output$downloadeps_t_03 <- downloadHandler(
   filename = function(){ 
     s <- event_data("plotly_click", source = "filt_total_barplot1")
     paste0(s[["x"]],'_monthwise_at_',input$region_select_01,'_',input$selectyear01, '.eps')
-    },
+  },
   content = function(file) {
     postscript(file,
                width = 11.69 , height = 8.27, # inches
@@ -632,14 +785,15 @@ output$downloadeps_t_03 <- downloadHandler(
                    size = 4) +
         labs(title = paste("Quantity of", s[["x"]], "at each month over\n",input$region_select_01, "\nfor the year", input$selectyear01,"(in kg)"  ))+
         labs(y = "kg / Month", x = "Year / month (YYYYMM)")+
+        theme_bw()+
         theme(
-          plot.title = element_text(size = 18, face = "bold"  , hjust = 0.5 ),
-          axis.title.x = element_text(size = 16, face = "bold"   ),
-          axis.title.y = element_text(size = 16, face = "bold"   ),
-          axis.text.x = element_text(angle = 45, hjust = 1, size = 16   ),
-          axis.text.y = element_text(size = 16   ),
-          legend.text = element_text(size = 16   ),
-          legend.title = element_text(size = 16, face = "bold"   )
+          plot.title = element_text(size = 16, face = "bold"  , hjust = 0.5 ),
+          axis.title.x = element_text(size = 14, face = "bold"   ),
+          axis.title.y = element_text(size = 14, face = "bold"   ),
+          axis.text.x = element_text(angle = 45, hjust = 1, size = 12  ),
+          axis.text.y = element_text(size = 12 ),
+          legend.text = element_text(size = 8 ),
+          legend.title = element_text(size = 10, face = "bold"   )
         )
       print(g)
       dev.off()
@@ -651,7 +805,7 @@ output$downloadeps_t_04 <- downloadHandler(
   filename = function(){ 
     s <- event_data("plotly_click", source = "filt_total_barplot1")
     paste0(s[["x"]],'_practicewise_at_',input$region_select_01,'_',input$selectyear01, '.eps')},
-    content = function(file) {
+  content = function(file) {
     postscript(file,
                width = 11.69 , height = 8.27, # inches
                horizontal = TRUE, onefile = TRUE, paper = "special")
@@ -669,14 +823,15 @@ output$downloadeps_t_04 <- downloadHandler(
                    size = 4) +
         labs(title = paste("Total quantity of", s[["x"]], "prescribed at each GP Practice over\n",input$region_select_01, "\nfor the year", input$selectyear01,"(in kg)"  ))+
         labs(y = "kg / GP Practice", x = "GP Practice code", color = "API")+
+        theme_bw()+
         theme(
-          plot.title = element_text(size = 18, face = "bold"  , hjust = 0.5 ),
-          axis.title.x = element_text(size = 16, face = "bold"   ),
-          axis.title.y = element_text(size = 16, face = "bold"   ),
-          axis.text.x = element_text(angle = 45, hjust = 1, size = 16   ),
-          axis.text.y = element_text(size = 16   ),
-          legend.text = element_text(size = 16,   family= "Arial" ),
-          legend.title = element_text(size = 16, face = "bold"   )
+          plot.title = element_text(size = 16, face = "bold"  , hjust = 0.5 ),
+          axis.title.x = element_text(size = 14, face = "bold"   ),
+          axis.title.y = element_text(size = 14, face = "bold"   ),
+          axis.text.x = element_text(angle = 45, hjust = 1, size = 12  ),
+          axis.text.y = element_text(size = 12 ),
+          legend.text = element_text(size = 8 ),
+          legend.title = element_text(size = 10, face = "bold"   )
         )
       print(g)
       dev.off()
@@ -706,14 +861,15 @@ output$downloadeps_t_05 <- downloadHandler(
                    size = 4) +
         labs(title = paste("Total quantity of", s[["x"]],  "prescribed at each postcode over\n",input$region_select_01, "\nfor the year", input$selectyear01,"(in kg)"  ))+
         labs(y = "kg / postcode", x = "Postcode", color = "API")+
+        theme_bw()+
         theme(
-          plot.title = element_text(size = 18, face = "bold"  , hjust = 0.5 ),
-          axis.title.x = element_text(size = 16, face = "bold"   ),
-          axis.title.y = element_text(size = 16, face = "bold"   ),
-          axis.text.x = element_text(angle = 45, hjust = 1, size = 16   ),
-          axis.text.y = element_text(size = 16   ),
-          legend.text = element_text(size = 16   ),
-          legend.title = element_text(size = 16, face = "bold"   )
+          plot.title = element_text(size = 16, face = "bold"  , hjust = 0.5 ),
+          axis.title.x = element_text(size = 14, face = "bold"   ),
+          axis.title.y = element_text(size = 14, face = "bold"   ),
+          axis.text.x = element_text(angle = 45, hjust = 1, size = 12  ),
+          axis.text.y = element_text(size = 12 ),
+          legend.text = element_text(size = 8 ),
+          legend.title = element_text(size = 10, face = "bold"   )
         )
       print(g)
       dev.off()
@@ -743,14 +899,15 @@ output$downloadeps_t_06 <- downloadHandler(
                    size = 4) +
         labs(title = paste("Total quantity of", s[["x"]], "prescribed by each medicinal form over\n",input$region_select_01, "\nfor the year", input$selectyear01,"(in kg)"  ))+
         labs(y = "kg / medicinal form", x = "medicinal form", color = "API")+
+        theme_bw()+
         theme(
-          plot.title = element_text(size = 18, face = "bold"  , hjust = 0.5 ),
-          axis.title.x = element_text(size = 16, face = "bold"   ),
-          axis.title.y = element_text(size = 16, face = "bold"   ),
-          axis.text.x = element_text(angle = 45, hjust = 1, size = 16   ),
-          axis.text.y = element_text(size = 16   ),
-          legend.text = element_text(size = 16   ),
-          legend.title = element_text(size = 16, face = "bold"   )
+          plot.title = element_text(size = 16, face = "bold"  , hjust = 0.5 ),
+          axis.title.x = element_text(size = 14, face = "bold"   ),
+          axis.title.y = element_text(size = 14, face = "bold"   ),
+          axis.text.x = element_text(angle = 45, hjust = 1, size = 12  ),
+          axis.text.y = element_text(size = 12 ),
+          legend.text = element_text(size = 8 ),
+          legend.title = element_text(size = 10, face = "bold"   )
         )
       print(g)
       dev.off()
@@ -766,15 +923,16 @@ output$downloadpdf_t_01 <- downloadHandler(
     g <- ggplot(data=as.data.frame(filt_total_NM()), aes(x=NM, y=kg, fill=NM)) +
       geom_bar(stat="identity") +
       labs(title = paste("Total Compounds prescribed at",input$region_select_01, "\nover the year",input$selectyear01, "(in kg)") )+
-      labs(x = "API", y = "kg", color = "API")+
+      labs(x = "API", y = "kg", color = "API") +
+      theme_bw()+
       theme(
-        plot.title = element_text(size = 18, face = "bold"  , hjust = 0.5 ),
-        axis.title.x = element_text(size = 16, face = "bold"   ),
-        axis.title.y = element_text(size = 16, face = "bold"   ),
-        axis.text.x = element_text(angle = 45, hjust = 1, size = 16   ),
-        axis.text.y = element_text(size = 16   ),
-        legend.text = element_text(size = 16   ),
-        legend.title = element_text(size = 16, face = "bold"   )
+        plot.title = element_text(size = 16, face = "bold"  , hjust = 0.5 ),
+        axis.title.x = element_text(size = 14, face = "bold"   ),
+        axis.title.y = element_text(size = 14, face = "bold"   ),
+        axis.text.x = element_text(angle = 45, hjust = 1, size = 12  ),
+        axis.text.y = element_text(size = 12 ),
+        legend.text = element_text(size = 8 ),
+        legend.title = element_text(size = 10, face = "bold"   )
       )
     print(g)
     dev.off()
@@ -796,14 +954,15 @@ output$downloadpdf_t_02 <- downloadHandler(
                  size = 4) +
       labs(title = paste("Total qcompounds prescribed at each month over",input$region_select_01, "\nfor the year", input$selectyear01,"(in kg)"  ))+
       labs(y = "kg / Month", x = "Year / month (YYYYMM)", color = "API")+
+      theme_bw()+
       theme(
-        plot.title = element_text(size = 18, face = "bold"  , hjust = 0.5 ),
-        axis.title.x = element_text(size = 16, face = "bold"   ),
-        axis.title.y = element_text(size = 16, face = "bold"   ),
-        axis.text.x = element_text(angle = 45, hjust = 1, size = 16   ),
-        axis.text.y = element_text(size = 16   ),
-        legend.text = element_text(size = 16   ),
-        legend.title = element_text(size = 16, face = "bold"   )
+        plot.title = element_text(size = 16, face = "bold"  , hjust = 0.5 ),
+        axis.title.x = element_text(size = 14, face = "bold"   ),
+        axis.title.y = element_text(size = 14, face = "bold"   ),
+        axis.text.x = element_text(angle = 45, hjust = 1, size = 12  ),
+        axis.text.y = element_text(size = 12 ),
+        legend.text = element_text(size = 8 ),
+        legend.title = element_text(size = 10, face = "bold"   )
       )
     print(g)
     dev.off()
@@ -833,14 +992,15 @@ output$downloadpdf_t_03 <- downloadHandler(
                    size = 4) +
         labs(title = paste("Quantity of", s[["x"]], "at each month over\n",input$region_select_01, "\nfor the year", input$selectyear01,"(in kg)"  ))+
         labs(y = "kg / Month", x = "Year / month (YYYYMM)")+
+        theme_bw()+
         theme(
-          plot.title = element_text(size = 18, face = "bold"  , hjust = 0.5 ),
-          axis.title.x = element_text(size = 16, face = "bold"   ),
-          axis.title.y = element_text(size = 16, face = "bold"   ),
-          axis.text.x = element_text(angle = 45, hjust = 1, size = 16   ),
-          axis.text.y = element_text(size = 16   ),
-          legend.text = element_text(size = 16   ),
-          legend.title = element_text(size = 16, face = "bold"   )
+          plot.title = element_text(size = 16, face = "bold"  , hjust = 0.5 ),
+          axis.title.x = element_text(size = 14, face = "bold"   ),
+          axis.title.y = element_text(size = 14, face = "bold"   ),
+          axis.text.x = element_text(angle = 45, hjust = 1, size = 12  ),
+          axis.text.y = element_text(size = 12 ),
+          legend.text = element_text(size = 8 ),
+          legend.title = element_text(size = 10, face = "bold"   )
         )
       print(g)
       dev.off()
@@ -869,14 +1029,15 @@ output$downloadpdf_t_04 <- downloadHandler(
                    size = 4) +
         labs(title = paste("Total quantity of", s[["x"]], "prescribed at each GP Practice over\n",input$region_select_01, "\nfor the year", input$selectyear01,"(in kg)"  ))+
         labs(y = "kg / GP Practice", x = "GP Practice code", color = "API")+
+        theme_bw()+
         theme(
-          plot.title = element_text(size = 18, face = "bold"  , hjust = 0.5 ),
-          axis.title.x = element_text(size = 16, face = "bold"   ),
-          axis.title.y = element_text(size = 16, face = "bold"   ),
-          axis.text.x = element_text(angle = 45, hjust = 1, size = 16   ),
-          axis.text.y = element_text(size = 16   ),
-          legend.text = element_text(size = 16   ),
-          legend.title = element_text(size = 16, face = "bold"   )
+          plot.title = element_text(size = 16, face = "bold"  , hjust = 0.5 ),
+          axis.title.x = element_text(size = 14, face = "bold"   ),
+          axis.title.y = element_text(size = 14, face = "bold"   ),
+          axis.text.x = element_text(angle = 45, hjust = 1, size = 12  ),
+          axis.text.y = element_text(size = 12 ),
+          legend.text = element_text(size = 8 ),
+          legend.title = element_text(size = 10, face = "bold"   )
         )
       print(g)
       dev.off()
@@ -905,14 +1066,15 @@ output$downloadpdf_t_05 <- downloadHandler(
                    size = 4) +
         labs(title = paste("Total quantity of", s[["x"]],  "prescribed at each postcode over\n",input$region_select_01, "\nfor the year", input$selectyear01,"(in kg)"  ))+
         labs(y = "kg / postcode", x = "Postcode", color = "API")+
+        theme_bw()+
         theme(
-          plot.title = element_text(size = 18, face = "bold"  , hjust = 0.5 ),
-          axis.title.x = element_text(size = 16, face = "bold"   ),
-          axis.title.y = element_text(size = 16, face = "bold"   ),
-          axis.text.x = element_text(angle = 45, hjust = 1, size = 16   ),
-          axis.text.y = element_text(size = 16   ),
-          legend.text = element_text(size = 16   ),
-          legend.title = element_text(size = 16, face = "bold"   )
+          plot.title = element_text(size = 16, face = "bold"  , hjust = 0.5 ),
+          axis.title.x = element_text(size = 14, face = "bold"   ),
+          axis.title.y = element_text(size = 14, face = "bold"   ),
+          axis.text.x = element_text(angle = 45, hjust = 1, size = 12  ),
+          axis.text.y = element_text(size = 12 ),
+          legend.text = element_text(size = 8 ),
+          legend.title = element_text(size = 10, face = "bold"   )
         )
       print(g)
       dev.off()
@@ -941,14 +1103,15 @@ output$downloadpdf_t_06 <- downloadHandler(
                    size = 4) +
         labs(title = paste("Total quantity of", s[["x"]], "prescribed by each medicinal form over\n",input$region_select_01, "\nfor the year", input$selectyear01,"(in kg)"  ))+
         labs(y = "kg / medicinal form", x = "medicinal form", color = "API")+
+        theme_bw()+
         theme(
-          plot.title = element_text(size = 18, face = "bold"  , hjust = 0.5 ),
-          axis.title.x = element_text(size = 16, face = "bold"   ),
-          axis.title.y = element_text(size = 16, face = "bold"   ),
-          axis.text.x = element_text(angle = 45, hjust = 1, size = 16   ),
-          axis.text.y = element_text(size = 16   ),
-          legend.text = element_text(size = 16 ),
-          legend.title = element_text(size = 16, face = "bold"   )
+          plot.title = element_text(size = 16, face = "bold"  , hjust = 0.5 ),
+          axis.title.x = element_text(size = 14, face = "bold"   ),
+          axis.title.y = element_text(size = 14, face = "bold"   ),
+          axis.text.x = element_text(angle = 45, hjust = 1, size = 12  ),
+          axis.text.y = element_text(size = 12 ),
+          legend.text = element_text(size = 8 ),
+          legend.title = element_text(size = 10, face = "bold"   )
         )
       print(g)
       dev.off()

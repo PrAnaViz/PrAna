@@ -1,11 +1,5 @@
-tabPanel(
-  title = "Non-Targeted Approach",
-  id    = "datasetTab",
-  value = "datasetTab",
-  name  = "datasetTab",
-  class = "fade in",
-  br(),
-  
+nontarget_tab <- tabItem(
+  tabName = "nontargeted",
   fluidRow(
     
     column(
@@ -14,6 +8,9 @@ tabPanel(
         width = NULL, 
         status = "warning",
         solidHeader = TRUE, 
+        collapsible = TRUE,
+        closable = FALSE, 
+        maximizable = TRUE,
         tags$style(type = "text/css", 
                    ".leaflet .legend i{
                    width: 18px;
@@ -42,17 +39,33 @@ tabPanel(
                    
         ),
         fluidRow(
-          column(
-            width = 4,
-            uiOutput("selected_api_input")
+          column(4,
+                 uiOutput("selected_api_input")
           ),
-          column(
-            width = 6,
-            sliderInput("sel_month", "Select Month:",
-                        min = 0, max = 12, value = 8),
-            actionButton(inputId = "gen_leaflet01",
-                         label = "Generate Graph", class="btn btn-success action-button")
-          )
+          column(6, offset = 1,
+                 uiOutput("regioninput2")
+          )),
+        fluidRow(
+          column(3,
+                 selectInput('selectyear02', 'Select Prescirption Year:',
+                             c(
+                               '2015' = '2015',
+                               '2016' = '2016',
+                               '2017' = '2017',
+                               '2018' = '2018'), 
+                             selected = '2018'),
+          ),
+          column(4,
+                 offset = 1,
+                 sliderInput("sel_month", "Select Month:",
+                             min = 0, max = 12, value = 8)
+          ),
+          column(3,  
+                 actionButton(inputId = "gen_leaflet01",
+                              label = "Generate Graph", class="btn btn-success action-button")
+                 
+          ),
+          
         ),
         fluidRow(
           column(
@@ -85,6 +98,9 @@ tabPanel(
         width = NULL,
         status = "info",
         solidHeader = TRUE, 
+        collapsible = TRUE,
+        closable = FALSE, 
+        maximizable = TRUE,
         tags$style("#txt_line_gp_title 
                                             {
                                             font:16px Arial, Helvetica, sans-serif;
