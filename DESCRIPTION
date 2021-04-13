@@ -6,32 +6,22 @@ Authors@R:person("Kishore Kumar", "Jagadeesan", email = "jkkishore85@gmail.com",
 Description: Package with functions to compile and process UK NHS Digital prescribing data 
         for the period 2015-2018 to facilitate the calculation of the consumption data and long-term time, seasonal and 
         location based trends to create an interactive data visualisation tool for a wider use.
-Imports: shinydashboard, 
-         shiny,
-         shinyBS,
+Imports: shiny,
          dbplyr,
          data.table,
          plyr,
-         dplyr,
-         DT,
          magrittr,
-         tidyr,
          reshape,
          reshape2,
          readxl,
-         stringr,
          lubridate,
-         ggplot2,
          chron,
-         plotly,
-         leaflet,
-         readr,
          stringi,
+         stringr,
          tidyverse,
-         RMariaDB,
-         DBI,
          utils,
-         rgdal
+         rgdal,
+         dplyr
 Encoding: UTF-8
 LazyData: true
 Suggests:
