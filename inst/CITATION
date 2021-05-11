@@ -3,10 +3,14 @@ citHeader("To cite PrAna in publications use:")
 citEntry(
   entry    = "Article",
   title    = "PrAna: An R package to calculate and visualize England NHS primary care prescribing data",
-  author   = "Kishore Kumar Jagadeesan and James Grant and Sue Griffin and Ruth Barden and Barbara Kasprzyk-Hordern" ,
+  author   = personList(person("Kishore Kumar", "Jagadeesan"),
+                          person("James","Grant"),
+                          person("Sue", "Griffin"),
+                          person("Ruth", "Barden"),
+                          person("Barbara", "Kasprzyk-Hordern")),
   journal  = "BMC Medical Informatics and Decision Making",
   year     = "Under Review",
-  textVersion = paste(
-
-  )
+  textVersion = paste("Kishore Kumar Jagadeesan, James Grant, Sue Griffin, Ruth Barden, Barbara Kasprzyk-Hordern",
+  "PrAna: An R package to calculate and visualize England NHS primary care prescribing data",
+  "BMC Medical Informatics and Decision Making (under review). https://www.researchsquare.com/article/rs-499597/v1")
 )

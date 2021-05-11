@@ -13,3 +13,4 @@
 ^data-raw$
 .git
 ^\.github$
+^LICENSE\.md$
