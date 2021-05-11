@@ -2,6 +2,7 @@
   [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
   [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![CRAN status](https://www.r-pkg.org/badges/version/PrAna)](https://CRAN.R-project.org/package=PrAna)
+[![R-CMD-check](https://github.com/PrAnaViz/PrAna/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/PrAnaViz/PrAna/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
   
 # PrAna
