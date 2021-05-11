@@ -14,3 +14,4 @@
 .git
 ^\.github$
 ^LICENSE\.md$
+^_config\.yml$
