@@ -17,9 +17,3 @@ a dataframe, polygon file
 \description{
 Convert shpae files to the polygons
 }
-\examples{
-\dontrun{
-shpsubset2polygon("C:/dataset/shape_files","NHS Bath and North East Somerset CCG")
-}
-
-}

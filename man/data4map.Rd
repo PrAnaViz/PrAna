@@ -19,8 +19,3 @@ a dataframe
 data4map
 Add the geo location IDs to the GP address files
 }
-\examples{
-\dontrun{
-data4map(gp_2017,full_postcode)
-}
-}

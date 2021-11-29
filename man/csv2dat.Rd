@@ -15,8 +15,3 @@ csv2dat(path)
 \description{
 Combine and convert .CSV file(s) in the defined path to a \code{dataframe}
 }
-\examples{
-\dontrun{
-csv2dat()
-}
-}

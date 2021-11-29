@@ -9,6 +9,8 @@ generate_gp_list_ccg(shape_file, region, full_postcode, gp_data)
 \arguments{
 \item{shape_file}{Shape file location}
 
+\item{region}{CCG region name}
+
 \item{full_postcode}{Full postcode with geo information}
 
 \item{gp_data}{GP extracted data location}
@@ -18,9 +20,4 @@ a character vector file with GP Practice codes
 }
 \description{
 generate_gp_list_ccg
-}
-\examples{
-\dontrun{
-generate_gp_list_ccg(shape_file, region,full_postcode, gp_data)
-}
 }

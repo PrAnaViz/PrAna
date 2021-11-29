@@ -24,11 +24,6 @@
 #' @import plyr
 #' @import tidyverse
 #'
-#' @examples 
-#' \dontrun{
-#' importdmd("C:/dmdDataLoader/excel/")
-#' }
-#' 
 
 importdmd <- function(path)
 {

@@ -21,8 +21,3 @@ a dataframe
 \description{
 Generate GP lists based on the shape file and GP address
 }
-\examples{
-\dontrun{
-finalgplist(coordinates, polygon_data, mapdata, gp_data_extract) 
-}
-}

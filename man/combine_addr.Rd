@@ -15,8 +15,3 @@ combine_addr(path)
 \description{
 Combine and convert \code{ADDR} files in the defined path to a \code{dataframe}
 }
-\examples{
-\dontrun{
-combine_addr()
-}
-}

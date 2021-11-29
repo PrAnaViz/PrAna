@@ -3,5 +3,5 @@ utils::globalVariables(c("VPID", "summarise", "ISID",
                          "API", "API_CODE", "BNFCODE" ,"DForm" ,"PERIOD", 
                          "PRACTICE", "V1", "Vol_Mass_Tot", "dform", "gram", "ing2", "uom_2",
                          "FORMCD", "QUANTITY", "UOM", "Vol_Mass", "multi_fac", "CRS", "PRACTICE_CODE",
-                         "postcode","region_name", "region"
+                         "postcode","region_name"
 ))

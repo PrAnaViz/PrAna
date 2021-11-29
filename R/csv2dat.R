@@ -4,10 +4,7 @@
 #'
 #' @param path location for the target .CSV file(s) 
 #'
-#' @examples 
-#' \dontrun{
-#' csv2dat()
-#' }
+
 #' @return \code{dataframe} 
 #' @export
 

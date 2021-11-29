@@ -10,10 +10,6 @@
 #' @return a dataframe
 #' @export
 #'
-#' @examples
-#' \dontrun{
-#' finalgplist(coordinates, polygon_data, mapdata, gp_data_extract) 
-#' }
 
 finalgplist <- function(coordinate,x,y,z)
 {

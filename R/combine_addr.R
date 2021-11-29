@@ -7,10 +7,6 @@
 #' @return \code{dataframe} 
 #' @export
 #'
-#' @examples
-#' \dontrun{
-#' combine_addr()
-#' }
 
 combine_addr <- function(path)
 {

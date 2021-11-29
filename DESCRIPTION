@@ -43,7 +43,11 @@ Imports: shiny,
          tidyverse,
          utils,
          rgdal,
-         dplyr
+         dplyr,
+         readr,
+         sf,
+         sp, 
+         ggplot2
 Encoding: UTF-8
 Suggests:
     knitr (>= 0.1.0),

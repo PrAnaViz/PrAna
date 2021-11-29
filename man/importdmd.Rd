@@ -22,9 +22,3 @@ A list with the following elements:
 \description{
 Import dm+d files and link it to the BNF code using SNOMED mapping file
 }
-\examples{
-\dontrun{
-importdmd("C:/dmdDataLoader/excel/")
-}
-
-}

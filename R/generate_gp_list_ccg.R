@@ -1,28 +1,15 @@
-library(ggplot2)
-library(tidyverse)
-library(rgdal)
-library(data.table)
-
-
-# Functions used
-# source("R/csvcombine.R")
-# source("R/data4map.R")
-# source("R/finalgplist.R")
-# source("R/shp2polygondata.R")
-
 #' generate_gp_list_ccg
 #'
 #' @param shape_file Shape file location
 #' @param full_postcode Full postcode with geo information
 #' @param gp_data GP extracted data location
+#' @param region CCG region name
 #'
 #' @return a character vector file with GP Practice codes
+#' @importFrom readr read_csv
+#' @importFrom dplyr select
 #' @export
 #'
-#' @examples
-#' \dontrun{
-#' generate_gp_list_ccg(shape_file, region,full_postcode, gp_data)
-#' }
 
 generate_gp_list_ccg <- function(shape_file, region,full_postcode, gp_data) {
   

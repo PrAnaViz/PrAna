@@ -1,4 +1,3 @@
-
 #' Run in-built Shiny Apps in the package
 #'
 #' @param appName In-built Shiny App name.
