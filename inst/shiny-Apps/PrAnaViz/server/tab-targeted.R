@@ -1,14 +1,29 @@
 ## Server
 library(shiny)
 
+# Connect to local host 
+aggr_wodb <- reactive({
+  DBI:: dbConnect(
+    drv = RMariaDB::MariaDB(),
+    username = input$usernm ,
+    password = isolate(input$pwd), 
+    host=input$hostnm)
+}) 
 # For drug targets
 targetdata <- reactive({
-  inFile <- input$file1
-  if (is.null(inFile))
-    return(NULL)
+  if (input$sel_target == TRUE) {
+    read_csv("dataset/targets.csv", col_names = FALSE)
+  }
+  else
+  {
+    inFile <- input$file1
+    if (is.null(inFile))
+      return(NULL)
+    
+    read_csv(inFile$datapath, col_names = FALSE)
+  }
   
-  fread(inFile$datapath, header = FALSE,
-        sep = ",", quote = '"')
+  
 })
 
 map <- reactive({
@@ -27,17 +42,9 @@ map <- reactive({
   map <- as.data.frame(map)
 })
 
-sql.demo_one <- "SELECT * FROM gp_practice." 
+.gp_practice <- "SELECT * FROM gp_practice." 
 sql.support <- "SELECT * FROM support." 
 
-# Connect to local host 
-aggr_wodb <- reactive({
-  DBI:: dbConnect(
-    drv = RMariaDB::MariaDB(),
-    username = input$usernm ,
-    password = isolate(input$pwd), 
-    host=input$hostnm)
-}) 
 
 
 dform_desc <- reactive({
@@ -46,7 +53,7 @@ dform_desc <- reactive({
 
 gp_list_shape <- reactive({
   tbl(aggr_wodb(), sql("SELECT * FROM support.full_gp_shapewise" )) %>%
-    mutate (region = toupper(region))
+    dplyr::mutate (region = toupper(region))
 })
 
 # select table bnf_group
@@ -96,15 +103,15 @@ df_gp_data_full_latnlong <- reactive({
 # postcode_full table
 gp_data_full_latnlong <- reactive({
   base::do.call(rbind, df_gp_data_full_latnlong()) %>%
-    mutate(latitude = as.numeric(latitude),
+    dplyr::mutate(latitude = as.numeric(latitude),
            longitude = as.numeric(longitude))
 })  
 
 # For the UI to show all the regions based on year
 gp_list_year_tab  <- reactive ({
   gp_list_shape () %>%
-    filter (Year %in% !!input$selectyear01) %>%
-    select(region)
+    dplyr::filter (Year %in% !!input$selectyear01) %>%
+    dplyr::select(region)
 })
 
 # select table postcode_full
@@ -138,27 +145,46 @@ gp_list_year  <- reactive ({
 })
 
 list_practices <- reactive({
-  gp_list_year () %>%
-    dplyr::rename (organisation_code = PRACTICE ) %>%
-    merge(ccg_gp_full()[,c("organisation_code","setting_type")] , by = "organisation_code") %>%
-    dplyr::filter (setting_type %in% !!input$setting_select_01) %>% 
-    dplyr::rename (PRACTICE = organisation_code ) %>% 
-    dplyr::rename (Year = year ) 
+  
+  if(input$setting_select_01 == "all")
+  {
+    gp_list_year () %>%
+      dplyr::rename (organisation_code = PRACTICE ) %>%
+      merge(ccg_gp_full()[,c("organisation_code","setting_type")] , by = "organisation_code") %>%
+      dplyr::rename (PRACTICE = organisation_code ) %>% 
+      dplyr::rename (Year = year ) 
+  }
+  else
+  {
+    gp_list_year () %>%
+      dplyr::rename (organisation_code = PRACTICE ) %>%
+      merge(ccg_gp_full()[,c("organisation_code","setting_type")] , by = "organisation_code") %>%
+      dplyr::filter (setting_type %in% !!input$setting_select_01) %>% 
+      dplyr::rename (PRACTICE = organisation_code ) %>% 
+      dplyr::rename (Year = year )
+    
+  }
 })
 
 # Get the list of all the practices based on year and region
 list_practices_year <- reactive({
   list_practices () %>%
-    filter (Year %in% !!input$selectyear01) %>%
-    filter (region %in% !!toupper(input$region_select_01)) %>%
-    select(PRACTICE)
+    dplyr::filter (Year %in% !!input$selectyear01) %>%
+    dplyr::filter (region %in% !!toupper(input$region_select_01)) %>%
+    dplyr::select(PRACTICE)
   
 })
 
 ## Bind all the practices
 bind_practices <- reactive({
-  base::do.call(rbind, dfList_banes())  %>%
-    distinct()
+  base::do.call(rbind, dfList_banes())  #%>%
+    #dplyr::distinct()
+})
+
+get_GP <- reactive({
+  bind_practices() %>%
+    dplyr::select(PRACTICE) %>%
+    unique()
 })
 
 # Filter out the practices based on selected region and practices
@@ -169,25 +195,25 @@ tbls_yearwise <- reactive ({
 # ## Need to change the database once we have all regions in a sql database
 dfList_banes <- reactive({
   if(input$selectyear01 == "2015"){
-    lapply(paste(sql.demo_one, tbls_yearwise()," WHERE PERIOD LIKE '%2015%'"), function(s) {
+    lapply(paste(.gp_practice, tbls_yearwise()," WHERE PERIOD LIKE '%2015%'"), function(s) {
       tryCatch({ return(dbGetQuery(aggr_wodb(), s))
       }, error = function(e) return(as.character(e)))
     })
   }
   else if(input$selectyear01 == "2016"){
-    lapply(paste(sql.demo_one, tbls_yearwise()," WHERE PERIOD LIKE '%2016%'"), function(s) {
+    lapply(paste(.gp_practice, tbls_yearwise()," WHERE PERIOD LIKE '%2016%'"), function(s) {
       tryCatch({ return(dbGetQuery(aggr_wodb(), s))
       }, error = function(e) return(as.character(e)))
     })
   }
   else if(input$selectyear01 == "2017"){
-    lapply(paste(sql.demo_one, tbls_yearwise()," WHERE PERIOD LIKE '%2017%'"), function(s) {
+    lapply(paste(.gp_practice, tbls_yearwise()," WHERE PERIOD LIKE '%2017%'"), function(s) {
       tryCatch({ return(dbGetQuery(aggr_wodb(), s))
       }, error = function(e) return(as.character(e)))
     })
   }
   else if(input$selectyear01 == "2018"){
-    lapply(paste(sql.demo_one, tbls_yearwise()," WHERE PERIOD LIKE '%2018%'"), function(s) {
+    lapply(paste(.gp_practice, tbls_yearwise()," WHERE PERIOD LIKE '%2018%'"), function(s) {
       tryCatch({ return(dbGetQuery(aggr_wodb(), s))
       }, error = function(e) return(as.character(e)))
     })
@@ -199,29 +225,30 @@ dfList_banes <- reactive({
 # Subset data - Period
 filt_total_period  <- reactive ({ 
   bind_practices() %>%
-    filter (!grepl("Error: Table",CPD)) %>% 
+    dplyr::filter (!grepl("Error: Table",CPD)) %>% 
     dplyr::mutate(NM = tolower(NM) ) %>% 
-    dplyr::filter (str_detect(NM , paste(!!targetdata()$V1,collapse = '|'))) %>%
-    mutate(Year=(substr(PERIOD, 1, 4))) %>%
-    filter (Year %in% !!input$selectyear01) %>%
-    mutate(gram2 = as.numeric(gram)) %>%
-    group_by(NM, PERIOD) %>%
-    summarise(gram_sum = sum(gram2, na.rm = T)) %>%
-    mutate(kg = gram_sum/1000) 
+    dplyr::filter (str_detect(NM , paste(!!targetdata()$X1,collapse = '|'))) %>%
+    dplyr::mutate(Year=(substr(PERIOD, 1, 4))) %>%
+    dplyr::filter (Year %in% !!input$selectyear01) %>%
+    dplyr::mutate(gram2 = as.numeric(gram)) %>%
+    dplyr::group_by(NM, PERIOD) %>%
+    dplyr::summarise(gram_sum = sum(gram2, na.rm = T)) %>%
+    dplyr::mutate(kg = gram_sum/1000) 
 })
 
 # Subset yearwise data - Practice
 filt_total_practice <- reactive ({ 
   bind_practices() %>%
-    filter (!grepl("Error: Table",CPD)) %>% 
+    dplyr::filter (!grepl("Error: Table",CPD)) %>% 
     dplyr::mutate(NM = tolower(NM) ) %>% 
-    dplyr::filter (str_detect(NM , paste(!!targetdata()$V1,collapse = '|'))) %>%
-    mutate(Year=(substr(PERIOD, 1, 4))) %>%
-    filter (Year %in% !!input$selectyear01) %>%
-    mutate(gram2 = as.numeric(gram)) %>%
-    group_by(NM, PRACTICE) %>%
-    summarise(gram_sum = sum(gram2, na.rm = T)) %>%
-    mutate(kg = gram_sum/1000) 
+    dplyr::filter (str_detect(NM , paste(!!targetdata()$X1,collapse = '|'))) %>%
+    dplyr::left_join(gp_postcode_full(), by=c("PRACTICE"="PRACTICE", "PERIOD" = "PERIOD")) %>%
+    dplyr::mutate(Year=(substr(PERIOD, 1, 4))) %>%
+    dplyr::filter (Year %in% !!input$selectyear01) %>%
+    dplyr::mutate(gram2 = as.numeric(gram)) %>%
+    dplyr::group_by(NM, PRACTICE, SURGERY_NAME) %>%
+    dplyr::summarise(gram_sum = sum(gram2, na.rm = T)) %>%
+    dplyr::mutate(kg = gram_sum/1000) 
 })
 
 
@@ -229,7 +256,7 @@ gp_postcode_full <-  reactive ({
   gp_data_full_latnlong() %>%
     dplyr::filter (Year %in% !!input$selectyear01)  %>%
     dplyr::select(PERIOD, PRACTICE, SURGERY_NAME, postcode, latitude, longitude) %>%
-    distinct()
+    dplyr::distinct()
 })
 
 # Subset yearwise data - Postcode
@@ -237,51 +264,35 @@ filt_total_postcode <- reactive ({
   bind_practices() %>%
     dplyr::filter (!grepl("Error: Table",CPD)) %>% 
     dplyr::mutate(NM = tolower(NM) ) %>% 
-    dplyr::filter (str_detect(NM , paste(!!targetdata()$V1,collapse = '|'))) %>%
+    dplyr::filter (str_detect(NM , paste(!!targetdata()$X1,collapse = '|'))) %>%
     dplyr::mutate(Year=(substr(PERIOD, 1, 4))) %>%
     dplyr::filter (Year %in% !!input$selectyear01) %>%
     dplyr::mutate(gram2 = as.numeric(gram)) %>%
     dplyr::left_join(gp_postcode_full(), by=c("PRACTICE"="PRACTICE", "PERIOD" = "PERIOD")) %>%
-    group_by(NM, postcode) %>%
-    summarise(gram_sum = sum(gram2, na.rm = T)) %>%
+    dplyr::group_by(NM, postcode) %>%
+    dplyr::summarise(gram_sum = sum(gram2, na.rm = T)) %>%
     dplyr::mutate(kg = gram_sum/1000) 
 })
 
 # Subset yearwise data - Medicinal Form
 filt_total_dform <- reactive ({
   bind_practices() %>%
-    filter (!grepl("Error: Table",CPD)) %>% 
+    dplyr::filter (!grepl("Error: Table",CPD)) %>% 
     dplyr::mutate(NM = tolower(NM) ) %>% 
-    dplyr::filter (str_detect(NM , paste(!!targetdata()$V1,collapse = '|'))) %>%
-    mutate(Year=(substr(PERIOD, 1, 4))) %>%
-    filter (Year %in% !!input$selectyear01) %>%
-    mutate(gram2 = as.numeric(gram)) %>%
-    mutate(DForm = as.numeric(DForm)) %>%
-    mutate(CD = DForm) %>% 
-    left_join(dform_desc(), by="CD") %>%
-    group_by(NM, DESC) %>%
-    summarise(gram_sum = sum(gram2, na.rm = T)) %>%
-    mutate(kg = gram_sum/1000) 
+    dplyr::filter (str_detect(NM , paste(!!targetdata()$X1,collapse = '|'))) %>%
+    dplyr::mutate(Year=(substr(PERIOD, 1, 4))) %>%
+    dplyr::filter (Year %in% !!input$selectyear01) %>%
+    dplyr::mutate(gram2 = as.numeric(gram)) %>%
+    dplyr::mutate(DForm = as.numeric(DForm)) %>%
+    dplyr::mutate(CD = DForm) %>% 
+    dplyr::left_join(dform_desc(), by="CD") %>%
+    dplyr::group_by(NM, DESC) %>%
+    dplyr::summarise(gram_sum = sum(gram2, na.rm = T)) %>%
+    dplyr::mutate(kg = gram_sum/1000) 
 })
 
-# Subset yearwise data - Practice monthwise
-filt_total_practice_month <- reactive ({ 
-  bind_practices() %>%
-    filter (!grepl("Error: Table",CPD)) %>% 
-    dplyr::mutate(NM = tolower(NM) ) %>% 
-    dplyr::filter (str_detect(NM , paste(!!targetdata()$V1,collapse = '|'))) %>%
-    mutate(Year=(substr(PERIOD, 1, 4))) %>%
-    filter (Year %in% !!input$selectyear01) %>%
-    mutate(gram2 = as.numeric(gram)) %>%
-    group_by(NM, PRACTICE, PERIOD) %>%
-    summarise(gram_sum = sum(gram2, na.rm = T)) %>%
-    mutate(kg = gram_sum/1000) 
-})
 
 # Data for download csv
-
-
-
 data.lineplot_t_01 <- reactive ({
   dcast(as.data.frame(filt_total_period()), NM~PERIOD,value.var= "kg") 
 })
@@ -310,7 +321,8 @@ output$regioninput1 <- renderUI({
   withProgress(message = 'Data is loading, please wait ...', value = 1:100, {
     selectInput(inputId="region_select_01",
                 label="Select region:",
-                choices=map()$region_name
+                choices=map()$region_name,
+                selected ="NHS Bath and North East Somerset CCG"
     )
   })
 })
@@ -447,35 +459,21 @@ output$txt_tot_lineplot4_title <- renderUI({
   }
 })
 
-output$txt_tot_monthwise_gp_title <- renderUI({ 
-  s <- event_data("plotly_click", source = "filt_total_barplot1")
-  if (length(s) == 0) {
-    NULL
-  }   
-  else {
-    HTML( paste0("Total quantity of ",s[["x"]]," prescribed every month at different GP practice\nover ",input$region_select_01, "\nfor the year ", input$selectyear01," (in kg)")
-    ) 
-  }
-})
-
 ## Plots
-
-# Plotly barplot 01 - Yearwise
-
 
 
 # Subset yearwise data
 filt_total_NM <- reactive ({
   bind_practices() %>%
-    filter (!grepl("Error: Table",CPD)) %>% 
+    dplyr::filter (!grepl("Error: Table",CPD)) %>% 
     dplyr::mutate(NM = tolower(NM) ) %>% 
-    dplyr::filter (str_detect(NM , paste(paste0(!!targetdata()$V1,collapse = '|')))) %>%
-    mutate(Year=(substr(PERIOD, 1, 4))) %>%
-    filter (Year %in% !!input$selectyear01) %>%
-    mutate(gram2 = as.numeric(gram)) %>%
-    group_by(NM, Year) %>%
-    summarise(gram_sum = sum(gram2, na.rm = T)) %>%
-    mutate(kg = gram_sum/1000) 
+    dplyr::filter (str_detect(NM , paste(paste0(!!targetdata()$X1,collapse = '|')))) %>%
+    dplyr::mutate(Year=(substr(PERIOD, 1, 4))) %>%
+    dplyr::filter (Year %in% !!input$selectyear01) %>%
+    dplyr::mutate(gram2 = as.numeric(gram)) %>%
+    dplyr::group_by(NM, Year) %>%
+    dplyr::summarise(gram_sum = sum(gram2, na.rm = T)) %>%
+    dplyr::mutate(kg = gram_sum/1000) 
 })
 
 ##outputs 
@@ -485,11 +483,30 @@ output$txt_tot_barplot1_title <- renderUI({ HTML( paste0("Total Compounds prescr
 # barplot
 output$filt_total_barplot1 <- renderPlotly({  
   withProgress(message = 'Data is loading, please wait ...', value = 1:100, {
-    plot_ly(as.data.frame(filt_total_NM()), x = ~NM, y = ~kg,  type = "bar", color = ~NM, source = "filt_total_barplot1") %>%
+    plot01 <- plot_ly(as.data.frame(filt_total_NM()), 
+                      x = ~NM, y = ~kg,  type = "bar",
+                      color = ~NM,
+                      colors = color_palette(), 
+                      source = "filt_total_barplot1") %>% 
       layout(title = FALSE,
+             paper_bgcolor = "transparent", plot_bgcolor = "transparent",
              font = title_font,
              xaxis = list(title = "API"), 
-             yaxis = list(title = "kg"))      
+             yaxis = list(title = "kg"))
+    
+    if (input$dark_mode) plot01 <- plot01 %>%  
+        layout(
+          xaxis = list(
+            color = "white"),
+          yaxis = list(
+            color = "white"),
+          legend = list(
+            font = list(
+              color = "white")
+          ) 
+        )
+    else
+      plot01
   }) 
 })
 
@@ -505,12 +522,29 @@ output$filt_total_lineplot11 <- renderPlotly({
   withProgress(message = 'Data is loading, please wait ...', value = 1:100, {
     a1 <- as.data.frame(filt_total_period())
     a1$PERIOD <-  as.character(a1$PERIOD)
-    a2 <-  plot_ly(a1, x = ~PERIOD, y = ~kg, type = 'scatter',mode = 'lines+markers',color = ~NM, source = "filt_total_lineplot11")%>%
+    a2 <-  plot_ly(a1, x = ~PERIOD, y = ~kg, type = 'scatter',
+                   mode = 'lines+markers',color = ~NM, 
+                   colors = color_palette(), 
+                   source = "filt_total_lineplot11")%>%
       layout(title =FALSE,
+             paper_bgcolor = "transparent", plot_bgcolor = "transparent",
              font = title_font,
              xaxis = list(title = "Year / Month"),
              yaxis = list (title = "kg / month"))
-    a2
+    
+    if (input$dark_mode) a2 <- a2 %>%  
+      layout(
+        xaxis = list(
+          color = "white"),
+        yaxis = list(
+          color = "white"),
+        legend = list(
+          font = list(
+            color = "white")
+        ) 
+      )
+    else
+      a2
     
   })
 })
@@ -525,12 +559,28 @@ output$filt_total_lineplot1 <- renderPlotly({
     else { 
       a1 <- subset (as.data.frame(filt_total_period()), NM %in%  s[["x"]])
       a1$PERIOD <-  as.character(a1$PERIOD)
-      a2 <-  plot_ly(a1, x = ~PERIOD, y = ~kg, type = 'scatter',mode = 'lines+markers')%>%
+      a2 <-  plot_ly(a1, x = ~PERIOD, y = ~kg, type = 'scatter',
+                     colors = color_palette(), 
+                     mode = 'lines+markers')%>%
         layout(title = FALSE,
+               paper_bgcolor = "transparent", plot_bgcolor = "transparent",
                font = title_font,
                xaxis = list(title = "Year / Month"),
                yaxis = list (title = "kg / month"))
-      a2
+      
+      if (input$dark_mode) a2 <- a2 %>%  
+        layout(
+          xaxis = list(
+            color = "white"),
+          yaxis = list(
+            color = "white"),
+          legend = list(
+            font = list(
+              color = "white")
+          ) 
+        )
+      else
+        a2
     }
   })
 })
@@ -544,12 +594,29 @@ output$filt_total_lineplot2 <- renderPlotly({
     }   
     else {
       a1 <- subset (as.data.frame(filt_total_practice()),NM %in% s[["x"]])
-      a2 <-  plot_ly(a1, x = ~PRACTICE, y = ~kg, type = 'scatter',mode = 'lines+markers')%>%
+      a2 <-  plot_ly(a1, x = ~SURGERY_NAME, y = ~kg, 
+                     type = "bar", color = ~SURGERY_NAME,
+                     colors = color_palette()
+      )%>%
         layout(title = FALSE ,
+               paper_bgcolor = "transparent", plot_bgcolor = "transparent",
                font = title_font,
                xaxis = list(title = "GP Practice Code"),
                yaxis = list (title = "kg /  GP Practice"))
-      a2
+      
+      if (input$dark_mode) a2 <- a2 %>%  
+        layout(
+          xaxis = list(
+            color = "white"),
+          yaxis = list(
+            color = "white"),
+          legend = list(
+            font = list(
+              color = "white")
+          ) 
+        )
+      else
+        a2
     }
   })
 })
@@ -563,12 +630,29 @@ output$filt_total_lineplot3 <- renderPlotly({
     }   
     else {
       a1 <- subset (as.data.frame(filt_total_postcode()),NM %in% s[["x"]])
-      a2 <-  plot_ly(a1, x = ~postcode, y = ~kg, type = 'scatter',mode = 'lines+markers')%>%
+      a2 <-  plot_ly(a1, x = ~postcode, y = ~kg, 
+                     type = "bar", color = ~postcode,
+                     colors = color_palette()
+      )%>%
         layout(title = FALSE ,
+               paper_bgcolor = "transparent", plot_bgcolor = "transparent",
                font = title_font,
                xaxis = list(title = "Postcode"),
                yaxis = list (title = "kg /  Postcode"))
-      a2
+      
+      if (input$dark_mode) a2 <- a2 %>%  
+        layout(
+          xaxis = list(
+            color = "white"),
+          yaxis = list(
+            color = "white"),
+          legend = list(
+            font = list(
+              color = "white")
+          ) 
+        )
+      else
+        a2
     }
   })
 })
@@ -582,33 +666,28 @@ output$filt_total_lineplot4 <- renderPlotly({
     }   
     else {
       a1 <- subset (as.data.frame(filt_total_dform()),NM %in% s[["x"]])
-      a2 <-  plot_ly(a1, x = ~DESC, y = ~kg, type = 'scatter',mode = 'lines+markers')%>%
+      a2 <-  plot_ly(a1, x = ~DESC, y = ~kg, type = "bar", 
+                     colors = color_palette(), 
+                     color = ~DESC)%>%
         layout(title = FALSE ,
+               paper_bgcolor = "transparent", plot_bgcolor = "transparent",
                font = title_font,
                xaxis = list(title = "Medicinal Form"),
                yaxis = list (title = "kg /  medicinal form"))
-      a2
-    }
-  })
-})
-
-# Plotly lineplot 05 - monthwise
-output$plot_compound_monthwise <- renderPlotly({ 
-  withProgress(message = 'Data is loading, please wait ...', value = 1:100, {
-    s <- event_data("plotly_click", source = "filt_total_barplot1")
-    if (length(s) == 0) {
-      NULL
-    }   
-    else {
-      a1 <- subset(as.data.frame(filt_total_practice_month()), NM %in%    s[["x"]])
-      a1$PERIOD <-  as.character(a1$PERIOD)
-      a2 <-  plot_ly(a1, x = ~PERIOD, y = ~kg, type = 'scatter',mode = 'lines+markers',color=~PRACTICE)%>%
-        layout(title = FALSE ,
-               font = title_font,
-               xaxis = list(title = "PERIOD (YYYYMM)"),
-               yaxis = list (title = "kg / month"))
-      a2
       
+      if (input$dark_mode) a2 <- a2 %>%  
+        layout(
+          xaxis = list(
+            color = "white"),
+          yaxis = list(
+            color = "white"),
+          legend = list(
+            font = list(
+              color = "white")
+          ) 
+        )
+      else
+        a2
     }
   })
 })
@@ -711,6 +790,7 @@ output$downloadeps_t_01<- downloadHandler(
                horizontal = TRUE, onefile = TRUE, paper = "special")
     g <- ggplot(data=as.data.frame(filt_total_NM()), aes(x=NM, y=kg, fill=NM)) +
       geom_bar(stat="identity") +
+      scale_fill_manual(values = color_palette()) +
       labs(title = paste("Total Compounds prescribed at",input$region_select_01, "\nover the year",input$selectyear01, "(in kg)") )+
       labs(x = "API", y = "kg", color = "API") +
       theme_bw()+
@@ -743,6 +823,8 @@ output$downloadeps_t_02 <- downloadHandler(
       geom_point(aes(color = NM ),
                  shape = 20,    
                  size = 4) +
+      scale_color_manual(values = color_palette()) +
+      
       labs(title = paste("Total compounds prescribed at each month over",input$region_select_01, "\nfor the year", input$selectyear01,"(in kg)"  ))+
       labs(y = "kg / Month", x = "Year / month (YYYYMM)", color = "API")+
       theme_bw()+
@@ -783,6 +865,8 @@ output$downloadeps_t_03 <- downloadHandler(
         geom_point(aes(color = NM ),
                    shape = 20,    
                    size = 4) +
+        scale_color_manual(values = color_palette()) +
+        
         labs(title = paste("Quantity of", s[["x"]], "at each month over\n",input$region_select_01, "\nfor the year", input$selectyear01,"(in kg)"  ))+
         labs(y = "kg / Month", x = "Year / month (YYYYMM)")+
         theme_bw()+
@@ -815,12 +899,9 @@ output$downloadeps_t_04 <- downloadHandler(
     }   
     else {
       a1 <- subset (as.data.frame(filt_total_practice()),NM %in% s[["x"]])
-      g <- ggplot(data=a1, aes(x=PRACTICE, y=kg, group = NM)) +
-        geom_line(aes(color = NM ) ,
-                  size = 0.5) +  
-        geom_point(aes(color = NM ),
-                   shape = 20,    
-                   size = 4) +
+      g <- ggplot(data=a1, aes(x=SURGERY_NAME, y=kg)) +
+        geom_col(aes(fill = SURGERY_NAME )) +
+        scale_fill_manual(values = color_palette()) +
         labs(title = paste("Total quantity of", s[["x"]], "prescribed at each GP Practice over\n",input$region_select_01, "\nfor the year", input$selectyear01,"(in kg)"  ))+
         labs(y = "kg / GP Practice", x = "GP Practice code", color = "API")+
         theme_bw()+
@@ -853,12 +934,9 @@ output$downloadeps_t_05 <- downloadHandler(
     }   
     else {
       a1 <- subset (as.data.frame(filt_total_postcode()),NM %in% s[["x"]])
-      g <- ggplot(data=a1, aes(x=postcode, y=kg, group = NM)) +
-        geom_line(aes(color = NM ) ,
-                  size = 0.5) +  
-        geom_point(aes(color = NM ),
-                   shape = 20,    
-                   size = 4) +
+      g <- ggplot(data=a1, aes(x=postcode, y=kg)) +
+        geom_col(aes(fill = postcode ) )  +
+        scale_fill_manual(values = color_palette()) +
         labs(title = paste("Total quantity of", s[["x"]],  "prescribed at each postcode over\n",input$region_select_01, "\nfor the year", input$selectyear01,"(in kg)"  ))+
         labs(y = "kg / postcode", x = "Postcode", color = "API")+
         theme_bw()+
@@ -892,11 +970,9 @@ output$downloadeps_t_06 <- downloadHandler(
     else {
       a1 <- subset (as.data.frame(filt_total_dform()),NM %in% s[["x"]])
       g <- ggplot(data=a1, aes(x=DESC, y=kg, group = NM)) +
-        geom_line(aes(color = NM ) ,
-                  size = 0.5) +  
-        geom_point(aes(color = NM ),
-                   shape = 20,    
-                   size = 4) +
+        geom_col(aes(fill =DESC )) +
+        scale_fill_manual(values = color_palette()) +
+        
         labs(title = paste("Total quantity of", s[["x"]], "prescribed by each medicinal form over\n",input$region_select_01, "\nfor the year", input$selectyear01,"(in kg)"  ))+
         labs(y = "kg / medicinal form", x = "medicinal form", color = "API")+
         theme_bw()+
@@ -922,6 +998,7 @@ output$downloadpdf_t_01 <- downloadHandler(
     pdf(file, paper = "a4r",width = 14)
     g <- ggplot(data=as.data.frame(filt_total_NM()), aes(x=NM, y=kg, fill=NM)) +
       geom_bar(stat="identity") +
+      scale_fill_manual(values = color_palette()) +
       labs(title = paste("Total Compounds prescribed at",input$region_select_01, "\nover the year",input$selectyear01, "(in kg)") )+
       labs(x = "API", y = "kg", color = "API") +
       theme_bw()+
@@ -952,6 +1029,7 @@ output$downloadpdf_t_02 <- downloadHandler(
       geom_point(aes(color = NM ),
                  shape = 20,    
                  size = 4) +
+      scale_color_manual(values = color_palette()) +
       labs(title = paste("Total qcompounds prescribed at each month over",input$region_select_01, "\nfor the year", input$selectyear01,"(in kg)"  ))+
       labs(y = "kg / Month", x = "Year / month (YYYYMM)", color = "API")+
       theme_bw()+
@@ -990,6 +1068,8 @@ output$downloadpdf_t_03 <- downloadHandler(
         geom_point(aes(color = NM ),
                    shape = 20,    
                    size = 4) +
+        scale_color_manual(values = color_palette()) +
+        
         labs(title = paste("Quantity of", s[["x"]], "at each month over\n",input$region_select_01, "\nfor the year", input$selectyear01,"(in kg)"  ))+
         labs(y = "kg / Month", x = "Year / month (YYYYMM)")+
         theme_bw()+
@@ -1008,6 +1088,20 @@ output$downloadpdf_t_03 <- downloadHandler(
   }
 )
 
+
+
+color_palette <- reactive({
+  if (input$plot_colors == 'viridis::viridis' ||input$plot_colors =='viridis::inferno' ||
+      input$plot_colors == 'viridis::plasma' ||input$plot_colors =='viridis::magma')
+  {
+    colorRampPalette(paletteer_c(paste(input$plot_colors),8)) (30)
+  }
+  else
+  {
+    colorRampPalette(paletteer_d(paste(input$plot_colors),8)) (30)
+  }
+  
+}) 
 output$downloadpdf_t_04 <- downloadHandler(
   filename = function(){ 
     s <- event_data("plotly_click", source = "filt_total_barplot1")
@@ -1021,16 +1115,14 @@ output$downloadpdf_t_04 <- downloadHandler(
     }   
     else {
       a1 <- subset (as.data.frame(filt_total_practice()),NM %in% s[["x"]])
-      g <- ggplot(data=a1, aes(x=PRACTICE, y=kg, group = NM)) +
-        geom_line(aes(color = NM ) ,
-                  size = 0.5) +  
-        geom_point(aes(color = NM ),
-                   shape = 20,    
-                   size = 4) +
+      g <- ggplot(data=a1, aes(x=SURGERY_NAME, y=kg)) +
+        geom_col(aes(fill = SURGERY_NAME )) +
+        scale_fill_manual(values = color_palette()) +
         labs(title = paste("Total quantity of", s[["x"]], "prescribed at each GP Practice over\n",input$region_select_01, "\nfor the year", input$selectyear01,"(in kg)"  ))+
         labs(y = "kg / GP Practice", x = "GP Practice code", color = "API")+
         theme_bw()+
         theme(
+          legend.position = "none",
           plot.title = element_text(size = 16, face = "bold"  , hjust = 0.5 ),
           axis.title.x = element_text(size = 14, face = "bold"   ),
           axis.title.y = element_text(size = 14, face = "bold"   ),
@@ -1058,12 +1150,9 @@ output$downloadpdf_t_05 <- downloadHandler(
     }   
     else {
       a1 <- subset (as.data.frame(filt_total_postcode()),NM %in% s[["x"]])
-      g <- ggplot(data=a1, aes(x=postcode, y=kg, group = NM)) +
-        geom_line(aes(color = NM ) ,
-                  size = 0.5) +  
-        geom_point(aes(color = NM ),
-                   shape = 20,    
-                   size = 4) +
+      g <- ggplot(data=a1, aes(x=postcode, y=kg)) +
+        geom_col(aes( fill = postcode ))  +
+        scale_fill_manual(values = color_palette()) +
         labs(title = paste("Total quantity of", s[["x"]],  "prescribed at each postcode over\n",input$region_select_01, "\nfor the year", input$selectyear01,"(in kg)"  ))+
         labs(y = "kg / postcode", x = "Postcode", color = "API")+
         theme_bw()+
@@ -1095,12 +1184,9 @@ output$downloadpdf_t_06 <- downloadHandler(
     }   
     else {
       a1 <- subset (as.data.frame(filt_total_dform()),NM %in% s[["x"]])
-      g <- ggplot(data=a1, aes(x=DESC, y=kg, group = NM)) +
-        geom_line(aes(color = NM ) ,
-                  size = 0.5) +  
-        geom_point(aes(color = NM ),
-                   shape = 20,    
-                   size = 4) +
+      g <- ggplot(data=a1, aes(x=DESC, y=kg)) +
+        geom_col(aes(fill = DESC )) +
+        scale_fill_manual(values = color_palette()) +
         labs(title = paste("Total quantity of", s[["x"]], "prescribed by each medicinal form over\n",input$region_select_01, "\nfor the year", input$selectyear01,"(in kg)"  ))+
         labs(y = "kg / medicinal form", x = "medicinal form", color = "API")+
         theme_bw()+

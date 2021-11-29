@@ -20,7 +20,7 @@
 #' \dontrun{
 #'  
 #' ## an example character vector containing different GP Practices
-#' GP_practices <- c("L81069","L81070","L81071","L81072")
+#' gp_practice <- c("L81069","L81070","L81071","L81072")
 #' 
 #' ## Define the files output location
 #' setwd("C:/Datasets/practice_wise/2018")
@@ -45,7 +45,7 @@
 
 #' 
 #' ## execute practice_wise function to generate multiple files
-#' practice_wise(data201812, GP_practices, api_map, uom, dform, ing)
+#' practice_wise(data201812, gp_practice, api_map, uom, dform, ing)
 #' 
 #' }
 #' 

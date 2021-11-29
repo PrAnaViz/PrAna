@@ -2,13 +2,10 @@
 library(shiny)
 library(bs4Dash)
 library(echarts4r)
-library(thematic)
 library(plotly)
 library(waiter)
 
 source("global.R")
-
-thematic_shiny()
 
 # toast options
 toastOpts <- list(
@@ -43,8 +40,6 @@ shinyApp(
         opacity = 0.8
       ),
       fixed = TRUE,
-      
-      
       rightUi = tagList(
         dropdownMenu(
           badgeStatus = NULL,
@@ -84,7 +79,8 @@ shinyApp(
       e_theme_register(echarts_dark_theme$options, name = echarts_dark_theme$name),
       tabItems(
         targeted_tab,
-        nontarget_tab
+        nontarget_tab,
+        datatables_tab
       )
     ),
     controlbar = dashboardControlbar(
@@ -98,6 +94,17 @@ shinyApp(
         controlbarItem(
           "Skin",
           skinSelector()
+        ),
+        controlbarItem(
+          "Plot",
+          selectInput('plot_colors', 'Plot Colours:',
+                      c(
+                        'default' = 'viridis::viridis',
+                        'inferno' = 'viridis::inferno',
+                        'plasma' = 'viridis::plasma',
+                        'magma' = 'viridis::magma',
+                        'npg' = 'ggsci::nrc_npg'), 
+                      selected = 'default')
         )
       )
     ),
@@ -118,7 +125,7 @@ shinyApp(
     # tab sources
     source(file.path("server", "tab-targeted.R"),  local = TRUE)$value
     source(file.path("server", "tab-non-targeted.R"),  local = TRUE)$value
-    
+   
     # alerts ------------------------------------------------------------------
     
     observeEvent(input$show_alert, {

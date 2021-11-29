@@ -13,6 +13,7 @@ targeted_tab <- tabItem(
                         fluidRow(
                           column(3, 
                                  uiOutput("uifile1"),
+                                 checkboxInput("sel_target", label = "Sample targets", value = TRUE),
                                  actionButton(inputId = "gen_barplot01",
                                               label = "Generate Graph", 
                                               class="btn btn-success action-button")
@@ -152,22 +153,6 @@ targeted_tab <- tabItem(
                     br(),
                     htmlOutput('txt_tot_lineplot4_title'),
                     plotlyOutput("filt_total_lineplot4",height="450px")
-                  ),
-                  tabPanel(
-                    id = NULL,
-                    title = "Practice - Monthwise",
-                    tabName = "Practice - Monthwise",value = "filt_tab_monthwise",
-                    icon  = icon("calendar-plus",lib = "font-awesome"),
-                    br(),
-                    tags$style("#txt_tot_monthwise_gp_title {
-                                                 font:16px Arial, Helvetica, sans-serif;
-                                                 line-height: 1.1; 
-                                                 text-align: center;
- 
-                                                  }"
-                    ),
-                    htmlOutput('txt_tot_monthwise_gp_title'),
-                    plotlyOutput("plot_compound_monthwise",height="450px")
                   )
                   
            ) # End of TabBox

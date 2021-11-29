@@ -39,50 +39,81 @@ nontarget_tab <- tabItem(
                    
         ),
         fluidRow(
-          column(4,
-                 uiOutput("selected_api_input")
+          column(6,
+                 uiOutput("selected_api_input"),
+                 uiOutput("regioninput2"),
+                 radioGroupButtons(
+                   inputId = "selPlot_nt",
+                   choiceNames =
+                     list(icon("chart-bar"), icon("map-marked-alt")),
+                   choiceValues =
+                     list( "bar", "map"),
+                   label = "Type", 
+                   status = "default"
+                 )
           ),
-          column(6, offset = 1,
-                 uiOutput("regioninput2")
-          )),
-        fluidRow(
-          column(3,
-                 selectInput('selectyear02', 'Select Prescirption Year:',
+          column(4,
+                 selectInput('selectyear02', 'Select Year:',
                              c(
                                '2015' = '2015',
                                '2016' = '2016',
                                '2017' = '2017',
                                '2018' = '2018'), 
                              selected = '2018'),
-          ),
-          column(4,
-                 offset = 1,
-                 sliderInput("sel_month", "Select Month:",
-                             min = 0, max = 12, value = 8)
-          ),
-          column(3,  
+                 selectInput("sel_month", "Select Month:",
+                             c(
+                               'January' = 'January',
+                               'February' = 'February',
+                               'March' = 'March',
+                               'April' = 'April',
+                               'May' = 'May',
+                               'June' ='June', 
+                               'July'= 'July',
+                               'August' = 'August',
+                               'September' = 'September',
+                               'November'='November',
+                               'December' ='December')),
                  actionButton(inputId = "gen_leaflet01",
-                              label = "Generate Graph", class="btn btn-success action-button")
-                 
-          ),
-          
+                              label = "Generate Graph", 
+                              class="btn btn-success action-button")
+          )  
         ),
-        fluidRow(
-          column(
-            width = 12,
-            tags$style("#txt_leaflet 
+        tags$hr(),
+        conditionalPanel("input.selPlot_nt == 'map'",
+                         
+                         fluidRow(
+                           column(
+                             width = 12,
+                             tags$style("#txt_leaflet 
                                             {
                                             font:16px Arial, Helvetica, sans-serif;
                                             line-height: 1.1; 
                                             text-align: left;
                                             font-weight: bold;
                                             }"
-            ),
-            htmlOutput("txt_leaflet")
-          )
+                             ),
+                             htmlOutput("txt_leaflet")
+                           )
+                         ),
+                         leafletOutput("postcodemap", height="700px")
         ),
-        tags$hr(),
-        leafletOutput("postcodemap", height="700px"),
+        conditionalPanel("input.selPlot_nt == 'bar'",
+                         fluidRow(
+                           column(
+                             width = 12,
+                             tags$style("#txt_barplot_nt 
+                                            {
+                                            font:16px Arial, Helvetica, sans-serif;
+                                            line-height: 1.1; 
+                                            text-align: left;
+                                            font-weight: bold;
+                                            }"
+                             ),
+                             htmlOutput("txt_barplot_nt")
+                           )
+                         ),
+                         plotlyOutput("filt_barplot1_nt")
+        ),
         tags$hr(),
         fluidRow(
           column(
@@ -101,16 +132,33 @@ nontarget_tab <- tabItem(
         collapsible = TRUE,
         closable = FALSE, 
         maximizable = TRUE,
-        tags$style("#txt_line_gp_title 
-                                            {
-                                            font:16px Arial, Helvetica, sans-serif;
-                                            line-height: 1.1; 
-                                            text-align: center;
-                                            font-weight: bold;
-                                            }"
+        conditionalPanel("input.selPlot_nt == 'map'",
+                         
+                         tags$style("#txt_line_gp_title1 
+                          {
+                          font:16px Arial, Helvetica, sans-serif;
+                          line-height: 1.1; 
+                          text-align: center;
+                          font-weight: bold;
+                                     }"
+                         ),
+                         htmlOutput("txt_line_gp_title1"),
+                         plotlyOutput("filt_gp_lineplot1",height="350px")
         ),
-        htmlOutput("txt_line_gp_title"),
-        plotlyOutput("filt_gp_lineplot1",height="350px"),
+        
+        conditionalPanel("input.selPlot_nt == 'bar'",
+                         
+                         tags$style("#txt_line_gp_title2 
+                          {
+                          font:16px Arial, Helvetica, sans-serif;
+                          line-height: 1.1; 
+                          text-align: center;
+                          font-weight: bold;
+                                     }"
+                         ),
+                         htmlOutput("txt_line_gp_title2"),
+                         plotlyOutput("filt_gp_lineplot2",height="350px")
+        ),
         tags$hr(),
         uiOutput("uidownload_nt_02")
       )

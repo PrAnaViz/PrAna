@@ -1,6 +1,4 @@
 ## Server
-## Shape file
-
 # ui for file input 01
 output$uifile_shape <- renderUI({
   tipify(fileInput('file_shape', 'Upload shape files at once (.shp, .dbf, .shx and .prj):',
@@ -17,7 +15,8 @@ output$regioninput2 <- renderUI({
   withProgress(message = 'Data is loading, please wait ...', value = 1:100, {
     selectInput(inputId="region_select_02",
                 label="Select region:",
-                choices=map()$region_name
+                choices=map()$region_name,
+                selected ="NHS Bath and North East Somerset CCG"
     )
   })
 })
@@ -38,33 +37,132 @@ getColor <- function(data02) {
 
 gp_postcode_full <-  reactive ({ 
   gp_data_full_latnlong() %>%
-    filter (Year %in% !!input$selectyear02)  %>%
+    dplyr::filter (Year %in% !!input$selectyear02)  %>%
     dplyr::select(PERIOD, PRACTICE, SURGERY_NAME, postcode, latitude, longitude) %>%
-    distinct()
-})
-
-# Add zero before the month
-month_sel <- reactive ({
-  if (input$sel_month >= 10) {
-    input$sel_month
-  }
-  else if (input$sel_month < 10) {
-    paste("0",input$sel_month, sep="" )
-  }
+    dplyr::distinct()
 })
 
 postcode_api <- reactive({
   bind_practices () %>%
-    mutate(Year=(substr(PERIOD, 1, 4)),gram2 = as.numeric(gram)) %>%
-    filter (!grepl("Error: Table",CPD)) %>%
+    dplyr::mutate(gram2 = as.numeric(gram)) %>%
+    dplyr::filter (!grepl("Error: Table",CPD)) %>%
     dplyr::filter ( tolower(NM) %in% !!input$selected_api) %>%
-    left_join(gp_postcode_full(), by=c("PRACTICE"="PRACTICE", "PERIOD" = "PERIOD")) %>%
-    group_by(SURGERY_NAME, NM, Year, PERIOD, PRACTICE, postcode, latitude, longitude) %>%
-    summarise(gram_sum = sum(gram2, na.rm = T)) %>%
-    mutate(kg = gram_sum/1000) %>%
-    mutate(month=(substr(PERIOD, 5, 6))) 
+    dplyr::left_join(gp_postcode_full(), by=c("PRACTICE"="PRACTICE", "PERIOD" = "PERIOD")) %>%
+    dplyr::group_by(SURGERY_NAME, NM, PERIOD, PRACTICE, postcode, latitude, longitude) %>%
+    dplyr::summarise(gram_sum = sum(gram2, na.rm = T)) %>%
+    dplyr::mutate(kg = gram_sum/1000) %>%
+    dplyr::ungroup() %>%
+    dplyr::mutate(PERIOD02 =  zoo::as.Date(zoo::as.yearmon(as.character(PERIOD),"%Y%m"))) %>%
+    dplyr::mutate(period = format(PERIOD02, format ="%B %Y")) %>%
+    dplyr::mutate(MONYear = format(PERIOD02, format ="%b %Y")) %>%
+    separate(period, c("month", "Year"),sep = " ") 
+  
 })
 
+
+## Barplot
+
+## Data for barplot
+
+data_for_plot <- reactive({
+  postcode_api() %>%
+    dplyr::select(postcode, PRACTICE, NM, SURGERY_NAME, PERIOD, Year, month, gram_sum ) %>% 
+    dplyr::filter ( month %in% !!input$sel_month) %>%
+    dplyr::group_by(postcode, NM, PERIOD, month) %>%
+    dplyr::summarise(gram_sum = sum(gram_sum, na.rm = T)) %>%
+    dplyr::mutate(kg = gram_sum/1000) %>%
+    dplyr::ungroup() 
+})
+
+
+
+# barplot
+output$filt_barplot1_nt <- renderPlotly({
+  withProgress(message = 'Data is loading, please wait ...', value = 1:100, {
+    plot01 <- plot_ly(as.data.frame(data_for_plot()),
+                      x = ~postcode, y = ~kg,  type = "bar",
+                      color = ~postcode,
+                      colors = color_palette(),
+                      source = "filt_barplot1_nt") %>%
+      layout(title = FALSE,
+             paper_bgcolor = "transparent", plot_bgcolor = "transparent",
+             font = title_font,
+             xaxis = list(title = "Post code"),
+             yaxis = list(title = "kg"))
+    
+    if (input$dark_mode) plot01 <- plot01 %>%
+        layout(
+          xaxis = list(
+            color = "white"),
+          yaxis = list(
+            color = "white"),
+          legend = list(
+            font = list(
+              color = "white")
+          )
+        )
+    else
+      plot01
+  })
+})
+
+## End of Barplot
+
+
+##lineplot 02
+output$filt_gp_lineplot2 <- renderPlotly({ 
+  s <- event_data("plotly_click", source = "filt_barplot1_nt")
+  
+  if (length(s) == 0) {
+    NULL
+  }   
+  else {
+    
+    dat_lineplotgp2 <- reactive ({ 
+      postcode_api() %>%
+        filter (postcode %in% s[[3]] )
+    })
+    
+    a1 <- as.data.frame(dat_lineplotgp2())
+    
+    a1$PERIOD <-  as.character(a1$PERIOD)
+    
+    a2 <-  plot_ly(a1, x = ~PERIOD, 
+                   y = ~kg, 
+                   color = ~SURGERY_NAME,
+                   colors = color_palette()) %>%
+      add_markers(showlegend = TRUE) %>%
+      add_lines(showlegend = FALSE) %>%
+      layout(
+        paper_bgcolor = "transparent", plot_bgcolor = "transparent",
+        title =  FALSE,
+        autosize = TRUE,
+        showlegend = TRUE,
+        xaxis = list(title = "Year / Month"),
+        yaxis = list (title = "kg / month"),
+        legend = list(orientation = "h",
+                      x = 0.3, 
+                      y = -0.3)
+      )
+    if (input$dark_mode) a2 <- a2 %>%  
+      layout(
+        xaxis = list(
+          color = "white"),
+        yaxis = list(
+          color = "white"),
+        legend = list(
+          font = list(
+            color = "white")
+        ) 
+      )
+    else
+      a2
+  }
+})
+
+
+
+## End of line plot 02
 ## Leaflet
 ## Base leaflet map
 output$postcodemap <- renderLeaflet({
@@ -89,7 +187,7 @@ output$postcodemap <- renderLeaflet({
 observeEvent(input$gen_leaflet01, {
   postcode_api_month <- reactive ({
     postcode_api() %>%
-      filter (month %in% month_sel())
+      filter (month %in% !!input$sel_month)
   })
   # # leaflet icons
   icons <- reactive({ awesomeIcons(
@@ -115,7 +213,13 @@ observeEvent(input$gen_leaflet01, {
         "<br>",
         "Prescribed quantity (kg):",postcode_api_month()$kg
       )
-    )
+    ) %>%
+    addLegend("bottomright", 
+              colors =c("green",  "orange", "red"),
+              labels= c("kg < 0.1", "kg < 0.4","kg > 0.4"),
+              title= "Quantity (kg/month)",
+              opacity = 1)
+  
 })
 
 
@@ -124,7 +228,7 @@ observeEvent(input$postcodemap_marker_click, {
   
   dat_lineplotgp <- reactive ({ 
     postcode_api() %>%
-      filter (postcode %in% !!input$postcodemap_marker_click$id)
+      filter (postcode %in% !!input$postcodemap_marker_click$id) 
   })
   
   # Plotly lineplot 01 - Period
@@ -132,12 +236,16 @@ observeEvent(input$postcodemap_marker_click, {
     withProgress(message = 'Data is loading, please wait ...', value = 1:100, {
       a1 <- as.data.frame(dat_lineplotgp())
       a1$PERIOD <-  as.character(a1$PERIOD)
-      a2 <-  plot_ly(a1, x = ~PERIOD, y = ~kg, color = ~SURGERY_NAME) %>%
+      a2 <-  plot_ly(a1, x = ~PERIOD, 
+                     y = ~kg, 
+                     color = ~SURGERY_NAME,
+                     colors = color_palette()) %>%
         add_markers(showlegend = TRUE) %>%
         add_lines(showlegend = FALSE) %>%
         layout(
-          title =  F,
-          autosize = T,
+          paper_bgcolor = "transparent", plot_bgcolor = "transparent",
+          title =  FALSE,
+          autosize = TRUE,
           showlegend = TRUE,
           xaxis = list(title = "Year / Month"),
           yaxis = list (title = "kg / month"),
@@ -145,7 +253,19 @@ observeEvent(input$postcodemap_marker_click, {
                         x = 0.3, 
                         y = -0.3)
         )
-      a2
+      if (input$dark_mode) a2 <- a2 %>%  
+        layout(
+          xaxis = list(
+            color = "white"),
+          yaxis = list(
+            color = "white"),
+          legend = list(
+            font = list(
+              color = "white")
+          ) 
+        )
+      else
+        a2
       
     })
   })
@@ -166,6 +286,7 @@ observeEvent(input$postcodemap_marker_click, {
         geom_point(aes(color = SURGERY_NAME ),
                    shape = 20,    
                    size = 4) +
+        scale_color_manual(values = color_palette()) +
         labs(title = paste("Quantity of",input$selected_api,"prescribed at",input$postcodemap_marker_click$id, "monthwise for the year", input$selectyear02,"(in kg)"))+
         labs(x = "Year / Month", y = "kg / month")+
         theme_bw()+
@@ -197,6 +318,8 @@ observeEvent(input$postcodemap_marker_click, {
         geom_point(aes(color = SURGERY_NAME ),
                    shape = 20,    
                    size = 2) +
+        scale_color_manual(values = color_palette()) +
+        
         labs(title = paste("Quantity of",input$selected_api,"prescribed at",input$postcodemap_marker_click$id, "monthwise for the year", input$selectyear02,"(in kg)"))+
         labs(x = "Year / Month", y = "kg / month")+
         theme_bw()+
@@ -219,15 +342,15 @@ observeEvent(input$postcodemap_marker_click, {
 # Total by postcode
 tot_postcode <- reactive({
   bind_practices () %>%
-    filter (!grepl("Error: Table",CPD)) %>%
+    dplyr::filter (!grepl("Error: Table",CPD)) %>%
     dplyr::mutate(NM = tolower(NM) ) %>% 
-    filter (tolower(NM) %in% !!input$selected_api) %>%
-    mutate(Year=(substr(PERIOD, 1, 4))) %>%
-    mutate(gram2 = as.numeric(gram)) %>%
-    left_join(gp_postcode_full(), by=c("PRACTICE"="PRACTICE", "PERIOD" = "PERIOD")) %>%
-    group_by(NM, Year, postcode) %>%
-    summarise(gram_sum = sum(gram2, na.rm = T)) %>%
-    mutate(kg = gram_sum/1000) 
+    dplyr::filter (tolower(NM) %in% !!input$selected_api) %>%
+    dplyr::mutate(Year=(substr(PERIOD, 1, 4))) %>%
+    dplyr::mutate(gram2 = as.numeric(gram)) %>%
+    dplyr::left_join(gp_postcode_full(), by=c("PRACTICE"="PRACTICE", "PERIOD" = "PERIOD")) %>%
+    dplyr::group_by(NM, Year, postcode) %>%
+    dplyr::summarise(gram_sum = sum(gram2, na.rm = T)) %>%
+    dplyr::mutate(kg = gram_sum/1000) 
   
 })
 
@@ -247,6 +370,36 @@ observeEvent(input$postcodemap_marker_click, {
   
 })
 
+
+output$txt_barplot_nt <- renderUI({ 
+  s <- event_data("plotly_click", source = "filt_barplot1_nt")
+  if (length(s) == 0) {
+    NULL
+  }   
+  else {
+    HTML( paste0(
+      "Total quantity of ",input$selected_api, " prescribed at ",s[[3]], 
+      " in ",input$sel_month, " :" ,s[[4]] , " (kg)" 
+    ) 
+    )
+  }
+})
+
+
+output$txt_line_gp_title2 <- renderUI({ 
+  s <- event_data("plotly_click", source = "filt_barplot1_nt")
+  if (length(s) == 0) {
+    NULL
+  }   
+  else {
+    
+    HTML( paste("Quantity of ",input$selected_api,
+                "prescribed at<br/>",s[[3]], "monthwise for<br/>the year ",input$sel_month, 
+                "(in kg)") ) 
+  }
+})
+
+
 # Data for download csv
 # leaflet data monthwise
 downheatmap_period <- reactive ({
@@ -263,7 +416,7 @@ downheatmap_year <- reactive ({
 # for each postcode - monthwise with GP
 lineplot_postcode <- reactive ({
   dcast(as.data.frame(postcode_api()), postcode+SURGERY_NAME+ NM ~ PERIOD,value.var= "kg") %>%
-    filter (postcode %in% !!input$postcodemap_marker_click$id)
+    dplyr::filter (postcode %in% !!input$postcodemap_marker_click$id)
 })
 
 ### Outputs
@@ -275,7 +428,7 @@ output$selected_api_input <- renderUI({
     selectInput(inputId="selected_api",
                 label="Select BNF Chemical Substance:",
                 choices=unique(bnf_group()$BNF_CHEMICAL_SUBSTANCE),
-                selected =head(unique(bnf_group()$BNF_CHEMICAL_SUBSTANCE)),  multiple = FALSE
+                selected = "metformin hydrochloride",  multiple = FALSE
     )
   })
 })
@@ -303,9 +456,10 @@ output$uidownload_nt_02 <- renderUI({
 
 ## Text outputs
 
-output$txt_line_gp_title <- renderUI({ HTML( paste("Quantity of ",input$selected_api,"prescribed at<br/>",input$postcodemap_marker_click$id, "monthwise for<br/>the year ", input$selectyear02,"(in kg)") ) })
+output$txt_line_gp_title1 <- renderUI({ HTML( paste("Quantity of ",input$selected_api,"prescribed at<br/>",input$postcodemap_marker_click$id, "monthwise for<br/>the year ", input$selectyear02,"(in kg)") ) })
 
 output$txt_gp_pie_title <- renderUI({ HTML( paste("Total quantity of ",input$selected_api, "<br/>prescribed at ",input$postcodemap_marker_click$id, "in the<br/>year ",input$selectyear02, " (Group by medicinal form)") ) })
+
 
 ## Download Buttons
 
@@ -333,6 +487,9 @@ output$downloadcsv_nt_03 <- downloadHandler(
     write.csv(as.data.frame( lineplot_postcode()), file, row.names = TRUE)
   }
 )
+
+
+
 
 
 ###########
